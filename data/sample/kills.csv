@@ -1,0 +1,7 @@
+series_id,game_id,round_id,time,killer_side,victim_side,weapon,headshot
+s1,lan:sample-game-1,lan:sample-game-1_1,18.2,CT,T,usp_s,1
+s1,lan:sample-game-1,lan:sample-game-1_2,31.4,T,CT,ak47,0
+s2,online:sample-game-2,online:sample-game-2_1,15.7,T,CT,glock,1
+s2,online:sample-game-2,online:sample-game-2_2,42.0,CT,T,m4a1_s,0
+s3,lan:sample-game-3,lan:sample-game-3_1,20.5,CT,T,usp_s,1
+s3,lan:sample-game-3,lan:sample-game-3_2,26.8,CT,T,awp,0

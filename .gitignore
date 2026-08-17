@@ -1,0 +1,33 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated datasets and trained model binaries
+data/interim/
+data/processed/
+models/*
+!models/esta_full_m8_tuned/
+models/esta_full_m8_tuned/*
+!models/esta_full_m8_tuned/pre_round_xgb.joblib
+*.json.xz
+*.dem
+
+# Local logs and temporary files
+*.log
+*.tmp
+~$*

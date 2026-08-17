@@ -1,0 +1,14 @@
+{
+  "task": "pre_round",
+  "definition": "freeze-time end after purchases and before combat",
+  "feature_count": 43,
+  "row_counts": {
+    "train": 28522,
+    "val": 8380,
+    "test": 4172
+  },
+  "train_ct_win_rate": 0.5429493022929668,
+  "xgboost_best_iteration": 212,
+  "xgboost_minus_logistic_test_auc": -0.0001072335539895608,
+  "acceptance_auc_margin_at_least_0_01": false
+}
