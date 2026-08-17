@@ -83,6 +83,9 @@ src\csdemo\split.py            按 series_id 划分 train/val/test
 src\csdemo\make_dataset.py     生成模型训练表
 src\csdemo\train_xgb.py        训练与评估 XGBoost
 src\csdemo\m6_analysis.py      M6 特征体检、重要性、分地图指标和消融
+src\csdemo\metrics.py          M7-M10 共用概率指标
+src\csdemo\m7_baselines.py     M7 三模型统一对照
+src\csdemo\m9_evaluation.py    M9 统一评估、bootstrap 和图表
 src\csdemo\train_lgbm.py       后续 LightGBM 对比
 src\csdemo\schema.py           特征列和 ID 列定义
 src\csdemo\config.py           路径、随机种子和 70/20/10 比例
@@ -131,6 +134,19 @@ reports\esta_full_m8_tuned\seed_stability.csv
 reports\esta_full_m8_tuned\m8_controlled_tuning_report.md
 ```
 
+M9 统一评估报告：
+
+```text
+reports\esta_full_m9\test_predictions.csv
+reports\esta_full_m9\bootstrap_95ci.csv
+reports\esta_full_m9\m9_summary.json
+reports\esta_full_m9\m9_evaluation_report.md
+reports\esta_full_m9\roc_curve.png
+reports\esta_full_m9\confusion_matrix.png
+reports\esta_full_m9\probability_distribution.png
+reports\esta_full_m9\reliability_curve.png
+```
+
 ## 文档路径
 
 ```text
@@ -138,6 +154,8 @@ docs\pre_round_xgb_module_spec.md   模块、目标和当前效果
 docs\project_paths.md               本路径说明
 docs\metrics_guide.md               模型指标概念
 docs\m6_feature_dictionary.md       M6 开局前特征定义和取值范围
+docs\m7_baseline_spec.md            M7 简单基线验收
+docs\m9_evaluation_spec.md          M9 统一评估验收
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
 reports\m5_split_leakage_audit.md                    70/20/10 泄漏审计
@@ -182,6 +200,12 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m6_analysis --data data\pro
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.check_quality --input data\interim\esta_full --report-dir reports\data_quality\esta_full
 ```
 
-M2、M4.1、M4.2 和 M6 已完成。当前标准数据为 41,074 个开局前样本，
-质量报告没有 error 或 warning；M6 正式 XGBoost 测试 AUC 为 0.7220。
-下一阶段是 M7 常数基线和逻辑回归对照。
+运行 M9 统一评估：
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m9_evaluation --data data\processed\esta_full\pre_round.parquet --model models\esta_full_m8_tuned\pre_round_xgb.joblib --report-dir reports\esta_full_m9 --bootstrap-samples 2000 --seed 42
+```
+
+M2 至 M9 已完成。当前标准数据为 41,074 个开局前样本，质量报告没有
+error 或 warning；M9 正式测试 AUC 为 0.7271，系列赛级 95% CI 为
+[0.7131, 0.7409]。下一阶段是 M10 概率校准。

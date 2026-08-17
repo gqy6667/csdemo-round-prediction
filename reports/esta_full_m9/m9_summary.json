@@ -1,0 +1,65 @@
+{
+  "task": "pre_round",
+  "definition": "freeze-time end after purchases and before combat",
+  "model_path": "models\\esta_full_m8_tuned\\pre_round_xgb.joblib",
+  "test_rounds": 4172,
+  "test_series": 79,
+  "bootstrap_unit": "series_id",
+  "bootstrap_samples": 2000,
+  "seed": 42,
+  "metrics": {
+    "accuracy": 0.6474113135186961,
+    "log_loss": 0.5917331887919193,
+    "brier_score": 0.20529449849711118,
+    "ece10": 0.023197745861465936,
+    "auc": 0.7271219343412749
+  },
+  "confusion_matrix_threshold_0_5": {
+    "true_negative": 879,
+    "false_positive": 1105,
+    "false_negative": 366,
+    "true_positive": 1822
+  },
+  "target_assessment": {
+    "auc": {
+      "value": 0.7271219343412749,
+      "minimum_passed": true,
+      "stage_passed": false,
+      "excellent_passed": false,
+      "minimum": 0.7,
+      "stage": 0.73,
+      "excellent": 0.75,
+      "higher_is_better": true
+    },
+    "log_loss": {
+      "value": 0.5917331887919193,
+      "minimum_passed": true,
+      "stage_passed": false,
+      "excellent_passed": false,
+      "minimum": 0.61,
+      "stage": 0.58,
+      "excellent": 0.56,
+      "higher_is_better": false
+    },
+    "accuracy": {
+      "value": 0.6474113135186961,
+      "minimum_passed": true,
+      "stage_passed": false,
+      "excellent_passed": false,
+      "minimum": 0.64,
+      "stage": 0.66,
+      "excellent": 0.68,
+      "higher_is_better": true
+    },
+    "brier_score": {
+      "value": 0.20529449849711118,
+      "minimum_passed": true,
+      "stage_passed": false,
+      "excellent_passed": false,
+      "minimum": 0.21,
+      "stage": 0.195,
+      "excellent": 0.185,
+      "higher_is_better": false
+    }
+  }
+}

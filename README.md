@@ -24,6 +24,8 @@ Chinese project documentation:
 - `docs/m7_baseline_spec.md`
 - `reports/esta_full_m7/m7_baseline_report.md`
 - `reports/esta_full_m8_tuned/m8_controlled_tuning_report.md`
+- `docs/m9_evaluation_spec.md`
+- `reports/esta_full_m9/m9_evaluation_report.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -37,6 +39,13 @@ M7 baseline comparison on the identical test rows:
 - Logistic-regression AUC: `0.7272`
 - Tuned XGBoost AUC: `0.7271`
 - XGBoost minus logistic-regression AUC: `-0.0001` (the `+0.01` target was not met)
+
+M9 series-level bootstrap evaluation of tuned XGBoost:
+
+- AUC: `0.7271` (95% CI `[0.7131, 0.7409]`)
+- Log loss: `0.5917` (95% CI `[0.5802, 0.6039]`)
+- Accuracy: `0.6474` (95% CI `[0.6324, 0.6624]`)
+- Brier score: `0.2053` (95% CI `[0.2009, 0.2099]`)
 
 The full ESTA dataset and historical models are not committed. The small tuned M8
 pre-round model is included for reproducibility. See `data/README.md`.
@@ -93,4 +102,10 @@ Run the reproducible M7 baseline comparison:
 
 ```powershell
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m7_baselines --data data\processed\esta_full\pre_round.parquet --model-dir models\esta_full_m7 --report-dir reports\esta_full_m7
+```
+
+Run the M9 fixed-test evaluation:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m9_evaluation --data data\processed\esta_full\pre_round.parquet --model models\esta_full_m8_tuned\pre_round_xgb.joblib --report-dir reports\esta_full_m9 --bootstrap-samples 2000 --seed 42
 ```
