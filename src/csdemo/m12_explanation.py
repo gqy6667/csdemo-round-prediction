@@ -5,6 +5,7 @@ from typing import Sequence
 import numpy as np
 import pandas as pd
 import xgboost as xgb
+from sklearn.inspection import permutation_importance
 
 from .schema import ID_COLUMNS, PRE_ROUND_FEATURES
 
@@ -60,6 +61,65 @@ def tree_shap_contributions(
         contributions[:, :-1], index=x.index, columns=expected_columns
     )
     return values, contributions[:, -1]
+
+
+def gain_importance(bundle: dict) -> pd.DataFrame:
+    expected_columns = list(bundle.get("columns", []))
+    if not expected_columns:
+        raise KeyError("Model bundle must contain non-empty columns.")
+    full_booster = bundle["model"].get_booster()
+    available_tree_count = len(full_booster.get_dump())
+    tree_count = deployment_tree_count(bundle)
+    booster = full_booster[:tree_count] if tree_count < available_tree_count else full_booster
+    gain = booster.get_score(importance_type="gain")
+    split_count = booster.get_score(importance_type="weight")
+    result = pd.DataFrame(
+        {
+            "feature": expected_columns,
+            "gain": [float(gain.get(feature, 0.0)) for feature in expected_columns],
+            "split_count": [int(split_count.get(feature, 0)) for feature in expected_columns],
+        }
+    )
+    total_gain = float(result["gain"].sum())
+    result["gain_normalized"] = result["gain"] / total_gain if total_gain else 0.0
+    result["deployment_tree_count"] = tree_count
+    result["available_tree_count"] = available_tree_count
+    result = result.sort_values(["gain", "feature"], ascending=[False, True])
+    result.insert(0, "gain_rank", range(1, len(result) + 1))
+    return result.reset_index(drop=True)
+
+
+def permutation_auc_importance(
+    model,
+    x: pd.DataFrame,
+    y,
+    *,
+    n_repeats: int = 20,
+    seed: int = 42,
+) -> pd.DataFrame:
+    if x.empty or len(x) != len(y):
+        raise ValueError("Permutation inputs must have the same non-zero length.")
+    if n_repeats < 1:
+        raise ValueError("n_repeats must be at least 1.")
+    result = permutation_importance(
+        model,
+        x,
+        y,
+        scoring="roc_auc",
+        n_repeats=n_repeats,
+        random_state=seed,
+        n_jobs=1,
+    )
+    importance = pd.DataFrame(
+        {
+            "feature": x.columns,
+            "auc_decrease_mean": result.importances_mean,
+            "auc_decrease_std": result.importances_std,
+            "n_repeats": n_repeats,
+        }
+    ).sort_values(["auc_decrease_mean", "feature"], ascending=[False, True])
+    importance.insert(0, "permutation_rank", range(1, len(importance) + 1))
+    return importance.reset_index(drop=True)
 
 
 def shap_importance(shap_values: pd.DataFrame) -> pd.DataFrame:
@@ -138,3 +198,63 @@ def select_explanation_cases(predictions: pd.DataFrame) -> pd.DataFrame:
         row["case_type"] = case_type
         selected.append(row)
     return pd.DataFrame(selected)
+
+
+def build_case_explanations(
+    cases: pd.DataFrame,
+    x: pd.DataFrame,
+    shap_values: pd.DataFrame,
+    base_values: np.ndarray,
+    *,
+    top_n: int = 10,
+) -> pd.DataFrame:
+    if top_n < 1:
+        raise ValueError("top_n must be at least 1.")
+    if len(x) != len(shap_values) or len(x) != len(base_values):
+        raise ValueError("Feature, SHAP, and base-value rows must have equal length.")
+    if list(x.columns) != list(shap_values.columns):
+        raise ValueError("Feature and SHAP columns must match in the same order.")
+    if "row_position" not in cases.columns or "case_type" not in cases.columns:
+        raise KeyError("Cases must contain row_position and case_type.")
+
+    rows = []
+    for _, case in cases.iterrows():
+        position = int(case["row_position"])
+        if position < 0 or position >= len(x):
+            raise IndexError(f"Case row_position {position} is outside the test data.")
+        contributions = shap_values.iloc[position]
+        ordered_features = contributions.abs().sort_values(ascending=False).index[:top_n]
+        model_log_odds = float(base_values[position] + contributions.sum())
+        reconstructed_probability = float(
+            1.0 / (1.0 + np.exp(-np.clip(model_log_odds, -709, 709)))
+        )
+        common = {
+            column: case[column]
+            for column in cases.columns
+            if column != "row_position"
+        }
+        common.update(
+            {
+                "row_position": position,
+                "base_value_log_odds": float(base_values[position]),
+                "model_log_odds": model_log_odds,
+                "reconstructed_ct_probability": reconstructed_probability,
+            }
+        )
+        for rank, feature in enumerate(ordered_features, start=1):
+            contribution = float(contributions[feature])
+            rows.append(
+                {
+                    **common,
+                    "contribution_rank": rank,
+                    "feature": feature,
+                    "feature_value": x.iloc[position][feature],
+                    "shap_value_log_odds": contribution,
+                    "direction": (
+                        "toward_ct"
+                        if contribution > 0
+                        else "toward_t" if contribution < 0 else "neutral"
+                    ),
+                }
+            )
+    return pd.DataFrame(rows)

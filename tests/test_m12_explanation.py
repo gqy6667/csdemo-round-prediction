@@ -2,11 +2,15 @@ import unittest
 
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
 
 from src.csdemo.m12_explanation import (
     audit_model_features,
+    build_case_explanations,
     deployment_tree_count,
+    gain_importance,
+    permutation_auc_importance,
     select_explanation_cases,
     shap_importance,
     tree_shap_contributions,
@@ -46,6 +50,10 @@ class M12ExplanationTests(unittest.TestCase):
         self.assertLess(model.best_iteration + 1, len(model.get_booster().get_dump()))
         self.assertEqual(deployment_tree_count(bundle), model.best_iteration + 1)
         np.testing.assert_allclose(reconstructed, deployed, atol=1e-6)
+
+        gain = gain_importance(bundle)
+        self.assertEqual(gain["deployment_tree_count"].unique().tolist(), [model.best_iteration + 1])
+        self.assertAlmostEqual(gain["gain_normalized"].sum(), 1.0)
 
     def test_feature_audit_allows_pre_round_defuse_kits_and_flags_leakage(self) -> None:
         audit = audit_model_features(
@@ -93,6 +101,52 @@ class M12ExplanationTests(unittest.TestCase):
 
         self.assertEqual(importance.iloc[0]["feature"], "large")
         self.assertAlmostEqual(importance.iloc[0]["mean_abs_shap"], 0.7)
+
+    def test_permutation_auc_importance_ranks_signal_above_noise(self) -> None:
+        rng = np.random.default_rng(11)
+        x = pd.DataFrame(
+            {"signal": rng.normal(size=400), "noise": rng.normal(size=400)}
+        )
+        y = (x["signal"] > 0).astype(int)
+        model = LogisticRegression().fit(x, y)
+
+        importance = permutation_auc_importance(
+            model, x, y, n_repeats=5, seed=11
+        ).set_index("feature")
+
+        self.assertGreater(
+            importance.loc["signal", "auc_decrease_mean"],
+            importance.loc["noise", "auc_decrease_mean"],
+        )
+
+    def test_case_explanations_keep_top_contributions_and_probability(self) -> None:
+        predictions = pd.DataFrame(
+            {
+                "round_id": ["ct", "t", "wrong", "other"],
+                "y_true": [1, 0, 0, 1],
+                "ct_win_probability": [0.91, 0.08, 0.86, 0.55],
+            }
+        )
+        cases = select_explanation_cases(predictions)
+        x = pd.DataFrame(
+            {"strong": [2.0, -2.0, 1.5, 0.1], "small": [0.2, -0.1, 0.3, 0.0]}
+        )
+        shap_values = pd.DataFrame(
+            {"strong": [1.7, -1.8, 1.4, 0.1], "small": [0.2, -0.1, 0.3, 0.0]}
+        )
+        base_values = np.zeros(len(x))
+
+        explanations = build_case_explanations(
+            cases, x, shap_values, base_values, top_n=2
+        )
+
+        self.assertEqual(len(explanations), 6)
+        self.assertTrue((explanations.groupby("case_type")["contribution_rank"].max() == 2).all())
+        self.assertEqual(
+            explanations[explanations["feature"].eq("strong")]["direction"].tolist(),
+            ["toward_ct", "toward_t", "toward_ct"],
+        )
+        self.assertTrue(explanations["reconstructed_ct_probability"].between(0, 1).all())
 
 
 if __name__ == "__main__":
