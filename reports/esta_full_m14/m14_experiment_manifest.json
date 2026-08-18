@@ -1,0 +1,333 @@
+{
+  "stage": "M14",
+  "experiment_id": "pre_round_xgboost_final_acceptance",
+  "generated_at_utc": "2026-08-18T17:16:09.320807+00:00",
+  "task_definition": "freeze-time end after purchases and before combat",
+  "code": {
+    "commit": "40cc2424e82bc8aab06e4cb4da881e12435e89c3",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_clean_before_report_generation": true,
+    "working_tree_status_before_report_generation": [],
+    "ignored_existing_report_status": [
+      "?? reports/esta_full_m14/"
+    ]
+  },
+  "environment": {
+    "python_version": "3.10.20",
+    "python_implementation": "CPython",
+    "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+    "environment_prefix": "C:\\Users\\admin\\11\\envs\\game",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2",
+      "xgboost": "3.2.0",
+      "pyarrow": "24.0.0",
+      "joblib": "1.5.3",
+      "matplotlib": "3.10.9"
+    },
+    "nvcc": {
+      "available": true,
+      "path": "C:\\Users\\admin\\11\\envs\\game\\Library\\bin\\nvcc.exe",
+      "return_code": 0,
+      "version_output": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:42:46_Pacific_Standard_Time_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0"
+    },
+    "gpu_required_for_current_xgboost": false
+  },
+  "environment_lock_audit": {
+    "passed": true,
+    "requirements_lock": "requirements-lock.txt",
+    "environment_file": "environment.yml",
+    "python_version_locked": true,
+    "package_mismatches": []
+  },
+  "raw_data": {
+    "path": "C:\\project1\\data\\esta",
+    "available": true,
+    "file_count": 1558,
+    "total_bytes": 4001138344,
+    "subset_counts": {
+      "lan": 680,
+      "online": 878
+    },
+    "inventory_sha256": "07391e1aa728921fa84cc832bec81383d3ea3c6dfe684c1e05e7303d66a4c68e",
+    "hash_definition": "sha256 of sorted relative path and byte-size entries"
+  },
+  "artifacts": {
+    "rounds": {
+      "path": "data/interim/esta_full/rounds.parquet",
+      "bytes": 975732,
+      "sha256": "e1d83d9473fa87e0ffc013d659aae24f319ee1b5eaf4b2057b4a4809266174d3"
+    },
+    "kills": {
+      "path": "data/interim/esta_full/kills.parquet",
+      "bytes": 3415801,
+      "sha256": "591c3e4b00cb8eaa202bc37a93dd5486faa8877c0261966e04e780bbbeb70816"
+    },
+    "pre_round": {
+      "path": "data/processed/esta_full/pre_round.parquet",
+      "bytes": 1255792,
+      "sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72"
+    },
+    "first_kill": {
+      "path": "data/processed/esta_full/first_kill.parquet",
+      "bytes": 1452831,
+      "sha256": "4a16fe962a0174437a3e04aaea07c9d348987882557260f1295851e3d65aa50a"
+    },
+    "model": {
+      "path": "models/esta_full_m8_tuned/pre_round_xgb.joblib",
+      "bytes": 289541,
+      "sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d"
+    },
+    "calibrator": {
+      "path": "models/esta_full_m10/pre_round_calibrator.joblib",
+      "bytes": 227,
+      "sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507"
+    },
+    "requirements_lock": {
+      "path": "requirements-lock.txt",
+      "bytes": 201,
+      "sha256": "5533564a59b311cf8de4d043f89624a756e6b85c18b57cf18297986c87526a61"
+    },
+    "pipeline_script": {
+      "path": "scripts/run_pre_round_pipeline.ps1",
+      "bytes": 3992,
+      "sha256": "5c0e2bc59fd87b800eb273e1adc7dbf544756039bf6a5991471dfd8e54eeca0b"
+    }
+  },
+  "required_artifact_audit": {
+    "passed": true,
+    "required_count": 24,
+    "present_count": 24,
+    "missing": []
+  },
+  "data": {
+    "identity": {
+      "passed": true,
+      "errors": [],
+      "round_rows": 41074,
+      "kill_rows": 268640,
+      "pre_round_rows": 41074,
+      "duplicate_round_ids": 0,
+      "duplicate_pre_round_ids": 0,
+      "orphan_kills": 0,
+      "invalid_round_labels": 0,
+      "invalid_pre_round_labels": 0
+    },
+    "split_contract": {
+      "passed": true,
+      "errors": [],
+      "rows": 41074,
+      "series": 782,
+      "series_counts": {
+        "train": 547,
+        "val": 156,
+        "test": 79
+      },
+      "row_counts": {
+        "train": 28522,
+        "val": 8380,
+        "test": 4172
+      },
+      "duplicate_round_ids": 0,
+      "cross_split_series": 0,
+      "cross_split_games": 0,
+      "cross_split_rounds": 0,
+      "missing_id_rows": 0
+    },
+    "split_assignment_file": "split_assignments.csv",
+    "split_assignment_rows": 782,
+    "quality": {
+      "passed": true,
+      "errors": [],
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 47
+    },
+    "first_kill_rows_for_next_stage": 41027
+  },
+  "stage_evidence": {
+    "checks": {
+      "baseline_models": true,
+      "minimum_metrics": true,
+      "generalization_gap": true,
+      "calibration": true,
+      "robustness": true,
+      "explanation": true,
+      "prediction_interface": true
+    },
+    "metric_assessment": {
+      "metrics": {
+        "auc": {
+          "value": 0.7271219343412749,
+          "minimum": 0.7,
+          "stage_target": 0.73,
+          "higher_is_better": true,
+          "minimum_passed": true,
+          "stage_passed": false,
+          "stage_gap": 0.0028780656587250597
+        },
+        "log_loss": {
+          "value": 0.5917331887919193,
+          "minimum": 0.61,
+          "stage_target": 0.58,
+          "higher_is_better": false,
+          "minimum_passed": true,
+          "stage_passed": false,
+          "stage_gap": 0.011733188791919313
+        },
+        "accuracy": {
+          "value": 0.6474113135186961,
+          "minimum": 0.64,
+          "stage_target": 0.66,
+          "higher_is_better": true,
+          "minimum_passed": true,
+          "stage_passed": false,
+          "stage_gap": 0.012588686481303957
+        },
+        "brier_score": {
+          "value": 0.20529449849711118,
+          "minimum": 0.21,
+          "stage_target": 0.195,
+          "higher_is_better": false,
+          "minimum_passed": true,
+          "stage_passed": false,
+          "stage_gap": 0.01029449849711117
+        }
+      },
+      "minimum_passed_count": 4,
+      "stage_passed_count": 0,
+      "all_minimum_passed": true,
+      "all_stage_passed": false
+    },
+    "baseline": {
+      "models": [
+        "constant_train_prior",
+        "logistic_regression",
+        "xgboost_tuned"
+      ],
+      "xgboost_minus_logistic_test_auc": -0.0001072335539895608,
+      "xgboost_auc_margin_target_passed": false
+    },
+    "training": {
+      "best_iteration": 212,
+      "best_tree_count": 213,
+      "parameters": {
+        "objective": "binary:logistic",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": 0.85,
+        "device": null,
+        "early_stopping_rounds": 100,
+        "enable_categorical": false,
+        "eval_metric": "logloss",
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": 0.03,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": 2,
+        "max_leaves": null,
+        "min_child_weight": 3,
+        "missing": null,
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": 3000,
+        "n_jobs": -1,
+        "num_parallel_tree": null,
+        "random_state": 42,
+        "reg_alpha": 0,
+        "reg_lambda": 1,
+        "sampling_method": null,
+        "scale_pos_weight": null,
+        "subsample": 0.85,
+        "tree_method": null,
+        "validate_parameters": null,
+        "verbosity": null
+      },
+      "train_val_auc_gap": 0.011122567544754824,
+      "encoded_feature_count": 43,
+      "forbidden_model_columns": []
+    },
+    "calibration": {
+      "selected_method": "uncalibrated",
+      "test_ece10": 0.023197745861465936
+    },
+    "robustness": {
+      "lan_minus_online_auc": 0.009003111095576943,
+      "reviewed_error_cases": 30,
+      "all_large_map_ci_lower_minimum_passed": false
+    },
+    "explanation": {
+      "acceptance": {
+        "three_importance_methods_created": true,
+        "ct_t_and_error_cases_created": true,
+        "top20_has_no_id_or_future_leakage": true,
+        "all_model_features_pass_schema_audit": true,
+        "shap_reconstructs_probability_within_1e_5": true
+      },
+      "top_mean_abs_shap_feature": "eq_value_diff_ct"
+    },
+    "interface": {
+      "status": "passed",
+      "example_prediction": {
+        "ct_win_probability": 0.5676999688148499,
+        "t_win_probability": 0.43230003118515015,
+        "predicted_side": "CT",
+        "decision_threshold": 0.5,
+        "probability_sum": 1.0
+      }
+    }
+  },
+  "tests": {
+    "passed": true,
+    "return_code": 0,
+    "test_count": 70,
+    "duration_seconds": 1.9731094000001121,
+    "command": "C:\\Users\\admin\\11\\envs\\game\\python.exe -m unittest discover -s tests -v"
+  },
+  "checks": {
+    "required_artifacts": true,
+    "raw_source": true,
+    "data_identity": true,
+    "quality_gate": true,
+    "split_contract": true,
+    "baseline_models": true,
+    "minimum_metrics": true,
+    "generalization_gap": true,
+    "calibration": true,
+    "robustness": true,
+    "explanation": true,
+    "prediction_interface": true,
+    "automated_tests": true,
+    "environment_lock": true,
+    "reproduction_entrypoint": true
+  },
+  "readiness": {
+    "status": "passed",
+    "phase_1_pre_round_xgboost_complete": true,
+    "ready_for_first_kill_xgboost": true,
+    "blocking_failures": []
+  },
+  "external_benchmark_rows": 4,
+  "nonblocking_follow_ups": [
+    "M0 尚缺正式的 20 回合人工快照核验记录；现有自动测试与 M4.1 原始帧核验不能完全替代人工抽查。",
+    "M3 当前 Parquet 未保留 freezeTimeEndTick 与 snapshot tick，所以下次全量重建应新增字段并输出完整 tick 偏移分布。",
+    "四个核心指标通过最低门槛，但 Accuracy、AUC、Log Loss 和 Brier 均未达到更高阶段目标。",
+    "XGBoost 测试 AUC 比逻辑回归低约 0.000107，未达到领先 0.01 的研究目标。",
+    "部分大地图的 AUC 置信区间下界仍低于 0.67。",
+    "当前是固定系列赛级随机切分，尚未完成按比赛时间的外推测试。",
+    "战队和选手身份特征仍未加入；应在时间切分设计完成后再评估。"
+  ]
+}

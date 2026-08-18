@@ -31,6 +31,7 @@ Chinese project documentation:
 - `docs/m11_robustness_spec.md`
 - `docs/m12_explanation_spec.md`
 - `docs/m13_prediction_interface_spec.md`
+- `docs/m14_final_acceptance_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -38,6 +39,8 @@ Chinese project documentation:
 - `reports/esta_full_m12/external_benchmark_comparison.md`
 - `reports/esta_full_m13/m13_interface_report.md`
 - `reports/esta_full_m13/external_benchmark_comparison.md`
+- `reports/esta_full_m14/m14_final_acceptance_report.md`
+- `reports/esta_full_m14/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -182,3 +185,20 @@ Re-run all M13 interface checks and external benchmark comparisons:
 ```powershell
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m13_interface --model models\esta_full_m8_tuned\pre_round_xgb.joblib --calibrator models\esta_full_m10\pre_round_calibrator.joblib --json-example examples\pre_round_snapshot.json --csv-example examples\pre_round_snapshot.csv --metrics reports\esta_full_m9\m9_summary.json --benchmarks benchmarks\external_round_model_metrics.csv --report-dir reports\esta_full_m13
 ```
+
+Run the M14 final acceptance against existing artifacts:
+
+```powershell
+.\scripts\run_pre_round_pipeline.ps1
+```
+
+Rebuild everything from the local ESTA dataset before M14 acceptance:
+
+```powershell
+.\scripts\run_pre_round_pipeline.ps1 -FullRebuild
+```
+
+M14 passes all 15 blocking checks and all 70 automated tests. The four core test
+metrics pass the agreed minimum gates, but none reaches the higher stage target.
+The project is ready to start a fresh post-first-kill XGBoost pipeline using the
+repaired round identity and the persisted 782-series split manifest.

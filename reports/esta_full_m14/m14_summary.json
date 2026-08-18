@@ -1,0 +1,73 @@
+{
+  "stage": "M14",
+  "status": "passed",
+  "phase_1_pre_round_xgboost_complete": true,
+  "ready_for_first_kill_xgboost": true,
+  "blocking_failures": [],
+  "checks": {
+    "required_artifacts": true,
+    "raw_source": true,
+    "data_identity": true,
+    "quality_gate": true,
+    "split_contract": true,
+    "baseline_models": true,
+    "minimum_metrics": true,
+    "generalization_gap": true,
+    "calibration": true,
+    "robustness": true,
+    "explanation": true,
+    "prediction_interface": true,
+    "automated_tests": true,
+    "environment_lock": true,
+    "reproduction_entrypoint": true
+  },
+  "metrics": {
+    "metrics": {
+      "auc": {
+        "value": 0.7271219343412749,
+        "minimum": 0.7,
+        "stage_target": 0.73,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": false,
+        "stage_gap": 0.0028780656587250597
+      },
+      "log_loss": {
+        "value": 0.5917331887919193,
+        "minimum": 0.61,
+        "stage_target": 0.58,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": false,
+        "stage_gap": 0.011733188791919313
+      },
+      "accuracy": {
+        "value": 0.6474113135186961,
+        "minimum": 0.64,
+        "stage_target": 0.66,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": false,
+        "stage_gap": 0.012588686481303957
+      },
+      "brier_score": {
+        "value": 0.20529449849711118,
+        "minimum": 0.21,
+        "stage_target": 0.195,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": false,
+        "stage_gap": 0.01029449849711117
+      }
+    },
+    "minimum_passed_count": 4,
+    "stage_passed_count": 0,
+    "all_minimum_passed": true,
+    "all_stage_passed": false
+  },
+  "test_count": 70,
+  "git_commit": "40cc2424e82bc8aab06e4cb4da881e12435e89c3",
+  "raw_file_count": 1558,
+  "pre_round_rows": 41074,
+  "first_kill_rows_for_next_stage": 41027
+}
