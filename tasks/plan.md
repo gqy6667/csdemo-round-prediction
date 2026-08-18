@@ -1,21 +1,28 @@
-# M15 Implementation Plan
+# M16 Implementation Plan
 
 ## Scope
 
-Repair and accept the post-first-kill dataset built from the repaired three-column round identity.
-Do not train or tune a model in this stage.
+Train the first valid post-first-kill baselines on the M15 repaired-key artifact.
+Keep the feature profile, split, metrics, and untuned XGBoost parameters fixed.
 
 ## Slices
 
-1. Specify the prediction point, valid event rule, key contract, split contract, and gates.
-2. Add regression tests for tick ordering and post-kill alive state.
-3. Fix first-kill feature construction.
-4. Add an auditable M15 command and tests for its contracts.
-5. Rebuild the full artifact, run all tests, write reports, and update beginner-facing docs.
+1. Freeze the canonical non-redundant feature profile and metric targets.
+2. Add failing tests for feature selection, split preparation, and model contracts.
+3. Implement Dummy, logistic-regression, and untuned-XGBoost training.
+4. Add a matched-row pre-round XGBoost control and external comparison.
+5. Run the full artifact, verify all gates, document, commit, and push.
 
 ## Review Gates
 
-- Gate A: the specification records all assumptions before production code changes.
-- Gate B: regression tests fail against the old event selection.
-- Gate C: the rebuilt 41,027-row dataset passes every blocking check.
-- Gate D: no model metric is reported as an M15 result because M15 does not train a model.
+- Gate A: the M16 specification and targets exist before model code.
+- Gate B: focused tests fail before the M16 module exists, then pass after implementation.
+- Gate C: all models use identical keys and the exact M15 split/data fingerprint.
+- Gate D: the report retains misses against targets and non-comparable external gaps.
+
+## Outcome
+
+M16 passed all four review gates and all eight blocking acceptance checks. The formal
+XGBoost test AUC is 0.808896, while logistic regression is 0.809059. The matched-row
+first-kill feature profile adds 0.088015 validation AUC over the pre-round control.
+M17 will tune XGBoost using train/validation only.

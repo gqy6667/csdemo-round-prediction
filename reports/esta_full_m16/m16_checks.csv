@@ -1,0 +1,9 @@
+check,passed,blocking
+m15_artifact,True,True
+data_contract,True,True
+feature_contract,True,True
+model_probabilities,True,True
+frozen_xgboost,True,True
+minimum_metrics,True,True
+automated_tests,True,True
+external_report,True,True

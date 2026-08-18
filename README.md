@@ -33,6 +33,7 @@ Chinese project documentation:
 - `docs/m13_prediction_interface_spec.md`
 - `docs/m14_final_acceptance_spec.md`
 - `docs/m15_first_kill_data_spec.md`
+- `docs/m16_first_kill_baseline_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -44,6 +45,8 @@ Chinese project documentation:
 - `reports/esta_full_m14/external_benchmark_comparison.md`
 - `reports/esta_full_m15/m15_first_kill_data_report.md`
 - `reports/esta_full_m15/external_benchmark_comparison.md`
+- `reports/esta_full_m16/m16_first_kill_baseline_report.md`
+- `reports/esta_full_m16/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -215,4 +218,17 @@ M15 passes all 12 blocking checks and all 80 automated tests. It keeps 41,027
 post-first-kill samples, explicitly excludes 47 rounds with no valid enemy kill,
 and reuses the persisted 782-series split manifest. Replacing seconds ordering
 with tick ordering changes the selected event in 14,357 old rows (34.99%). M15
-does not train a model; M16 is the fixed-split baseline comparison.
+does not train a model.
+
+Run the M16 fixed-split first-kill baseline comparison:
+
+```powershell
+.\scripts\run_first_kill_baselines.ps1
+```
+
+M16 passes all 8 blocking checks and all 90 automated tests. On the untouched
+4,170-row test split, untuned XGBoost reaches Accuracy `0.7453`, AUC `0.8089`,
+Log Loss `0.5248`, and Brier `0.1763`. Logistic regression reaches AUC `0.8091`,
+so the tree model is not yet clearly better. Against an identical-row pre-round
+XGBoost control, the first-kill feature profile adds `0.0880` validation AUC and
+`0.0860` test AUC. M17 is validation-only controlled XGBoost tuning.

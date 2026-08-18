@@ -1,0 +1,323 @@
+{
+  "stage": "M16",
+  "generated_at_utc": "2026-08-18T18:21:11.383387+00:00",
+  "task": "post_first_kill",
+  "definition": "immediately after earliest valid enemy kill by demo tick",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "ready_for_m17": true
+  },
+  "checks": {
+    "m15_artifact": true,
+    "data_contract": true,
+    "feature_contract": true,
+    "model_probabilities": true,
+    "frozen_xgboost": true,
+    "minimum_metrics": true,
+    "automated_tests": true,
+    "external_report": true
+  },
+  "data": {
+    "path": "data/processed/esta_full/first_kill.parquet",
+    "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "rows": 41027,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "series": 782,
+    "games": 1558,
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0
+  },
+  "features": {
+    "profile": "canonical_event",
+    "raw_count": 40,
+    "encoded_count": 82,
+    "raw_features": [
+      "map_name",
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "first_kill_advantage_ct",
+      "first_kill_time",
+      "first_kill_headshot",
+      "first_kill_weapon"
+    ],
+    "excluded_redundant_features": [
+      "first_kill_is_ct",
+      "first_death_is_ct",
+      "ct_alive_after_fk",
+      "t_alive_after_fk",
+      "alive_diff_ct_after_fk"
+    ],
+    "forbidden_encoded_features": [],
+    "control_encoded_count": 43
+  },
+  "models": {
+    "formal": [
+      "constant_train_prior",
+      "logistic_regression",
+      "xgboost_untuned"
+    ],
+    "xgboost_params": {
+      "objective": "binary:logistic",
+      "base_score": null,
+      "booster": null,
+      "callbacks": null,
+      "colsample_bylevel": null,
+      "colsample_bynode": null,
+      "colsample_bytree": 0.85,
+      "device": null,
+      "early_stopping_rounds": null,
+      "enable_categorical": false,
+      "eval_metric": "logloss",
+      "feature_types": null,
+      "feature_weights": null,
+      "gamma": null,
+      "grow_policy": null,
+      "importance_type": null,
+      "interaction_constraints": null,
+      "learning_rate": 0.03,
+      "max_bin": null,
+      "max_cat_threshold": null,
+      "max_cat_to_onehot": null,
+      "max_delta_step": null,
+      "max_depth": 4,
+      "max_leaves": null,
+      "min_child_weight": null,
+      "missing": NaN,
+      "monotone_constraints": null,
+      "multi_strategy": null,
+      "n_estimators": 500,
+      "n_jobs": -1,
+      "num_parallel_tree": null,
+      "random_state": 42,
+      "reg_alpha": null,
+      "reg_lambda": null,
+      "sampling_method": null,
+      "scale_pos_weight": null,
+      "subsample": 0.85,
+      "tree_method": null,
+      "validate_parameters": null,
+      "verbosity": null
+    },
+    "model_artifacts": {
+      "constant_train_prior": {
+        "path": "models/esta_full_m16/first_kill_constant_train_prior.joblib",
+        "bytes": 4872,
+        "sha256": "80a04392dd795b214dd990da44c9dd441ef8e79334ae5b29c43829b8ba593320"
+      },
+      "logistic_regression": {
+        "path": "models/esta_full_m16/first_kill_logistic_regression.joblib",
+        "bytes": 8257,
+        "sha256": "05f73e00c92c7e167960169b6bbf477bb39b6419d43c913cc7cfa9014acab625"
+      },
+      "xgboost_untuned": {
+        "path": "models/esta_full_m16/first_kill_xgboost_untuned.joblib",
+        "bytes": 832554,
+        "sha256": "aad3074c80d3f6b533ffbddbe0ae1928bfc22209f3befbd4d67d009eaea93ae4"
+      },
+      "xgboost_pre_round_control": {
+        "path": "models/esta_full_m16/first_kill_xgboost_pre_round_control.joblib",
+        "bytes": 828976,
+        "sha256": "c6584a1315d57c5bc99483982da1d6fc6e082b062a8fd4b18439f9d1ed158463"
+      }
+    }
+  },
+  "metrics": {
+    "accuracy": 0.7453237410071942,
+    "auc": 0.8088959225349904,
+    "log_loss": 0.5247534331448958,
+    "brier_score": 0.1762645347408764,
+    "ece10": 0.01090835026338052
+  },
+  "test_metrics_by_model": {
+    "constant_train_prior": {
+      "accuracy": 0.5247002398081535,
+      "auc": 0.5,
+      "log_loss": 0.6926432805734406,
+      "brier_score": 0.24974627640937555,
+      "ece10": 0.01887798336570312
+    },
+    "logistic_regression": {
+      "accuracy": 0.7434052757793765,
+      "auc": 0.8090589528793879,
+      "log_loss": 0.5266419675805064,
+      "brier_score": 0.17607033399417882,
+      "ece10": 0.015016607603500954
+    },
+    "xgboost_untuned": {
+      "accuracy": 0.7453237410071942,
+      "auc": 0.8088959225349904,
+      "log_loss": 0.5247534331448958,
+      "brier_score": 0.1762645347408764,
+      "ece10": 0.01090835026338052
+    }
+  },
+  "metric_targets": {
+    "all_minimum_passed": true,
+    "all_stage_passed": true,
+    "minimum_passed_count": 4,
+    "stage_passed_count": 4,
+    "metrics": {
+      "accuracy": {
+        "value": 0.7453237410071942,
+        "minimum": 0.68,
+        "stage": 0.7,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "auc": {
+        "value": 0.8088959225349904,
+        "minimum": 0.75,
+        "stage": 0.78,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "log_loss": {
+        "value": 0.5247534331448958,
+        "minimum": 0.58,
+        "stage": 0.55,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "brier_score": {
+        "value": 0.1762645347408764,
+        "minimum": 0.2,
+        "stage": 0.185,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      }
+    }
+  },
+  "xgboost_vs_logistic_test": {
+    "accuracy": {
+      "left": 0.7453237410071942,
+      "right": 0.7434052757793765,
+      "raw_left_minus_right": 0.0019184652278176895,
+      "performance_advantage_left": 0.0019184652278176895
+    },
+    "auc": {
+      "left": 0.8088959225349904,
+      "right": 0.8090589528793879,
+      "raw_left_minus_right": -0.00016303034439746344,
+      "performance_advantage_left": -0.00016303034439746344
+    },
+    "log_loss": {
+      "left": 0.5247534331448958,
+      "right": 0.5266419675805064,
+      "raw_left_minus_right": -0.001888534435610656,
+      "performance_advantage_left": 0.001888534435610656
+    },
+    "brier_score": {
+      "left": 0.1762645347408764,
+      "right": 0.17607033399417882,
+      "raw_left_minus_right": 0.00019420074669757037,
+      "performance_advantage_left": -0.00019420074669757037
+    },
+    "ece10": {
+      "left": 0.01090835026338052,
+      "right": 0.015016607603500954,
+      "raw_left_minus_right": -0.004108257340120434,
+      "performance_advantage_left": 0.004108257340120434
+    }
+  },
+  "feature_control_gains": {
+    "train": {
+      "accuracy": 0.06848257222085719,
+      "auc": 0.06907560369963606,
+      "log_loss": 0.06825292180647757,
+      "brier_score": 0.02954781583770552,
+      "ece10": -0.0009975529249780304
+    },
+    "val": {
+      "accuracy": 0.09141969407265771,
+      "auc": 0.08801534073318007,
+      "log_loss": 0.06862624537927386,
+      "brier_score": 0.03021974165023031,
+      "ece10": 0.006193941251938331
+    },
+    "test": {
+      "accuracy": 0.09592326139088725,
+      "auc": 0.08600715396521164,
+      "log_loss": 0.06906930912432696,
+      "brier_score": 0.02976119391554405,
+      "ece10": 0.009365451799111548
+    }
+  },
+  "xgboost_train_minus_val_auc": 0.039153900170436184,
+  "prediction_audit": {
+    "passed": true,
+    "rows": 4170,
+    "expected_rows": 4170,
+    "invalid_probability_cells": 0,
+    "duplicate_key_rows": 0
+  },
+  "xgboost_parameter_audit": {
+    "passed": true,
+    "expected": {
+      "n_estimators": 500,
+      "max_depth": 4,
+      "learning_rate": 0.03,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "random_state": 42
+    },
+    "mismatches": {}
+  },
+  "external_comparison_rows": 7,
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 1.9328482000000804,
+    "test_count": 90
+  },
+  "next_stage": "M17 validation-only controlled XGBoost tuning"
+}
