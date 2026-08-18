@@ -1,11 +1,12 @@
-# M16 Checklist
+# M17 Checklist
 
-- [x] Freeze the M16 assumptions, feature profile, targets, and external comparison rules.
-- [x] Add failing feature and model contract tests.
-- [x] Implement shared split preparation and the three formal baselines.
-- [x] Implement the matched-row pre-round XGBoost control.
-- [x] Add the first-kill external benchmark registry and difference report.
-- [x] Train on the full M15 artifact and write M16 reports.
+- [x] Freeze M17 assumptions, candidate grid, selection rule, goals, and boundaries.
+- [x] Add failing candidate and validation-only protocol tests.
+- [x] Implement candidate definitions, control-variable audit, and phase selection.
+- [x] Implement sequential training and seed stability.
+- [x] Implement frozen test evaluation and internal/external comparison.
+- [x] Run all 39 candidates on the accepted M16 feature artifact.
+- [x] Generate and inspect all M17 reports and model artifacts.
 - [x] Run the complete automated test suite and compile check.
 - [x] Update README and project path documentation.
-- [x] Commit and push M16.
+- [x] Commit and push M17.

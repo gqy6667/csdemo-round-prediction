@@ -1,28 +1,36 @@
-# M16 Implementation Plan
+# M17 Implementation Plan
 
 ## Scope
 
-Train the first valid post-first-kill baselines on the M15 repaired-key artifact.
-Keep the feature profile, split, metrics, and untuned XGBoost parameters fixed.
+Tune the accepted M16 post-first-kill XGBoost using train/validation only. Keep the
+M15 artifact, M16 feature contract, grouped split, and external comparison policy fixed.
 
 ## Slices
 
-1. Freeze the canonical non-redundant feature profile and metric targets.
-2. Add failing tests for feature selection, split preparation, and model contracts.
-3. Implement Dummy, logistic-regression, and untuned-XGBoost training.
-4. Add a matched-row pre-round XGBoost control and external comparison.
-5. Run the full artifact, verify all gates, document, commit, and push.
+1. Freeze candidate grids, selection threshold, targets, and test-use boundary.
+2. Add failing tests for candidate isolation and validation-only selection.
+3. Implement sequential search and verify each phase before adding final evaluation.
+4. Add seed stability, frozen test evaluation, internal/external comparisons, and reports.
+5. Run the full artifact, document the result, commit, and push.
+
+## Risks
+
+- Validation overfitting: retain the incumbent unless Log Loss improves by at least 0.0001.
+- Accidental test leakage: tuning functions accept only train/validation prepared frames.
+- Misleading external ranking: retain comparability labels and report numeric gaps only.
+- Runtime growth: keep the frozen 39-candidate greedy grid and CPU execution.
 
 ## Review Gates
 
-- Gate A: the M16 specification and targets exist before model code.
-- Gate B: focused tests fail before the M16 module exists, then pass after implementation.
-- Gate C: all models use identical keys and the exact M15 split/data fingerprint.
-- Gate D: the report retains misses against targets and non-comparable external gaps.
+- Gate A: the M17 specification exists before model implementation or experiments.
+- Gate B: protocol tests fail before the M17 module exists, then pass after each slice.
+- Gate C: all 39 candidate rows are validation-only and pass control-variable audit.
+- Gate D: test is evaluated only after the eight phase selections and seed audit are frozen.
+- Gate E: reports retain target misses, test regressions, and external comparability limits.
 
 ## Outcome
 
-M16 passed all four review gates and all eight blocking acceptance checks. The formal
-XGBoost test AUC is 0.808896, while logistic regression is 0.809059. The matched-row
-first-kill feature profile adds 0.088015 validation AUC over the pre-round control.
-M17 will tune XGBoost using train/validation only.
+M17 passed all five review gates and all 12 blocking checks. Validation Log Loss
+improved by 0.002038; the tuned test AUC/Log Loss/Brier are 0.809837/0.523146/0.175656.
+Accuracy decreased by 0.001199 and ECE10 worsened by 0.004541, both retained in the
+report. M18 will evaluate the frozen model without further parameter selection.

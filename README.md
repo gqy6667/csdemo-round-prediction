@@ -34,6 +34,7 @@ Chinese project documentation:
 - `docs/m14_final_acceptance_spec.md`
 - `docs/m15_first_kill_data_spec.md`
 - `docs/m16_first_kill_baseline_spec.md`
+- `docs/m17_first_kill_tuning_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -47,6 +48,8 @@ Chinese project documentation:
 - `reports/esta_full_m15/external_benchmark_comparison.md`
 - `reports/esta_full_m16/m16_first_kill_baseline_report.md`
 - `reports/esta_full_m16/external_benchmark_comparison.md`
+- `reports/esta_full_m17/m17_first_kill_tuning_report.md`
+- `reports/esta_full_m17/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -231,4 +234,18 @@ M16 passes all 8 blocking checks and all 90 automated tests. On the untouched
 Log Loss `0.5248`, and Brier `0.1763`. Logistic regression reaches AUC `0.8091`,
 so the tree model is not yet clearly better. Against an identical-row pre-round
 XGBoost control, the first-kill feature profile adds `0.0880` validation AUC and
-`0.0860` test AUC. M17 is validation-only controlled XGBoost tuning.
+`0.0860` test AUC.
+
+Run M17 validation-only controlled XGBoost tuning:
+
+```powershell
+.\scripts\run_first_kill_tuning.ps1
+```
+
+M17 evaluates 39 frozen candidates across eight sequential phases and passes all
+12 blocking checks plus all 100 automated tests. The selected model uses a 1,500-tree
+cap, 50-round early stopping, depth 2, and subsample 0.9; seed 42 stops at 409 trees.
+Test AUC improves from `0.8089` to `0.8098`, Log Loss from `0.5248` to `0.5231`, and
+Brier from `0.1763` to `0.1757`. Accuracy falls by `0.12` percentage points and ECE10
+worsens by `0.0045`, so those tradeoffs remain explicit. M18 is fixed-model robustness,
+bootstrap evaluation, and calibration diagnosis.

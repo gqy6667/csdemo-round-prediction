@@ -1,0 +1,400 @@
+{
+  "stage": "M17",
+  "generated_at_utc": "2026-08-18T19:25:32.309571+00:00",
+  "task": "post_first_kill",
+  "selection_metric": "validation log loss",
+  "minimum_phase_improvement": 0.0001,
+  "test_use": "evaluated once after parameters and seed protocol were frozen",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "ready_for_m18": true
+  },
+  "checks": {
+    "m16_prerequisite": true,
+    "data_contract": true,
+    "feature_contract": true,
+    "candidate_grid": true,
+    "validation_only": true,
+    "phase_selection": true,
+    "frozen_model": true,
+    "seed_stability": true,
+    "final_predictions": true,
+    "minimum_metrics": true,
+    "external_report": true,
+    "automated_tests": true
+  },
+  "prerequisite": {
+    "passed": true,
+    "m16_status": "passed",
+    "m16_ready_for_m17": true,
+    "expected_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "actual_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "actual_bytes": 1479873
+  },
+  "data": {
+    "path": "data/processed/esta_full/first_kill.parquet",
+    "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "rows": 41027,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "series": 782,
+    "games": 1558
+  },
+  "features": {
+    "raw_count": 40,
+    "encoded_count": 82,
+    "raw_features": [
+      "map_name",
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "first_kill_advantage_ct",
+      "first_kill_time",
+      "first_kill_headshot",
+      "first_kill_weapon"
+    ],
+    "matches_m16": true
+  },
+  "tuning": {
+    "phase_count": 8,
+    "candidate_count": 39,
+    "elapsed_seconds": 23.244389800005592,
+    "selected_candidates": [
+      {
+        "phase": "tree_policy",
+        "candidate_id": "tree_cap_1500_es50",
+        "changed": true,
+        "accepted_improvement": 0.0015839442991814057
+      },
+      {
+        "phase": "max_depth",
+        "candidate_id": "max_depth_2",
+        "changed": true,
+        "accepted_improvement": 0.00031562184056510567
+      },
+      {
+        "phase": "min_child_weight",
+        "candidate_id": "min_child_weight_1",
+        "changed": false,
+        "accepted_improvement": 0.0
+      },
+      {
+        "phase": "reg_lambda",
+        "candidate_id": "reg_lambda_1",
+        "changed": false,
+        "accepted_improvement": 0.0
+      },
+      {
+        "phase": "reg_alpha",
+        "candidate_id": "reg_alpha_0",
+        "changed": false,
+        "accepted_improvement": 0.0
+      },
+      {
+        "phase": "subsample",
+        "candidate_id": "subsample_0.9",
+        "changed": true,
+        "accepted_improvement": 0.00013892190369879653
+      },
+      {
+        "phase": "colsample_bytree",
+        "candidate_id": "colsample_bytree_0.85",
+        "changed": false,
+        "accepted_improvement": 0.0
+      },
+      {
+        "phase": "learning_rate",
+        "candidate_id": "learning_rate_0.03",
+        "changed": false,
+        "accepted_improvement": 0.0
+      }
+    ]
+  },
+  "frozen_model": {
+    "params": {
+      "n_estimators": 1500,
+      "max_depth": 2,
+      "min_child_weight": 1,
+      "learning_rate": 0.03,
+      "subsample": 0.9,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0,
+      "reg_lambda": 1,
+      "early_stopping_rounds": 50,
+      "random_state": 42
+    },
+    "best_iteration": 408,
+    "best_tree_count": 409,
+    "artifact": {
+      "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "bytes": 425536,
+      "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+    },
+    "parameter_audit": {
+      "passed": true,
+      "expected": {
+        "n_estimators": 1500,
+        "max_depth": 2,
+        "min_child_weight": 1,
+        "learning_rate": 0.03,
+        "subsample": 0.9,
+        "colsample_bytree": 0.85,
+        "reg_alpha": 0,
+        "reg_lambda": 1,
+        "early_stopping_rounds": 50,
+        "random_state": 42
+      },
+      "mismatches": {}
+    }
+  },
+  "metrics": {
+    "accuracy": 0.7441247002398081,
+    "auc": 0.8098368635821109,
+    "log_loss": 0.5231460210364541,
+    "brier_score": 0.17565589988309552,
+    "ece10": 0.01544967890679123
+  },
+  "stage_goals": {
+    "all_passed": true,
+    "goals": {
+      "validation_log_loss_improvement": {
+        "value": 0.002038488043445308,
+        "target": 0.001,
+        "higher_is_better": true,
+        "passed": true
+      },
+      "validation_auc": {
+        "value": 0.8033236207281457,
+        "target": 0.800069,
+        "higher_is_better": true,
+        "passed": true
+      },
+      "train_validation_auc_gap": {
+        "value": 0.012846130042866832,
+        "target": 0.03,
+        "higher_is_better": false,
+        "passed": true
+      }
+    }
+  },
+  "minimum_metrics": {
+    "all_minimum_passed": true,
+    "all_stage_passed": true,
+    "minimum_passed_count": 4,
+    "stage_passed_count": 4,
+    "metrics": {
+      "accuracy": {
+        "value": 0.7441247002398081,
+        "minimum": 0.68,
+        "stage": 0.7,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "auc": {
+        "value": 0.8098368635821109,
+        "minimum": 0.75,
+        "stage": 0.78,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "log_loss": {
+        "value": 0.5231460210364541,
+        "minimum": 0.58,
+        "stage": 0.55,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "brier_score": {
+        "value": 0.17565589988309552,
+        "minimum": 0.2,
+        "stage": 0.185,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      }
+    }
+  },
+  "tuned_vs_untuned_test": {
+    "accuracy": {
+      "left": 0.7441247002398081,
+      "right": 0.7453237410071942,
+      "raw_left_minus_right": -0.0011990407673860837,
+      "performance_advantage_left": -0.0011990407673860837
+    },
+    "auc": {
+      "left": 0.8098368635821109,
+      "right": 0.8088959225349904,
+      "raw_left_minus_right": 0.0009409410471205026,
+      "performance_advantage_left": 0.0009409410471205026
+    },
+    "log_loss": {
+      "left": 0.5231460210364541,
+      "right": 0.5247534331448958,
+      "raw_left_minus_right": -0.0016074121084416193,
+      "performance_advantage_left": 0.0016074121084416193
+    },
+    "brier_score": {
+      "left": 0.17565589988309552,
+      "right": 0.1762645347408764,
+      "raw_left_minus_right": -0.0006086348577808709,
+      "performance_advantage_left": 0.0006086348577808709
+    },
+    "ece10": {
+      "left": 0.01544967890679123,
+      "right": 0.0109083502633805,
+      "raw_left_minus_right": 0.00454132864341073,
+      "performance_advantage_left": -0.00454132864341073
+    }
+  },
+  "tuned_vs_logistic_test": {
+    "accuracy": {
+      "left": 0.7441247002398081,
+      "right": 0.7434052757793765,
+      "raw_left_minus_right": 0.0007194244604316058,
+      "performance_advantage_left": 0.0007194244604316058
+    },
+    "auc": {
+      "left": 0.8098368635821109,
+      "right": 0.8090589528793879,
+      "raw_left_minus_right": 0.0007779107027230392,
+      "performance_advantage_left": 0.0007779107027230392
+    },
+    "log_loss": {
+      "left": 0.5231460210364541,
+      "right": 0.5266419675805064,
+      "raw_left_minus_right": -0.0034959465440522752,
+      "performance_advantage_left": 0.0034959465440522752
+    },
+    "brier_score": {
+      "left": 0.17565589988309552,
+      "right": 0.1760703339941788,
+      "raw_left_minus_right": -0.00041443411108327277,
+      "performance_advantage_left": 0.00041443411108327277
+    },
+    "ece10": {
+      "left": 0.01544967890679123,
+      "right": 0.0150166076035009,
+      "raw_left_minus_right": 0.0004330713032903305,
+      "performance_advantage_left": -0.0004330713032903305
+    }
+  },
+  "seed_stability": {
+    "passed": true,
+    "observed_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "forbidden_columns": [],
+    "val_log_loss_range": 0.00012977123176116656,
+    "val_auc_range": 0.0003183593157868314,
+    "limits": {
+      "val_log_loss": 0.002,
+      "val_auc": 0.003
+    }
+  },
+  "prediction_audit": {
+    "passed": true,
+    "rows": 4170,
+    "expected_rows": 4170,
+    "invalid_probability_rows": 0,
+    "duplicate_key_rows": 0
+  },
+  "candidate_grid_audit": {
+    "passed": true,
+    "phase_count": 8,
+    "candidate_count": 39,
+    "changed_parameters_by_phase": {
+      "tree_policy": [
+        "early_stopping_rounds",
+        "n_estimators"
+      ],
+      "max_depth": [
+        "max_depth"
+      ],
+      "min_child_weight": [
+        "min_child_weight"
+      ],
+      "reg_lambda": [
+        "reg_lambda"
+      ],
+      "reg_alpha": [
+        "reg_alpha"
+      ],
+      "subsample": [
+        "subsample"
+      ],
+      "colsample_bytree": [
+        "colsample_bytree"
+      ],
+      "learning_rate": [
+        "learning_rate"
+      ]
+    },
+    "violations": []
+  },
+  "phase_selection_audit": {
+    "passed": true,
+    "phase_count": 8,
+    "selection_rows": 8,
+    "failures": []
+  },
+  "external_comparison_rows": 7,
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 2.0584803000001557,
+    "test_count": 100
+  },
+  "deployment_recommendation": "M17 tuned XGBoost",
+  "next_stage": "M18 fixed-model evaluation, robustness, and calibration diagnosis"
+}
