@@ -1,0 +1,166 @@
+{
+  "stage": "M15",
+  "passed": true,
+  "checks": {
+    "required_columns": {
+      "passed": true,
+      "blocking": true,
+      "missing_round_columns": [],
+      "missing_kill_columns": [],
+      "missing_sample_columns": [],
+      "missing_manifest_columns": []
+    },
+    "unique_repaired_key": {
+      "passed": true,
+      "blocking": true,
+      "round_duplicate_rows": 0,
+      "sample_duplicate_rows": 0,
+      "selected_event_duplicate_rows": 0
+    },
+    "sample_coverage": {
+      "passed": true,
+      "blocking": true,
+      "selected_event_rows": 41027,
+      "sample_key_rows": 41027,
+      "coverage_mismatch_rows": 0,
+      "orphan_sample_rows": 0
+    },
+    "event_linkage": {
+      "passed": true,
+      "blocking": true,
+      "mismatch_rows": 0,
+      "mismatch_by_field": {
+        "first_kill_time": 0,
+        "first_kill_is_ct": 0,
+        "first_death_is_ct": 0,
+        "first_kill_headshot": 0,
+        "first_kill_weapon": 0,
+        "first_kill_advantage_ct": 0
+      }
+    },
+    "core_values_present": {
+      "passed": true,
+      "blocking": true,
+      "null_cells": 0
+    },
+    "initial_5v5_state": {
+      "passed": true,
+      "blocking": true,
+      "valid_rows": 41074,
+      "total_rows": 41074
+    },
+    "post_kill_state": {
+      "passed": true,
+      "blocking": true,
+      "invalid_alive_rows": 0,
+      "derived_mismatch_rows": 0
+    },
+    "label_linkage": {
+      "passed": true,
+      "blocking": true,
+      "mismatch_rows": 0
+    },
+    "split_manifest": {
+      "passed": true,
+      "blocking": true,
+      "manifest_duplicate_rows": 0,
+      "mismatch_rows": 0,
+      "sample_series_missing_from_manifest": 0,
+      "manifest_series_without_sample": 0
+    },
+    "split_isolation": {
+      "passed": true,
+      "blocking": true,
+      "cross_split_series": 0,
+      "cross_split_games": 0,
+      "cross_split_rounds": 0
+    },
+    "normalized_kill_sides": {
+      "passed": true,
+      "blocking": true,
+      "invalid_rows": 0
+    },
+    "automated_tests": {
+      "passed": true,
+      "blocking": true,
+      "return_code": 0,
+      "elapsed_seconds": 2.10192619999998
+    }
+  },
+  "counts": {
+    "round_rows": 41074,
+    "kill_rows": 268640,
+    "sample_rows": 41027,
+    "excluded_rounds": 47,
+    "series": 782,
+    "games": 1558
+  },
+  "diagnostics": {
+    "time_order_disagreements": 14357,
+    "nonpositive_first_kill_time": 0,
+    "selected_without_source_first_kill_flag": 70,
+    "source_flags_not_at_earliest_tick": 0
+  },
+  "generated_at_utc": "2026-08-18T17:44:47.763044+00:00",
+  "task_definition": "purchase complete, immediately after earliest valid enemy kill by tick",
+  "previous_dataset_comparison": {
+    "available": true,
+    "previous_rows": 41027,
+    "current_rows": 41027,
+    "previous_duplicate_keys": 0,
+    "current_duplicate_keys": 0,
+    "new_columns": [
+      "alive_diff_ct_after_fk",
+      "ct_alive_after_fk",
+      "t_alive_after_fk"
+    ],
+    "removed_columns": [],
+    "added_keys": 0,
+    "removed_keys": 0,
+    "matched_keys": 41027,
+    "event_changed_rows": 14357,
+    "event_changed_fraction": 0.34994028322811804,
+    "changed_by_field": {
+      "first_kill_time": 14357,
+      "first_kill_is_ct": 6697,
+      "first_death_is_ct": 6697,
+      "first_kill_headshot": 6694,
+      "first_kill_weapon": 9669,
+      "first_kill_advantage_ct": 6697
+    },
+    "preserved_from_first_m15_run": true
+  },
+  "split_summary": [
+    {
+      "split": "train",
+      "series": 547,
+      "games": 1083,
+      "samples": 28489,
+      "series_fraction": 0.6994884910485933,
+      "ct_win_rate": 0.5435782231738566
+    },
+    {
+      "split": "val",
+      "series": 156,
+      "games": 316,
+      "samples": 8368,
+      "series_fraction": 0.19948849104859334,
+      "ct_win_rate": 0.5358508604206501
+    },
+    {
+      "split": "test",
+      "series": 79,
+      "games": 159,
+      "samples": 4170,
+      "series_fraction": 0.1010230179028133,
+      "ct_win_rate": 0.5247002398081535
+    }
+  ],
+  "data_artifact": {
+    "path": "data/processed/esta_full/first_kill.parquet",
+    "bytes": 1479873,
+    "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+  },
+  "external_comparison_status": "not_applicable_no_model",
+  "next_stage": "M16 fixed-split Dummy, logistic regression, and untuned XGBoost baselines"
+}

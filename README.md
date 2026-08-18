@@ -32,6 +32,7 @@ Chinese project documentation:
 - `docs/m12_explanation_spec.md`
 - `docs/m13_prediction_interface_spec.md`
 - `docs/m14_final_acceptance_spec.md`
+- `docs/m15_first_kill_data_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -41,6 +42,8 @@ Chinese project documentation:
 - `reports/esta_full_m13/external_benchmark_comparison.md`
 - `reports/esta_full_m14/m14_final_acceptance_report.md`
 - `reports/esta_full_m14/external_benchmark_comparison.md`
+- `reports/esta_full_m15/m15_first_kill_data_report.md`
+- `reports/esta_full_m15/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -105,8 +108,10 @@ pre-round model is included for reproducibility. See `data/README.md`.
 
 ### Stage 2: first-kill samples
 
-- Build one sample per round at the first kill timestamp.
-- Add first-kill features: killer side/team, victim side/team, weapon, headshot, trade window, alive-player differential after the kill.
+- Build one sample at the earliest valid enemy-kill tick within each repaired
+  `series_id + game_id + round_id` key.
+- Add first-kill side, victim side, weapon, headshot, and the 5v4/4v5 alive state.
+- Treat ESTA `seconds` as a candidate feature, never as the event-ordering key.
 - Train an XGBoost baseline with the same split.
 
 ### Stage 3: real-time samples
@@ -200,5 +205,14 @@ Rebuild everything from the local ESTA dataset before M14 acceptance:
 
 M14 passes all 15 blocking checks and all 70 automated tests. The four core test
 metrics pass the agreed minimum gates, but none reaches the higher stage target.
-The project is ready to start a fresh post-first-kill XGBoost pipeline using the
-repaired round identity and the persisted 782-series split manifest.
+M15 can now rebuild and audit the repaired post-first-kill dataset:
+
+```powershell
+.\scripts\run_first_kill_data_stage.ps1
+```
+
+M15 passes all 12 blocking checks and all 80 automated tests. It keeps 41,027
+post-first-kill samples, explicitly excludes 47 rounds with no valid enemy kill,
+and reuses the persisted 782-series split manifest. Replacing seconds ordering
+with tick ordering changes the selected event in 14,357 old rows (34.99%). M15
+does not train a model; M16 is the fixed-split baseline comparison.

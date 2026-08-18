@@ -1,0 +1,13 @@
+check,passed,blocking,details
+required_columns,True,True,"{""missing_kill_columns"": [], ""missing_manifest_columns"": [], ""missing_round_columns"": [], ""missing_sample_columns"": []}"
+unique_repaired_key,True,True,"{""round_duplicate_rows"": 0, ""sample_duplicate_rows"": 0, ""selected_event_duplicate_rows"": 0}"
+sample_coverage,True,True,"{""coverage_mismatch_rows"": 0, ""orphan_sample_rows"": 0, ""sample_key_rows"": 41027, ""selected_event_rows"": 41027}"
+event_linkage,True,True,"{""mismatch_by_field"": {""first_death_is_ct"": 0, ""first_kill_advantage_ct"": 0, ""first_kill_headshot"": 0, ""first_kill_is_ct"": 0, ""first_kill_time"": 0, ""first_kill_weapon"": 0}, ""mismatch_rows"": 0}"
+core_values_present,True,True,"{""null_cells"": 0}"
+initial_5v5_state,True,True,"{""total_rows"": 41074, ""valid_rows"": 41074}"
+post_kill_state,True,True,"{""derived_mismatch_rows"": 0, ""invalid_alive_rows"": 0}"
+label_linkage,True,True,"{""mismatch_rows"": 0}"
+split_manifest,True,True,"{""manifest_duplicate_rows"": 0, ""manifest_series_without_sample"": 0, ""mismatch_rows"": 0, ""sample_series_missing_from_manifest"": 0}"
+split_isolation,True,True,"{""cross_split_games"": 0, ""cross_split_rounds"": 0, ""cross_split_series"": 0}"
+normalized_kill_sides,True,True,"{""invalid_rows"": 0}"
+automated_tests,True,True,"{""elapsed_seconds"": 2.10192619999998, ""return_code"": 0}"

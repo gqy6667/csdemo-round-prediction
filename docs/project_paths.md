@@ -40,7 +40,9 @@ csdemo_round_prediction\
 ├─ docs\                       项目规格、路径说明和指标说明
 ├─ models\                     训练后保存的模型
 ├─ reports\                    Accuracy、AUC、Log Loss 等实验结果
+├─ scripts\                    可重复运行的阶段入口
 ├─ src\csdemo\                 Python 源代码
+├─ tasks\                      当前阶段的实施计划和检查表
 ├─ tests\                      自动化测试
 ├─ README.md                   项目首页和快速命令
 └─ requirements.txt            Python 依赖
@@ -54,7 +56,7 @@ M2 修复后的完整数据：
 data\interim\esta_full\rounds.parquet
 data\interim\esta_full\kills.parquet
 data\processed\esta_full\pre_round.parquet
-data\processed\esta_full\first_kill.parquet
+data\processed\esta_full\first_kill.parquet   M15 按最小 tick 修复后的首杀样本
 ```
 
 M2 修复前的历史数据和模型：
@@ -94,6 +96,7 @@ src\csdemo\m12_explanation.py  M12 Gain、Permutation、TreeSHAP 和泄漏检查
 src\csdemo\predict_pre_round.py M13 单条 JSON/CSV 校验与胜率预测
 src\csdemo\m13_interface.py    M13 接口验收和阶段报告
 src\csdemo\m14_acceptance.py   M14 最终验收、实验清单和报告
+src\csdemo\m15_first_kill_data.py M15 首杀样本重建、主键/split 审计和报告
 src\csdemo\benchmark_comparison.py  各阶段外部模型差值报告
 src\csdemo\train_lgbm.py       后续 LightGBM 对比
 src\csdemo\schema.py           特征列和 ID 列定义
@@ -233,6 +236,19 @@ reports\esta_full_m14\external_benchmark_comparison.csv
 reports\esta_full_m14\external_benchmark_comparison.md
 ```
 
+M15 首杀样本修复与验收：
+
+```text
+reports\esta_full_m15\m15_summary.json
+reports\esta_full_m15\m15_checks.csv
+reports\esta_full_m15\excluded_rounds.csv
+reports\esta_full_m15\split_summary.csv
+reports\esta_full_m15\automated_test_output.txt
+reports\esta_full_m15\m15_first_kill_data_report.md
+reports\esta_full_m15\external_benchmark_comparison.csv
+reports\esta_full_m15\external_benchmark_comparison.md
+```
+
 ## 文档路径
 
 ```text
@@ -247,6 +263,7 @@ docs\m11_robustness_spec.md         M11 稳健性和错误分析验收
 docs\m12_explanation_spec.md        M12 模型解释与泄漏检查验收
 docs\m13_prediction_interface_spec.md M13 独立预测接口与使用教程
 docs\m14_final_acceptance_spec.md    M14 最终验收与复现教程
+docs\m15_first_kill_data_spec.md     M15 首杀定义、主键关联和数据验收
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -346,12 +363,21 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m13_interface --model model
 .\scripts\run_pre_round_pipeline.ps1 -FullRebuild
 ```
 
+运行 M15 首杀样本修复和验收：
+
+```powershell
+.\scripts\run_first_kill_data_stage.ps1
+```
+
 M14 最低门槛最终验收已通过。当前标准数据为 41,074 个开局前样本，质量报告没有
 error 或 warning；M9 正式测试 AUC 为 0.7271，系列赛级 95% CI 为
 [0.7131, 0.7409]；M10 验证集选择保留原始概率；M11 已完成分组 CI 和 30 个
 高置信错误审查；M12 已完成三种重要性、43 个特征泄漏检查和三个回合案例解释；
 M13 已提供单条 JSON/CSV 预测；M14 已锁定环境、运行 70 项测试、保存哈希和 782 条
-系列赛 split 清单。下一阶段是使用修复主键重新建立首杀后 XGBoost。
+系列赛 split 清单。M15 已使用完整三列主键和最小 tick 重建 41,027 条首杀后样本，
+排除 47 个无有效击杀回合，12 个阻塞检查与 80 项测试全部通过。旧样本有 14,357 条
+首杀事件发生变化；历史首杀模型指标因此继续作废。下一阶段 M16 才开始 Dummy、
+逻辑回归和未经调参 XGBoost 的同 split 对照。
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。

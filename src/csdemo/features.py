@@ -43,19 +43,54 @@ def make_pre_round_samples(rounds: pd.DataFrame) -> pd.DataFrame:
     return out[cols].copy()
 
 
-def make_first_kill_samples(rounds: pd.DataFrame, kills: pd.DataFrame) -> pd.DataFrame:
-    required_kill_cols = set(ID_COLUMNS + ["time", "killer_side", "victim_side"])
-    missing = sorted(required_kill_cols - set(kills.columns))
+def select_first_valid_kills(kills: pd.DataFrame) -> pd.DataFrame:
+    """Select the earliest enemy kill by demo tick within each repaired round key."""
+
+    required = set(ID_COLUMNS + ["tick", "time", "killer_side", "victim_side"])
+    missing = sorted(required - set(kills.columns))
     if missing:
         raise KeyError(f"Missing required kill columns: {missing}")
 
-    base = make_pre_round_samples(rounds)
-    # All identity columns are required so kills cannot cross between maps in one series.
-    first_kills = (
-        kills.sort_values(ID_COLUMNS + ["time"])
-        .groupby(ID_COLUMNS, as_index=False)
-        .first()
+    identity_and_order = ID_COLUMNS + ["tick"]
+    if kills[identity_and_order].isna().any().any():
+        raise ValueError("Kill identity columns and tick must not be null")
+
+    valid = kills.copy()
+    killer_side = valid["killer_side"].astype("string").str.upper()
+    victim_side = valid["victim_side"].astype("string").str.upper()
+    enemy_kill = (
+        killer_side.isin(["CT", "T"])
+        & victim_side.isin(["CT", "T"])
+        & killer_side.ne(victim_side)
     )
+    valid = valid.loc[enemy_kill].copy()
+    valid["_source_order"] = range(len(valid))
+
+    ordered = valid.sort_values(
+        ID_COLUMNS + ["tick", "_source_order"], kind="mergesort"
+    )
+    selected = ordered.groupby(ID_COLUMNS, sort=False, as_index=False).head(1)
+    return selected.drop(columns="_source_order").reset_index(drop=True)
+
+
+def make_first_kill_samples(rounds: pd.DataFrame, kills: pd.DataFrame) -> pd.DataFrame:
+    required_round_cols = set(ID_COLUMNS + ["ct_alive", "t_alive"])
+    missing_round_cols = sorted(required_round_cols - set(rounds.columns))
+    if missing_round_cols:
+        raise KeyError(f"Missing required first-kill round columns: {missing_round_cols}")
+    if (~rounds["ct_alive"].eq(5) | ~rounds["t_alive"].eq(5)).any():
+        raise ValueError("First-kill samples require a 5v5 pre-combat snapshot")
+
+    base = make_pre_round_samples(rounds)
+    alive_before = rounds[ID_COLUMNS + ["ct_alive", "t_alive"]].copy()
+    base = base.merge(
+        alive_before,
+        on=ID_COLUMNS,
+        how="left",
+        validate="one_to_one",
+    )
+    # Full identity and tick ordering prevent events crossing maps or time resets.
+    first_kills = select_first_valid_kills(kills)
 
     fk = first_kills.rename(
         columns={
@@ -76,12 +111,11 @@ def make_first_kill_samples(rounds: pd.DataFrame, kills: pd.DataFrame) -> pd.Dat
         validate="one_to_one",
     )
 
-    if "ct_alive" in samples.columns and "t_alive" in samples.columns:
-        samples["ct_alive_after_fk"] = samples["ct_alive"] - samples["first_death_is_ct"]
-        samples["t_alive_after_fk"] = samples["t_alive"] - (1 - samples["first_death_is_ct"])
-        samples["alive_diff_ct_after_fk"] = (
-            samples["ct_alive_after_fk"] - samples["t_alive_after_fk"]
-        )
+    samples["ct_alive_after_fk"] = samples["ct_alive"] - samples["first_death_is_ct"]
+    samples["t_alive_after_fk"] = samples["t_alive"] - (1 - samples["first_death_is_ct"])
+    samples["alive_diff_ct_after_fk"] = (
+        samples["ct_alive_after_fk"] - samples["t_alive_after_fk"]
+    )
 
     keep = ID_COLUMNS + [LABEL_COL] + [c for c in FIRST_KILL_FEATURES if c in samples.columns]
     return samples[keep].copy()
