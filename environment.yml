@@ -1,0 +1,18 @@
+name: csdemo-game
+channels:
+  - defaults
+dependencies:
+  - python=3.10.20
+  - pip=26.1.1
+  - pip:
+      - numpy==2.2.6
+      - pandas==2.3.3
+      - scikit-learn==1.7.2
+      - xgboost==3.2.0
+      - pyarrow==24.0.0
+      - joblib==1.5.3
+      - matplotlib==3.10.9
+      - lightgbm==4.6.0
+
+# CUDA/NVCC is optional for this accepted CPU XGBoost model. The current local
+# environment has CUDA 12.8, but recreating this project does not require a GPU.
