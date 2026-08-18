@@ -178,7 +178,9 @@ def collect_runtime_environment() -> dict[str, Any]:
     }
 
 
-def collect_git_state(project_root: str | Path) -> dict[str, Any]:
+def collect_git_state(
+    project_root: str | Path, ignored_output_paths: tuple[str, ...] = ()
+) -> dict[str, Any]:
     root = Path(project_root)
 
     def git(*args: str) -> str:
@@ -187,13 +189,25 @@ def collect_git_state(project_root: str | Path) -> dict[str, Any]:
         )
         return completed.stdout.strip()
 
-    status = git("status", "--porcelain")
+    status_lines = git("status", "--porcelain").splitlines()
+    normalized_ignored = tuple(
+        path.replace("\\", "/").rstrip("/") + "/" for path in ignored_output_paths
+    )
+    ignored_lines = []
+    relevant_lines = []
+    for line in status_lines:
+        changed_path = line[3:].replace("\\", "/")
+        if any(changed_path.startswith(prefix) for prefix in normalized_ignored):
+            ignored_lines.append(line)
+        else:
+            relevant_lines.append(line)
     return {
         "commit": git("rev-parse", "HEAD"),
         "branch": git("branch", "--show-current"),
         "remote": git("remote", "get-url", "origin"),
-        "working_tree_clean_before_report_generation": not bool(status),
-        "working_tree_status_before_report_generation": status.splitlines(),
+        "working_tree_clean_before_report_generation": not relevant_lines,
+        "working_tree_status_before_report_generation": relevant_lines,
+        "ignored_existing_report_status": ignored_lines,
     }
 
 
@@ -579,13 +593,19 @@ def run_acceptance(
     first_kill = pd.read_parquet(root / "data/processed/esta_full/first_kill.parquet")
     identity = audit_data_identity(rounds, kills, pre_round)
     split = audit_split_contract(pre_round)
+    split_assignments = build_split_assignments(pre_round)
     quality = audit_quality_summary(
         pd.read_csv(root / "reports/data_quality/esta_full/quality_summary.csv")
     )
     stage_evidence = collect_stage_evidence(root)
     runtime = collect_runtime_environment()
     environment_lock = audit_environment_lock(root, runtime)
-    git_state = collect_git_state(root)
+    try:
+        ignored_report_path = output_dir.relative_to(root).as_posix()
+        ignored_output_paths = (ignored_report_path,)
+    except ValueError:
+        ignored_output_paths = ()
+    git_state = collect_git_state(root, ignored_output_paths)
     tests = run_automated_tests(root)
 
     checks = {
@@ -643,6 +663,8 @@ def run_acceptance(
         "data": {
             "identity": identity,
             "split_contract": split,
+            "split_assignment_file": "split_assignments.csv",
+            "split_assignment_rows": int(len(split_assignments)),
             "quality": quality,
             "first_kill_rows_for_next_stage": int(len(first_kill)),
         },
@@ -652,6 +674,8 @@ def run_acceptance(
         "readiness": readiness,
         "external_benchmark_rows": int(len(comparison)),
         "nonblocking_follow_ups": [
+            "M0 尚缺正式的 20 回合人工快照核验记录；现有自动测试与 M4.1 原始帧核验不能完全替代人工抽查。",
+            "M3 当前 Parquet 未保留 freezeTimeEndTick 与 snapshot tick，所以下次全量重建应新增字段并输出完整 tick 偏移分布。",
             "四个核心指标通过最低门槛，但 Accuracy、AUC、Log Loss 和 Brier 均未达到更高阶段目标。",
             "XGBoost 测试 AUC 比逻辑回归低约 0.000107，未达到领先 0.01 的研究目标。",
             "部分大地图的 AUC 置信区间下界仍低于 0.67。",
@@ -679,6 +703,7 @@ def run_acceptance(
     _write_json(output_dir / "runtime_environment.json", runtime)
     _write_json(output_dir / "m14_experiment_manifest.json", manifest)
     _write_json(output_dir / "m14_summary.json", summary)
+    split_assignments.to_csv(output_dir / "split_assignments.csv", index=False)
     (output_dir / "automated_test_output.txt").write_text(
         tests["output"], encoding="utf-8"
     )
@@ -733,6 +758,29 @@ def assess_metric_targets(metrics: Mapping[str, float]) -> dict[str, Any]:
         "all_minimum_passed": minimum_count == len(results),
         "all_stage_passed": stage_count == len(results),
     }
+
+
+def build_split_assignments(frame: pd.DataFrame) -> pd.DataFrame:
+    """Build the persistent one-row-per-series split manifest required by M5."""
+
+    required = {"series_id", "game_id", "round_id", "split", "ct_win"}
+    missing = sorted(required - set(frame.columns))
+    if missing:
+        raise KeyError("Split assignment data missing columns: " + ", ".join(missing))
+    if frame.groupby("series_id")["split"].nunique().gt(1).any():
+        raise ValueError("A series_id cannot be assigned to multiple splits.")
+    assignments = (
+        frame.groupby("series_id", as_index=False)
+        .agg(
+            split=("split", "first"),
+            game_count=("game_id", "nunique"),
+            round_count=("round_id", "size"),
+            ct_win_rate=("ct_win", "mean"),
+        )
+        .sort_values("series_id")
+        .reset_index(drop=True)
+    )
+    return assignments
 
 
 def audit_split_contract(frame: pd.DataFrame) -> dict[str, Any]:

@@ -11,12 +11,32 @@ from src.csdemo.m14_acceptance import (
     audit_required_artifacts,
     audit_quality_summary,
     audit_split_contract,
+    build_split_assignments,
     decide_phase_readiness,
     fingerprint_file,
 )
 
 
 class M14AcceptanceTests(unittest.TestCase):
+    def test_split_assignments_save_one_row_per_series(self) -> None:
+        frame = pd.DataFrame(
+            {
+                "series_id": ["s1", "s1", "s2"],
+                "game_id": ["g1", "g2", "g3"],
+                "round_id": ["g1_1", "g2_1", "g3_1"],
+                "split": ["train", "train", "test"],
+                "ct_win": [1, 0, 1],
+            }
+        )
+
+        result = build_split_assignments(frame)
+
+        self.assertEqual(result["series_id"].tolist(), ["s1", "s2"])
+        self.assertEqual(result.loc[0, "split"], "train")
+        self.assertEqual(result.loc[0, "game_count"], 2)
+        self.assertEqual(result.loc[0, "round_count"], 2)
+        self.assertAlmostEqual(result.loc[0, "ct_win_rate"], 0.5)
+
     def test_module_entrypoint_runs_after_all_function_definitions(self) -> None:
         source = Path(m14_module.__file__).read_text(encoding="utf-8")
 
