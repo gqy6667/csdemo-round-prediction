@@ -29,7 +29,9 @@ Chinese project documentation:
 - `docs/m10_calibration_spec.md`
 - `reports/esta_full_m10/m10_calibration_report.md`
 - `docs/m11_robustness_spec.md`
+- `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
+- `reports/esta_full_m11/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -58,6 +60,17 @@ M11 found a LAN-online AUC gap of `0.0090` (95% CI `[-0.0181, 0.0369]`).
 All seven maps with at least 300 test rounds pass the `0.69` point-estimate target,
 while some map confidence intervals still cross below `0.67`. Thirty high-confidence
 errors were reviewed and categorized.
+
+Closest published freeze-time benchmark differences:
+
+- DNN accuracy `0.6792`; current XGBoost `0.6474`: `-3.18` percentage points.
+- DNN log loss `0.5679`; current XGBoost `0.5917`: `+0.0239` (higher is worse).
+- Different datasets and split protocols make these reference gaps, not a controlled
+  DNN-versus-XGBoost comparison.
+
+Mid-round snapshot studies report approximately `0.88` accuracy, but use alive-player,
+health, time and bomb-state information observed after combat starts. Their numerical
+gaps are reported separately and are not interpreted as model superiority.
 
 The full ESTA dataset and historical models are not committed. The small tuned M8
 pre-round model is included for reproducibility. See `data/README.md`.
@@ -132,4 +145,10 @@ Run M11 grouped robustness and error analysis:
 
 ```powershell
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m11_robustness --predictions reports\esta_full_m9\test_predictions.csv --data data\processed\esta_full\pre_round.parquet --kills data\interim\esta_full\kills.parquet --report-dir reports\esta_full_m11 --bootstrap-samples 2000 --seed 42 --review-cases 30
+```
+
+Generate the external benchmark difference table for M11 or a later stage:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.benchmark_comparison --metrics reports\esta_full_m9\m9_summary.json --benchmarks benchmarks\external_round_model_metrics.csv --report-dir reports\esta_full_m11 --stage-label M11
 ```

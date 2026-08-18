@@ -66,6 +66,22 @@ LAN 减 Online 的 AUC 为 `0.009003`，差值 95% CI 为
 位置、投掷物效果和后续决策。首杀是重要的事后解释变量，也支持后续单独开发
 “首杀后胜率”；这些模式不是经过因果识别的确定原因。
 
+## 外部模型差值
+
+与预测时点最接近的公开研究同样在 `RoundFreezetimeEnd` 读取装备，DNN 报告
+Accuracy `0.679220`、Log Loss `0.567860`。当前 XGBoost 的 Accuracy 为
+`0.647411`，低 `3.18` 个百分点；Log Loss 为 `0.591733`，高 `0.023873`。
+这是目前最有参考价值的差值，但外部研究使用不同 HLTV 数据和随机行级 80/20
+验证，没有报告系列赛隔离，因此不能把全部差值解释为算法差异。
+
+回合中快照研究报告 Random Forest Accuracy `0.8841` 和 `0.88`，本项目数值
+分别低 `23.67`、`23.26` 个百分点。它们使用剩余时间、存活人数、血量和下包
+状态等交火后信息，属于更容易的预测任务，只报告数值差，不判断模型优劣。
+
+完整来源、可比性标签和逐项计算见
+`reports\esta_full_m11\external_benchmark_comparison.md`。后续阶段报告必须按照
+`docs\external_benchmark_policy.md` 重新生成同名 CSV 和 Markdown。
+
 ## 验收结论
 
 - LAN/online AUC 差 <= 0.04：通过。
@@ -91,6 +107,8 @@ reports\esta_full_m11\map_auc_with_ci.png
 reports\esta_full_m11\error_pattern_counts.png
 reports\esta_full_m11\m11_summary.json
 reports\esta_full_m11\m11_robustness_report.md
+reports\esta_full_m11\external_benchmark_comparison.csv
+reports\esta_full_m11\external_benchmark_comparison.md
 ```
 
 ## 复现命令
@@ -98,6 +116,7 @@ reports\esta_full_m11\m11_robustness_report.md
 ```powershell
 cd C:\Users\admin\Documents\Codex\2026-07-06\th\work\csdemo_round_prediction
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m11_robustness --predictions reports\esta_full_m9\test_predictions.csv --data data\processed\esta_full\pre_round.parquet --kills data\interim\esta_full\kills.parquet --report-dir reports\esta_full_m11 --bootstrap-samples 2000 --seed 42 --review-cases 30
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.benchmark_comparison --metrics reports\esta_full_m9\m9_summary.json --benchmarks benchmarks\external_round_model_metrics.csv --report-dir reports\esta_full_m11 --stage-label M11
 ```
 
 下一阶段是 M12 模型解释：补 gain、Permutation Importance 和 SHAP，并检查
