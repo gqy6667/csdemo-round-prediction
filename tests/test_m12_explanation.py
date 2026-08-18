@@ -7,6 +7,7 @@ from xgboost import XGBClassifier
 
 from src.csdemo.m12_explanation import (
     audit_model_features,
+    build_importance_comparison,
     build_case_explanations,
     deployment_tree_count,
     gain_importance,
@@ -147,6 +148,39 @@ class M12ExplanationTests(unittest.TestCase):
             ["toward_ct", "toward_t", "toward_ct"],
         )
         self.assertTrue(explanations["reconstructed_ct_probability"].between(0, 1).all())
+
+    def test_importance_comparison_keeps_each_methods_native_units(self) -> None:
+        gain = pd.DataFrame(
+            {
+                "gain_rank": [1, 2],
+                "feature": ["economy", "score"],
+                "gain_normalized": [0.7, 0.3],
+            }
+        )
+        permutation = pd.DataFrame(
+            {
+                "permutation_rank": [1, 2],
+                "feature": ["score", "economy"],
+                "auc_decrease_mean": [0.08, 0.04],
+                "auc_decrease_std": [0.01, 0.02],
+            }
+        )
+        shap = pd.DataFrame(
+            {
+                "shap_rank": [1, 2],
+                "feature": ["economy", "score"],
+                "mean_abs_shap": [0.6, 0.2],
+            }
+        )
+
+        comparison = build_importance_comparison(gain, permutation, shap).set_index(
+            "feature"
+        )
+
+        self.assertAlmostEqual(comparison.loc["economy", "gain_normalized"], 0.7)
+        self.assertAlmostEqual(comparison.loc["score", "auc_decrease_mean"], 0.08)
+        self.assertAlmostEqual(comparison.loc["economy", "mean_abs_shap"], 0.6)
+        self.assertAlmostEqual(comparison.loc["economy", "mean_rank"], 4 / 3)
 
 
 if __name__ == "__main__":

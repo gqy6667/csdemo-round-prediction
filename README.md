@@ -29,9 +29,12 @@ Chinese project documentation:
 - `docs/m10_calibration_spec.md`
 - `reports/esta_full_m10/m10_calibration_report.md`
 - `docs/m11_robustness_spec.md`
+- `docs/m12_explanation_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
+- `reports/esta_full_m12/m12_explanation_report.md`
+- `reports/esta_full_m12/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -71,6 +74,12 @@ Closest published freeze-time benchmark differences:
 Mid-round snapshot studies report approximately `0.88` accuracy, but use alive-player,
 health, time and bomb-state information observed after combat starts. Their numerical
 gaps are reported separately and are not interpreted as model superiority.
+
+M12 explains the unchanged model with deployment-tree gain, 20-repeat test AUC
+permutation importance, and native XGBoost TreeSHAP. Equipment-value difference is
+the most stable feature (gain/permutation/SHAP ranks `2/1/1`). All 43 encoded inputs
+pass the pre-round leakage audit, and TreeSHAP reconstructs deployed probabilities with
+maximum absolute error `0.0000002512`.
 
 The full ESTA dataset and historical models are not committed. The small tuned M8
 pre-round model is included for reproducibility. See `data/README.md`.
@@ -151,4 +160,10 @@ Generate the external benchmark difference table for M11 or a later stage:
 
 ```powershell
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.benchmark_comparison --metrics reports\esta_full_m9\m9_summary.json --benchmarks benchmarks\external_round_model_metrics.csv --report-dir reports\esta_full_m11 --stage-label M11
+```
+
+Run M12 model explanation and regenerate the required external comparison:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m12_explanation --data data\processed\esta_full\pre_round.parquet --model models\esta_full_m8_tuned\pre_round_xgb.joblib --report-dir reports\esta_full_m12 --permutation-repeats 20 --seed 42 --case-features 10 --shap-plot-rows 1500
 ```

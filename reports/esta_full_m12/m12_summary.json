@@ -1,0 +1,138 @@
+{
+  "task": "pre_round",
+  "definition": "freeze-time end after purchases and before combat",
+  "model_path": "models\\esta_full_m8_tuned\\pre_round_xgb.joblib",
+  "test_rounds": 4172,
+  "encoded_features": 43,
+  "available_tree_count": 313,
+  "deployment_tree_count": 213,
+  "permutation_metric": "test_auc_decrease",
+  "permutation_repeats": 20,
+  "seed": 42,
+  "shap_method": "xgboost_native_tree_shap",
+  "shap_units": "log_odds",
+  "shap_reconstruction_max_abs_error": 2.511670809113298e-07,
+  "shap_reconstruction_mean_abs_error": 3.641225069816561e-08,
+  "top_features": {
+    "gain": [
+      "grenade_diff_ct",
+      "eq_value_diff_ct",
+      "helmet_diff_ct",
+      "armor_diff_ct",
+      "t_rifles",
+      "t_helmets",
+      "ct_eq_value",
+      "ct_armor",
+      "t_armor",
+      "rifle_diff_ct"
+    ],
+    "permutation_auc": [
+      "eq_value_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "helmet_diff_ct",
+      "score_diff_ct",
+      "ct_m4a1_s",
+      "map_name_de_inferno",
+      "ct_armor",
+      "t_armor",
+      "t_rifles"
+    ],
+    "mean_abs_shap": [
+      "eq_value_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "helmet_diff_ct",
+      "grenade_diff_ct",
+      "ct_m4a1_s",
+      "ct_armor",
+      "rifle_diff_ct",
+      "score_diff_ct",
+      "t_rifles"
+    ],
+    "mean_rank": [
+      "eq_value_diff_ct",
+      "ct_eq_value",
+      "helmet_diff_ct",
+      "t_eq_value",
+      "grenade_diff_ct",
+      "ct_armor",
+      "ct_m4a1_s",
+      "t_rifles",
+      "armor_diff_ct",
+      "score_diff_ct"
+    ]
+  },
+  "importance_rank_spearman": {
+    "gain_rank": {
+      "gain_rank": 1.0,
+      "permutation_rank": 0.6436122017517366,
+      "shap_rank": 0.873301117487164
+    },
+    "permutation_rank": {
+      "gain_rank": 0.6436122017517366,
+      "permutation_rank": 1.0,
+      "shap_rank": 0.7135306553911205
+    },
+    "shap_rank": {
+      "gain_rank": 0.873301117487164,
+      "permutation_rank": 0.7135306553911205,
+      "shap_rank": 1.0
+    }
+  },
+  "feature_audit": {
+    "all_feature_failures": 0,
+    "top20_failures": 0
+  },
+  "selected_cases": [
+    {
+      "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+      "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+      "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_5",
+      "map_name": "de_ancient",
+      "round_num": 5,
+      "y_true": 1,
+      "ct_win_probability": 0.9824344515800476,
+      "predicted_label": 1,
+      "correct": true,
+      "row_position": 3321,
+      "prediction_confidence": 0.9824344515800476,
+      "case_type": "ct_high_probability"
+    },
+    {
+      "series_id": "cd39478e-f125-44c7-bdeb-90ba52fed8a3",
+      "game_id": "lan:fe5f9da6-2d03-4b91-9786-425ce96f2631",
+      "round_id": "lan:fe5f9da6-2d03-4b91-9786-425ce96f2631_3",
+      "map_name": "de_inferno",
+      "round_num": 3,
+      "y_true": 0,
+      "ct_win_probability": 0.03435879200696945,
+      "predicted_label": 0,
+      "correct": true,
+      "row_position": 1836,
+      "prediction_confidence": 0.96564120054245,
+      "case_type": "t_high_probability"
+    },
+    {
+      "series_id": "63e0d98d-fd95-4698-9d12-808508005ee2",
+      "game_id": "online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b",
+      "round_id": "online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b_2",
+      "map_name": "de_vertigo",
+      "round_num": 2,
+      "y_true": 0,
+      "ct_win_probability": 0.9772343635559082,
+      "predicted_label": 1,
+      "correct": false,
+      "row_position": 2243,
+      "prediction_confidence": 0.9772343635559082,
+      "case_type": "high_confidence_error"
+    }
+  ],
+  "acceptance": {
+    "three_importance_methods_created": true,
+    "ct_t_and_error_cases_created": true,
+    "top20_has_no_id_or_future_leakage": true,
+    "all_model_features_pass_schema_audit": true,
+    "shap_reconstructs_probability_within_1e_5": true
+  }
+}

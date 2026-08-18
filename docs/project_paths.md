@@ -90,6 +90,7 @@ src\csdemo\m9_evaluation.py    M9 统一评估、bootstrap 和图表
 src\csdemo\calibration.py      可持久化的 Identity/Sigmoid/Isotonic 校准器
 src\csdemo\m10_calibration.py  M10 验证集校准选择和测试比较
 src\csdemo\m11_robustness.py   M11 分组置信区间和高置信错误分析
+src\csdemo\m12_explanation.py  M12 Gain、Permutation、TreeSHAP 和泄漏检查
 src\csdemo\benchmark_comparison.py  各阶段外部模型差值报告
 src\csdemo\train_lgbm.py       后续 LightGBM 对比
 src\csdemo\schema.py           特征列和 ID 列定义
@@ -180,6 +181,28 @@ reports\esta_full_m11\external_benchmark_comparison.csv
 reports\esta_full_m11\external_benchmark_comparison.md
 ```
 
+M12 模型解释：
+
+```text
+reports\esta_full_m12\gain_importance.csv
+reports\esta_full_m12\permutation_importance_auc.csv
+reports\esta_full_m12\shap_importance.csv
+reports\esta_full_m12\importance_comparison.csv
+reports\esta_full_m12\all_feature_leakage_audit.csv
+reports\esta_full_m12\top20_feature_audit.csv
+reports\esta_full_m12\selected_cases.csv
+reports\esta_full_m12\case_explanations.csv
+reports\esta_full_m12\gain_importance.png
+reports\esta_full_m12\permutation_importance_auc.png
+reports\esta_full_m12\shap_importance.png
+reports\esta_full_m12\shap_summary.png
+reports\esta_full_m12\case_explanations.png
+reports\esta_full_m12\m12_summary.json
+reports\esta_full_m12\m12_explanation_report.md
+reports\esta_full_m12\external_benchmark_comparison.csv
+reports\esta_full_m12\external_benchmark_comparison.md
+```
+
 ## 文档路径
 
 ```text
@@ -191,6 +214,7 @@ docs\m7_baseline_spec.md            M7 简单基线验收
 docs\m9_evaluation_spec.md          M9 统一评估验收
 docs\m10_calibration_spec.md        M10 概率校准验收
 docs\m11_robustness_spec.md         M11 稳健性和错误分析验收
+docs\m12_explanation_spec.md        M12 模型解释与泄漏检查验收
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -260,10 +284,17 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m11_robustness --prediction
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.benchmark_comparison --metrics reports\esta_full_m9\m9_summary.json --benchmarks benchmarks\external_round_model_metrics.csv --report-dir reports\esta_full_m11 --stage-label M11
 ```
 
-M2 至 M11 已完成。当前标准数据为 41,074 个开局前样本，质量报告没有
+运行 M12 模型解释（同时生成 M12 外部模型差值表）：
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m12_explanation --data data\processed\esta_full\pre_round.parquet --model models\esta_full_m8_tuned\pre_round_xgb.joblib --report-dir reports\esta_full_m12 --permutation-repeats 20 --seed 42 --case-features 10 --shap-plot-rows 1500
+```
+
+M2 至 M12 已完成。当前标准数据为 41,074 个开局前样本，质量报告没有
 error 或 warning；M9 正式测试 AUC 为 0.7271，系列赛级 95% CI 为
 [0.7131, 0.7409]；M10 验证集选择保留原始概率；M11 已完成分组 CI 和 30 个
-高置信错误审查。下一阶段是 M12 模型解释。
+高置信错误审查；M12 已完成三种重要性、43 个特征泄漏检查和三个回合案例解释。
+下一阶段是 M13 独立预测接口。
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。
