@@ -1,0 +1,4 @@
+pattern,cases,pattern_type
+favored_side_major_equipment_upset,30,pre_round
+predicted_favorite_lost_first_kill,22,outcome
+predicted_favorite_lost_after_first_kill,8,outcome

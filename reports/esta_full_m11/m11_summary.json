@@ -1,0 +1,40 @@
+{
+  "task": "pre_round",
+  "bootstrap_unit": "series_id within each group",
+  "bootstrap_samples": 2000,
+  "seed": 42,
+  "source_auc_gap": {
+    "comparison": "lan_minus_online_auc",
+    "lan_auc": 0.7316927129060579,
+    "online_auc": 0.7226896018104809,
+    "signed_difference": 0.009003111095576943,
+    "absolute_difference": 0.009003111095576943,
+    "ci_lower_95": -0.01813016181811879,
+    "ci_upper_95": 0.036924663270925924,
+    "successful_bootstraps": 2000,
+    "bootstrap_unit": "series_id_within_source"
+  },
+  "source_gap_passed": true,
+  "large_map_count": 7,
+  "large_map_min_auc": 0.6959929078014184,
+  "large_map_min_auc_ci_lower": 0.6586058424144601,
+  "large_map_minimum_passed": true,
+  "large_map_target_passed": true,
+  "all_large_map_ci_lower_minimum_passed": false,
+  "high_confidence_definition": "assigned predicted-side probability >= 0.80 and wrong",
+  "high_confidence_errors_available": 90,
+  "reviewed_error_cases": 30,
+  "error_review_passed": true,
+  "reviewed_pre_round_pattern_counts": {
+    "favored_side_major_equipment_upset": 30
+  },
+  "reviewed_outcome_pattern_counts": {
+    "predicted_favorite_lost_first_kill": 22,
+    "predicted_favorite_lost_after_first_kill": 8
+  },
+  "all_high_confidence_outcome_pattern_counts": {
+    "predicted_favorite_lost_first_kill": 61,
+    "predicted_favorite_lost_after_first_kill": 29
+  },
+  "first_kill_usage": "post-hoc diagnosis only; never a pre-round model feature"
+}

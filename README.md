@@ -28,6 +28,8 @@ Chinese project documentation:
 - `reports/esta_full_m9/m9_evaluation_report.md`
 - `docs/m10_calibration_spec.md`
 - `reports/esta_full_m10/m10_calibration_report.md`
+- `docs/m11_robustness_spec.md`
+- `reports/esta_full_m11/m11_robustness_report.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -51,6 +53,11 @@ M9 series-level bootstrap evaluation of tuned XGBoost:
 
 M10 grouped validation selected `uncalibrated` (identity): raw XGBoost test ECE10
 is `0.0232`, and both sigmoid and isotonic calibration worsened Log Loss and Brier.
+
+M11 found a LAN-online AUC gap of `0.0090` (95% CI `[-0.0181, 0.0369]`).
+All seven maps with at least 300 test rounds pass the `0.69` point-estimate target,
+while some map confidence intervals still cross below `0.67`. Thirty high-confidence
+errors were reviewed and categorized.
 
 The full ESTA dataset and historical models are not committed. The small tuned M8
 pre-round model is included for reproducibility. See `data/README.md`.
@@ -119,4 +126,10 @@ Run M10 validation-only calibration selection:
 
 ```powershell
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m10_calibration --data data\processed\esta_full\pre_round.parquet --base-model models\esta_full_m8_tuned\pre_round_xgb.joblib --model-dir models\esta_full_m10 --report-dir reports\esta_full_m10 --folds 5
+```
+
+Run M11 grouped robustness and error analysis:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m11_robustness --predictions reports\esta_full_m9\test_predictions.csv --data data\processed\esta_full\pre_round.parquet --kills data\interim\esta_full\kills.parquet --report-dir reports\esta_full_m11 --bootstrap-samples 2000 --seed 42 --review-cases 30
 ```
