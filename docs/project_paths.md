@@ -91,6 +91,8 @@ src\csdemo\calibration.py      可持久化的 Identity/Sigmoid/Isotonic 校准�
 src\csdemo\m10_calibration.py  M10 验证集校准选择和测试比较
 src\csdemo\m11_robustness.py   M11 分组置信区间和高置信错误分析
 src\csdemo\m12_explanation.py  M12 Gain、Permutation、TreeSHAP 和泄漏检查
+src\csdemo\predict_pre_round.py M13 单条 JSON/CSV 校验与胜率预测
+src\csdemo\m13_interface.py    M13 接口验收和阶段报告
 src\csdemo\benchmark_comparison.py  各阶段外部模型差值报告
 src\csdemo\train_lgbm.py       后续 LightGBM 对比
 src\csdemo\schema.py           特征列和 ID 列定义
@@ -203,6 +205,20 @@ reports\esta_full_m12\external_benchmark_comparison.csv
 reports\esta_full_m12\external_benchmark_comparison.md
 ```
 
+M13 独立预测接口：
+
+```text
+examples\pre_round_snapshot.json
+examples\pre_round_snapshot.csv
+examples\pre_round_prediction_output.json
+reports\esta_full_m13\m13_summary.json
+reports\esta_full_m13\example_prediction.json
+reports\esta_full_m13\validation_error_examples.json
+reports\esta_full_m13\m13_interface_report.md
+reports\esta_full_m13\external_benchmark_comparison.csv
+reports\esta_full_m13\external_benchmark_comparison.md
+```
+
 ## 文档路径
 
 ```text
@@ -215,6 +231,7 @@ docs\m9_evaluation_spec.md          M9 统一评估验收
 docs\m10_calibration_spec.md        M10 概率校准验收
 docs\m11_robustness_spec.md         M11 稳健性和错误分析验收
 docs\m12_explanation_spec.md        M12 模型解释与泄漏检查验收
+docs\m13_prediction_interface_spec.md M13 独立预测接口与使用教程
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -290,11 +307,23 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.benchmark_comparison --metr
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m12_explanation --data data\processed\esta_full\pre_round.parquet --model models\esta_full_m8_tuned\pre_round_xgb.joblib --report-dir reports\esta_full_m12 --permutation-repeats 20 --seed 42 --case-features 10 --shap-plot-rows 1500
 ```
 
-M2 至 M12 已完成。当前标准数据为 41,074 个开局前样本，质量报告没有
+使用 M13 接口预测一条开局快照：
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_pre_round --input examples\pre_round_snapshot.json --model models\esta_full_m8_tuned\pre_round_xgb.joblib --calibrator models\esta_full_m10\pre_round_calibrator.joblib
+```
+
+重新生成 M13 接口验收和外部模型差值报告：
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m13_interface --model models\esta_full_m8_tuned\pre_round_xgb.joblib --calibrator models\esta_full_m10\pre_round_calibrator.joblib --json-example examples\pre_round_snapshot.json --csv-example examples\pre_round_snapshot.csv --metrics reports\esta_full_m9\m9_summary.json --benchmarks benchmarks\external_round_model_metrics.csv --report-dir reports\esta_full_m13
+```
+
+M2 至 M13 已完成。当前标准数据为 41,074 个开局前样本，质量报告没有
 error 或 warning；M9 正式测试 AUC 为 0.7271，系列赛级 95% CI 为
 [0.7131, 0.7409]；M10 验证集选择保留原始概率；M11 已完成分组 CI 和 30 个
-高置信错误审查；M12 已完成三种重要性、43 个特征泄漏检查和三个回合案例解释。
-下一阶段是 M13 独立预测接口。
+高置信错误审查；M12 已完成三种重要性、43 个特征泄漏检查和三个回合案例解释；
+M13 已提供单条 JSON/CSV 预测、严格校验和可重复验收。下一阶段是 M14 最终验收。
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。

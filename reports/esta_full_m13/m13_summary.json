@@ -1,0 +1,70 @@
+{
+  "stage": "M13",
+  "status": "passed",
+  "snapshot_definition": "purchase end, before combat",
+  "model_performance_changed": false,
+  "input_contract": {
+    "base_feature_count": 27,
+    "derived_feature_count": 9,
+    "pre_encoding_feature_count": 36,
+    "encoded_feature_count": 43,
+    "known_maps": [
+      "de_ancient",
+      "de_dust2",
+      "de_inferno",
+      "de_mirage",
+      "de_nuke",
+      "de_overpass",
+      "de_train",
+      "de_vertigo"
+    ]
+  },
+  "checks": {
+    "json_validation_passed": true,
+    "csv_validation_passed": true,
+    "json_csv_prediction_match": true,
+    "probabilities_in_range": true,
+    "probabilities_sum_to_one": true,
+    "validation_cases_passed": 5,
+    "validation_cases_total": 5
+  },
+  "example_prediction": {
+    "task": "pre_round",
+    "snapshot_definition": "purchase end, before combat",
+    "calibration_method": "uncalibrated",
+    "validation": {
+      "status": "passed",
+      "required_base_feature_count": 27,
+      "provided_field_count": 27,
+      "derived_features": [
+        "score_diff_ct",
+        "eq_value_diff_ct",
+        "cash_diff_ct",
+        "armor_diff_ct",
+        "helmet_diff_ct",
+        "grenade_diff_ct",
+        "awp_diff_ct",
+        "rifle_diff_ct",
+        "smg_diff_ct"
+      ],
+      "model_feature_count_before_encoding": 36,
+      "map_name": "de_nuke",
+      "encoded_model_feature_count": 43
+    },
+    "prediction": {
+      "ct_win_probability": 0.5676999688148499,
+      "t_win_probability": 0.43230003118515015,
+      "predicted_side": "CT",
+      "decision_threshold": 0.5,
+      "probability_sum": 1.0
+    }
+  },
+  "fixed_test_metrics": {
+    "accuracy": 0.6474113135186961,
+    "log_loss": 0.5917331887919193,
+    "brier_score": 0.20529449849711118,
+    "ece10": 0.023197745861465936,
+    "auc": 0.7271219343412749
+  },
+  "external_benchmark_rows": 4
+}

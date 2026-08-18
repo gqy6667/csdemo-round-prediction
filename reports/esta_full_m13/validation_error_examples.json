@@ -1,0 +1,44 @@
+[
+  {
+    "case": "missing_required_field",
+    "rejected": true,
+    "error_count": 2,
+    "errors": [
+      "missing required fields: round_num",
+      "round_num: required field is missing"
+    ]
+  },
+  {
+    "case": "wrong_numeric_type",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "ct_cash must be an integer; got '3500'"
+    ]
+  },
+  {
+    "case": "out_of_range",
+    "rejected": true,
+    "error_count": 2,
+    "errors": [
+      "ct_helmets must be between 0 and 5; got 6",
+      "ct_helmets (6) cannot exceed ct_armor (5)"
+    ]
+  },
+  {
+    "case": "unknown_map",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "map_name 'de_cache' was not seen during training; choose one of ['de_ancient', 'de_dust2', 'de_inferno', 'de_mirage', 'de_nuke', 'de_overpass', 'de_train', 'de_vertigo']"
+    ]
+  },
+  {
+    "case": "inconsistent_derived_feature",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "score_diff_ct must equal ct_score - t_score; expected 1, got 99"
+    ]
+  }
+]

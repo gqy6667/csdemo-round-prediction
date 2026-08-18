@@ -30,11 +30,14 @@ Chinese project documentation:
 - `reports/esta_full_m10/m10_calibration_report.md`
 - `docs/m11_robustness_spec.md`
 - `docs/m12_explanation_spec.md`
+- `docs/m13_prediction_interface_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
 - `reports/esta_full_m12/m12_explanation_report.md`
 - `reports/esta_full_m12/external_benchmark_comparison.md`
+- `reports/esta_full_m13/m13_interface_report.md`
+- `reports/esta_full_m13/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -166,4 +169,16 @@ Run M12 model explanation and regenerate the required external comparison:
 
 ```powershell
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m12_explanation --data data\processed\esta_full\pre_round.parquet --model models\esta_full_m8_tuned\pre_round_xgb.joblib --report-dir reports\esta_full_m12 --permutation-repeats 20 --seed 42 --case-features 10 --shap-plot-rows 1500
+```
+
+Predict one purchase-end, pre-combat snapshot with the M13 interface:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_pre_round --input examples\pre_round_snapshot.json --model models\esta_full_m8_tuned\pre_round_xgb.joblib --calibrator models\esta_full_m10\pre_round_calibrator.joblib
+```
+
+Re-run all M13 interface checks and external benchmark comparisons:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m13_interface --model models\esta_full_m8_tuned\pre_round_xgb.joblib --calibrator models\esta_full_m10\pre_round_calibrator.joblib --json-example examples\pre_round_snapshot.json --csv-example examples\pre_round_snapshot.csv --metrics reports\esta_full_m9\m9_summary.json --benchmarks benchmarks\external_round_model_metrics.csv --report-dir reports\esta_full_m13
 ```
