@@ -24,6 +24,9 @@ models/*
 !models/esta_full_m8_tuned/
 models/esta_full_m8_tuned/*
 !models/esta_full_m8_tuned/pre_round_xgb.joblib
+!models/esta_full_m10/
+models/esta_full_m10/*
+!models/esta_full_m10/pre_round_calibrator.joblib
 *.json.xz
 *.dem
 

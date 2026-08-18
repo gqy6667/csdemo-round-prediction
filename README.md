@@ -26,6 +26,8 @@ Chinese project documentation:
 - `reports/esta_full_m8_tuned/m8_controlled_tuning_report.md`
 - `docs/m9_evaluation_spec.md`
 - `reports/esta_full_m9/m9_evaluation_report.md`
+- `docs/m10_calibration_spec.md`
+- `reports/esta_full_m10/m10_calibration_report.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -46,6 +48,9 @@ M9 series-level bootstrap evaluation of tuned XGBoost:
 - Log loss: `0.5917` (95% CI `[0.5802, 0.6039]`)
 - Accuracy: `0.6474` (95% CI `[0.6324, 0.6624]`)
 - Brier score: `0.2053` (95% CI `[0.2009, 0.2099]`)
+
+M10 grouped validation selected `uncalibrated` (identity): raw XGBoost test ECE10
+is `0.0232`, and both sigmoid and isotonic calibration worsened Log Loss and Brier.
 
 The full ESTA dataset and historical models are not committed. The small tuned M8
 pre-round model is included for reproducibility. See `data/README.md`.
@@ -108,4 +113,10 @@ Run the M9 fixed-test evaluation:
 
 ```powershell
 C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m9_evaluation --data data\processed\esta_full\pre_round.parquet --model models\esta_full_m8_tuned\pre_round_xgb.joblib --report-dir reports\esta_full_m9 --bootstrap-samples 2000 --seed 42
+```
+
+Run M10 validation-only calibration selection:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m10_calibration --data data\processed\esta_full\pre_round.parquet --base-model models\esta_full_m8_tuned\pre_round_xgb.joblib --model-dir models\esta_full_m10 --report-dir reports\esta_full_m10 --folds 5
 ```

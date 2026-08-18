@@ -153,27 +153,29 @@ def grouped_metrics(predictions: pd.DataFrame, group_column: str) -> pd.DataFram
     return pd.DataFrame(rows).sort_values("rounds", ascending=False)
 
 
-def make_predictions(df: pd.DataFrame, bundle: dict) -> pd.DataFrame:
+def make_predictions(
+    df: pd.DataFrame, bundle: dict, *, split: str = "test"
+) -> pd.DataFrame:
     if "model" not in bundle or "columns" not in bundle:
         raise KeyError("Model bundle must contain model and columns.")
-    test_df = df[df["split"].eq("test")].copy()
-    if test_df.empty:
-        raise ValueError("Evaluation data has no test rows.")
+    split_df = df[df["split"].eq(split)].copy()
+    if split_df.empty:
+        raise ValueError(f"Evaluation data has no {split} rows.")
 
-    x_test, y_test = prepare_xy(test_df)
-    x_test = x_test.reindex(columns=bundle["columns"], fill_value=0)
-    probability = bundle["model"].predict_proba(x_test)[:, 1]
+    x_split, y_split = prepare_xy(split_df)
+    x_split = x_split.reindex(columns=bundle["columns"], fill_value=0)
+    probability = bundle["model"].predict_proba(x_split)[:, 1]
     metadata = [
         column
         for column in ("series_id", "game_id", "round_id", "map_name", "round_num")
-        if column in test_df.columns
+        if column in split_df.columns
     ]
-    predictions = test_df[metadata].reset_index(drop=True)
+    predictions = split_df[metadata].reset_index(drop=True)
     if "game_id" in predictions.columns:
         predictions["source_subset"] = (
             predictions["game_id"].astype(str).str.split(":", n=1).str[0]
         )
-    predictions["y_true"] = y_test.to_numpy(dtype=int)
+    predictions["y_true"] = y_split.to_numpy(dtype=int)
     predictions["ct_win_probability"] = probability
     predictions["t_win_probability"] = 1.0 - probability
     predictions["predicted_label"] = (probability >= 0.5).astype(int)

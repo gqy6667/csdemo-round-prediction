@@ -1,0 +1,49 @@
+{
+  "task": "pre_round",
+  "selection_data": "validation only",
+  "selection_method": "grouped out-of-fold log_loss, then brier_score",
+  "validation_group_column": "series_id",
+  "validation_folds": 5,
+  "selected_method": "uncalibrated",
+  "validation_oof_comparison": [
+    {
+      "method": "uncalibrated",
+      "accuracy": 0.6503579952,
+      "log_loss": 0.5960376041,
+      "brier_score": 0.2075754273,
+      "ece10": 0.011285226,
+      "auc": 0.718595704
+    },
+    {
+      "method": "sigmoid",
+      "accuracy": 0.6489260143,
+      "log_loss": 0.59624993,
+      "brier_score": 0.2076337197,
+      "ece10": 0.0087772379,
+      "auc": 0.7182207683
+    },
+    {
+      "method": "isotonic",
+      "accuracy": 0.6445107399,
+      "log_loss": 0.605117198,
+      "brier_score": 0.2082313135,
+      "ece10": 0.0126450325,
+      "auc": 0.7139030264
+    }
+  ],
+  "test_selected_metrics": {
+    "accuracy": 0.6474113135186961,
+    "auc": 0.7271219343412749,
+    "log_loss": 0.5917331887919193,
+    "brier_score": 0.20529449849711118,
+    "ece10": 0.023197745861465936
+  },
+  "test_changes_vs_uncalibrated": {
+    "log_loss": 0.0,
+    "brier_score": 0.0,
+    "ece10": 0.0
+  },
+  "test_ece_minimum_passed": true,
+  "test_ece_stage_passed": true,
+  "no_material_probability_metric_harm": true
+}
