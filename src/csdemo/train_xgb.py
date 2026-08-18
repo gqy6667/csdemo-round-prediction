@@ -14,14 +14,18 @@ from .metrics import probability_metrics
 from .schema import ID_COLUMNS
 
 
-def prepare_xy(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
+def prepare_features(df: pd.DataFrame) -> pd.DataFrame:
     # IDs control joins and splits; they must never become predictive features.
     drop_cols = set(ID_COLUMNS) | {"match_id", "split", LABEL_COL}
     x = df.drop(columns=[c for c in drop_cols if c in df.columns])
     categorical = x.select_dtypes(exclude="number").columns
     if len(categorical):
         x[categorical] = x[categorical].astype("string").fillna("__MISSING__")
-    x = pd.get_dummies(x)
+    return pd.get_dummies(x)
+
+
+def prepare_xy(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
+    x = prepare_features(df)
     y = df[LABEL_COL].astype(int)
     return x, y
 
