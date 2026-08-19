@@ -1,0 +1,268 @@
+{
+  "stage": "M20",
+  "generated_at_utc": "2026-08-19T16:26:20.879875+00:00",
+  "task": "post_first_kill",
+  "definition": "purchase complete, immediately after earliest valid enemy kill",
+  "model_policy": "M17/M18 artifacts frozen; inference only; no fit or tuning",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "ready_for_m21": true
+  },
+  "checks": {
+    "m19_prerequisite": true,
+    "artifact_contracts": true,
+    "json_csv_validation": true,
+    "json_csv_prediction_match": true,
+    "probability_contract": true,
+    "invalid_examples": true,
+    "feature_alignment": true,
+    "fixed_metrics_and_targets": true,
+    "external_report": true,
+    "automated_tests": true,
+    "validation_cases_passed": 10,
+    "validation_cases_total": 10
+  },
+  "prerequisite": {
+    "passed": true,
+    "checks": {
+      "m19_accepted": true,
+      "m18_accepted": true,
+      "model_sha256": true,
+      "model_bytes": true,
+      "calibrator_sha256": true,
+      "calibrator_bytes": true,
+      "model_contract": true,
+      "calibrator_contract": true,
+      "deployment_tree_contract": true,
+      "formal_targets_frozen": true
+    },
+    "model_artifact": {
+      "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "bytes": 425536,
+      "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+    },
+    "expected_model_artifact": {
+      "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "bytes": 425536,
+      "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+    },
+    "calibrator_artifact": {
+      "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+      "bytes": 426,
+      "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+    },
+    "expected_calibrator_artifact": {
+      "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+      "bytes": 426,
+      "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+    },
+    "model_contract": {
+      "passed": true,
+      "task": "first_kill",
+      "profile": "canonical_event",
+      "raw_feature_count": 40,
+      "encoded_feature_count": 82,
+      "known_map_count": 8,
+      "known_weapon_count": 36,
+      "deployment_tree_count": 409,
+      "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "calibrator_contract": {
+      "passed": true,
+      "task": "post_first_kill",
+      "method": "uncalibrated",
+      "base_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+      "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    }
+  },
+  "model_performance_changed": false,
+  "xgboost_fit_calls": 0,
+  "input_contract": {
+    "purchase_base_feature_count": 27,
+    "first_kill_feature_count": 4,
+    "required_input_field_count": 31,
+    "derived_feature_count": 9,
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "known_map_count": 8,
+    "known_weapon_count": 36,
+    "deployment_tree_count": 409
+  },
+  "artifacts": {
+    "model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+    "calibrator_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+  },
+  "example_prediction": {
+    "task": "first_kill",
+    "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+    "calibration_method": "uncalibrated",
+    "validation": {
+      "status": "passed",
+      "required_purchase_base_feature_count": 27,
+      "required_first_kill_feature_count": 4,
+      "provided_field_count": 31,
+      "derived_features": [
+        "score_diff_ct",
+        "eq_value_diff_ct",
+        "cash_diff_ct",
+        "armor_diff_ct",
+        "helmet_diff_ct",
+        "grenade_diff_ct",
+        "awp_diff_ct",
+        "rifle_diff_ct",
+        "smg_diff_ct"
+      ],
+      "derived_feature_count": 9,
+      "raw_model_feature_count": 40,
+      "map_name": "de_nuke",
+      "first_kill_side": "CT",
+      "first_kill_weapon": "AK-47",
+      "encoded_model_feature_count": 82,
+      "model_contract_verified": true,
+      "calibrator_contract_verified": true,
+      "deployment_tree_count": 409
+    },
+    "prediction": {
+      "ct_win_probability": 0.7187644839286804,
+      "t_win_probability": 0.2812355160713196,
+      "predicted_side": "CT",
+      "decision_threshold": 0.5,
+      "probability_sum": 1.0
+    }
+  },
+  "fixed_test_metrics": {
+    "accuracy": 0.7441247002398081,
+    "auc": 0.8098368635821109,
+    "log_loss": 0.5231460210364541,
+    "brier_score": 0.17565589988309552,
+    "ece10": 0.01544967890679123
+  },
+  "formal_targets": {
+    "passed_count": 10,
+    "target_count": 10,
+    "remaining_count": 0,
+    "all_formal_targets_passed": true,
+    "rows": [
+      {
+        "target_id": "test_accuracy",
+        "label": "Test Accuracy",
+        "direction": "higher",
+        "current": 0.7441247002,
+        "target": 0.7,
+        "remaining": 0.0,
+        "margin": 0.0441247002,
+        "passed": true
+      },
+      {
+        "target_id": "test_auc",
+        "label": "Test AUC",
+        "direction": "higher",
+        "current": 0.8098368636,
+        "target": 0.78,
+        "remaining": 0.0,
+        "margin": 0.0298368636,
+        "passed": true
+      },
+      {
+        "target_id": "test_log_loss",
+        "label": "Test Log Loss",
+        "direction": "lower",
+        "current": 0.523146021,
+        "target": 0.55,
+        "remaining": 0.0,
+        "margin": 0.026853979,
+        "passed": true
+      },
+      {
+        "target_id": "test_brier",
+        "label": "Test Brier",
+        "direction": "lower",
+        "current": 0.1756558999,
+        "target": 0.185,
+        "remaining": 0.0,
+        "margin": 0.0093441001,
+        "passed": true
+      },
+      {
+        "target_id": "test_ece10",
+        "label": "Test ECE10",
+        "direction": "lower",
+        "current": 0.0154496789,
+        "target": 0.03,
+        "remaining": 0.0,
+        "margin": 0.0145503211,
+        "passed": true
+      },
+      {
+        "target_id": "auc_ci_lower",
+        "label": "AUC 95% CI lower",
+        "direction": "higher",
+        "current": 0.7977312429,
+        "target": 0.79,
+        "remaining": 0.0,
+        "margin": 0.0077312429,
+        "passed": true
+      },
+      {
+        "target_id": "log_loss_ci_upper",
+        "label": "Log Loss 95% CI upper",
+        "direction": "lower",
+        "current": 0.5361462109,
+        "target": 0.54,
+        "remaining": 0.0,
+        "margin": 0.0038537891,
+        "passed": true
+      },
+      {
+        "target_id": "source_auc_gap",
+        "label": "LAN-online absolute AUC gap",
+        "direction": "lower",
+        "current": 0.0102764212,
+        "target": 0.04,
+        "remaining": 0.0,
+        "margin": 0.0297235788,
+        "passed": true
+      },
+      {
+        "target_id": "large_map_min_auc",
+        "label": "Large-map minimum AUC",
+        "direction": "higher",
+        "current": 0.7839007092,
+        "target": 0.77,
+        "remaining": 0.0,
+        "margin": 0.0139007092,
+        "passed": true
+      },
+      {
+        "target_id": "large_map_min_auc_ci_lower",
+        "label": "Large-map minimum AUC CI lower",
+        "direction": "higher",
+        "current": 0.7507191523,
+        "target": 0.7,
+        "remaining": 0.0,
+        "margin": 0.0507191523,
+        "passed": true
+      }
+    ]
+  },
+  "external_comparison_rows": 7,
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 4.478958000001512,
+    "test_count": 131,
+    "skipped": false
+  },
+  "roadmap": {
+    "pre_round_xgboost": "complete_through_M14",
+    "first_kill_xgboost_current": "M20_interface_complete",
+    "first_kill_xgboost_modules_remaining_after_m20": 1,
+    "remaining_module": "M21 first-kill final acceptance",
+    "later_tracks": [
+      "LightGBM controlled comparison",
+      "real-time win probability data and model"
+    ]
+  },
+  "next_stage": "M21 first-kill final acceptance"
+}

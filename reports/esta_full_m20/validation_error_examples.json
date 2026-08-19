@@ -1,0 +1,83 @@
+[
+  {
+    "case": "missing_first_kill_field",
+    "rejected": true,
+    "error_count": 2,
+    "errors": [
+      "missing required first-kill fields: first_kill_time",
+      "first_kill_time: required field is missing"
+    ]
+  },
+  {
+    "case": "invalid_first_kill_advantage",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "first_kill_advantage_ct must be -1 or 1; got 0"
+    ]
+  },
+  {
+    "case": "first_kill_time_out_of_range",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "first_kill_time must be between 0 and 180 seconds; got 181"
+    ]
+  },
+  {
+    "case": "invalid_headshot",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "first_kill_headshot must be a boolean or 0/1; got 2"
+    ]
+  },
+  {
+    "case": "unknown_first_kill_weapon",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "first_kill_weapon 'Unknown Blaster' was not seen during training; choose one of ['AK-47', 'AUG', 'AWP', 'CZ75 Auto', 'Desert Eagle', 'Dual Berettas', 'FAMAS', 'Five-SeveN', 'G3SG1', 'Galil AR', 'Glock-18', 'HE Grenade', 'Incendiary Grenade', 'Knife', 'M4A1', 'M4A4', 'MAC-10', 'MAG-7', 'MP5-SD', 'MP7', 'MP9', 'Molotov', 'Negev', 'Nova', 'P2000', 'P250', 'P90', 'PP-Bizon', 'SCAR-20', 'SG 553', 'SSG 08', 'Tec-9', 'UMP-45', 'USP-S', 'XM1014', 'Zeus x27']"
+    ]
+  },
+  {
+    "case": "unknown_map",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "map_name 'de_cache' was not seen during training; choose one of ['de_ancient', 'de_dust2', 'de_inferno', 'de_mirage', 'de_nuke', 'de_overpass', 'de_train', 'de_vertigo']"
+    ]
+  },
+  {
+    "case": "inconsistent_derived_feature",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "score_diff_ct must equal ct_score - t_score; expected 1, got 99"
+    ]
+  },
+  {
+    "case": "target_leakage",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "forbidden fields: ct_win"
+    ]
+  },
+  {
+    "case": "future_second_kill",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "forbidden fields: second_kill_weapon"
+    ]
+  },
+  {
+    "case": "redundant_alive_state",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "forbidden fields: ct_alive_after_fk"
+    ]
+  }
+]

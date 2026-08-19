@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "checks": {
+    "m19_accepted": true,
+    "m18_accepted": true,
+    "model_sha256": true,
+    "model_bytes": true,
+    "calibrator_sha256": true,
+    "calibrator_bytes": true,
+    "model_contract": true,
+    "calibrator_contract": true,
+    "deployment_tree_contract": true,
+    "formal_targets_frozen": true
+  },
+  "model_artifact": {
+    "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+    "bytes": 425536,
+    "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+  },
+  "expected_model_artifact": {
+    "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+    "bytes": 425536,
+    "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+  },
+  "calibrator_artifact": {
+    "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+    "bytes": 426,
+    "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+  },
+  "expected_calibrator_artifact": {
+    "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+    "bytes": 426,
+    "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+  },
+  "model_contract": {
+    "passed": true,
+    "task": "first_kill",
+    "profile": "canonical_event",
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "known_map_count": 8,
+    "known_weapon_count": 36,
+    "deployment_tree_count": 409,
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+  },
+  "calibrator_contract": {
+    "passed": true,
+    "task": "post_first_kill",
+    "method": "uncalibrated",
+    "base_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+  }
+}

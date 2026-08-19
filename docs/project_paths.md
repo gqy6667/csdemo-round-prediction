@@ -101,6 +101,8 @@ src\csdemo\m16_first_kill_baselines.py M16 三模型基线、开局控制组和�
 src\csdemo\m17_first_kill_tuning.py M17 validation-only 控制变量调参和报告
 src\csdemo\m18_first_kill_evaluation.py M18 固定模型 bootstrap、稳健性、错误和校准评估
 src\csdemo\m19_first_kill_explanation.py M19 三种解释、分组置换、泄漏与目标距离审计
+src\csdemo\predict_first_kill.py M20 首杀后单条 JSON/CSV 校验与胜率预测
+src\csdemo\m20_first_kill_interface.py M20 接口、模型/校准器哈希和阶段验收
 src\csdemo\benchmark_comparison.py  各阶段外部模型差值报告
 src\csdemo\train_lgbm.py       后续 LightGBM 对比
 src\csdemo\schema.py           特征列和 ID 列定义
@@ -325,6 +327,22 @@ reports\esta_full_m19\external_benchmark_comparison.csv
 reports\esta_full_m19\external_benchmark_comparison.md
 ```
 
+M20 首杀后单条预测接口：
+
+```text
+examples\first_kill_snapshot.json
+examples\first_kill_snapshot.csv
+examples\first_kill_prediction_output.json
+reports\esta_full_m20\m20_summary.json
+reports\esta_full_m20\m20_checks.csv
+reports\esta_full_m20\example_prediction.json
+reports\esta_full_m20\validation_error_examples.json
+reports\esta_full_m20\model_contract_audit.json
+reports\esta_full_m20\m20_first_kill_interface_report.md
+reports\esta_full_m20\external_benchmark_comparison.csv
+reports\esta_full_m20\external_benchmark_comparison.md
+```
+
 ## 文档路径
 
 ```text
@@ -344,6 +362,7 @@ docs\m16_first_kill_baseline_spec.md M16 首杀后特征、基线和验收目标
 docs\m17_first_kill_tuning_spec.md M17 调参网格、validation-only 规则和验收目标
 docs\m18_first_kill_evaluation_spec.md M18 固定模型评估、分组和校准验收目标
 docs\m19_first_kill_explanation_spec.md M19 解释方法、泄漏合同和目标距离定义
+docs\m20_first_kill_prediction_interface_spec.md M20 单条输入、模型/校准器和错误合同
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -473,6 +492,18 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m13_interface --model model
 .\scripts\run_first_kill_explanation.ps1
 ```
 
+使用 M20 接口预测一条首杀后快照：
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_first_kill --input examples\first_kill_snapshot.json --model models\esta_full_m17\first_kill_xgboost_tuned.joblib --calibrator models\esta_full_m18\first_kill_calibrator.joblib
+```
+
+运行 M20 首杀后接口验收：
+
+```powershell
+.\scripts\run_first_kill_interface.ps1
+```
+
 M14 最低门槛最终验收已通过。当前标准数据为 41,074 个开局前样本，质量报告没有
 error 或 warning；M9 正式测试 AUC 为 0.7271，系列赛级 95% CI 为
 [0.7131, 0.7409]；M10 验证集选择保留原始概率；M11 已完成分组 CI 和 30 个
@@ -496,7 +527,11 @@ validation OOF 选择保留原始概率。13 个阻塞检查与 108 项测试通
 TreeSHAP；82 个编码列全部映射到 40 个允许原始特征，泄漏失败数为 0，SHAP 概率
 重建最大误差为 4.03e-7。十项正式目标全部通过，首要特征为首杀阵营优势，其次为
 购买结束装备价值差。9 个阻塞检查与 118 项测试通过。首杀后 XGBoost 还剩 M20 单条
-预测接口和 M21 最终验收。
+预测接口和 M21 最终验收。M20 已提供严格校验的单条 JSON/CSV 命令：31 个必填输入
+生成 40 个原始特征并对齐 82 个编码列；模型和校准器哈希一致，JSON/CSV 概率完全
+相同，10 个错误案例全部拒绝。示例输出 CT/T 为 0.718764/0.281236，但这只是接口演示，
+不改变固定测试指标。10 个阻断检查和 131 项测试通过。首杀后 XGBoost 只剩 M21 最终
+验收。
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。

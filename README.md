@@ -37,6 +37,7 @@ Chinese project documentation:
 - `docs/m17_first_kill_tuning_spec.md`
 - `docs/m18_first_kill_evaluation_spec.md`
 - `docs/m19_first_kill_explanation_spec.md`
+- `docs/m20_first_kill_prediction_interface_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -56,6 +57,9 @@ Chinese project documentation:
 - `reports/esta_full_m18/external_benchmark_comparison.md`
 - `reports/esta_full_m19/m19_first_kill_explanation_report.md`
 - `reports/esta_full_m19/external_benchmark_comparison.md`
+- `reports/esta_full_m20/m20_first_kill_interface_report.md`
+- `reports/esta_full_m20/external_benchmark_comparison.md`
+- `reports/m6_to_m19_progress_report.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -279,5 +283,23 @@ encoded and raw-feature grouped permutation importance, and native TreeSHAP. All
 82 encoded inputs map to 40 allowed raw features with zero leakage failures, and
 TreeSHAP reconstructs the fixed probabilities within `4.03e-7`. All ten formal
 performance and robustness targets pass. The strongest raw feature is
-`first_kill_advantage_ct`, followed by `eq_value_diff_ct`. M20 will add a validated
-JSON/CSV prediction interface; M21 is the final first-kill XGBoost acceptance stage.
+`first_kill_advantage_ct`, followed by `eq_value_diff_ct`.
+
+Predict one post-first-kill snapshot with the M20 interface:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_first_kill --input examples\first_kill_snapshot.json --model models\esta_full_m17\first_kill_xgboost_tuned.joblib --calibrator models\esta_full_m18\first_kill_calibrator.joblib
+```
+
+Run the complete M20 interface acceptance:
+
+```powershell
+.\scripts\run_first_kill_interface.ps1
+```
+
+M20 passes all 10 blocking checks and all 131 automated tests. It validates 27
+purchase fields plus four first-kill fields, derives nine CT-minus-T differences,
+and aligns one row to the frozen 40 raw/82 encoded feature contract. JSON and CSV
+produce identical probabilities; ten invalid examples are rejected. The stage makes
+zero XGBoost fit calls and leaves all M18/M19 metrics and target margins unchanged.
+M21 is the only remaining first-kill XGBoost module.

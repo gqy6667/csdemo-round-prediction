@@ -32,4 +32,8 @@ add first-kill event and artifact contracts, and keep M19 metrics unchanged.
 
 ## Outcome
 
-Pending M20 implementation.
+M20 completed. The frozen M17 model and M18 identity calibrator now support strict
+single-snapshot JSON/CSV inference without retraining. All 10 acceptance blockers
+and 10 invalid-input cases passed, the full suite reached 131 passing tests, and
+the accepted post-first-kill metrics remained unchanged. M21 is the remaining
+post-first-kill robustness and release-readiness stage.
