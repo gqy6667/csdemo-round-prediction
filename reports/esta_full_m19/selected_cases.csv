@@ -1,0 +1,4 @@
+series_id,game_id,round_id,y_true,ct_win_probability,predicted_label,correct,map_name,round_num,eq_value_diff_ct,first_kill_advantage_ct,first_kill_time,first_kill_headshot,first_kill_weapon,row_position,prediction_confidence,case_type
+63e0d98d-fd95-4698-9d12-808508005ee2,online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b,online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b_8,1,0.9925467371940613,1,True,de_vertigo,8,25500,1,8.3671875,0,AK-47,2248,0.9925467371940613,ct_high_probability
+c7f0e145-6303-40e6-9b79-ab0f825db57d,online:178eb7eb-2dd3-4394-9a5e-232c52ae0cdb,online:178eb7eb-2dd3-4394-9a5e-232c52ae0cdb_20,0,0.012751465663313866,0,True,de_nuke,20,-21450,-1,42.22834645669291,1,MAC-10,2129,0.9872485343366861,t_high_probability
+63e0d98d-fd95-4698-9d12-808508005ee2,online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b,online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b_2,0,0.989380955696106,1,False,de_vertigo,2,18850,1,56.171875,0,MP9,2242,0.989380955696106,high_confidence_error

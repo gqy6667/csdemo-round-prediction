@@ -1,36 +1,38 @@
-# M17 Implementation Plan
+# M19 Implementation Plan
 
 ## Scope
 
-Tune the accepted M16 post-first-kill XGBoost using train/validation only. Keep the
-M15 artifact, M16 feature contract, grouped split, and external comparison policy fixed.
+Explain the accepted M17/M18 post-first-kill XGBoost without retraining it. Reuse the
+M12 native TreeSHAP implementation, add first-kill-specific feature timing audit, raw
+feature grouped permutation, formal target distance, and external metric gaps.
 
 ## Slices
 
-1. Freeze candidate grids, selection threshold, targets, and test-use boundary.
-2. Add failing tests for candidate isolation and validation-only selection.
-3. Implement sequential search and verify each phase before adding final evaluation.
-4. Add seed stability, frozen test evaluation, internal/external comparisons, and reports.
-5. Run the full artifact, document the result, commit, and push.
+1. Freeze explanation methods, leakage whitelist, target-gap formulas, and no-training boundary.
+2. Add failing tests for encoded-to-source mapping, grouped permutation, leakage, and gaps.
+3. Implement the deterministic contracts and verify focused tests.
+4. Add Gain, encoded/grouped permutation, TreeSHAP, cases, plots, and reports.
+5. Run the full artifact, document target/external gaps, commit, and push.
 
 ## Risks
 
-- Validation overfitting: retain the incumbent unless Log Loss improves by at least 0.0001.
-- Accidental test leakage: tuning functions accept only train/validation prepared frames.
+- Misusing test explanations for selection: M19 contains no model fit or feature selection.
+- Incorrect categorical aggregation: require each encoded column to map exactly once.
+- Explaining unused trees: limit Gain and TreeSHAP to `best_iteration + 1` trees.
 - Misleading external ranking: retain comparability labels and report numeric gaps only.
-- Runtime growth: keep the frozen 39-candidate greedy grid and CPU execution.
+- Runtime growth: use 20 deterministic repeats and XGBoost native TreeSHAP on 4,170 rows.
 
 ## Review Gates
 
-- Gate A: the M17 specification exists before model implementation or experiments.
-- Gate B: protocol tests fail before the M17 module exists, then pass after each slice.
-- Gate C: all 39 candidate rows are validation-only and pass control-variable audit.
-- Gate D: test is evaluated only after the eight phase selections and seed audit are frozen.
-- Gate E: reports retain target misses, test regressions, and external comparability limits.
+- Gate A: the M19 specification exists before explanation code or experiments.
+- Gate B: mapping, leakage, grouped permutation, and target-gap tests fail before implementation.
+- Gate C: all 82 encoded columns map to exactly 40 accepted source features.
+- Gate D: TreeSHAP reconstructs deployed probabilities and no XGBoost training occurs.
+- Gate E: reports retain target margins, internal non-superiority, and external limitations.
 
 ## Outcome
 
-M17 passed all five review gates and all 12 blocking checks. Validation Log Loss
-improved by 0.002038; the tuned test AUC/Log Loss/Brier are 0.809837/0.523146/0.175656.
-Accuracy decreased by 0.001199 and ECE10 worsened by 0.004541, both retained in the
-report. M18 will evaluate the frozen model without further parameter selection.
+Completed on 2026-08-20. M19 passed all 9 blocking checks, all 10 formal target
+gates, and 118 automated tests. The frozen M17/M18 model was explained without
+training; all 82 encoded columns map to 40 permitted raw features with zero leakage
+failures. M20 is the next stage.

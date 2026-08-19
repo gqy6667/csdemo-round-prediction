@@ -1,0 +1,6 @@
+metric,xgboost_tuned,logistic_regression,raw_xgboost_minus_logistic,performance_advantage_xgboost,formal_target,note
+accuracy,0.7441247002398081,0.7434052757793765,0.0007194244604316058,0.0007194244604316058,,M16 defined no blocking XGBoost-over-logistic target
+auc,0.8098368635821109,0.8090589528793879,0.0007779107027230392,0.0007779107027230392,,M16 defined no blocking XGBoost-over-logistic target
+log_loss,0.5231460210364541,0.5266419675805064,-0.0034959465440522752,0.0034959465440522752,,M16 defined no blocking XGBoost-over-logistic target
+brier_score,0.1756558998830955,0.1760703339941788,-0.0004144341110833005,0.0004144341110833005,,M16 defined no blocking XGBoost-over-logistic target
+ece10,0.0154496789067912,0.0150166076035009,0.000433071303290301,-0.000433071303290301,,M16 defined no blocking XGBoost-over-logistic target

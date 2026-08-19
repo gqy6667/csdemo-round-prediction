@@ -100,6 +100,7 @@ src\csdemo\m15_first_kill_data.py M15 首杀样本重建、主键/split 审计�
 src\csdemo\m16_first_kill_baselines.py M16 三模型基线、开局控制组和验收报告
 src\csdemo\m17_first_kill_tuning.py M17 validation-only 控制变量调参和报告
 src\csdemo\m18_first_kill_evaluation.py M18 固定模型 bootstrap、稳健性、错误和校准评估
+src\csdemo\m19_first_kill_explanation.py M19 三种解释、分组置换、泄漏与目标距离审计
 src\csdemo\benchmark_comparison.py  各阶段外部模型差值报告
 src\csdemo\train_lgbm.py       后续 LightGBM 对比
 src\csdemo\schema.py           特征列和 ID 列定义
@@ -307,6 +308,23 @@ reports\esta_full_m18\external_benchmark_comparison.csv
 reports\esta_full_m18\external_benchmark_comparison.md
 ```
 
+M19 首杀后模型解释与泄漏审计：
+
+```text
+reports\esta_full_m19\source_feature_importance.csv
+reports\esta_full_m19\grouped_permutation_importance_auc.csv
+reports\esta_full_m19\all_feature_leakage_audit.csv
+reports\esta_full_m19\target_gap.csv
+reports\esta_full_m19\internal_model_gap.csv
+reports\esta_full_m19\selected_cases.csv
+reports\esta_full_m19\case_explanations.csv
+reports\esta_full_m19\m19_checks.csv
+reports\esta_full_m19\m19_summary.json
+reports\esta_full_m19\m19_first_kill_explanation_report.md
+reports\esta_full_m19\external_benchmark_comparison.csv
+reports\esta_full_m19\external_benchmark_comparison.md
+```
+
 ## 文档路径
 
 ```text
@@ -325,6 +343,7 @@ docs\m15_first_kill_data_spec.md     M15 首杀定义、主键关联和数据验
 docs\m16_first_kill_baseline_spec.md M16 首杀后特征、基线和验收目标
 docs\m17_first_kill_tuning_spec.md M17 调参网格、validation-only 规则和验收目标
 docs\m18_first_kill_evaluation_spec.md M18 固定模型评估、分组和校准验收目标
+docs\m19_first_kill_explanation_spec.md M19 解释方法、泄漏合同和目标距离定义
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -448,6 +467,12 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m13_interface --model model
 .\scripts\run_first_kill_evaluation.ps1
 ```
 
+运行 M19 首杀后模型解释与泄漏审计：
+
+```powershell
+.\scripts\run_first_kill_explanation.ps1
+```
+
 M14 最低门槛最终验收已通过。当前标准数据为 41,074 个开局前样本，质量报告没有
 error 或 warning；M9 正式测试 AUC 为 0.7271，系列赛级 95% CI 为
 [0.7131, 0.7409]；M10 验证集选择保留原始概率；M11 已完成分组 CI 和 30 个
@@ -467,7 +492,11 @@ ECE10 恶化 0.0045。12 个阻塞检查与 100 项测试通过。M18 没有重�
 [0.7977, 0.8221]，Log Loss 为 0.5231，95% CI 为 [0.5097, 0.5361]。LAN-online
 AUC 差为 -0.0103，95% CI 为 [-0.0346, 0.0148]；主要地图最低 AUC 为 0.7839。
 validation OOF 选择保留原始概率。13 个阻塞检查与 108 项测试通过，下一阶段是 M19
-模型解释与特征泄漏审计。
+模型解释与特征泄漏审计。M19 已完成 Gain、20 次编码/原始特征分组 Permutation 和
+TreeSHAP；82 个编码列全部映射到 40 个允许原始特征，泄漏失败数为 0，SHAP 概率
+重建最大误差为 4.03e-7。十项正式目标全部通过，首要特征为首杀阵营优势，其次为
+购买结束装备价值差。9 个阻塞检查与 118 项测试通过。首杀后 XGBoost 还剩 M20 单条
+预测接口和 M21 最终验收。
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。

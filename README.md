@@ -36,6 +36,7 @@ Chinese project documentation:
 - `docs/m16_first_kill_baseline_spec.md`
 - `docs/m17_first_kill_tuning_spec.md`
 - `docs/m18_first_kill_evaluation_spec.md`
+- `docs/m19_first_kill_explanation_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -53,6 +54,8 @@ Chinese project documentation:
 - `reports/esta_full_m17/external_benchmark_comparison.md`
 - `reports/esta_full_m18/m18_first_kill_evaluation_report.md`
 - `reports/esta_full_m18/external_benchmark_comparison.md`
+- `reports/esta_full_m19/m19_first_kill_explanation_report.md`
+- `reports/esta_full_m19/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -264,4 +267,17 @@ tests. Test AUC is `0.8098` with series-level 95% CI `[0.7977, 0.8221]`; Log Los
 `0.5231` with CI `[0.5097, 0.5361]`. The LAN-online AUC difference is `-0.0103`
 with CI `[-0.0346, 0.0148]`, and all maps with at least 300 test rounds exceed the
 `0.740` minimum AUC. Grouped validation selects the uncalibrated identity method.
-M19 is first-kill model explanation and feature-leakage audit.
+
+Run M19 first-kill model explanation and feature-leakage audit:
+
+```powershell
+.\scripts\run_first_kill_explanation.ps1
+```
+
+M19 explains the unchanged M17/M18 model with deployment-tree Gain, 20-repeat
+encoded and raw-feature grouped permutation importance, and native TreeSHAP. All
+82 encoded inputs map to 40 allowed raw features with zero leakage failures, and
+TreeSHAP reconstructs the fixed probabilities within `4.03e-7`. All ten formal
+performance and robustness targets pass. The strongest raw feature is
+`first_kill_advantage_ct`, followed by `eq_value_diff_ct`. M20 will add a validated
+JSON/CSV prediction interface; M21 is the final first-kill XGBoost acceptance stage.
