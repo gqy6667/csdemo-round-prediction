@@ -99,6 +99,7 @@ src\csdemo\m14_acceptance.py   M14 最终验收、实验清单和报告
 src\csdemo\m15_first_kill_data.py M15 首杀样本重建、主键/split 审计和报告
 src\csdemo\m16_first_kill_baselines.py M16 三模型基线、开局控制组和验收报告
 src\csdemo\m17_first_kill_tuning.py M17 validation-only 控制变量调参和报告
+src\csdemo\m18_first_kill_evaluation.py M18 固定模型 bootstrap、稳健性、错误和校准评估
 src\csdemo\benchmark_comparison.py  各阶段外部模型差值报告
 src\csdemo\train_lgbm.py       后续 LightGBM 对比
 src\csdemo\schema.py           特征列和 ID 列定义
@@ -287,6 +288,25 @@ reports\esta_full_m17\external_benchmark_comparison.csv
 reports\esta_full_m17\external_benchmark_comparison.md
 ```
 
+M18 首杀后固定模型评估：
+
+```text
+models\esta_full_m18\first_kill_calibrator.joblib   本地，不提交
+reports\esta_full_m18\global_bootstrap_95ci.csv
+reports\esta_full_m18\metrics_by_map_with_ci.csv
+reports\esta_full_m18\metrics_by_source_with_ci.csv
+reports\esta_full_m18\source_auc_gap.csv
+reports\esta_full_m18\validation_oof_calibration.csv
+reports\esta_full_m18\test_calibration_comparison.csv
+reports\esta_full_m18\all_high_confidence_errors.csv
+reports\esta_full_m18\reviewed_top30_errors.csv
+reports\esta_full_m18\m18_checks.csv
+reports\esta_full_m18\m18_summary.json
+reports\esta_full_m18\m18_first_kill_evaluation_report.md
+reports\esta_full_m18\external_benchmark_comparison.csv
+reports\esta_full_m18\external_benchmark_comparison.md
+```
+
 ## 文档路径
 
 ```text
@@ -304,6 +324,7 @@ docs\m14_final_acceptance_spec.md    M14 最终验收与复现教程
 docs\m15_first_kill_data_spec.md     M15 首杀定义、主键关联和数据验收
 docs\m16_first_kill_baseline_spec.md M16 首杀后特征、基线和验收目标
 docs\m17_first_kill_tuning_spec.md M17 调参网格、validation-only 规则和验收目标
+docs\m18_first_kill_evaluation_spec.md M18 固定模型评估、分组和校准验收目标
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -421,6 +442,12 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.m13_interface --model model
 .\scripts\run_first_kill_tuning.ps1
 ```
 
+运行 M18 首杀后固定模型评估：
+
+```powershell
+.\scripts\run_first_kill_evaluation.ps1
+```
+
 M14 最低门槛最终验收已通过。当前标准数据为 41,074 个开局前样本，质量报告没有
 error 或 warning；M9 正式测试 AUC 为 0.7271，系列赛级 95% CI 为
 [0.7131, 0.7409]；M10 验证集选择保留原始概率；M11 已完成分组 CI 和 30 个
@@ -435,8 +462,12 @@ M13 已提供单条 JSON/CSV 预测；M14 已锁定环境、运行 70 项测试�
 只使用 train/validation 的 39 个候选中选择 1,500 树上限、early stopping 50、depth 2、
 subsample 0.9，正式 seed 42 使用 409 棵树。测试 AUC/Log Loss/Brier 为
 0.8098/0.5231/0.1757，相对 M16 分别改善 0.0009/0.0016/0.0006；Accuracy 下降 0.0012，
-ECE10 恶化 0.0045。12 个阻塞检查与 100 项测试通过，下一阶段是 M18 固定模型评估、
-分组稳健性和校准诊断。
+ECE10 恶化 0.0045。12 个阻塞检查与 100 项测试通过。M18 没有重新训练 XGBoost，
+模型概率回放最大误差为 1.11e-16；测试 AUC 为 0.8098，系列赛级 95% CI 为
+[0.7977, 0.8221]，Log Loss 为 0.5231，95% CI 为 [0.5097, 0.5361]。LAN-online
+AUC 差为 -0.0103，95% CI 为 [-0.0346, 0.0148]；主要地图最低 AUC 为 0.7839。
+validation OOF 选择保留原始概率。13 个阻塞检查与 108 项测试通过，下一阶段是 M19
+模型解释与特征泄漏审计。
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。

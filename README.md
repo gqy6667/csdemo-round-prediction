@@ -35,6 +35,7 @@ Chinese project documentation:
 - `docs/m15_first_kill_data_spec.md`
 - `docs/m16_first_kill_baseline_spec.md`
 - `docs/m17_first_kill_tuning_spec.md`
+- `docs/m18_first_kill_evaluation_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -50,6 +51,8 @@ Chinese project documentation:
 - `reports/esta_full_m16/external_benchmark_comparison.md`
 - `reports/esta_full_m17/m17_first_kill_tuning_report.md`
 - `reports/esta_full_m17/external_benchmark_comparison.md`
+- `reports/esta_full_m18/m18_first_kill_evaluation_report.md`
+- `reports/esta_full_m18/external_benchmark_comparison.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -247,5 +250,18 @@ M17 evaluates 39 frozen candidates across eight sequential phases and passes all
 cap, 50-round early stopping, depth 2, and subsample 0.9; seed 42 stops at 409 trees.
 Test AUC improves from `0.8089` to `0.8098`, Log Loss from `0.5248` to `0.5231`, and
 Brier from `0.1763` to `0.1757`. Accuracy falls by `0.12` percentage points and ECE10
-worsens by `0.0045`, so those tradeoffs remain explicit. M18 is fixed-model robustness,
-bootstrap evaluation, and calibration diagnosis.
+worsens by `0.0045`, so those tradeoffs remain explicit.
+
+Run M18 fixed-model evaluation and validation-only calibration diagnosis:
+
+```powershell
+.\scripts\run_first_kill_evaluation.ps1
+```
+
+M18 replays the frozen M17 probabilities to `1.11e-16` maximum absolute error and
+makes zero XGBoost fit calls. It passes all 13 blocking checks and all 108 automated
+tests. Test AUC is `0.8098` with series-level 95% CI `[0.7977, 0.8221]`; Log Loss is
+`0.5231` with CI `[0.5097, 0.5361]`. The LAN-online AUC difference is `-0.0103`
+with CI `[-0.0346, 0.0148]`, and all maps with at least 300 test rounds exceed the
+`0.740` minimum AUC. Grouped validation selects the uncalibrated identity method.
+M19 is first-kill model explanation and feature-leakage audit.

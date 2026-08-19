@@ -1,0 +1,2 @@
+comparison,lan_auc,online_auc,signed_difference,absolute_difference,ci_lower_95,ci_upper_95,ci_includes_zero,successful_bootstraps,bootstrap_unit
+lan_minus_online_auc,0.8037978540747381,0.8140742752393239,-0.010276421164585714,0.010276421164585714,-0.03458639695501609,0.014829139625289933,True,2000,series_id_global

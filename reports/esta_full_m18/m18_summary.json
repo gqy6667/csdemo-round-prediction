@@ -1,0 +1,298 @@
+{
+  "stage": "M18",
+  "generated_at_utc": "2026-08-19T15:40:13.466517+00:00",
+  "task": "post_first_kill",
+  "model_policy": "M17 XGBoost frozen; no training or tuning in M18",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "ready_for_m19": true
+  },
+  "checks": {
+    "m17_prerequisite": true,
+    "split_and_key_contract": true,
+    "prediction_replay": true,
+    "global_bootstrap": true,
+    "global_metric_minimum": true,
+    "group_outputs": true,
+    "source_stability": true,
+    "large_map_minimum": true,
+    "calibration_protocol": true,
+    "calibration_no_material_harm": true,
+    "error_review": true,
+    "external_report": true,
+    "automated_tests": true
+  },
+  "stage_targets": {
+    "global_interval_target": true,
+    "large_map_auc_target": true,
+    "large_map_ci_target": true,
+    "source_gap_ci_includes_zero": true,
+    "calibration_ece_target": true,
+    "all_passed": true
+  },
+  "prerequisite": {
+    "passed": true,
+    "checks": {
+      "m17_accepted": true,
+      "m17_task": true,
+      "data_sha256": true,
+      "model_sha256": true,
+      "bundle_task": true,
+      "raw_feature_contract": true,
+      "encoded_feature_contract": true,
+      "predictor_available": true
+    },
+    "data_artifact": {
+      "path": "data/processed/esta_full/first_kill.parquet",
+      "bytes": 1479873,
+      "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "model_artifact": {
+      "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "bytes": 425536,
+      "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+    },
+    "expected_data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "expected_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+  },
+  "data": {
+    "path": "data/processed/esta_full/first_kill.parquet",
+    "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "rows": 41027,
+    "series": 782,
+    "games": 1558,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_percentages": {
+      "train": 69.43963731201404,
+      "val": 20.39632437175519,
+      "test": 10.164038316230775
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "cross_split_series": 0,
+    "duplicate_key_rows": 0,
+    "key_columns": [
+      "series_id",
+      "game_id",
+      "round_id"
+    ]
+  },
+  "model_replay": {
+    "passed": true,
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "encoded_columns_match_m17": true,
+    "split_rows": {
+      "val": 8368,
+      "test": 4170
+    },
+    "xgboost_fit_calls": 0
+  },
+  "prediction_replay": {
+    "passed": true,
+    "tolerance": 1e-12,
+    "saved_rows": 4170,
+    "replayed_rows": 4170,
+    "saved_duplicate_key_rows": 0,
+    "replayed_duplicate_key_rows": 0,
+    "key_mismatch_count": 0,
+    "invalid_probability_cells": 0,
+    "max_absolute_probability_difference": 1.1102230246251565e-16
+  },
+  "metric_replay_max_absolute_difference": 0.0,
+  "metrics": {
+    "accuracy": 0.7441247002398081,
+    "auc": 0.8098368635821109,
+    "log_loss": 0.5231460210364541,
+    "brier_score": 0.17565589988309552,
+    "ece10": 0.01544967890679123
+  },
+  "bootstrap": {
+    "unit": "series_id",
+    "samples": 2000,
+    "seed": 42
+  },
+  "global_assessment": {
+    "bootstrap_complete": true,
+    "auc_ci_lower_95": 0.7977312428624149,
+    "log_loss_ci_upper_95": 0.5361462109319748,
+    "minimum_passed": true,
+    "stage_passed": true,
+    "minimum_thresholds": {
+      "auc_ci_lower_95": 0.78,
+      "log_loss_ci_upper_95": 0.55
+    },
+    "stage_thresholds": {
+      "auc_ci_lower_95": 0.79,
+      "log_loss_ci_upper_95": 0.54
+    }
+  },
+  "robustness": {
+    "outputs_complete": true,
+    "large_map_count": 7,
+    "large_map_min_auc": 0.7839007092198581,
+    "large_map_min_auc_ci_lower": 0.7507191522574516,
+    "large_map_minimum_passed": true,
+    "large_map_stage_passed": true,
+    "large_map_ci_stage_passed": true,
+    "source_gap_passed": true,
+    "source_gap_ci_includes_zero": true
+  },
+  "source_auc_gap": {
+    "comparison": "lan_minus_online_auc",
+    "lan_auc": 0.8037978540747381,
+    "online_auc": 0.8140742752393239,
+    "signed_difference": -0.010276421164585714,
+    "absolute_difference": 0.010276421164585714,
+    "ci_lower_95": -0.03458639695501609,
+    "ci_upper_95": 0.014829139625289933,
+    "ci_includes_zero": true,
+    "successful_bootstraps": 2000,
+    "bootstrap_unit": "series_id_global"
+  },
+  "group_table_rows": {
+    "map": 8,
+    "source": 2,
+    "round_stage": 3,
+    "equipment_band": 5,
+    "first_kill_side": 2,
+    "first_kill_time_band": 4,
+    "first_kill_weapon_family": 5,
+    "first_kill_headshot": 2
+  },
+  "calibration_protocol": {
+    "passed": true,
+    "checks": {
+      "exact_rows": true,
+      "unique_complete_keys": true,
+      "series_one_fold": true,
+      "fold_count": true,
+      "probability_columns": true,
+      "finite_probabilities": true,
+      "methods_complete": true,
+      "selected_from_oof": true
+    },
+    "selection_data": "validation only",
+    "selection_rule": "lowest grouped OOF log_loss, then brier_score, then method",
+    "validation_folds": 5,
+    "selected_method": "uncalibrated"
+  },
+  "calibration": {
+    "selected_method": "uncalibrated",
+    "selected_test_metrics": {
+      "accuracy": 0.7441247002398081,
+      "auc": 0.8098368635821109,
+      "log_loss": 0.5231460210364541,
+      "brier_score": 0.17565589988309552,
+      "ece10": 0.01544967890679123
+    },
+    "changes_vs_uncalibrated": {
+      "log_loss": 0.0,
+      "brier_score": 0.0,
+      "ece10": 0.0
+    },
+    "no_material_probability_metric_harm": true,
+    "test_ece_stage_passed": true,
+    "calibrator_artifact": {
+      "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+      "bytes": 426,
+      "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+    },
+    "validation_oof_comparison": [
+      {
+        "method": "uncalibrated",
+        "accuracy": 0.7434273423,
+        "log_loss": 0.5277960859,
+        "brier_score": 0.1774675412,
+        "ece10": 0.011932839,
+        "auc": 0.8033236207
+      },
+      {
+        "method": "sigmoid",
+        "accuracy": 0.7442638623,
+        "log_loss": 0.5279196218,
+        "brier_score": 0.1775390266,
+        "ece10": 0.0085159347,
+        "auc": 0.8029009025
+      },
+      {
+        "method": "isotonic",
+        "accuracy": 0.7424713193,
+        "log_loss": 0.5394960588,
+        "brier_score": 0.1778476285,
+        "ece10": 0.0062280181,
+        "auc": 0.8006605303
+      }
+    ],
+    "test_comparison": [
+      {
+        "method": "uncalibrated",
+        "selected_by_validation": true,
+        "accuracy": 0.7441247002,
+        "log_loss": 0.523146021,
+        "brier_score": 0.1756558999,
+        "ece10": 0.0154496789,
+        "auc": 0.8098368636,
+        "log_loss_change_vs_uncalibrated": 0.0,
+        "brier_score_change_vs_uncalibrated": 0.0,
+        "ece10_change_vs_uncalibrated": 0.0,
+        "accuracy_change_vs_uncalibrated": 0.0,
+        "auc_change_vs_uncalibrated": 0.0
+      },
+      {
+        "method": "sigmoid",
+        "selected_by_validation": false,
+        "accuracy": 0.7436450839,
+        "log_loss": 0.5232351933,
+        "brier_score": 0.1757046569,
+        "ece10": 0.0124260682,
+        "auc": 0.8098368636,
+        "log_loss_change_vs_uncalibrated": 8.91723e-05,
+        "brier_score_change_vs_uncalibrated": 4.8757e-05,
+        "ece10_change_vs_uncalibrated": -0.0030236107,
+        "accuracy_change_vs_uncalibrated": -0.0004796163,
+        "auc_change_vs_uncalibrated": 0.0
+      },
+      {
+        "method": "isotonic",
+        "selected_by_validation": false,
+        "accuracy": 0.7460431655,
+        "log_loss": 0.5395081409,
+        "brier_score": 0.1759575663,
+        "ece10": 0.0115807554,
+        "auc": 0.808887967,
+        "log_loss_change_vs_uncalibrated": 0.0163621199,
+        "brier_score_change_vs_uncalibrated": 0.0003016664,
+        "ece10_change_vs_uncalibrated": -0.0038689235,
+        "accuracy_change_vs_uncalibrated": 0.0019184652,
+        "auc_change_vs_uncalibrated": -0.0009488966
+      }
+    ]
+  },
+  "errors": {
+    "definition": "wrong and assigned predicted-side probability >= 0.80",
+    "available": 90,
+    "reviewed": 30,
+    "review_target": 30,
+    "signal_pattern_counts": {
+      "first_kill_and_equipment_agree": 81,
+      "equipment_only": 9
+    }
+  },
+  "external_comparison_rows": 7,
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 2.547892000000502,
+    "test_count": 108
+  },
+  "next_stage": "M19 first-kill model explanation and leakage audit"
+}
