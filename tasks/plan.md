@@ -1,39 +1,38 @@
-# M20 Implementation Plan
+# M21 Implementation Plan
 
 ## Scope
 
-Wrap the accepted M17/M18 post-first-kill XGBoost and identity calibrator in a strict
-one-snapshot JSON/CSV inference interface. Reuse the M13 purchase-state validation,
-add first-kill event and artifact contracts, and keep M19 metrics unchanged.
+Close the post-first-kill XGBoost track with a no-training final acceptance runner,
+a three-mode PowerShell reproduction entrypoint, and a data-backed M6-to-M21 progress
+report. Preserve all frozen M17-M20 probabilities, metrics, hashes, and target margins.
 
 ## Slices
 
-1. Freeze the input, output, model, calibrator, error, and no-training contracts.
-2. Add failing tests for event validation, bundle association, prediction, CLI, and artifacts.
-3. Implement one-row validation and prediction as the first vertical slice.
-4. Add M20 prerequisite checks, invalid cases, external comparison, and Chinese report.
-5. Run the formal artifact, document usage and remaining work, commit, and push.
+1. Freeze the M21 evidence, blocker, replay, reproduction, and progress-report contracts.
+2. Add failing tests for stage continuity, split isolation, replay tolerance, script coverage,
+   acceptance decisions, and progress comparability labels.
+3. Implement the acceptance primitives and prove the focused tests green.
+4. Implement the real-artifact runner, experiment manifest, final report, and one-click script.
+5. Commit executable M21 code, run the formal acceptance from that clean commit, then commit
+   generated evidence and documentation.
 
 ## Risks
 
-- Silent all-zero categories: reject maps and weapons absent from saved encoded columns.
-- Model/calibrator drift: verify SHA-256 and task/data association before predicting.
-- Redundant or future fields: allow only the documented 31 base and 9 optional difference fields.
-- CSV type drift: normalize numeric and boolean event values through the same validator as JSON.
-- Misleading example probability: retain fixed test metrics and external comparability labels.
+- Artifact drift: compare bytes and SHA-256 across M15-M20 and the loaded bundles.
+- Hidden split leakage: audit series, game, and round overlap directly from the Parquet data.
+- Metric drift: replay all 4,170 test probabilities and compare at `1e-12` tolerance.
+- Circular testing: unit tests call small functions; the formal runner invokes the full suite once.
+- Misleading progress: label same-task comparisons separately from prediction-time changes.
+- Dirty manifest: commit code before the formal run so the manifest records a stable revision.
 
 ## Review Gates
 
-- Gate A: the M20 specification exists before interface code.
-- Gate B: first-kill validation and bundle tests fail before implementation.
-- Gate C: valid JSON/CSV produce identical finite complementary probabilities.
-- Gate D: every frozen invalid example is rejected with a specific message.
-- Gate E: model metrics, ten target margins, and external limitations remain unchanged.
+- Gate A: the M21 specification exists before tests or implementation.
+- Gate B: focused M21 tests fail because the acceptance module does not yet exist.
+- Gate C: focused tests pass before the formal real-artifact run.
+- Gate D: the formal run passes 17/17 blockers without calling `fit()`.
+- Gate E: the complete suite, compile check, JSON parsing, and Git diff checks pass.
 
 ## Outcome
 
-M20 completed. The frozen M17 model and M18 identity calibrator now support strict
-single-snapshot JSON/CSV inference without retraining. All 10 acceptance blockers
-and 10 invalid-input cases passed, the full suite reached 131 passing tests, and
-the accepted post-first-kill metrics remained unchanged. M21 is the remaining
-post-first-kill robustness and release-readiness stage.
+Pending M21 implementation.

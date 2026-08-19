@@ -1,12 +1,13 @@
-# M20 Checklist
+# M21 Checklist
 
-- [x] Freeze M20 input/output, artifact, error, and no-training contracts.
-- [x] Add failing first-kill validation, bundle, prediction, CLI, and runner tests.
-- [x] Implement the validated one-row JSON/CSV predictor.
-- [x] Implement model/calibrator prerequisite and hash audits.
-- [x] Implement the M20 acceptance runner and external comparison.
-- [x] Add JSON/CSV examples, PowerShell entrypoint, and Chinese report.
-- [x] Run the formal M20 flow and inspect every generated artifact.
-- [x] Run the complete automated test suite, CLI checks, and compile check.
-- [x] Update README, path, module, and M6-current progress documentation.
-- [x] Commit and push M20.
+- [x] Audit M15-M20 evidence and freeze the M21 specification.
+- [ ] Add failing M21 acceptance and progress-report tests.
+- [ ] Implement stage-chain, data, split, artifact, replay, and target audits.
+- [ ] Implement the M21 summary, manifest, reports, and external comparison.
+- [ ] Implement the three-mode first-kill reproduction script.
+- [ ] Run focused tests and commit executable M21 code.
+- [ ] Run the formal M21 acceptance from the committed revision.
+- [ ] Run the complete suite, CLI checks, compile check, and artifact parsing.
+- [ ] Generate and review the M6-M21 progress report.
+- [ ] Update README, project paths, and module roadmap documentation.
+- [ ] Commit reports and documentation, then push M21.
