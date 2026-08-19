@@ -1,38 +1,35 @@
-# M19 Implementation Plan
+# M20 Implementation Plan
 
 ## Scope
 
-Explain the accepted M17/M18 post-first-kill XGBoost without retraining it. Reuse the
-M12 native TreeSHAP implementation, add first-kill-specific feature timing audit, raw
-feature grouped permutation, formal target distance, and external metric gaps.
+Wrap the accepted M17/M18 post-first-kill XGBoost and identity calibrator in a strict
+one-snapshot JSON/CSV inference interface. Reuse the M13 purchase-state validation,
+add first-kill event and artifact contracts, and keep M19 metrics unchanged.
 
 ## Slices
 
-1. Freeze explanation methods, leakage whitelist, target-gap formulas, and no-training boundary.
-2. Add failing tests for encoded-to-source mapping, grouped permutation, leakage, and gaps.
-3. Implement the deterministic contracts and verify focused tests.
-4. Add Gain, encoded/grouped permutation, TreeSHAP, cases, plots, and reports.
-5. Run the full artifact, document target/external gaps, commit, and push.
+1. Freeze the input, output, model, calibrator, error, and no-training contracts.
+2. Add failing tests for event validation, bundle association, prediction, CLI, and artifacts.
+3. Implement one-row validation and prediction as the first vertical slice.
+4. Add M20 prerequisite checks, invalid cases, external comparison, and Chinese report.
+5. Run the formal artifact, document usage and remaining work, commit, and push.
 
 ## Risks
 
-- Misusing test explanations for selection: M19 contains no model fit or feature selection.
-- Incorrect categorical aggregation: require each encoded column to map exactly once.
-- Explaining unused trees: limit Gain and TreeSHAP to `best_iteration + 1` trees.
-- Misleading external ranking: retain comparability labels and report numeric gaps only.
-- Runtime growth: use 20 deterministic repeats and XGBoost native TreeSHAP on 4,170 rows.
+- Silent all-zero categories: reject maps and weapons absent from saved encoded columns.
+- Model/calibrator drift: verify SHA-256 and task/data association before predicting.
+- Redundant or future fields: allow only the documented 31 base and 9 optional difference fields.
+- CSV type drift: normalize numeric and boolean event values through the same validator as JSON.
+- Misleading example probability: retain fixed test metrics and external comparability labels.
 
 ## Review Gates
 
-- Gate A: the M19 specification exists before explanation code or experiments.
-- Gate B: mapping, leakage, grouped permutation, and target-gap tests fail before implementation.
-- Gate C: all 82 encoded columns map to exactly 40 accepted source features.
-- Gate D: TreeSHAP reconstructs deployed probabilities and no XGBoost training occurs.
-- Gate E: reports retain target margins, internal non-superiority, and external limitations.
+- Gate A: the M20 specification exists before interface code.
+- Gate B: first-kill validation and bundle tests fail before implementation.
+- Gate C: valid JSON/CSV produce identical finite complementary probabilities.
+- Gate D: every frozen invalid example is rejected with a specific message.
+- Gate E: model metrics, ten target margins, and external limitations remain unchanged.
 
 ## Outcome
 
-Completed on 2026-08-20. M19 passed all 9 blocking checks, all 10 formal target
-gates, and 118 automated tests. The frozen M17/M18 model was explained without
-training; all 82 encoded columns map to 40 permitted raw features with zero leakage
-failures. M20 is the next stage.
+Pending M20 implementation.

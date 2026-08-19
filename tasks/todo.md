@@ -1,11 +1,12 @@
-# M19 Checklist
+# M20 Checklist
 
-- [x] Freeze M19 methods, feature timing contract, targets, and boundaries.
-- [x] Add failing mapping, grouped permutation, leakage, and target-gap tests.
-- [x] Implement encoded-to-source mapping and post-first-kill leakage audit.
-- [x] Implement grouped permutation and target/internal gap calculations.
-- [x] Run Gain, encoded permutation, TreeSHAP, and three case explanations.
-- [x] Generate and inspect M19 tables, plots, Chinese report, and external comparison.
-- [x] Run the complete automated test suite and compile check.
-- [x] Update README and project path documentation.
-- [x] Commit and push M19.
+- [x] Freeze M20 input/output, artifact, error, and no-training contracts.
+- [ ] Add failing first-kill validation, bundle, prediction, CLI, and runner tests.
+- [ ] Implement the validated one-row JSON/CSV predictor.
+- [ ] Implement model/calibrator prerequisite and hash audits.
+- [ ] Implement the M20 acceptance runner and external comparison.
+- [ ] Add JSON/CSV examples, PowerShell entrypoint, and Chinese report.
+- [ ] Run the formal M20 flow and inspect every generated artifact.
+- [ ] Run the complete automated test suite, CLI checks, and compile check.
+- [ ] Update README, path, module, and M6-current progress documentation.
+- [ ] Commit and push M20.
