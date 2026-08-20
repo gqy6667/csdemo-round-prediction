@@ -5,9 +5,9 @@
 - [x] Implement stage-chain, data, split, artifact, replay, and target audits.
 - [x] Implement the M21 summary, manifest, reports, and external comparison.
 - [x] Implement the three-mode first-kill reproduction script.
-- [ ] Run focused tests and commit executable M21 code.
-- [ ] Run the formal M21 acceptance from the committed revision.
-- [ ] Run the complete suite, CLI checks, compile check, and artifact parsing.
-- [ ] Generate and review the M6-M21 progress report.
-- [ ] Update README, project paths, and module roadmap documentation.
-- [ ] Commit reports and documentation, then push M21.
+- [x] Run focused tests and commit executable M21 code.
+- [x] Run the formal M21 acceptance from the committed revision.
+- [x] Run the complete suite, CLI checks, compile check, and artifact parsing.
+- [x] Generate and review the M6-M21 progress report.
+- [x] Update README, project paths, and module roadmap documentation.
+- [x] Commit reports and documentation, then push M21.

@@ -1,0 +1,427 @@
+{
+  "stage": "M21",
+  "generated_at_utc": "2026-08-20T00:27:38.834190+00:00",
+  "task": "post_first_kill",
+  "definition": "purchase complete, immediately after earliest valid enemy kill",
+  "model_policy": "M17/M18 artifacts frozen; final acceptance only; no fit or tuning",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 17,
+    "blocking_total": 17,
+    "first_kill_xgboost_complete": true,
+    "ready_for_lightgbm_comparison": true
+  },
+  "checks": {
+    "required_artifacts": true,
+    "raw_source": true,
+    "stage_chain": true,
+    "data_identity": true,
+    "split_contract": true,
+    "model_contract": true,
+    "calibrator_contract": true,
+    "prediction_replay": true,
+    "formal_targets": true,
+    "robustness": true,
+    "explanation": true,
+    "prediction_interface": true,
+    "external_comparison": true,
+    "environment_lock": true,
+    "automated_tests": true,
+    "reproduction_entrypoint": true,
+    "progress_report": true
+  },
+  "stage_chain": {
+    "passed": true,
+    "accepted_stages": 6,
+    "expected_stages": 6,
+    "failed_stages": [],
+    "stage_checks": {
+      "M15": true,
+      "M16": true,
+      "M17": true,
+      "M18": true,
+      "M19": true,
+      "M20": true
+    }
+  },
+  "data": {
+    "path": "data/processed/esta_full/first_kill.parquet",
+    "bytes": 1479873,
+    "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "rows": 41027,
+    "series": 782,
+    "games": 1558,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "split_percentages": {
+      "train": 69.43963731201404,
+      "val": 20.396324371755185,
+      "test": 10.164038316230775
+    },
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0,
+    "split_manifest": {
+      "passed": true,
+      "assignment_rows": 782,
+      "manifest_rows": 782,
+      "assignment_duplicate_series": 0,
+      "manifest_duplicate_series": 0,
+      "missing_series": 0,
+      "split_mismatch_series": 0
+    }
+  },
+  "artifacts": {
+    "model": {
+      "path": "C:\\Users\\admin\\Documents\\Codex\\2026-07-06\\th\\work\\csdemo_round_prediction\\models\\esta_full_m17\\first_kill_xgboost_tuned.joblib",
+      "bytes": 425536,
+      "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+    },
+    "calibrator": {
+      "path": "C:\\Users\\admin\\Documents\\Codex\\2026-07-06\\th\\work\\csdemo_round_prediction\\models\\esta_full_m18\\first_kill_calibrator.joblib",
+      "bytes": 426,
+      "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+    }
+  },
+  "model_contract": {
+    "passed": true,
+    "task": "first_kill",
+    "profile": "canonical_event",
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "known_map_count": 8,
+    "known_weapon_count": 36,
+    "deployment_tree_count": 409,
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "data_hash_match": true,
+    "model_hash_match": true
+  },
+  "calibrator_contract": {
+    "passed": true,
+    "task": "post_first_kill",
+    "method": "uncalibrated",
+    "base_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "calibrator_hash_match": true
+  },
+  "prediction_replay": {
+    "passed": true,
+    "tolerance": 1e-12,
+    "saved_rows": 4170,
+    "replayed_rows": 4170,
+    "matched_rows": 4170,
+    "saved_duplicate_key_rows": 0,
+    "replayed_duplicate_key_rows": 0,
+    "key_mismatch_count": 0,
+    "label_mismatch_count": 0,
+    "invalid_probability_cells": 0,
+    "max_absolute_probability_difference": 1.1102230246251565e-16
+  },
+  "metric_replay": {
+    "passed": true,
+    "tolerance": 1e-12,
+    "missing_metrics": [],
+    "absolute_differences": {
+      "accuracy": 0.0,
+      "auc": 0.0,
+      "log_loss": 0.0,
+      "brier_score": 0.0,
+      "ece10": 0.0
+    },
+    "max_absolute_difference": 0.0
+  },
+  "metrics": {
+    "accuracy": 0.7441247002398081,
+    "log_loss": 0.5231460210364541,
+    "brier_score": 0.17565589988309552,
+    "ece10": 0.01544967890679123,
+    "auc": 0.8098368635821109
+  },
+  "formal_targets": {
+    "passed": true,
+    "passed_count": 10,
+    "target_count": 10,
+    "remaining_count": 0,
+    "rows_equal_between_m19_and_m20": true,
+    "unique_ten_targets": true
+  },
+  "formal_target_rows": [
+    {
+      "target_id": "test_accuracy",
+      "label": "Test Accuracy",
+      "direction": "higher",
+      "current": 0.7441247002,
+      "target": 0.7,
+      "remaining": 0.0,
+      "margin": 0.0441247002,
+      "passed": true
+    },
+    {
+      "target_id": "test_auc",
+      "label": "Test AUC",
+      "direction": "higher",
+      "current": 0.8098368636,
+      "target": 0.78,
+      "remaining": 0.0,
+      "margin": 0.0298368636,
+      "passed": true
+    },
+    {
+      "target_id": "test_log_loss",
+      "label": "Test Log Loss",
+      "direction": "lower",
+      "current": 0.523146021,
+      "target": 0.55,
+      "remaining": 0.0,
+      "margin": 0.026853979,
+      "passed": true
+    },
+    {
+      "target_id": "test_brier",
+      "label": "Test Brier",
+      "direction": "lower",
+      "current": 0.1756558999,
+      "target": 0.185,
+      "remaining": 0.0,
+      "margin": 0.0093441001,
+      "passed": true
+    },
+    {
+      "target_id": "test_ece10",
+      "label": "Test ECE10",
+      "direction": "lower",
+      "current": 0.0154496789,
+      "target": 0.03,
+      "remaining": 0.0,
+      "margin": 0.0145503211,
+      "passed": true
+    },
+    {
+      "target_id": "auc_ci_lower",
+      "label": "AUC 95% CI lower",
+      "direction": "higher",
+      "current": 0.7977312429,
+      "target": 0.79,
+      "remaining": 0.0,
+      "margin": 0.0077312429,
+      "passed": true
+    },
+    {
+      "target_id": "log_loss_ci_upper",
+      "label": "Log Loss 95% CI upper",
+      "direction": "lower",
+      "current": 0.5361462109,
+      "target": 0.54,
+      "remaining": 0.0,
+      "margin": 0.0038537891,
+      "passed": true
+    },
+    {
+      "target_id": "source_auc_gap",
+      "label": "LAN-online absolute AUC gap",
+      "direction": "lower",
+      "current": 0.0102764212,
+      "target": 0.04,
+      "remaining": 0.0,
+      "margin": 0.0297235788,
+      "passed": true
+    },
+    {
+      "target_id": "large_map_min_auc",
+      "label": "Large-map minimum AUC",
+      "direction": "higher",
+      "current": 0.7839007092,
+      "target": 0.77,
+      "remaining": 0.0,
+      "margin": 0.0139007092,
+      "passed": true
+    },
+    {
+      "target_id": "large_map_min_auc_ci_lower",
+      "label": "Large-map minimum AUC CI lower",
+      "direction": "higher",
+      "current": 0.7507191523,
+      "target": 0.7,
+      "remaining": 0.0,
+      "margin": 0.0507191523,
+      "passed": true
+    }
+  ],
+  "robustness": {
+    "passed": true,
+    "source_auc_gap": {
+      "comparison": "lan_minus_online_auc",
+      "lan_auc": 0.8037978540747381,
+      "online_auc": 0.8140742752393239,
+      "signed_difference": -0.010276421164585714,
+      "absolute_difference": 0.010276421164585714,
+      "ci_lower_95": -0.03458639695501609,
+      "ci_upper_95": 0.014829139625289933,
+      "ci_includes_zero": true,
+      "successful_bootstraps": 2000,
+      "bootstrap_unit": "series_id_global"
+    },
+    "large_map_min_auc": 0.7839007092198581,
+    "large_map_min_auc_ci_lower": 0.7507191522574516,
+    "reviewed_high_confidence_errors": 30
+  },
+  "explanation": {
+    "passed": true,
+    "all_feature_failures": 0,
+    "top20_failures": 0,
+    "shap_reconstruction_max_abs_error": 4.029524912629867e-07,
+    "top_source_feature": "first_kill_advantage_ct"
+  },
+  "interface": {
+    "passed": true,
+    "m20_frozen_checks_passed": true,
+    "json_csv_prediction_match": true,
+    "m20_example_prediction_match": true,
+    "probability_difference_vs_m20": 0.0,
+    "example_prediction": {
+      "task": "first_kill",
+      "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+      "calibration_method": "uncalibrated",
+      "validation": {
+        "status": "passed",
+        "required_purchase_base_feature_count": 27,
+        "required_first_kill_feature_count": 4,
+        "provided_field_count": 31,
+        "derived_features": [
+          "score_diff_ct",
+          "eq_value_diff_ct",
+          "cash_diff_ct",
+          "armor_diff_ct",
+          "helmet_diff_ct",
+          "grenade_diff_ct",
+          "awp_diff_ct",
+          "rifle_diff_ct",
+          "smg_diff_ct"
+        ],
+        "derived_feature_count": 9,
+        "raw_model_feature_count": 40,
+        "map_name": "de_nuke",
+        "first_kill_side": "CT",
+        "first_kill_weapon": "AK-47",
+        "encoded_model_feature_count": 82,
+        "model_contract_verified": true,
+        "calibrator_contract_verified": true,
+        "deployment_tree_count": 409
+      },
+      "prediction": {
+        "ct_win_probability": 0.7187644839286804,
+        "t_win_probability": 0.2812355160713196,
+        "predicted_side": "CT",
+        "decision_threshold": 0.5,
+        "probability_sum": 1.0
+      }
+    },
+    "model_audit": {
+      "passed": true,
+      "task": "first_kill",
+      "profile": "canonical_event",
+      "raw_feature_count": 40,
+      "encoded_feature_count": 82,
+      "known_map_count": 8,
+      "known_weapon_count": 36,
+      "deployment_tree_count": 409,
+      "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "calibrator_audit": {
+      "passed": true,
+      "task": "post_first_kill",
+      "method": "uncalibrated",
+      "base_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+      "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    }
+  },
+  "external_comparison_rows": 7,
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "test_count": 145,
+    "duration_seconds": 5.489887400000043,
+    "command": "C:\\Users\\admin\\11\\envs\\game\\python.exe -m unittest discover -s tests -v",
+    "skipped": false
+  },
+  "environment": {
+    "python_version": "3.10.20",
+    "python_implementation": "CPython",
+    "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+    "environment_prefix": "C:\\Users\\admin\\11\\envs\\game",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2",
+      "xgboost": "3.2.0",
+      "pyarrow": "24.0.0",
+      "joblib": "1.5.3",
+      "matplotlib": "3.10.9"
+    },
+    "nvcc": {
+      "available": true,
+      "path": "C:\\Users\\admin\\11\\envs\\game\\Library\\bin\\nvcc.exe",
+      "return_code": 0,
+      "version_output": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:42:46_Pacific_Standard_Time_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0"
+    },
+    "gpu_required_for_current_xgboost": false
+  },
+  "environment_lock": {
+    "passed": true,
+    "requirements_lock": "requirements-lock.txt",
+    "environment_file": "environment.yml",
+    "python_version_locked": true,
+    "package_mismatches": []
+  },
+  "code": {
+    "commit": "5f608a20f0cb9b39e85af87c825b990535646f91",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_clean_before_report_generation": true,
+    "working_tree_status_before_report_generation": [],
+    "ignored_existing_report_status": []
+  },
+  "raw_source": {
+    "path": "C:\\project1\\data\\esta",
+    "available": true,
+    "file_count": 1558,
+    "total_bytes": 4001138344,
+    "subset_counts": {
+      "lan": 680,
+      "online": 878
+    },
+    "inventory_sha256": "07391e1aa728921fa84cc832bec81383d3ea3c6dfe684c1e05e7303d66a4c68e",
+    "hash_definition": "sha256 of sorted relative path and byte-size entries"
+  },
+  "reproduction_entrypoint": {
+    "passed": true,
+    "required_token_count": 10,
+    "present_token_count": 10,
+    "missing_tokens": []
+  },
+  "xgboost_fit_calls": 0,
+  "model_performance_changed": false,
+  "progress": {
+    "stage_metric_rows": 5,
+    "comparison_rows": 4,
+    "report_path": "C:\\Users\\admin\\Documents\\Codex\\2026-07-06\\th\\work\\csdemo_round_prediction\\reports\\m6_to_m21_progress_report.md"
+  },
+  "roadmap": {
+    "pre_round_xgboost": "complete_through_M14",
+    "first_kill_xgboost": "complete_through_M21",
+    "first_kill_xgboost_modules_remaining": 0,
+    "next_stage": "LightGBM controlled comparison",
+    "later_stage": "real-time win probability"
+  }
+}

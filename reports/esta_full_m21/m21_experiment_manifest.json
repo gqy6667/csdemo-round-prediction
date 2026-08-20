@@ -1,0 +1,2354 @@
+{
+  "stage": "M21",
+  "experiment_id": "post_first_kill_xgboost_final_acceptance",
+  "generated_at_utc": "2026-08-20T00:27:38.834190+00:00",
+  "code": {
+    "commit": "5f608a20f0cb9b39e85af87c825b990535646f91",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_clean_before_report_generation": true,
+    "working_tree_status_before_report_generation": [],
+    "ignored_existing_report_status": []
+  },
+  "environment": {
+    "python_version": "3.10.20",
+    "python_implementation": "CPython",
+    "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+    "environment_prefix": "C:\\Users\\admin\\11\\envs\\game",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2",
+      "xgboost": "3.2.0",
+      "pyarrow": "24.0.0",
+      "joblib": "1.5.3",
+      "matplotlib": "3.10.9"
+    },
+    "nvcc": {
+      "available": true,
+      "path": "C:\\Users\\admin\\11\\envs\\game\\Library\\bin\\nvcc.exe",
+      "return_code": 0,
+      "version_output": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:42:46_Pacific_Standard_Time_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0"
+    },
+    "gpu_required_for_current_xgboost": false
+  },
+  "environment_lock_audit": {
+    "passed": true,
+    "requirements_lock": "requirements-lock.txt",
+    "environment_file": "environment.yml",
+    "python_version_locked": true,
+    "package_mismatches": []
+  },
+  "raw_data": {
+    "path": "C:\\project1\\data\\esta",
+    "available": true,
+    "file_count": 1558,
+    "total_bytes": 4001138344,
+    "subset_counts": {
+      "lan": 680,
+      "online": 878
+    },
+    "inventory_sha256": "07391e1aa728921fa84cc832bec81383d3ea3c6dfe684c1e05e7303d66a4c68e",
+    "hash_definition": "sha256 of sorted relative path and byte-size entries"
+  },
+  "artifact_fingerprints": {
+    "data/processed/esta_full/first_kill.parquet": {
+      "path": "data/processed/esta_full/first_kill.parquet",
+      "bytes": 1479873,
+      "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "reports/esta_full_m14/split_assignments.csv": {
+      "path": "reports/esta_full_m14/split_assignments.csv",
+      "bytes": 50982,
+      "sha256": "31ea3f9cc2ceacc2dd582cd6c546a8f734aa43c8d7c2824587b98baf92aa9b0d"
+    },
+    "reports/esta_full_m15/m15_summary.json": {
+      "path": "reports/esta_full_m15/m15_summary.json",
+      "bytes": 4493,
+      "sha256": "e59d97a18f2f3c9217fd4e3bdf9f3d6d04560bcda13dfe2e7bb51acbfeeb663f"
+    },
+    "reports/esta_full_m16/m16_summary.json": {
+      "path": "reports/esta_full_m16/m16_summary.json",
+      "bytes": 9204,
+      "sha256": "2882cff85db35f328a92b52954db46040e122db806de1961cec430512a89f044"
+    },
+    "reports/esta_full_m16/m16_model_comparison.csv": {
+      "path": "reports/esta_full_m16/m16_model_comparison.csv",
+      "bytes": 1246,
+      "sha256": "32fce65fa2117cf164684e9bb4fef589d4053c17ca59b7c0e693a8357ab258ec"
+    },
+    "reports/esta_full_m17/m17_summary.json": {
+      "path": "reports/esta_full_m17/m17_summary.json",
+      "bytes": 10730,
+      "sha256": "da78ce9d6cd70fca311b8130e88d9fda78f9c45034930947c4c45d852d214a23"
+    },
+    "reports/esta_full_m17/model_comparison.csv": {
+      "path": "reports/esta_full_m17/model_comparison.csv",
+      "bytes": 1622,
+      "sha256": "487f8b48a5e8c763e4940eb867f271a49d1773e9f73bba7015a7d56e82ecfaae"
+    },
+    "reports/esta_full_m17/test_predictions.csv": {
+      "path": "reports/esta_full_m17/test_predictions.csv",
+      "bytes": 884082,
+      "sha256": "d91ece894b6c7ea2c4e40972804859c6533963462dc960ab0544089ed03a5eae"
+    },
+    "reports/esta_full_m18/m18_summary.json": {
+      "path": "reports/esta_full_m18/m18_summary.json",
+      "bytes": 9074,
+      "sha256": "995ea75987aa6275989c207ed118a5781f74b30b8c0bf30bfb62e766e95cf8ab"
+    },
+    "reports/esta_full_m19/m19_summary.json": {
+      "path": "reports/esta_full_m19/m19_summary.json",
+      "bytes": 14219,
+      "sha256": "886ea9bf9315648c909c2eb8d58107c90d6c78475fc798a85f2bf825b7787b97"
+    },
+    "reports/esta_full_m20/m20_summary.json": {
+      "path": "reports/esta_full_m20/m20_summary.json",
+      "bytes": 8307,
+      "sha256": "f79df58ecf34a51813b6ba036e9e4a5e1e85e09b6ae1c032fe1b7b40878a63c0"
+    },
+    "models/esta_full_m17/first_kill_xgboost_tuned.joblib": {
+      "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "bytes": 425536,
+      "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+    },
+    "models/esta_full_m18/first_kill_calibrator.joblib": {
+      "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+      "bytes": 426,
+      "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+    },
+    "benchmarks/external_first_kill_tuned_metrics.csv": {
+      "path": "benchmarks/external_first_kill_tuned_metrics.csv",
+      "bytes": 3250,
+      "sha256": "f159ed57e4aa9e9ccda3a9c5761b15e347d3fe9e91ef4d3ed0bb2454dcba2bff"
+    },
+    "examples/first_kill_snapshot.json": {
+      "path": "examples/first_kill_snapshot.json",
+      "bytes": 611,
+      "sha256": "2c8f427557588da7e59527cc9c65cf5fc8b5a77694b6fb2d1271335f40ce52c8"
+    },
+    "examples/first_kill_snapshot.csv": {
+      "path": "examples/first_kill_snapshot.csv",
+      "bytes": 418,
+      "sha256": "682227fdda3a8b783d00898e6fce4705fcbf4c34326c7f5e743a9ceea871e919"
+    },
+    "environment.yml": {
+      "path": "environment.yml",
+      "bytes": 450,
+      "sha256": "0be4b4b0524f223f52fdf831516f120dce3623e7482d9e814e41e1fa8b3df10f"
+    },
+    "requirements-lock.txt": {
+      "path": "requirements-lock.txt",
+      "bytes": 201,
+      "sha256": "5533564a59b311cf8de4d043f89624a756e6b85c18b57cf18297986c87526a61"
+    },
+    "scripts/run_first_kill_data_stage.ps1": {
+      "path": "scripts/run_first_kill_data_stage.ps1",
+      "bytes": 894,
+      "sha256": "d3cdbed518c19e5ff1318f0b00244429e9f8cee4393d795084ef9813fedcc2eb"
+    },
+    "scripts/run_first_kill_baselines.ps1": {
+      "path": "scripts/run_first_kill_baselines.ps1",
+      "bytes": 848,
+      "sha256": "528c568865d7c705f205350f7c3d71a36e2b33af9e69d0e910a6d05c30915eb5"
+    },
+    "scripts/run_first_kill_tuning.ps1": {
+      "path": "scripts/run_first_kill_tuning.ps1",
+      "bytes": 1064,
+      "sha256": "db201672fb60fbbacd05cb281abe4522cb7a3f3ecfdf08bc1a04663669cd2ffa"
+    },
+    "scripts/run_first_kill_evaluation.ps1": {
+      "path": "scripts/run_first_kill_evaluation.ps1",
+      "bytes": 1192,
+      "sha256": "970ba782dd1c7f634eeb3c1303f78acac351959860f46bfff28e72b3df013e4b"
+    },
+    "scripts/run_first_kill_explanation.ps1": {
+      "path": "scripts/run_first_kill_explanation.ps1",
+      "bytes": 1068,
+      "sha256": "ee5142c35c862241ef0f729574d4f7d822109d0b37a5d94437ddb4b4962836c0"
+    },
+    "scripts/run_first_kill_interface.ps1": {
+      "path": "scripts/run_first_kill_interface.ps1",
+      "bytes": 1096,
+      "sha256": "27160efe393e169be7e867a1e943e45e345ae5b1370c852dd163604e569b4620"
+    },
+    "scripts/run_first_kill_pipeline.ps1": {
+      "path": "scripts/run_first_kill_pipeline.ps1",
+      "bytes": 2432,
+      "sha256": "59402fde18ef944a99d3d6b44155c31135fc009e25658bdc3a611ae3086161a2"
+    },
+    "docs/m21_first_kill_final_acceptance_spec.md": {
+      "path": "docs/m21_first_kill_final_acceptance_spec.md",
+      "bytes": 5725,
+      "sha256": "59a9e156b9bbbba09d8fee10b4761c283a27451fe73cf2806fcc8ba58a46a81d"
+    }
+  },
+  "required_artifact_audit": {
+    "passed": true,
+    "required_count": 26,
+    "present_count": 26,
+    "missing": []
+  },
+  "stage_summaries": {
+    "M15": {
+      "stage": "M15",
+      "passed": true,
+      "checks": {
+        "required_columns": {
+          "passed": true,
+          "blocking": true,
+          "missing_round_columns": [],
+          "missing_kill_columns": [],
+          "missing_sample_columns": [],
+          "missing_manifest_columns": []
+        },
+        "unique_repaired_key": {
+          "passed": true,
+          "blocking": true,
+          "round_duplicate_rows": 0,
+          "sample_duplicate_rows": 0,
+          "selected_event_duplicate_rows": 0
+        },
+        "sample_coverage": {
+          "passed": true,
+          "blocking": true,
+          "selected_event_rows": 41027,
+          "sample_key_rows": 41027,
+          "coverage_mismatch_rows": 0,
+          "orphan_sample_rows": 0
+        },
+        "event_linkage": {
+          "passed": true,
+          "blocking": true,
+          "mismatch_rows": 0,
+          "mismatch_by_field": {
+            "first_kill_time": 0,
+            "first_kill_is_ct": 0,
+            "first_death_is_ct": 0,
+            "first_kill_headshot": 0,
+            "first_kill_weapon": 0,
+            "first_kill_advantage_ct": 0
+          }
+        },
+        "core_values_present": {
+          "passed": true,
+          "blocking": true,
+          "null_cells": 0
+        },
+        "initial_5v5_state": {
+          "passed": true,
+          "blocking": true,
+          "valid_rows": 41074,
+          "total_rows": 41074
+        },
+        "post_kill_state": {
+          "passed": true,
+          "blocking": true,
+          "invalid_alive_rows": 0,
+          "derived_mismatch_rows": 0
+        },
+        "label_linkage": {
+          "passed": true,
+          "blocking": true,
+          "mismatch_rows": 0
+        },
+        "split_manifest": {
+          "passed": true,
+          "blocking": true,
+          "manifest_duplicate_rows": 0,
+          "mismatch_rows": 0,
+          "sample_series_missing_from_manifest": 0,
+          "manifest_series_without_sample": 0
+        },
+        "split_isolation": {
+          "passed": true,
+          "blocking": true,
+          "cross_split_series": 0,
+          "cross_split_games": 0,
+          "cross_split_rounds": 0
+        },
+        "normalized_kill_sides": {
+          "passed": true,
+          "blocking": true,
+          "invalid_rows": 0
+        },
+        "automated_tests": {
+          "passed": true,
+          "blocking": true,
+          "return_code": 0,
+          "elapsed_seconds": 2.10192619999998
+        }
+      },
+      "counts": {
+        "round_rows": 41074,
+        "kill_rows": 268640,
+        "sample_rows": 41027,
+        "excluded_rounds": 47,
+        "series": 782,
+        "games": 1558
+      },
+      "diagnostics": {
+        "time_order_disagreements": 14357,
+        "nonpositive_first_kill_time": 0,
+        "selected_without_source_first_kill_flag": 70,
+        "source_flags_not_at_earliest_tick": 0
+      },
+      "generated_at_utc": "2026-08-18T17:44:47.763044+00:00",
+      "task_definition": "purchase complete, immediately after earliest valid enemy kill by tick",
+      "previous_dataset_comparison": {
+        "available": true,
+        "previous_rows": 41027,
+        "current_rows": 41027,
+        "previous_duplicate_keys": 0,
+        "current_duplicate_keys": 0,
+        "new_columns": [
+          "alive_diff_ct_after_fk",
+          "ct_alive_after_fk",
+          "t_alive_after_fk"
+        ],
+        "removed_columns": [],
+        "added_keys": 0,
+        "removed_keys": 0,
+        "matched_keys": 41027,
+        "event_changed_rows": 14357,
+        "event_changed_fraction": 0.34994028322811804,
+        "changed_by_field": {
+          "first_kill_time": 14357,
+          "first_kill_is_ct": 6697,
+          "first_death_is_ct": 6697,
+          "first_kill_headshot": 6694,
+          "first_kill_weapon": 9669,
+          "first_kill_advantage_ct": 6697
+        },
+        "preserved_from_first_m15_run": true
+      },
+      "split_summary": [
+        {
+          "split": "train",
+          "series": 547,
+          "games": 1083,
+          "samples": 28489,
+          "series_fraction": 0.6994884910485933,
+          "ct_win_rate": 0.5435782231738566
+        },
+        {
+          "split": "val",
+          "series": 156,
+          "games": 316,
+          "samples": 8368,
+          "series_fraction": 0.19948849104859334,
+          "ct_win_rate": 0.5358508604206501
+        },
+        {
+          "split": "test",
+          "series": 79,
+          "games": 159,
+          "samples": 4170,
+          "series_fraction": 0.1010230179028133,
+          "ct_win_rate": 0.5247002398081535
+        }
+      ],
+      "data_artifact": {
+        "path": "data/processed/esta_full/first_kill.parquet",
+        "bytes": 1479873,
+        "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+      },
+      "external_comparison_status": "not_applicable_no_model",
+      "next_stage": "M16 fixed-split Dummy, logistic regression, and untuned XGBoost baselines"
+    },
+    "M16": {
+      "stage": "M16",
+      "generated_at_utc": "2026-08-18T18:21:11.383387+00:00",
+      "task": "post_first_kill",
+      "definition": "immediately after earliest valid enemy kill by demo tick",
+      "acceptance": {
+        "status": "passed",
+        "blocking_failures": [],
+        "ready_for_m17": true
+      },
+      "checks": {
+        "m15_artifact": true,
+        "data_contract": true,
+        "feature_contract": true,
+        "model_probabilities": true,
+        "frozen_xgboost": true,
+        "minimum_metrics": true,
+        "automated_tests": true,
+        "external_report": true
+      },
+      "data": {
+        "path": "data/processed/esta_full/first_kill.parquet",
+        "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+        "rows": 41027,
+        "split_rows": {
+          "train": 28489,
+          "val": 8368,
+          "test": 4170
+        },
+        "series": 782,
+        "games": 1558,
+        "duplicate_key_rows": 0,
+        "cross_split_series": 0
+      },
+      "features": {
+        "profile": "canonical_event",
+        "raw_count": 40,
+        "encoded_count": 82,
+        "raw_features": [
+          "map_name",
+          "round_num",
+          "ct_score",
+          "t_score",
+          "score_diff_ct",
+          "ct_eq_value",
+          "t_eq_value",
+          "eq_value_diff_ct",
+          "ct_cash",
+          "t_cash",
+          "cash_diff_ct",
+          "ct_armor",
+          "t_armor",
+          "armor_diff_ct",
+          "ct_helmets",
+          "t_helmets",
+          "helmet_diff_ct",
+          "ct_defuse_kits",
+          "ct_grenades",
+          "t_grenades",
+          "grenade_diff_ct",
+          "ct_ak47",
+          "t_ak47",
+          "ct_m4a4",
+          "t_m4a4",
+          "ct_m4a1_s",
+          "t_m4a1_s",
+          "ct_awp",
+          "t_awp",
+          "awp_diff_ct",
+          "ct_rifles",
+          "t_rifles",
+          "rifle_diff_ct",
+          "ct_smgs",
+          "t_smgs",
+          "smg_diff_ct",
+          "first_kill_advantage_ct",
+          "first_kill_time",
+          "first_kill_headshot",
+          "first_kill_weapon"
+        ],
+        "excluded_redundant_features": [
+          "first_kill_is_ct",
+          "first_death_is_ct",
+          "ct_alive_after_fk",
+          "t_alive_after_fk",
+          "alive_diff_ct_after_fk"
+        ],
+        "forbidden_encoded_features": [],
+        "control_encoded_count": 43
+      },
+      "models": {
+        "formal": [
+          "constant_train_prior",
+          "logistic_regression",
+          "xgboost_untuned"
+        ],
+        "xgboost_params": {
+          "objective": "binary:logistic",
+          "base_score": null,
+          "booster": null,
+          "callbacks": null,
+          "colsample_bylevel": null,
+          "colsample_bynode": null,
+          "colsample_bytree": 0.85,
+          "device": null,
+          "early_stopping_rounds": null,
+          "enable_categorical": false,
+          "eval_metric": "logloss",
+          "feature_types": null,
+          "feature_weights": null,
+          "gamma": null,
+          "grow_policy": null,
+          "importance_type": null,
+          "interaction_constraints": null,
+          "learning_rate": 0.03,
+          "max_bin": null,
+          "max_cat_threshold": null,
+          "max_cat_to_onehot": null,
+          "max_delta_step": null,
+          "max_depth": 4,
+          "max_leaves": null,
+          "min_child_weight": null,
+          "missing": null,
+          "monotone_constraints": null,
+          "multi_strategy": null,
+          "n_estimators": 500,
+          "n_jobs": -1,
+          "num_parallel_tree": null,
+          "random_state": 42,
+          "reg_alpha": null,
+          "reg_lambda": null,
+          "sampling_method": null,
+          "scale_pos_weight": null,
+          "subsample": 0.85,
+          "tree_method": null,
+          "validate_parameters": null,
+          "verbosity": null
+        },
+        "model_artifacts": {
+          "constant_train_prior": {
+            "path": "models/esta_full_m16/first_kill_constant_train_prior.joblib",
+            "bytes": 4872,
+            "sha256": "80a04392dd795b214dd990da44c9dd441ef8e79334ae5b29c43829b8ba593320"
+          },
+          "logistic_regression": {
+            "path": "models/esta_full_m16/first_kill_logistic_regression.joblib",
+            "bytes": 8257,
+            "sha256": "05f73e00c92c7e167960169b6bbf477bb39b6419d43c913cc7cfa9014acab625"
+          },
+          "xgboost_untuned": {
+            "path": "models/esta_full_m16/first_kill_xgboost_untuned.joblib",
+            "bytes": 832554,
+            "sha256": "aad3074c80d3f6b533ffbddbe0ae1928bfc22209f3befbd4d67d009eaea93ae4"
+          },
+          "xgboost_pre_round_control": {
+            "path": "models/esta_full_m16/first_kill_xgboost_pre_round_control.joblib",
+            "bytes": 828976,
+            "sha256": "c6584a1315d57c5bc99483982da1d6fc6e082b062a8fd4b18439f9d1ed158463"
+          }
+        }
+      },
+      "metrics": {
+        "accuracy": 0.7453237410071942,
+        "auc": 0.8088959225349904,
+        "log_loss": 0.5247534331448958,
+        "brier_score": 0.1762645347408764,
+        "ece10": 0.01090835026338052
+      },
+      "test_metrics_by_model": {
+        "constant_train_prior": {
+          "accuracy": 0.5247002398081535,
+          "auc": 0.5,
+          "log_loss": 0.6926432805734406,
+          "brier_score": 0.24974627640937555,
+          "ece10": 0.01887798336570312
+        },
+        "logistic_regression": {
+          "accuracy": 0.7434052757793765,
+          "auc": 0.8090589528793879,
+          "log_loss": 0.5266419675805064,
+          "brier_score": 0.17607033399417882,
+          "ece10": 0.015016607603500954
+        },
+        "xgboost_untuned": {
+          "accuracy": 0.7453237410071942,
+          "auc": 0.8088959225349904,
+          "log_loss": 0.5247534331448958,
+          "brier_score": 0.1762645347408764,
+          "ece10": 0.01090835026338052
+        }
+      },
+      "metric_targets": {
+        "all_minimum_passed": true,
+        "all_stage_passed": true,
+        "minimum_passed_count": 4,
+        "stage_passed_count": 4,
+        "metrics": {
+          "accuracy": {
+            "value": 0.7453237410071942,
+            "minimum": 0.68,
+            "stage": 0.7,
+            "higher_is_better": true,
+            "minimum_passed": true,
+            "stage_passed": true,
+            "minimum_gap": 0.0,
+            "stage_gap": 0.0
+          },
+          "auc": {
+            "value": 0.8088959225349904,
+            "minimum": 0.75,
+            "stage": 0.78,
+            "higher_is_better": true,
+            "minimum_passed": true,
+            "stage_passed": true,
+            "minimum_gap": 0.0,
+            "stage_gap": 0.0
+          },
+          "log_loss": {
+            "value": 0.5247534331448958,
+            "minimum": 0.58,
+            "stage": 0.55,
+            "higher_is_better": false,
+            "minimum_passed": true,
+            "stage_passed": true,
+            "minimum_gap": 0.0,
+            "stage_gap": 0.0
+          },
+          "brier_score": {
+            "value": 0.1762645347408764,
+            "minimum": 0.2,
+            "stage": 0.185,
+            "higher_is_better": false,
+            "minimum_passed": true,
+            "stage_passed": true,
+            "minimum_gap": 0.0,
+            "stage_gap": 0.0
+          }
+        }
+      },
+      "xgboost_vs_logistic_test": {
+        "accuracy": {
+          "left": 0.7453237410071942,
+          "right": 0.7434052757793765,
+          "raw_left_minus_right": 0.0019184652278176895,
+          "performance_advantage_left": 0.0019184652278176895
+        },
+        "auc": {
+          "left": 0.8088959225349904,
+          "right": 0.8090589528793879,
+          "raw_left_minus_right": -0.00016303034439746344,
+          "performance_advantage_left": -0.00016303034439746344
+        },
+        "log_loss": {
+          "left": 0.5247534331448958,
+          "right": 0.5266419675805064,
+          "raw_left_minus_right": -0.001888534435610656,
+          "performance_advantage_left": 0.001888534435610656
+        },
+        "brier_score": {
+          "left": 0.1762645347408764,
+          "right": 0.17607033399417882,
+          "raw_left_minus_right": 0.00019420074669757037,
+          "performance_advantage_left": -0.00019420074669757037
+        },
+        "ece10": {
+          "left": 0.01090835026338052,
+          "right": 0.015016607603500954,
+          "raw_left_minus_right": -0.004108257340120434,
+          "performance_advantage_left": 0.004108257340120434
+        }
+      },
+      "feature_control_gains": {
+        "train": {
+          "accuracy": 0.06848257222085719,
+          "auc": 0.06907560369963606,
+          "log_loss": 0.06825292180647757,
+          "brier_score": 0.02954781583770552,
+          "ece10": -0.0009975529249780304
+        },
+        "val": {
+          "accuracy": 0.09141969407265771,
+          "auc": 0.08801534073318007,
+          "log_loss": 0.06862624537927386,
+          "brier_score": 0.03021974165023031,
+          "ece10": 0.006193941251938331
+        },
+        "test": {
+          "accuracy": 0.09592326139088725,
+          "auc": 0.08600715396521164,
+          "log_loss": 0.06906930912432696,
+          "brier_score": 0.02976119391554405,
+          "ece10": 0.009365451799111548
+        }
+      },
+      "xgboost_train_minus_val_auc": 0.039153900170436184,
+      "prediction_audit": {
+        "passed": true,
+        "rows": 4170,
+        "expected_rows": 4170,
+        "invalid_probability_cells": 0,
+        "duplicate_key_rows": 0
+      },
+      "xgboost_parameter_audit": {
+        "passed": true,
+        "expected": {
+          "n_estimators": 500,
+          "max_depth": 4,
+          "learning_rate": 0.03,
+          "subsample": 0.85,
+          "colsample_bytree": 0.85,
+          "random_state": 42
+        },
+        "mismatches": {}
+      },
+      "external_comparison_rows": 7,
+      "automated_tests": {
+        "passed": true,
+        "return_code": 0,
+        "elapsed_seconds": 1.9328482000000804,
+        "test_count": 90
+      },
+      "next_stage": "M17 validation-only controlled XGBoost tuning"
+    },
+    "M17": {
+      "stage": "M17",
+      "generated_at_utc": "2026-08-18T19:25:32.309571+00:00",
+      "task": "post_first_kill",
+      "selection_metric": "validation log loss",
+      "minimum_phase_improvement": 0.0001,
+      "test_use": "evaluated once after parameters and seed protocol were frozen",
+      "acceptance": {
+        "status": "passed",
+        "blocking_failures": [],
+        "ready_for_m18": true
+      },
+      "checks": {
+        "m16_prerequisite": true,
+        "data_contract": true,
+        "feature_contract": true,
+        "candidate_grid": true,
+        "validation_only": true,
+        "phase_selection": true,
+        "frozen_model": true,
+        "seed_stability": true,
+        "final_predictions": true,
+        "minimum_metrics": true,
+        "external_report": true,
+        "automated_tests": true
+      },
+      "prerequisite": {
+        "passed": true,
+        "m16_status": "passed",
+        "m16_ready_for_m17": true,
+        "expected_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+        "actual_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+        "actual_bytes": 1479873
+      },
+      "data": {
+        "path": "data/processed/esta_full/first_kill.parquet",
+        "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+        "rows": 41027,
+        "split_rows": {
+          "train": 28489,
+          "val": 8368,
+          "test": 4170
+        },
+        "series": 782,
+        "games": 1558
+      },
+      "features": {
+        "raw_count": 40,
+        "encoded_count": 82,
+        "raw_features": [
+          "map_name",
+          "round_num",
+          "ct_score",
+          "t_score",
+          "score_diff_ct",
+          "ct_eq_value",
+          "t_eq_value",
+          "eq_value_diff_ct",
+          "ct_cash",
+          "t_cash",
+          "cash_diff_ct",
+          "ct_armor",
+          "t_armor",
+          "armor_diff_ct",
+          "ct_helmets",
+          "t_helmets",
+          "helmet_diff_ct",
+          "ct_defuse_kits",
+          "ct_grenades",
+          "t_grenades",
+          "grenade_diff_ct",
+          "ct_ak47",
+          "t_ak47",
+          "ct_m4a4",
+          "t_m4a4",
+          "ct_m4a1_s",
+          "t_m4a1_s",
+          "ct_awp",
+          "t_awp",
+          "awp_diff_ct",
+          "ct_rifles",
+          "t_rifles",
+          "rifle_diff_ct",
+          "ct_smgs",
+          "t_smgs",
+          "smg_diff_ct",
+          "first_kill_advantage_ct",
+          "first_kill_time",
+          "first_kill_headshot",
+          "first_kill_weapon"
+        ],
+        "matches_m16": true
+      },
+      "tuning": {
+        "phase_count": 8,
+        "candidate_count": 39,
+        "elapsed_seconds": 23.244389800005592,
+        "selected_candidates": [
+          {
+            "phase": "tree_policy",
+            "candidate_id": "tree_cap_1500_es50",
+            "changed": true,
+            "accepted_improvement": 0.0015839442991814057
+          },
+          {
+            "phase": "max_depth",
+            "candidate_id": "max_depth_2",
+            "changed": true,
+            "accepted_improvement": 0.00031562184056510567
+          },
+          {
+            "phase": "min_child_weight",
+            "candidate_id": "min_child_weight_1",
+            "changed": false,
+            "accepted_improvement": 0.0
+          },
+          {
+            "phase": "reg_lambda",
+            "candidate_id": "reg_lambda_1",
+            "changed": false,
+            "accepted_improvement": 0.0
+          },
+          {
+            "phase": "reg_alpha",
+            "candidate_id": "reg_alpha_0",
+            "changed": false,
+            "accepted_improvement": 0.0
+          },
+          {
+            "phase": "subsample",
+            "candidate_id": "subsample_0.9",
+            "changed": true,
+            "accepted_improvement": 0.00013892190369879653
+          },
+          {
+            "phase": "colsample_bytree",
+            "candidate_id": "colsample_bytree_0.85",
+            "changed": false,
+            "accepted_improvement": 0.0
+          },
+          {
+            "phase": "learning_rate",
+            "candidate_id": "learning_rate_0.03",
+            "changed": false,
+            "accepted_improvement": 0.0
+          }
+        ]
+      },
+      "frozen_model": {
+        "params": {
+          "n_estimators": 1500,
+          "max_depth": 2,
+          "min_child_weight": 1,
+          "learning_rate": 0.03,
+          "subsample": 0.9,
+          "colsample_bytree": 0.85,
+          "reg_alpha": 0,
+          "reg_lambda": 1,
+          "early_stopping_rounds": 50,
+          "random_state": 42
+        },
+        "best_iteration": 408,
+        "best_tree_count": 409,
+        "artifact": {
+          "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+          "bytes": 425536,
+          "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+        },
+        "parameter_audit": {
+          "passed": true,
+          "expected": {
+            "n_estimators": 1500,
+            "max_depth": 2,
+            "min_child_weight": 1,
+            "learning_rate": 0.03,
+            "subsample": 0.9,
+            "colsample_bytree": 0.85,
+            "reg_alpha": 0,
+            "reg_lambda": 1,
+            "early_stopping_rounds": 50,
+            "random_state": 42
+          },
+          "mismatches": {}
+        }
+      },
+      "metrics": {
+        "accuracy": 0.7441247002398081,
+        "auc": 0.8098368635821109,
+        "log_loss": 0.5231460210364541,
+        "brier_score": 0.17565589988309552,
+        "ece10": 0.01544967890679123
+      },
+      "stage_goals": {
+        "all_passed": true,
+        "goals": {
+          "validation_log_loss_improvement": {
+            "value": 0.002038488043445308,
+            "target": 0.001,
+            "higher_is_better": true,
+            "passed": true
+          },
+          "validation_auc": {
+            "value": 0.8033236207281457,
+            "target": 0.800069,
+            "higher_is_better": true,
+            "passed": true
+          },
+          "train_validation_auc_gap": {
+            "value": 0.012846130042866832,
+            "target": 0.03,
+            "higher_is_better": false,
+            "passed": true
+          }
+        }
+      },
+      "minimum_metrics": {
+        "all_minimum_passed": true,
+        "all_stage_passed": true,
+        "minimum_passed_count": 4,
+        "stage_passed_count": 4,
+        "metrics": {
+          "accuracy": {
+            "value": 0.7441247002398081,
+            "minimum": 0.68,
+            "stage": 0.7,
+            "higher_is_better": true,
+            "minimum_passed": true,
+            "stage_passed": true,
+            "minimum_gap": 0.0,
+            "stage_gap": 0.0
+          },
+          "auc": {
+            "value": 0.8098368635821109,
+            "minimum": 0.75,
+            "stage": 0.78,
+            "higher_is_better": true,
+            "minimum_passed": true,
+            "stage_passed": true,
+            "minimum_gap": 0.0,
+            "stage_gap": 0.0
+          },
+          "log_loss": {
+            "value": 0.5231460210364541,
+            "minimum": 0.58,
+            "stage": 0.55,
+            "higher_is_better": false,
+            "minimum_passed": true,
+            "stage_passed": true,
+            "minimum_gap": 0.0,
+            "stage_gap": 0.0
+          },
+          "brier_score": {
+            "value": 0.17565589988309552,
+            "minimum": 0.2,
+            "stage": 0.185,
+            "higher_is_better": false,
+            "minimum_passed": true,
+            "stage_passed": true,
+            "minimum_gap": 0.0,
+            "stage_gap": 0.0
+          }
+        }
+      },
+      "tuned_vs_untuned_test": {
+        "accuracy": {
+          "left": 0.7441247002398081,
+          "right": 0.7453237410071942,
+          "raw_left_minus_right": -0.0011990407673860837,
+          "performance_advantage_left": -0.0011990407673860837
+        },
+        "auc": {
+          "left": 0.8098368635821109,
+          "right": 0.8088959225349904,
+          "raw_left_minus_right": 0.0009409410471205026,
+          "performance_advantage_left": 0.0009409410471205026
+        },
+        "log_loss": {
+          "left": 0.5231460210364541,
+          "right": 0.5247534331448958,
+          "raw_left_minus_right": -0.0016074121084416193,
+          "performance_advantage_left": 0.0016074121084416193
+        },
+        "brier_score": {
+          "left": 0.17565589988309552,
+          "right": 0.1762645347408764,
+          "raw_left_minus_right": -0.0006086348577808709,
+          "performance_advantage_left": 0.0006086348577808709
+        },
+        "ece10": {
+          "left": 0.01544967890679123,
+          "right": 0.0109083502633805,
+          "raw_left_minus_right": 0.00454132864341073,
+          "performance_advantage_left": -0.00454132864341073
+        }
+      },
+      "tuned_vs_logistic_test": {
+        "accuracy": {
+          "left": 0.7441247002398081,
+          "right": 0.7434052757793765,
+          "raw_left_minus_right": 0.0007194244604316058,
+          "performance_advantage_left": 0.0007194244604316058
+        },
+        "auc": {
+          "left": 0.8098368635821109,
+          "right": 0.8090589528793879,
+          "raw_left_minus_right": 0.0007779107027230392,
+          "performance_advantage_left": 0.0007779107027230392
+        },
+        "log_loss": {
+          "left": 0.5231460210364541,
+          "right": 0.5266419675805064,
+          "raw_left_minus_right": -0.0034959465440522752,
+          "performance_advantage_left": 0.0034959465440522752
+        },
+        "brier_score": {
+          "left": 0.17565589988309552,
+          "right": 0.1760703339941788,
+          "raw_left_minus_right": -0.00041443411108327277,
+          "performance_advantage_left": 0.00041443411108327277
+        },
+        "ece10": {
+          "left": 0.01544967890679123,
+          "right": 0.0150166076035009,
+          "raw_left_minus_right": 0.0004330713032903305,
+          "performance_advantage_left": -0.0004330713032903305
+        }
+      },
+      "seed_stability": {
+        "passed": true,
+        "observed_seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "forbidden_columns": [],
+        "val_log_loss_range": 0.00012977123176116656,
+        "val_auc_range": 0.0003183593157868314,
+        "limits": {
+          "val_log_loss": 0.002,
+          "val_auc": 0.003
+        }
+      },
+      "prediction_audit": {
+        "passed": true,
+        "rows": 4170,
+        "expected_rows": 4170,
+        "invalid_probability_rows": 0,
+        "duplicate_key_rows": 0
+      },
+      "candidate_grid_audit": {
+        "passed": true,
+        "phase_count": 8,
+        "candidate_count": 39,
+        "changed_parameters_by_phase": {
+          "tree_policy": [
+            "early_stopping_rounds",
+            "n_estimators"
+          ],
+          "max_depth": [
+            "max_depth"
+          ],
+          "min_child_weight": [
+            "min_child_weight"
+          ],
+          "reg_lambda": [
+            "reg_lambda"
+          ],
+          "reg_alpha": [
+            "reg_alpha"
+          ],
+          "subsample": [
+            "subsample"
+          ],
+          "colsample_bytree": [
+            "colsample_bytree"
+          ],
+          "learning_rate": [
+            "learning_rate"
+          ]
+        },
+        "violations": []
+      },
+      "phase_selection_audit": {
+        "passed": true,
+        "phase_count": 8,
+        "selection_rows": 8,
+        "failures": []
+      },
+      "external_comparison_rows": 7,
+      "automated_tests": {
+        "passed": true,
+        "return_code": 0,
+        "elapsed_seconds": 2.0584803000001557,
+        "test_count": 100
+      },
+      "deployment_recommendation": "M17 tuned XGBoost",
+      "next_stage": "M18 fixed-model evaluation, robustness, and calibration diagnosis"
+    },
+    "M18": {
+      "stage": "M18",
+      "generated_at_utc": "2026-08-19T15:40:13.466517+00:00",
+      "task": "post_first_kill",
+      "model_policy": "M17 XGBoost frozen; no training or tuning in M18",
+      "acceptance": {
+        "status": "passed",
+        "blocking_failures": [],
+        "ready_for_m19": true
+      },
+      "checks": {
+        "m17_prerequisite": true,
+        "split_and_key_contract": true,
+        "prediction_replay": true,
+        "global_bootstrap": true,
+        "global_metric_minimum": true,
+        "group_outputs": true,
+        "source_stability": true,
+        "large_map_minimum": true,
+        "calibration_protocol": true,
+        "calibration_no_material_harm": true,
+        "error_review": true,
+        "external_report": true,
+        "automated_tests": true
+      },
+      "stage_targets": {
+        "global_interval_target": true,
+        "large_map_auc_target": true,
+        "large_map_ci_target": true,
+        "source_gap_ci_includes_zero": true,
+        "calibration_ece_target": true,
+        "all_passed": true
+      },
+      "prerequisite": {
+        "passed": true,
+        "checks": {
+          "m17_accepted": true,
+          "m17_task": true,
+          "data_sha256": true,
+          "model_sha256": true,
+          "bundle_task": true,
+          "raw_feature_contract": true,
+          "encoded_feature_contract": true,
+          "predictor_available": true
+        },
+        "data_artifact": {
+          "path": "data/processed/esta_full/first_kill.parquet",
+          "bytes": 1479873,
+          "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+        },
+        "model_artifact": {
+          "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+          "bytes": 425536,
+          "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+        },
+        "expected_data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+        "expected_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+      },
+      "data": {
+        "path": "data/processed/esta_full/first_kill.parquet",
+        "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+        "rows": 41027,
+        "series": 782,
+        "games": 1558,
+        "split_rows": {
+          "train": 28489,
+          "val": 8368,
+          "test": 4170
+        },
+        "split_percentages": {
+          "train": 69.43963731201404,
+          "val": 20.39632437175519,
+          "test": 10.164038316230775
+        },
+        "split_series": {
+          "train": 547,
+          "val": 156,
+          "test": 79
+        },
+        "cross_split_series": 0,
+        "duplicate_key_rows": 0,
+        "key_columns": [
+          "series_id",
+          "game_id",
+          "round_id"
+        ]
+      },
+      "model_replay": {
+        "passed": true,
+        "raw_feature_count": 40,
+        "encoded_feature_count": 82,
+        "encoded_columns_match_m17": true,
+        "split_rows": {
+          "val": 8368,
+          "test": 4170
+        },
+        "xgboost_fit_calls": 0
+      },
+      "prediction_replay": {
+        "passed": true,
+        "tolerance": 1e-12,
+        "saved_rows": 4170,
+        "replayed_rows": 4170,
+        "saved_duplicate_key_rows": 0,
+        "replayed_duplicate_key_rows": 0,
+        "key_mismatch_count": 0,
+        "invalid_probability_cells": 0,
+        "max_absolute_probability_difference": 1.1102230246251565e-16
+      },
+      "metric_replay_max_absolute_difference": 0.0,
+      "metrics": {
+        "accuracy": 0.7441247002398081,
+        "auc": 0.8098368635821109,
+        "log_loss": 0.5231460210364541,
+        "brier_score": 0.17565589988309552,
+        "ece10": 0.01544967890679123
+      },
+      "bootstrap": {
+        "unit": "series_id",
+        "samples": 2000,
+        "seed": 42
+      },
+      "global_assessment": {
+        "bootstrap_complete": true,
+        "auc_ci_lower_95": 0.7977312428624149,
+        "log_loss_ci_upper_95": 0.5361462109319748,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_thresholds": {
+          "auc_ci_lower_95": 0.78,
+          "log_loss_ci_upper_95": 0.55
+        },
+        "stage_thresholds": {
+          "auc_ci_lower_95": 0.79,
+          "log_loss_ci_upper_95": 0.54
+        }
+      },
+      "robustness": {
+        "outputs_complete": true,
+        "large_map_count": 7,
+        "large_map_min_auc": 0.7839007092198581,
+        "large_map_min_auc_ci_lower": 0.7507191522574516,
+        "large_map_minimum_passed": true,
+        "large_map_stage_passed": true,
+        "large_map_ci_stage_passed": true,
+        "source_gap_passed": true,
+        "source_gap_ci_includes_zero": true
+      },
+      "source_auc_gap": {
+        "comparison": "lan_minus_online_auc",
+        "lan_auc": 0.8037978540747381,
+        "online_auc": 0.8140742752393239,
+        "signed_difference": -0.010276421164585714,
+        "absolute_difference": 0.010276421164585714,
+        "ci_lower_95": -0.03458639695501609,
+        "ci_upper_95": 0.014829139625289933,
+        "ci_includes_zero": true,
+        "successful_bootstraps": 2000,
+        "bootstrap_unit": "series_id_global"
+      },
+      "group_table_rows": {
+        "map": 8,
+        "source": 2,
+        "round_stage": 3,
+        "equipment_band": 5,
+        "first_kill_side": 2,
+        "first_kill_time_band": 4,
+        "first_kill_weapon_family": 5,
+        "first_kill_headshot": 2
+      },
+      "calibration_protocol": {
+        "passed": true,
+        "checks": {
+          "exact_rows": true,
+          "unique_complete_keys": true,
+          "series_one_fold": true,
+          "fold_count": true,
+          "probability_columns": true,
+          "finite_probabilities": true,
+          "methods_complete": true,
+          "selected_from_oof": true
+        },
+        "selection_data": "validation only",
+        "selection_rule": "lowest grouped OOF log_loss, then brier_score, then method",
+        "validation_folds": 5,
+        "selected_method": "uncalibrated"
+      },
+      "calibration": {
+        "selected_method": "uncalibrated",
+        "selected_test_metrics": {
+          "accuracy": 0.7441247002398081,
+          "auc": 0.8098368635821109,
+          "log_loss": 0.5231460210364541,
+          "brier_score": 0.17565589988309552,
+          "ece10": 0.01544967890679123
+        },
+        "changes_vs_uncalibrated": {
+          "log_loss": 0.0,
+          "brier_score": 0.0,
+          "ece10": 0.0
+        },
+        "no_material_probability_metric_harm": true,
+        "test_ece_stage_passed": true,
+        "calibrator_artifact": {
+          "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+          "bytes": 426,
+          "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+        },
+        "validation_oof_comparison": [
+          {
+            "method": "uncalibrated",
+            "accuracy": 0.7434273423,
+            "log_loss": 0.5277960859,
+            "brier_score": 0.1774675412,
+            "ece10": 0.011932839,
+            "auc": 0.8033236207
+          },
+          {
+            "method": "sigmoid",
+            "accuracy": 0.7442638623,
+            "log_loss": 0.5279196218,
+            "brier_score": 0.1775390266,
+            "ece10": 0.0085159347,
+            "auc": 0.8029009025
+          },
+          {
+            "method": "isotonic",
+            "accuracy": 0.7424713193,
+            "log_loss": 0.5394960588,
+            "brier_score": 0.1778476285,
+            "ece10": 0.0062280181,
+            "auc": 0.8006605303
+          }
+        ],
+        "test_comparison": [
+          {
+            "method": "uncalibrated",
+            "selected_by_validation": true,
+            "accuracy": 0.7441247002,
+            "log_loss": 0.523146021,
+            "brier_score": 0.1756558999,
+            "ece10": 0.0154496789,
+            "auc": 0.8098368636,
+            "log_loss_change_vs_uncalibrated": 0.0,
+            "brier_score_change_vs_uncalibrated": 0.0,
+            "ece10_change_vs_uncalibrated": 0.0,
+            "accuracy_change_vs_uncalibrated": 0.0,
+            "auc_change_vs_uncalibrated": 0.0
+          },
+          {
+            "method": "sigmoid",
+            "selected_by_validation": false,
+            "accuracy": 0.7436450839,
+            "log_loss": 0.5232351933,
+            "brier_score": 0.1757046569,
+            "ece10": 0.0124260682,
+            "auc": 0.8098368636,
+            "log_loss_change_vs_uncalibrated": 8.91723e-05,
+            "brier_score_change_vs_uncalibrated": 4.8757e-05,
+            "ece10_change_vs_uncalibrated": -0.0030236107,
+            "accuracy_change_vs_uncalibrated": -0.0004796163,
+            "auc_change_vs_uncalibrated": 0.0
+          },
+          {
+            "method": "isotonic",
+            "selected_by_validation": false,
+            "accuracy": 0.7460431655,
+            "log_loss": 0.5395081409,
+            "brier_score": 0.1759575663,
+            "ece10": 0.0115807554,
+            "auc": 0.808887967,
+            "log_loss_change_vs_uncalibrated": 0.0163621199,
+            "brier_score_change_vs_uncalibrated": 0.0003016664,
+            "ece10_change_vs_uncalibrated": -0.0038689235,
+            "accuracy_change_vs_uncalibrated": 0.0019184652,
+            "auc_change_vs_uncalibrated": -0.0009488966
+          }
+        ]
+      },
+      "errors": {
+        "definition": "wrong and assigned predicted-side probability >= 0.80",
+        "available": 90,
+        "reviewed": 30,
+        "review_target": 30,
+        "signal_pattern_counts": {
+          "first_kill_and_equipment_agree": 81,
+          "equipment_only": 9
+        }
+      },
+      "external_comparison_rows": 7,
+      "automated_tests": {
+        "passed": true,
+        "return_code": 0,
+        "elapsed_seconds": 2.547892000000502,
+        "test_count": 108
+      },
+      "next_stage": "M19 first-kill model explanation and leakage audit"
+    },
+    "M19": {
+      "stage": "M19",
+      "generated_at_utc": "2026-08-19T16:01:37.659893+00:00",
+      "task": "post_first_kill",
+      "definition": "immediately after the first valid enemy kill",
+      "model_policy": "M17/M18 model frozen; no fit, tuning, or feature selection",
+      "acceptance": {
+        "status": "passed",
+        "blocking_failures": [],
+        "ready_for_m20": true
+      },
+      "checks": {
+        "m18_prerequisite": true,
+        "model_replay": true,
+        "importance_methods": true,
+        "feature_mapping_and_leakage": true,
+        "shap_reconstruction": true,
+        "case_explanations": true,
+        "target_and_internal_gaps": true,
+        "external_report": true,
+        "automated_tests": true
+      },
+      "prerequisite": {
+        "passed": true,
+        "checks": {
+          "m18_accepted": true,
+          "m18_task": true,
+          "data_sha256": true,
+          "model_sha256": true,
+          "bundle_task": true,
+          "raw_feature_contract": true,
+          "encoded_feature_contract": true,
+          "deployment_tree_contract": true
+        },
+        "data_artifact": {
+          "path": "data/processed/esta_full/first_kill.parquet",
+          "bytes": 1479873,
+          "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+        },
+        "model_artifact": {
+          "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+          "bytes": 425536,
+          "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+        },
+        "raw_feature_count": 40,
+        "encoded_feature_count": 82,
+        "deployment_tree_count": 409
+      },
+      "model_replay": {
+        "passed": true,
+        "test_rows": 4170,
+        "metric_max_absolute_difference_vs_m18": 0.0,
+        "xgboost_fit_calls": 0,
+        "split_rows": {
+          "train": 28489,
+          "val": 8368,
+          "test": 4170
+        },
+        "cross_split_series": 0,
+        "duplicate_key_rows": 0
+      },
+      "test_rounds": 4170,
+      "raw_features": 40,
+      "encoded_features": 82,
+      "available_tree_count": 459,
+      "deployment_tree_count": 409,
+      "permutation_repeats": 20,
+      "seed": 42,
+      "shap_method": "xgboost_native_tree_shap",
+      "shap_units": "log_odds",
+      "shap_reconstruction_max_abs_error": 4.029524912629867e-07,
+      "shap_reconstruction_mean_abs_error": 1.1585286577869738e-07,
+      "feature_audit": {
+        "all_feature_failures": 0,
+        "top20_failures": 0,
+        "mapped_source_features": 40
+      },
+      "top_features": {
+        "encoded_gain": [
+          "first_kill_advantage_ct",
+          "eq_value_diff_ct",
+          "helmet_diff_ct",
+          "armor_diff_ct",
+          "rifle_diff_ct",
+          "ct_armor",
+          "t_rifles",
+          "grenade_diff_ct",
+          "ct_eq_value",
+          "t_armor"
+        ],
+        "encoded_permutation": [
+          "first_kill_advantage_ct",
+          "eq_value_diff_ct",
+          "ct_eq_value",
+          "helmet_diff_ct",
+          "t_eq_value",
+          "armor_diff_ct",
+          "map_name_de_inferno",
+          "ct_armor",
+          "ct_m4a1_s",
+          "map_name_de_overpass"
+        ],
+        "encoded_shap": [
+          "first_kill_advantage_ct",
+          "eq_value_diff_ct",
+          "ct_eq_value",
+          "helmet_diff_ct",
+          "t_eq_value",
+          "armor_diff_ct",
+          "ct_armor",
+          "rifle_diff_ct",
+          "ct_m4a1_s",
+          "score_diff_ct"
+        ],
+        "source_mean_rank": [
+          "first_kill_advantage_ct",
+          "eq_value_diff_ct",
+          "helmet_diff_ct",
+          "armor_diff_ct",
+          "ct_eq_value",
+          "map_name",
+          "ct_armor",
+          "t_eq_value",
+          "rifle_diff_ct",
+          "ct_m4a1_s"
+        ],
+        "source_grouped_permutation": [
+          "first_kill_advantage_ct",
+          "eq_value_diff_ct",
+          "ct_eq_value",
+          "helmet_diff_ct",
+          "t_eq_value",
+          "armor_diff_ct",
+          "map_name",
+          "ct_m4a1_s",
+          "ct_armor",
+          "score_diff_ct"
+        ]
+      },
+      "importance_rank_spearman": {
+        "gain_rank": {
+          "gain_rank": 1.0,
+          "permutation_rank": 0.4859002405285097,
+          "shap_rank": 0.958424483843232
+        },
+        "permutation_rank": {
+          "gain_rank": 0.4859002405285097,
+          "permutation_rank": 1.0,
+          "shap_rank": 0.523731783502574
+        },
+        "shap_rank": {
+          "gain_rank": 0.958424483843232,
+          "permutation_rank": 0.523731783502574,
+          "shap_rank": 1.0
+        }
+      },
+      "macro_group_permutation": [
+        {
+          "grouped_permutation_rank": 1,
+          "feature_group": "purchase_end",
+          "encoded_column_count": 43,
+          "baseline_auc": 0.8098368636,
+          "auc_decrease_mean": 0.1427168961,
+          "auc_decrease_std": 0.0071651837,
+          "auc_decrease_min": 0.1265599721,
+          "auc_decrease_max": 0.1537421114,
+          "n_repeats": 20
+        },
+        {
+          "grouped_permutation_rank": 2,
+          "feature_group": "first_kill_event",
+          "encoded_column_count": 39,
+          "baseline_auc": 0.8098368636,
+          "auc_decrease_mean": 0.1363791837,
+          "auc_decrease_std": 0.0058371628,
+          "auc_decrease_min": 0.125542589,
+          "auc_decrease_max": 0.1468951828,
+          "n_repeats": 20
+        }
+      ],
+      "first_kill_event_importance": [
+        {
+          "source_feature": "first_kill_advantage_ct",
+          "feature_group": "first_kill_event",
+          "encoded_column_count": 1,
+          "gain_normalized": 0.3624132519,
+          "split_count": 122,
+          "mean_abs_shap": 0.8631865978,
+          "grouped_auc_decrease_mean": 0.1384122666,
+          "grouped_auc_decrease_std": 0.0052709428,
+          "source_gain_rank": 1,
+          "source_shap_rank": 1,
+          "source_permutation_rank": 1,
+          "mean_rank": 1.0
+        },
+        {
+          "source_feature": "first_kill_time",
+          "feature_group": "first_kill_event",
+          "encoded_column_count": 1,
+          "gain_normalized": 0.0041110023,
+          "split_count": 71,
+          "mean_abs_shap": 0.0302738901,
+          "grouped_auc_decrease_mean": 0.000396663,
+          "grouped_auc_decrease_std": 0.0004609398,
+          "source_gain_rank": 20,
+          "source_shap_rank": 13,
+          "source_permutation_rank": 11,
+          "mean_rank": 14.6666666667
+        },
+        {
+          "source_feature": "first_kill_headshot",
+          "feature_group": "first_kill_event",
+          "encoded_column_count": 1,
+          "gain_normalized": 0.0038864386,
+          "split_count": 15,
+          "mean_abs_shap": 0.01054144,
+          "grouped_auc_decrease_mean": 0.0001286083,
+          "grouped_auc_decrease_std": 0.0001351306,
+          "source_gain_rank": 22,
+          "source_shap_rank": 17,
+          "source_permutation_rank": 14,
+          "mean_rank": 17.6666666667
+        },
+        {
+          "source_feature": "first_kill_weapon",
+          "feature_group": "first_kill_event",
+          "encoded_column_count": 36,
+          "gain_normalized": 0.0226351503,
+          "split_count": 38,
+          "mean_abs_shap": 0.0157835241,
+          "grouped_auc_decrease_mean": -2.9078e-05,
+          "grouped_auc_decrease_std": 0.0001968604,
+          "source_gain_rank": 10,
+          "source_shap_rank": 15,
+          "source_permutation_rank": 36,
+          "mean_rank": 20.3333333333
+        }
+      ],
+      "selected_cases": [
+        {
+          "series_id": "63e0d98d-fd95-4698-9d12-808508005ee2",
+          "game_id": "online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b",
+          "round_id": "online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b_8",
+          "y_true": 1,
+          "ct_win_probability": 0.9925467371940613,
+          "predicted_label": 1,
+          "correct": true,
+          "map_name": "de_vertigo",
+          "round_num": 8,
+          "eq_value_diff_ct": 25500,
+          "first_kill_advantage_ct": 1,
+          "first_kill_time": 8.3671875,
+          "first_kill_headshot": 0,
+          "first_kill_weapon": "AK-47",
+          "row_position": 2248,
+          "prediction_confidence": 0.9925467371940613,
+          "case_type": "ct_high_probability"
+        },
+        {
+          "series_id": "c7f0e145-6303-40e6-9b79-ab0f825db57d",
+          "game_id": "online:178eb7eb-2dd3-4394-9a5e-232c52ae0cdb",
+          "round_id": "online:178eb7eb-2dd3-4394-9a5e-232c52ae0cdb_20",
+          "y_true": 0,
+          "ct_win_probability": 0.012751465663313866,
+          "predicted_label": 0,
+          "correct": true,
+          "map_name": "de_nuke",
+          "round_num": 20,
+          "eq_value_diff_ct": -21450,
+          "first_kill_advantage_ct": -1,
+          "first_kill_time": 42.22834645669291,
+          "first_kill_headshot": 1,
+          "first_kill_weapon": "MAC-10",
+          "row_position": 2129,
+          "prediction_confidence": 0.9872485343366861,
+          "case_type": "t_high_probability"
+        },
+        {
+          "series_id": "63e0d98d-fd95-4698-9d12-808508005ee2",
+          "game_id": "online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b",
+          "round_id": "online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b_2",
+          "y_true": 0,
+          "ct_win_probability": 0.989380955696106,
+          "predicted_label": 1,
+          "correct": false,
+          "map_name": "de_vertigo",
+          "round_num": 2,
+          "eq_value_diff_ct": 18850,
+          "first_kill_advantage_ct": 1,
+          "first_kill_time": 56.171875,
+          "first_kill_headshot": 0,
+          "first_kill_weapon": "MP9",
+          "row_position": 2242,
+          "prediction_confidence": 0.989380955696106,
+          "case_type": "high_confidence_error"
+        }
+      ],
+      "target_gap": {
+        "passed_count": 10,
+        "target_count": 10,
+        "remaining_count": 0,
+        "all_formal_targets_passed": true,
+        "rows": [
+          {
+            "target_id": "test_accuracy",
+            "label": "Test Accuracy",
+            "direction": "higher",
+            "current": 0.7441247002,
+            "target": 0.7,
+            "remaining": 0.0,
+            "margin": 0.0441247002,
+            "passed": true
+          },
+          {
+            "target_id": "test_auc",
+            "label": "Test AUC",
+            "direction": "higher",
+            "current": 0.8098368636,
+            "target": 0.78,
+            "remaining": 0.0,
+            "margin": 0.0298368636,
+            "passed": true
+          },
+          {
+            "target_id": "test_log_loss",
+            "label": "Test Log Loss",
+            "direction": "lower",
+            "current": 0.523146021,
+            "target": 0.55,
+            "remaining": 0.0,
+            "margin": 0.026853979,
+            "passed": true
+          },
+          {
+            "target_id": "test_brier",
+            "label": "Test Brier",
+            "direction": "lower",
+            "current": 0.1756558999,
+            "target": 0.185,
+            "remaining": 0.0,
+            "margin": 0.0093441001,
+            "passed": true
+          },
+          {
+            "target_id": "test_ece10",
+            "label": "Test ECE10",
+            "direction": "lower",
+            "current": 0.0154496789,
+            "target": 0.03,
+            "remaining": 0.0,
+            "margin": 0.0145503211,
+            "passed": true
+          },
+          {
+            "target_id": "auc_ci_lower",
+            "label": "AUC 95% CI lower",
+            "direction": "higher",
+            "current": 0.7977312429,
+            "target": 0.79,
+            "remaining": 0.0,
+            "margin": 0.0077312429,
+            "passed": true
+          },
+          {
+            "target_id": "log_loss_ci_upper",
+            "label": "Log Loss 95% CI upper",
+            "direction": "lower",
+            "current": 0.5361462109,
+            "target": 0.54,
+            "remaining": 0.0,
+            "margin": 0.0038537891,
+            "passed": true
+          },
+          {
+            "target_id": "source_auc_gap",
+            "label": "LAN-online absolute AUC gap",
+            "direction": "lower",
+            "current": 0.0102764212,
+            "target": 0.04,
+            "remaining": 0.0,
+            "margin": 0.0297235788,
+            "passed": true
+          },
+          {
+            "target_id": "large_map_min_auc",
+            "label": "Large-map minimum AUC",
+            "direction": "higher",
+            "current": 0.7839007092,
+            "target": 0.77,
+            "remaining": 0.0,
+            "margin": 0.0139007092,
+            "passed": true
+          },
+          {
+            "target_id": "large_map_min_auc_ci_lower",
+            "label": "Large-map minimum AUC CI lower",
+            "direction": "higher",
+            "current": 0.7507191523,
+            "target": 0.7,
+            "remaining": 0.0,
+            "margin": 0.0507191523,
+            "passed": true
+          }
+        ]
+      },
+      "internal_model_gap": [
+        {
+          "metric": "accuracy",
+          "xgboost_tuned": 0.7441247002,
+          "logistic_regression": 0.7434052758,
+          "raw_xgboost_minus_logistic": 0.0007194245,
+          "performance_advantage_xgboost": 0.0007194245,
+          "formal_target": null,
+          "note": "M16 defined no blocking XGBoost-over-logistic target"
+        },
+        {
+          "metric": "auc",
+          "xgboost_tuned": 0.8098368636,
+          "logistic_regression": 0.8090589529,
+          "raw_xgboost_minus_logistic": 0.0007779107,
+          "performance_advantage_xgboost": 0.0007779107,
+          "formal_target": null,
+          "note": "M16 defined no blocking XGBoost-over-logistic target"
+        },
+        {
+          "metric": "log_loss",
+          "xgboost_tuned": 0.523146021,
+          "logistic_regression": 0.5266419676,
+          "raw_xgboost_minus_logistic": -0.0034959465,
+          "performance_advantage_xgboost": 0.0034959465,
+          "formal_target": null,
+          "note": "M16 defined no blocking XGBoost-over-logistic target"
+        },
+        {
+          "metric": "brier_score",
+          "xgboost_tuned": 0.1756558999,
+          "logistic_regression": 0.176070334,
+          "raw_xgboost_minus_logistic": -0.0004144341,
+          "performance_advantage_xgboost": 0.0004144341,
+          "formal_target": null,
+          "note": "M16 defined no blocking XGBoost-over-logistic target"
+        },
+        {
+          "metric": "ece10",
+          "xgboost_tuned": 0.0154496789,
+          "logistic_regression": 0.0150166076,
+          "raw_xgboost_minus_logistic": 0.0004330713,
+          "performance_advantage_xgboost": -0.0004330713,
+          "formal_target": null,
+          "note": "M16 defined no blocking XGBoost-over-logistic target"
+        }
+      ],
+      "external_comparison_rows": 7,
+      "automated_tests": {
+        "passed": true,
+        "return_code": 0,
+        "elapsed_seconds": 2.427375299999767,
+        "test_count": 118
+      },
+      "roadmap": {
+        "pre_round_xgboost": "complete_through_M14",
+        "first_kill_xgboost_current": "M19_explanation_complete",
+        "first_kill_xgboost_modules_remaining_after_m19": 2,
+        "remaining_modules": [
+          "M20 first-kill JSON/CSV prediction interface",
+          "M21 first-kill final acceptance"
+        ],
+        "later_tracks": [
+          "LightGBM controlled comparison",
+          "real-time win probability data and model"
+        ]
+      },
+      "next_stage": "M20 first-kill prediction interface"
+    },
+    "M20": {
+      "stage": "M20",
+      "generated_at_utc": "2026-08-19T16:26:20.879875+00:00",
+      "task": "post_first_kill",
+      "definition": "purchase complete, immediately after earliest valid enemy kill",
+      "model_policy": "M17/M18 artifacts frozen; inference only; no fit or tuning",
+      "acceptance": {
+        "status": "passed",
+        "blocking_failures": [],
+        "ready_for_m21": true
+      },
+      "checks": {
+        "m19_prerequisite": true,
+        "artifact_contracts": true,
+        "json_csv_validation": true,
+        "json_csv_prediction_match": true,
+        "probability_contract": true,
+        "invalid_examples": true,
+        "feature_alignment": true,
+        "fixed_metrics_and_targets": true,
+        "external_report": true,
+        "automated_tests": true,
+        "validation_cases_passed": 10,
+        "validation_cases_total": 10
+      },
+      "prerequisite": {
+        "passed": true,
+        "checks": {
+          "m19_accepted": true,
+          "m18_accepted": true,
+          "model_sha256": true,
+          "model_bytes": true,
+          "calibrator_sha256": true,
+          "calibrator_bytes": true,
+          "model_contract": true,
+          "calibrator_contract": true,
+          "deployment_tree_contract": true,
+          "formal_targets_frozen": true
+        },
+        "model_artifact": {
+          "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+          "bytes": 425536,
+          "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+        },
+        "expected_model_artifact": {
+          "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+          "bytes": 425536,
+          "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+        },
+        "calibrator_artifact": {
+          "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+          "bytes": 426,
+          "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+        },
+        "expected_calibrator_artifact": {
+          "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+          "bytes": 426,
+          "sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+        },
+        "model_contract": {
+          "passed": true,
+          "task": "first_kill",
+          "profile": "canonical_event",
+          "raw_feature_count": 40,
+          "encoded_feature_count": 82,
+          "known_map_count": 8,
+          "known_weapon_count": 36,
+          "deployment_tree_count": 409,
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+        },
+        "calibrator_contract": {
+          "passed": true,
+          "task": "post_first_kill",
+          "method": "uncalibrated",
+          "base_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+        }
+      },
+      "model_performance_changed": false,
+      "xgboost_fit_calls": 0,
+      "input_contract": {
+        "purchase_base_feature_count": 27,
+        "first_kill_feature_count": 4,
+        "required_input_field_count": 31,
+        "derived_feature_count": 9,
+        "raw_feature_count": 40,
+        "encoded_feature_count": 82,
+        "known_map_count": 8,
+        "known_weapon_count": 36,
+        "deployment_tree_count": 409
+      },
+      "artifacts": {
+        "model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+        "calibrator_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157"
+      },
+      "example_prediction": {
+        "task": "first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_nuke",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "AK-47",
+          "encoded_model_feature_count": 82,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 409
+        },
+        "prediction": {
+          "ct_win_probability": 0.7187644839286804,
+          "t_win_probability": 0.2812355160713196,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        }
+      },
+      "fixed_test_metrics": {
+        "accuracy": 0.7441247002398081,
+        "auc": 0.8098368635821109,
+        "log_loss": 0.5231460210364541,
+        "brier_score": 0.17565589988309552,
+        "ece10": 0.01544967890679123
+      },
+      "formal_targets": {
+        "passed_count": 10,
+        "target_count": 10,
+        "remaining_count": 0,
+        "all_formal_targets_passed": true,
+        "rows": [
+          {
+            "target_id": "test_accuracy",
+            "label": "Test Accuracy",
+            "direction": "higher",
+            "current": 0.7441247002,
+            "target": 0.7,
+            "remaining": 0.0,
+            "margin": 0.0441247002,
+            "passed": true
+          },
+          {
+            "target_id": "test_auc",
+            "label": "Test AUC",
+            "direction": "higher",
+            "current": 0.8098368636,
+            "target": 0.78,
+            "remaining": 0.0,
+            "margin": 0.0298368636,
+            "passed": true
+          },
+          {
+            "target_id": "test_log_loss",
+            "label": "Test Log Loss",
+            "direction": "lower",
+            "current": 0.523146021,
+            "target": 0.55,
+            "remaining": 0.0,
+            "margin": 0.026853979,
+            "passed": true
+          },
+          {
+            "target_id": "test_brier",
+            "label": "Test Brier",
+            "direction": "lower",
+            "current": 0.1756558999,
+            "target": 0.185,
+            "remaining": 0.0,
+            "margin": 0.0093441001,
+            "passed": true
+          },
+          {
+            "target_id": "test_ece10",
+            "label": "Test ECE10",
+            "direction": "lower",
+            "current": 0.0154496789,
+            "target": 0.03,
+            "remaining": 0.0,
+            "margin": 0.0145503211,
+            "passed": true
+          },
+          {
+            "target_id": "auc_ci_lower",
+            "label": "AUC 95% CI lower",
+            "direction": "higher",
+            "current": 0.7977312429,
+            "target": 0.79,
+            "remaining": 0.0,
+            "margin": 0.0077312429,
+            "passed": true
+          },
+          {
+            "target_id": "log_loss_ci_upper",
+            "label": "Log Loss 95% CI upper",
+            "direction": "lower",
+            "current": 0.5361462109,
+            "target": 0.54,
+            "remaining": 0.0,
+            "margin": 0.0038537891,
+            "passed": true
+          },
+          {
+            "target_id": "source_auc_gap",
+            "label": "LAN-online absolute AUC gap",
+            "direction": "lower",
+            "current": 0.0102764212,
+            "target": 0.04,
+            "remaining": 0.0,
+            "margin": 0.0297235788,
+            "passed": true
+          },
+          {
+            "target_id": "large_map_min_auc",
+            "label": "Large-map minimum AUC",
+            "direction": "higher",
+            "current": 0.7839007092,
+            "target": 0.77,
+            "remaining": 0.0,
+            "margin": 0.0139007092,
+            "passed": true
+          },
+          {
+            "target_id": "large_map_min_auc_ci_lower",
+            "label": "Large-map minimum AUC CI lower",
+            "direction": "higher",
+            "current": 0.7507191523,
+            "target": 0.7,
+            "remaining": 0.0,
+            "margin": 0.0507191523,
+            "passed": true
+          }
+        ]
+      },
+      "external_comparison_rows": 7,
+      "automated_tests": {
+        "passed": true,
+        "return_code": 0,
+        "elapsed_seconds": 4.478958000001512,
+        "test_count": 131,
+        "skipped": false
+      },
+      "roadmap": {
+        "pre_round_xgboost": "complete_through_M14",
+        "first_kill_xgboost_current": "M20_interface_complete",
+        "first_kill_xgboost_modules_remaining_after_m20": 1,
+        "remaining_module": "M21 first-kill final acceptance",
+        "later_tracks": [
+          "LightGBM controlled comparison",
+          "real-time win probability data and model"
+        ]
+      },
+      "next_stage": "M21 first-kill final acceptance"
+    }
+  },
+  "data_audit": {
+    "passed": true,
+    "missing_columns": [],
+    "rows": 41027,
+    "series": 782,
+    "games": 1558,
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0,
+    "null_identity_cells": 0,
+    "null_feature_cells": 0,
+    "invalid_split_rows": 0,
+    "invalid_label_rows": 0,
+    "invalid_first_kill_advantage_rows": 0,
+    "invalid_first_kill_time_rows": 0,
+    "invalid_first_kill_headshot_rows": 0,
+    "invalid_first_kill_weapon_rows": 0,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "split_percentages": {
+      "train": 69.43963731201404,
+      "val": 20.396324371755185,
+      "test": 10.164038316230775
+    },
+    "expected_split_rows_match": true,
+    "expected_split_series_match": true
+  },
+  "split_manifest_audit": {
+    "passed": true,
+    "assignment_rows": 782,
+    "manifest_rows": 782,
+    "assignment_duplicate_series": 0,
+    "manifest_duplicate_series": 0,
+    "missing_series": 0,
+    "split_mismatch_series": 0
+  },
+  "model_contract": {
+    "passed": true,
+    "task": "first_kill",
+    "profile": "canonical_event",
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "known_map_count": 8,
+    "known_weapon_count": 36,
+    "deployment_tree_count": 409,
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "data_hash_match": true,
+    "model_hash_match": true
+  },
+  "calibrator_contract": {
+    "passed": true,
+    "task": "post_first_kill",
+    "method": "uncalibrated",
+    "base_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "calibrator_hash_match": true
+  },
+  "prediction_replay": {
+    "passed": true,
+    "tolerance": 1e-12,
+    "saved_rows": 4170,
+    "replayed_rows": 4170,
+    "matched_rows": 4170,
+    "saved_duplicate_key_rows": 0,
+    "replayed_duplicate_key_rows": 0,
+    "key_mismatch_count": 0,
+    "label_mismatch_count": 0,
+    "invalid_probability_cells": 0,
+    "max_absolute_probability_difference": 1.1102230246251565e-16
+  },
+  "metric_replay": {
+    "passed": true,
+    "tolerance": 1e-12,
+    "missing_metrics": [],
+    "absolute_differences": {
+      "accuracy": 0.0,
+      "auc": 0.0,
+      "log_loss": 0.0,
+      "brier_score": 0.0,
+      "ece10": 0.0
+    },
+    "max_absolute_difference": 0.0
+  },
+  "formal_targets": {
+    "passed": true,
+    "passed_count": 10,
+    "target_count": 10,
+    "remaining_count": 0,
+    "rows_equal_between_m19_and_m20": true,
+    "unique_ten_targets": true
+  },
+  "robustness": {
+    "passed": true,
+    "source_auc_gap": {
+      "comparison": "lan_minus_online_auc",
+      "lan_auc": 0.8037978540747381,
+      "online_auc": 0.8140742752393239,
+      "signed_difference": -0.010276421164585714,
+      "absolute_difference": 0.010276421164585714,
+      "ci_lower_95": -0.03458639695501609,
+      "ci_upper_95": 0.014829139625289933,
+      "ci_includes_zero": true,
+      "successful_bootstraps": 2000,
+      "bootstrap_unit": "series_id_global"
+    },
+    "large_map_min_auc": 0.7839007092198581,
+    "large_map_min_auc_ci_lower": 0.7507191522574516,
+    "reviewed_high_confidence_errors": 30
+  },
+  "explanation": {
+    "passed": true,
+    "all_feature_failures": 0,
+    "top20_failures": 0,
+    "shap_reconstruction_max_abs_error": 4.029524912629867e-07,
+    "top_source_feature": "first_kill_advantage_ct"
+  },
+  "interface": {
+    "passed": true,
+    "m20_frozen_checks_passed": true,
+    "json_csv_prediction_match": true,
+    "m20_example_prediction_match": true,
+    "probability_difference_vs_m20": 0.0,
+    "example_prediction": {
+      "task": "first_kill",
+      "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+      "calibration_method": "uncalibrated",
+      "validation": {
+        "status": "passed",
+        "required_purchase_base_feature_count": 27,
+        "required_first_kill_feature_count": 4,
+        "provided_field_count": 31,
+        "derived_features": [
+          "score_diff_ct",
+          "eq_value_diff_ct",
+          "cash_diff_ct",
+          "armor_diff_ct",
+          "helmet_diff_ct",
+          "grenade_diff_ct",
+          "awp_diff_ct",
+          "rifle_diff_ct",
+          "smg_diff_ct"
+        ],
+        "derived_feature_count": 9,
+        "raw_model_feature_count": 40,
+        "map_name": "de_nuke",
+        "first_kill_side": "CT",
+        "first_kill_weapon": "AK-47",
+        "encoded_model_feature_count": 82,
+        "model_contract_verified": true,
+        "calibrator_contract_verified": true,
+        "deployment_tree_count": 409
+      },
+      "prediction": {
+        "ct_win_probability": 0.7187644839286804,
+        "t_win_probability": 0.2812355160713196,
+        "predicted_side": "CT",
+        "decision_threshold": 0.5,
+        "probability_sum": 1.0
+      }
+    },
+    "model_audit": {
+      "passed": true,
+      "task": "first_kill",
+      "profile": "canonical_event",
+      "raw_feature_count": 40,
+      "encoded_feature_count": 82,
+      "known_map_count": 8,
+      "known_weapon_count": 36,
+      "deployment_tree_count": 409,
+      "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "calibrator_audit": {
+      "passed": true,
+      "task": "post_first_kill",
+      "method": "uncalibrated",
+      "base_model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+      "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    }
+  },
+  "tests": {
+    "passed": true,
+    "return_code": 0,
+    "test_count": 145,
+    "duration_seconds": 5.489887400000043,
+    "command": "C:\\Users\\admin\\11\\envs\\game\\python.exe -m unittest discover -s tests -v",
+    "skipped": false
+  },
+  "checks": {
+    "required_artifacts": true,
+    "raw_source": true,
+    "stage_chain": true,
+    "data_identity": true,
+    "split_contract": true,
+    "model_contract": true,
+    "calibrator_contract": true,
+    "prediction_replay": true,
+    "formal_targets": true,
+    "robustness": true,
+    "explanation": true,
+    "prediction_interface": true,
+    "external_comparison": true,
+    "environment_lock": true,
+    "automated_tests": true,
+    "reproduction_entrypoint": true,
+    "progress_report": true
+  },
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 17,
+    "blocking_total": 17,
+    "first_kill_xgboost_complete": true,
+    "ready_for_lightgbm_comparison": true
+  },
+  "nonblocking_follow_ups": [
+    "Pre-round aspirational M14 targets remain unmet even though its completion minimums passed.",
+    "No chronological future-season holdout has been run.",
+    "Team and player identity features are not included.",
+    "LightGBM has not yet been compared under the same contract.",
+    "The real-time snapshot and event-sequence task has not started."
+  ]
+}

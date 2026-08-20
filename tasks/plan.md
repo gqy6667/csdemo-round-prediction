@@ -35,4 +35,8 @@ report. Preserve all frozen M17-M20 probabilities, metrics, hashes, and target m
 
 ## Outcome
 
-Pending M21 implementation.
+M21 completed. All 17 blockers passed, all 4,170 frozen test probabilities replayed
+within `1.11e-16`, all five metrics matched M18 exactly, and all ten formal targets
+retained zero remaining gap. The full suite reached 145 passing tests with zero fit
+calls. The post-first-kill XGBoost track is closed and ready for the LightGBM
+controlled comparison.

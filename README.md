@@ -38,6 +38,7 @@ Chinese project documentation:
 - `docs/m18_first_kill_evaluation_spec.md`
 - `docs/m19_first_kill_explanation_spec.md`
 - `docs/m20_first_kill_prediction_interface_spec.md`
+- `docs/m21_first_kill_final_acceptance_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -59,7 +60,9 @@ Chinese project documentation:
 - `reports/esta_full_m19/external_benchmark_comparison.md`
 - `reports/esta_full_m20/m20_first_kill_interface_report.md`
 - `reports/esta_full_m20/external_benchmark_comparison.md`
-- `reports/m6_to_m19_progress_report.md`
+- `reports/esta_full_m21/m21_first_kill_final_acceptance_report.md`
+- `reports/esta_full_m21/external_benchmark_comparison.md`
+- `reports/m6_to_m21_progress_report.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -302,4 +305,20 @@ purchase fields plus four first-kill fields, derives nine CT-minus-T differences
 and aligns one row to the frozen 40 raw/82 encoded feature contract. JSON and CSV
 produce identical probabilities; ten invalid examples are rejected. The stage makes
 zero XGBoost fit calls and leaves all M18/M19 metrics and target margins unchanged.
-M21 is the only remaining first-kill XGBoost module.
+
+Run the M21 final acceptance and reproducibility entrypoint:
+
+```powershell
+.\scripts\run_first_kill_pipeline.ps1
+```
+
+M21 passes all 17 blocking checks and all 145 automated tests. It inventories all
+1,558 ESTA files, verifies the grouped 69.44/20.40/10.16 percent split has zero
+cross-split series/game/round overlap, and replays all 4,170 test probabilities to
+`1.11e-16` maximum absolute error. All five metrics reproduce exactly, all ten
+formal targets retain zero remaining gap, and no XGBoost fit call occurs. The
+post-first-kill XGBoost track is complete; the next independent stage is a
+LightGBM controlled comparison on the identical data, split, features, and metrics.
+
+Use `-RebuildFirstKill` to rerun M15-M20 from accepted M14 artifacts, or
+`-FullRebuild` to rebuild the whole local pipeline from the raw ESTA files.

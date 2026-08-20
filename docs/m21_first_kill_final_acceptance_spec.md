@@ -139,3 +139,18 @@ docs/m21_first_kill_final_acceptance_spec.md    本规格
 6. 完整测试与源码编译通过；
 7. 工作成果提交并推送，原始数据和模型不进入 Git。
 
+## 10. 实际结果（2026-08-20）
+
+- 17/17 阻断项通过，`first_kill_xgboost_complete=true`；
+- M15-M20 六个前置阶段及交接状态全部通过；
+- 41,027 个首杀后样本与 M14 的 782 条系列 split 清单完全一致；
+- train/validation/test 为 28,489 / 8,368 / 4,170，跨 split 的 series/game/round 均为 0；
+- 4,170 条测试概率最大回放误差为 `1.11e-16`，五项指标最大误差为 `0`；
+- Accuracy/AUC/Log Loss/Brier/ECE10 为 `0.744125/0.809837/0.523146/0.175656/0.015450`；
+- 十项正式目标继续 10/10 通过，Remaining 全部为 0；
+- 模型为 40 个原始特征、82 个编码特征和 409 棵部署树；
+- JSON/CSV 示例概率与 M20 完全一致，模型和校准器哈希保持一致；
+- 145 项完整自动化测试、环境锁、原始 ESTA 清单和三模式一键入口全部通过；
+- XGBoost `fit()` 调用为 0，模型性能没有改变；
+- M6-M21 进度报告生成于 `reports/m6_to_m21_progress_report.md`；
+- 下一阶段为 LightGBM 同合同控制变量对照，实时胜率仍是之后的独立任务。

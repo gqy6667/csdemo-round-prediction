@@ -1,0 +1,5 @@
+comparison_id,from_stage,to_stage,comparability,note,accuracy_change,auc_change,log_loss_change,brier_score_change,ece10_change
+m6_to_m14_pre_round,M6,M14,same_task_same_split,Fair pre-round engineering and tuning comparison.,0.0011984659635666528,0.005121985942383556,-0.0020260730535754945,,
+m16_to_m21_first_kill_tuning,M16,M21,same_task_same_split,Fair post-first-kill tuning comparison.,-0.0011990407673860837,0.0009409410471205026,-0.0016074121084416193,-0.0006086348577808709,0.00454132864341073
+m14_to_m21_prediction_time,M14,M21,timing_change_not_algorithm_only,Includes new first-kill information; not a pure tuning gain.,0.09671338672111207,0.08271492924083601,-0.06858716775546514,-0.02963859861401566,-0.007748066954674705
+m6_to_m21_project_progress,M6,M21,mixed_scope_project_progress,"Combines data repair, engineering, and a later prediction point.",0.09791185268467872,0.08783691518321957,-0.07061324080904063,,
