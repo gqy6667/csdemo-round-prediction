@@ -1,10 +1,10 @@
 # M21 Checklist
 
 - [x] Audit M15-M20 evidence and freeze the M21 specification.
-- [ ] Add failing M21 acceptance and progress-report tests.
-- [ ] Implement stage-chain, data, split, artifact, replay, and target audits.
-- [ ] Implement the M21 summary, manifest, reports, and external comparison.
-- [ ] Implement the three-mode first-kill reproduction script.
+- [x] Add failing M21 acceptance and progress-report tests.
+- [x] Implement stage-chain, data, split, artifact, replay, and target audits.
+- [x] Implement the M21 summary, manifest, reports, and external comparison.
+- [x] Implement the three-mode first-kill reproduction script.
 - [ ] Run focused tests and commit executable M21 code.
 - [ ] Run the formal M21 acceptance from the committed revision.
 - [ ] Run the complete suite, CLI checks, compile check, and artifact parsing.
