@@ -1,13 +1,12 @@
-# M21 Checklist
+# M22 Checklist
 
-- [x] Audit M15-M20 evidence and freeze the M21 specification.
-- [x] Add failing M21 acceptance and progress-report tests.
-- [x] Implement stage-chain, data, split, artifact, replay, and target audits.
-- [x] Implement the M21 summary, manifest, reports, and external comparison.
-- [x] Implement the three-mode first-kill reproduction script.
-- [x] Run focused tests and commit executable M21 code.
-- [x] Run the formal M21 acceptance from the committed revision.
-- [x] Run the complete suite, CLI checks, compile check, and artifact parsing.
-- [x] Generate and review the M6-M21 progress report.
-- [x] Update README, project paths, and module roadmap documentation.
-- [x] Commit reports and documentation, then push M21.
+- [x] Audit M14/M21 evidence and freeze the M22 specification.
+- [ ] Write the consolidated XGBoost final summary.
+- [ ] Add failing M22 LightGBM contract tests.
+- [ ] Implement the LightGBM trainer and M22 acceptance runner.
+- [ ] Add the M22 one-click reproduction entrypoint.
+- [ ] Run focused tests and the real M22 experiment.
+- [ ] Verify all metrics, internal differences, external differences, and artifacts.
+- [ ] Run the complete suite and compile checks.
+- [ ] Update README, project paths, roadmap, and learning record.
+- [ ] Commit and push M22 to GitHub.

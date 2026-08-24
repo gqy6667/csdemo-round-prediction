@@ -1,40 +1,72 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
 import joblib
 import pandas as pd
-from lightgbm import LGBMClassifier
-from sklearn.metrics import accuracy_score, log_loss, roc_auc_score
+from lightgbm import LGBMClassifier, early_stopping, log_evaluation
 
-from .config import LABEL_COL, MODEL_DIR, RANDOM_STATE, REPORT_DIR
+from .config import MODEL_DIR, RANDOM_STATE, REPORT_DIR
 from .io import read_table
-from .schema import ID_COLUMNS
+from .metrics import probability_metrics
+from .train_xgb import align_columns, prepare_xy
 
 
-def prepare_xy(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
-    drop_cols = set(ID_COLUMNS) | {"match_id", "split", LABEL_COL}
-    x = df.drop(columns=[c for c in drop_cols if c in df.columns])
-    x = pd.get_dummies(x, dummy_na=True)
-    y = df[LABEL_COL].astype(int)
-    return x, y
+LIGHTGBM_BASE_PARAMS = {
+    "boosting_type": "gbdt",
+    "n_estimators": 3000,
+    "learning_rate": 0.03,
+    "num_leaves": 15,
+    "min_child_samples": 20,
+    "subsample": 0.85,
+    "subsample_freq": 1,
+    "colsample_bytree": 0.85,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+}
+EARLY_STOPPING_ROUNDS = 100
 
 
-def align_columns(reference: pd.DataFrame, other: pd.DataFrame) -> pd.DataFrame:
-    return other.reindex(columns=reference.columns, fill_value=0)
+def make_model(**overrides) -> LGBMClassifier:
+    params = {
+        **LIGHTGBM_BASE_PARAMS,
+        "objective": "binary",
+        "random_state": RANDOM_STATE,
+        "n_jobs": -1,
+        "device_type": "cpu",
+        "verbosity": -1,
+        "deterministic": True,
+        "force_col_wise": True,
+    }
+    params.update(overrides)
+    return LGBMClassifier(**params)
 
 
 def evaluate(model: LGBMClassifier, x: pd.DataFrame, y: pd.Series) -> dict[str, float]:
-    proba = model.predict_proba(x)[:, 1]
-    pred = (proba >= 0.5).astype(int)
-    metrics = {
-        "accuracy": accuracy_score(y, pred),
-        "log_loss": log_loss(y, proba),
-    }
-    if y.nunique() == 2:
-        metrics["auc"] = roc_auc_score(y, proba)
-    return metrics
+    probability = model.predict_proba(x)[:, 1]
+    return probability_metrics(y, probability, n_bins=10)
+
+
+def fit_with_validation(
+    model: LGBMClassifier,
+    x_train: pd.DataFrame,
+    y_train: pd.Series,
+    x_val: pd.DataFrame,
+    y_val: pd.Series,
+) -> LGBMClassifier:
+    model.fit(
+        x_train,
+        y_train,
+        eval_set=[(x_val, y_val)],
+        eval_metric="binary_logloss",
+        callbacks=[
+            early_stopping(EARLY_STOPPING_ROUNDS, verbose=False),
+            log_evaluation(period=0),
+        ],
+    )
+    return model
 
 
 def main() -> None:
@@ -59,18 +91,8 @@ def main() -> None:
     x_val = align_columns(x_train, x_val)
     x_test = align_columns(x_train, x_test)
 
-    model = LGBMClassifier(
-        n_estimators=500,
-        learning_rate=0.03,
-        num_leaves=31,
-        subsample=0.85,
-        colsample_bytree=0.85,
-        objective="binary",
-        random_state=RANDOM_STATE,
-        n_jobs=-1,
-        verbose=-1,
-    )
-    model.fit(x_train, y_train, eval_set=[(x_val, y_val)], eval_metric="binary_logloss")
+    model = make_model()
+    fit_with_validation(model, x_train, y_train, x_val, y_val)
 
     metrics = {
         "train": evaluate(model, x_train, y_train),
@@ -83,9 +105,33 @@ def main() -> None:
     model_dir.mkdir(parents=True, exist_ok=True)
     report_dir.mkdir(parents=True, exist_ok=True)
 
-    bundle = {"model": model, "columns": list(x_train.columns)}
+    bundle = {
+        "model": model,
+        "task": args.task,
+        "model_name": "lightgbm_baseline",
+        "columns": list(x_train.columns),
+        "params": model.get_params(),
+        "best_iteration": getattr(model, "best_iteration_", None),
+    }
     joblib.dump(bundle, model_dir / f"{args.task}_lgbm.joblib")
     pd.DataFrame(metrics).T.to_csv(report_dir / f"{args.task}_lgbm_metrics.csv")
+
+    history = getattr(model, "evals_result_", {})
+    if history:
+        validation = next(iter(history.values()))
+        pd.DataFrame(validation).to_csv(
+            report_dir / f"{args.task}_lgbm_training_history.csv",
+            index_label="iteration",
+        )
+    summary = {
+        "task": args.task,
+        "best_iteration": getattr(model, "best_iteration_", None),
+        "params": model.get_params(),
+    }
+    with (report_dir / f"{args.task}_lgbm_training_summary.json").open(
+        "w", encoding="utf-8"
+    ) as handle:
+        json.dump(summary, handle, indent=2)
 
     print(pd.DataFrame(metrics).T.round(4))
 
