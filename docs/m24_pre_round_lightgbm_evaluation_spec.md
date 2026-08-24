@@ -120,3 +120,23 @@ C:\Users\admin\11\envs\game\python.exe -m compileall src tests
 
 M24 通过后进入 M25：对冻结 LightGBM 做 gain、Permutation Importance、SHAP、
 泄漏审计和与 XGBoost 的解释差异分析。
+
+## 10. 实际验收结果
+
+M24 于 2026-08-24 完整运行并通过：
+
+- 41,074 行按系列赛划分为 28,522/8,380/4,172，系列赛数为 547/156/79，跨 split
+  系列赛、game 和 round 均为 0；
+- M23 冻结模型 `fit` 调用为 0，4,172 条测试概率回放最大误差为 `1.11e-16`；
+- AUC `0.727846`，系列赛级 95% CI `[0.714169, 0.741427]`；Log Loss
+  `0.591437`，95% CI `[0.580635, 0.602921]`；
+- LightGBM 五项点估计都优于 XGBoost，但五项配对性能优势 95% CI 全部包含 0，
+  暂无显著胜出证据；
+- LAN-online AUC 差 `0.008711`，95% CI `[-0.017073, 0.034198]`；
+- 七张至少 300 回合的地图最低点估计为 Ancient 的 `0.693777`，通过 0.670 最低线；
+  最低 CI 下界为 `0.661759`，未达到 0.670 研究目标；
+- validation OOF 选择 `uncalibrated`，测试 ECE10 为 `0.018875`；
+- 共 76 个高置信错误，保存全部案例并复核前 30 个；
+- 16/16 阻断项、176 项自动化测试和源码编译通过，可以进入 M25。
+
+详细结果见 `reports/esta_full_m24/m24_pre_round_lightgbm_evaluation_report.md`。

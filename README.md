@@ -6,7 +6,9 @@ This project builds three round-win prediction tasks from ESTA/AWPY demo data:
 2. post-first-kill win probability
 3. real-time win probability
 
-The first milestone focuses on the first two tasks with XGBoost, using a 70/20/10 train/validation/test split. LightGBM can be added after the baseline is stable.
+The first milestone focuses on the first two tasks with XGBoost, using a 70/20/10
+train/validation/test split. The pre-round LightGBM comparison is complete through
+M24 and uses the same frozen data and evaluation contract.
 
 ## Milestones
 
@@ -39,6 +41,8 @@ Chinese project documentation:
 - `docs/m19_first_kill_explanation_spec.md`
 - `docs/m20_first_kill_prediction_interface_spec.md`
 - `docs/m21_first_kill_final_acceptance_spec.md`
+- `docs/m23_pre_round_lightgbm_tuning_spec.md`
+- `docs/m24_pre_round_lightgbm_evaluation_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -62,7 +66,9 @@ Chinese project documentation:
 - `reports/esta_full_m20/external_benchmark_comparison.md`
 - `reports/esta_full_m21/m21_first_kill_final_acceptance_report.md`
 - `reports/esta_full_m21/external_benchmark_comparison.md`
-- `reports/m6_to_m21_progress_report.md`
+- `reports/esta_full_m23/m23_pre_round_lightgbm_tuning_report.md`
+- `reports/esta_full_m24/m24_pre_round_lightgbm_evaluation_report.md`
+- `reports/m6_to_m24_progress_report.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
 
@@ -350,3 +356,18 @@ blocking checks and 165 tests pass. See `reports/lightgbm_xgboost_external_metri
 for the consolidated LightGBM, final XGBoost, logistic-regression, and public-model
 comparison. M24 will evaluate the frozen model with grouped confidence intervals,
 robustness slices, and calibration diagnostics without further tuning.
+
+Run the M24 frozen LightGBM evaluation stage:
+
+```powershell
+.\scripts\run_pre_round_lightgbm_evaluation.ps1
+```
+
+M24 replays the frozen M23 model without calling LightGBM `fit`. All 16 blocking
+checks and 176 tests pass. Test AUC is 0.727846 with series-level 95% CI
+[0.714169, 0.741427]; Log Loss is 0.591437 with CI [0.580635, 0.602921]. LightGBM
+has better point estimates than XGBoost on all five metrics, but every paired
+bootstrap advantage interval includes zero, so the current evidence does not show
+a statistically stable win. LAN-online AUC difference is 0.008711 with CI
+[-0.017073, 0.034198], and validation OOF correctly selects no calibration. M25 is
+the frozen LightGBM explanation and leakage-audit stage.

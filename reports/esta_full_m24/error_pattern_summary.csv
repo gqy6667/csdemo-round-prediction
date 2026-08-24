@@ -1,0 +1,8 @@
+dimension,value,cases,share
+pre_round_pattern,favored_side_major_equipment_upset,76,1.0
+outcome_pattern,predicted_favorite_lost_first_kill,54,0.7105263157894737
+outcome_pattern,predicted_favorite_lost_after_first_kill,22,0.2894736842105263
+predicted_side,CT,43,0.5657894736842105
+predicted_side,T,33,0.4342105263157895
+first_kill_side,T,41,0.5394736842105263
+first_kill_side,CT,35,0.4605263157894737

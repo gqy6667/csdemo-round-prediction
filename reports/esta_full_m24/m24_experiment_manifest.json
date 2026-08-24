@@ -1,0 +1,99 @@
+{
+  "stage": "M24",
+  "generated_at_utc": "2026-08-24T12:02:14.575984+00:00",
+  "code": {
+    "commit": "de904098768fb470784ac87f7c6d0cf4b8935b6d",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_clean_before_report_generation": true,
+    "working_tree_status_before_report_generation": [],
+    "ignored_report_status": [
+      "?? reports/esta_full_m24/"
+    ]
+  },
+  "input_artifacts": {
+    "pre_round_data": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/pre_round.parquet",
+      "bytes": 1255792,
+      "sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72"
+    },
+    "kills": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/interim/esta_full/kills.parquet",
+      "bytes": 3415801,
+      "sha256": "591c3e4b00cb8eaa202bc37a93dd5486faa8877c0261966e04e780bbbeb70816"
+    },
+    "m23_model": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "bytes": 215024,
+      "sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+    },
+    "m23_summary": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m23/m23_summary.json",
+      "bytes": 10641,
+      "sha256": "c96b10ea764d6e551e74a24bc3f4212596b6ac69fd54d2b6351b08a575660ffe"
+    },
+    "m23_test_predictions": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m23/test_predictions.csv",
+      "bytes": 849806,
+      "sha256": "37367acb3864ffce4597aa0af5e351f0ac75d7f016703e5b3fe4ccadecb0dfc2"
+    },
+    "external_benchmarks": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/benchmarks/external_round_model_metrics.csv",
+      "bytes": 1796,
+      "sha256": "c2c9b5f7265620a2b68eda60b7e98340f3c88d9333c1eb267c3bbd4141558588"
+    },
+    "requirements_lock": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/requirements-lock.txt",
+      "bytes": 201,
+      "sha256": "5533564a59b311cf8de4d043f89624a756e6b85c18b57cf18297986c87526a61"
+    }
+  },
+  "output_artifacts": {
+    "calibrator": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+      "bytes": 494,
+      "sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1"
+    }
+  },
+  "contract": {
+    "model_frozen": true,
+    "lightgbm_fit_calls": 0,
+    "key_columns": [
+      "series_id",
+      "game_id",
+      "round_id"
+    ],
+    "bootstrap_unit": "series_id",
+    "bootstrap_samples": 2000,
+    "paired_model_bootstrap": true,
+    "calibration_selection_data": "validation only",
+    "calibration_folds": 5,
+    "first_kill_usage": "post-hoc error diagnosis only"
+  },
+  "checks": {
+    "m23_prerequisite": true,
+    "split_and_key_contract": true,
+    "prediction_replay": true,
+    "global_bootstrap": true,
+    "global_metric_minimum": true,
+    "paired_comparison": true,
+    "group_outputs": true,
+    "source_stability": true,
+    "large_map_minimum": true,
+    "calibration_protocol": true,
+    "calibration_no_material_harm": true,
+    "error_review": true,
+    "external_report": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true
+  },
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 16,
+    "blocking_total": 16,
+    "m24_lightgbm_evaluation_complete": true,
+    "ready_for_m25": true
+  }
+}

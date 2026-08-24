@@ -7,9 +7,9 @@
 - [x] Implement fixed robustness slices and high-confidence error review.
 - [x] Implement validation-only calibration and persisted calibrator.
 - [x] Add external comparison, report, manifest, and one-click entrypoint.
-- [ ] Run focused tests and commit executable M24 code.
-- [ ] Run the formal 2,000-bootstrap M24 experiment.
-- [ ] Verify all metrics, confidence intervals, model gaps, and artifacts.
-- [ ] Run the complete suite and compile checks.
-- [ ] Update README, project paths, roadmap, and progress report.
-- [ ] Commit and push M24 to GitHub.
+- [x] Run focused tests and commit executable M24 code.
+- [x] Run the formal 2,000-bootstrap M24 experiment.
+- [x] Verify all metrics, confidence intervals, model gaps, and artifacts.
+- [x] Run the complete suite and compile checks.
+- [x] Update README, project paths, roadmap, and progress report.
+- [x] Commit and push M24 to GitHub.

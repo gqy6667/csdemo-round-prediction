@@ -578,6 +578,12 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_first_kill --input 
 .\scripts\run_pre_round_lightgbm_tuning.ps1
 ```
 
+运行 M24 开局前 LightGBM 固定模型评估：
+
+```powershell
+.\scripts\run_pre_round_lightgbm_evaluation.ps1
+```
+
 只从 M14 产物重建首杀后流水线：
 
 ```powershell
@@ -629,6 +635,21 @@ M22 已完成第一版开局前 LightGBM 公平基线：13/13 阻断项和 155 �
 M23 已完成 9 阶段 36 候选和 5 个种子。没有候选达到 `0.0001` 的 validation Log Loss
 改善门槛，最终保留 M22 参数和指标。14/14 阻断项、165 项测试和源码编译通过；下一
 阶段为 M24 固定模型评估、稳健性和校准。
+
+M24 已完成固定 LightGBM 的系列赛级 2,000 次 bootstrap、四类稳健性分组、五项
+LightGBM-XGBoost 配对区间、validation-only 校准和 30 个高置信错误复核。16/16
+阻断项、176 项测试和源码编译通过。点指标均略优于 XGBoost，但配对区间全部包含 0；
+下一阶段为 M25 LightGBM 解释与泄漏审计。核心文件为：
+
+```text
+src\csdemo\m24_pre_round_lightgbm_evaluation.py
+tests\test_m24_pre_round_lightgbm_evaluation.py
+scripts\run_pre_round_lightgbm_evaluation.ps1
+docs\m24_pre_round_lightgbm_evaluation_spec.md
+reports\esta_full_m24\m24_pre_round_lightgbm_evaluation_report.md
+reports\esta_full_m24\m24_summary.json
+reports\esta_full_m24\m24_experiment_manifest.json
+```
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。

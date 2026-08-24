@@ -1,0 +1,331 @@
+{
+  "stage": "M24",
+  "generated_at_utc": "2026-08-24T12:02:14.575984+00:00",
+  "task": "pre_round",
+  "definition": "freeze-time end after purchases and before combat",
+  "model_policy": "M23 LightGBM frozen; no LightGBM training or tuning in M24",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 16,
+    "blocking_total": 16,
+    "m24_lightgbm_evaluation_complete": true,
+    "ready_for_m25": true
+  },
+  "checks": {
+    "m23_prerequisite": true,
+    "split_and_key_contract": true,
+    "prediction_replay": true,
+    "global_bootstrap": true,
+    "global_metric_minimum": true,
+    "paired_comparison": true,
+    "group_outputs": true,
+    "source_stability": true,
+    "large_map_minimum": true,
+    "calibration_protocol": true,
+    "calibration_no_material_harm": true,
+    "error_review": true,
+    "external_report": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true
+  },
+  "stage_targets": {
+    "global_interval_target": true,
+    "large_map_auc_target": true,
+    "large_map_ci_target": false,
+    "source_gap_ci_includes_zero": true,
+    "calibration_ece_target": true,
+    "all_passed": false
+  },
+  "prerequisite": {
+    "passed": true,
+    "checks": {
+      "m23_accepted": true,
+      "data_sha256": true,
+      "model_sha256": true,
+      "bundle_task": true,
+      "bundle_model_name": true,
+      "raw_feature_contract": true,
+      "encoded_feature_contract": true,
+      "parameter_contract": true,
+      "predictor_available": true
+    },
+    "data_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/pre_round.parquet",
+      "bytes": 1255792,
+      "sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72"
+    },
+    "model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "bytes": 215024,
+      "sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+    },
+    "expected_data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "expected_model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+  },
+  "data": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/pre_round.parquet",
+    "sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "rows": 41074,
+    "series": 782,
+    "games": 1558,
+    "split_rows": {
+      "train": 28522,
+      "val": 8380,
+      "test": 4172
+    },
+    "split_percentages": {
+      "train": 69.44052198471053,
+      "val": 20.402200905682427,
+      "test": 10.157277109607051
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0,
+    "duplicate_key_rows": 0,
+    "key_columns": [
+      "series_id",
+      "game_id",
+      "round_id"
+    ]
+  },
+  "model_replay": {
+    "passed": true,
+    "raw_feature_count": 36,
+    "encoded_feature_count": 43,
+    "encoded_columns_match_m23": true,
+    "split_rows": {
+      "val": 8380,
+      "test": 4172
+    },
+    "lightgbm_fit_calls": 0
+  },
+  "prediction_replay": {
+    "passed": true,
+    "tolerance": 1e-12,
+    "saved_rows": 4172,
+    "replayed_rows": 4172,
+    "saved_duplicate_key_rows": 0,
+    "replayed_duplicate_key_rows": 0,
+    "key_mismatch_count": 0,
+    "label_mismatch_count": 0,
+    "invalid_probability_cells": 0,
+    "max_absolute_probability_difference": 1.1102230246251565e-16
+  },
+  "metric_replay_max_absolute_difference": 0.0,
+  "metrics": {
+    "accuracy": 0.6507670182166826,
+    "auc": 0.7278463079406734,
+    "log_loss": 0.5914369800026945,
+    "brier_score": 0.20520059289240616,
+    "ece10": 0.018874543992825548
+  },
+  "bootstrap": {
+    "unit": "series_id",
+    "samples": 2000,
+    "seed": 42
+  },
+  "global_assessment": {
+    "bootstrap_complete": true,
+    "auc_ci_lower_95": 0.714168906813326,
+    "log_loss_ci_upper_95": 0.6029209407951397,
+    "minimum_passed": true,
+    "stage_passed": true,
+    "minimum_thresholds": {
+      "auc_ci_lower_95": 0.7,
+      "log_loss_ci_upper_95": 0.61
+    },
+    "stage_thresholds": {
+      "auc_ci_lower_95": 0.71,
+      "log_loss_ci_upper_95": 0.605
+    }
+  },
+  "paired_comparison": {
+    "bootstrap_complete": true,
+    "bootstrap_unit": "series_id_paired",
+    "significant_better_count": 0,
+    "significant_better_metrics": [],
+    "superiority_required_for_acceptance": false
+  },
+  "robustness": {
+    "outputs_complete": true,
+    "large_map_count": 7,
+    "large_map_min_auc": 0.693776595744681,
+    "large_map_min_auc_ci_lower": 0.6617590067295013,
+    "large_map_minimum_passed": true,
+    "large_map_stage_passed": true,
+    "large_map_ci_stage_passed": false,
+    "source_gap_passed": true,
+    "source_gap_ci_includes_zero": true
+  },
+  "source_auc_gap": {
+    "comparison": "lan_minus_online_auc",
+    "lan_auc": 0.732177348551361,
+    "online_auc": 0.7234667042359351,
+    "signed_difference": 0.008710644315425897,
+    "absolute_difference": 0.008710644315425897,
+    "ci_lower_95": -0.017073045740175253,
+    "ci_upper_95": 0.03419811851608807,
+    "ci_includes_zero": true,
+    "successful_bootstraps": 2000,
+    "bootstrap_unit": "series_id_global"
+  },
+  "group_table_rows": {
+    "map": 8,
+    "source": 2,
+    "round_stage": 3,
+    "equipment_band": 5
+  },
+  "calibration_protocol": {
+    "passed": true,
+    "checks": {
+      "exact_rows": true,
+      "unique_complete_keys": true,
+      "key_sets_match": true,
+      "series_one_fold": true,
+      "fold_count": true,
+      "probability_columns": true,
+      "finite_probabilities": true,
+      "methods_complete": true,
+      "selected_from_oof": true,
+      "no_test_columns": true
+    },
+    "forbidden_columns": [],
+    "selection_data": "validation only",
+    "selection_rule": "lowest grouped OOF log_loss, then brier_score, then method",
+    "validation_folds": 5,
+    "selected_method": "uncalibrated"
+  },
+  "calibration": {
+    "selected_method": "uncalibrated",
+    "selected_test_metrics": {
+      "accuracy": 0.6507670182166826,
+      "auc": 0.7278463079406734,
+      "log_loss": 0.5914369800026945,
+      "brier_score": 0.20520059289240616,
+      "ece10": 0.018874543992825548
+    },
+    "changes_vs_uncalibrated": {
+      "log_loss": 0.0,
+      "brier_score": 0.0,
+      "ece10": 0.0
+    },
+    "no_material_probability_metric_harm": true,
+    "test_ece_stage_passed": true,
+    "calibrator_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+      "bytes": 494,
+      "sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1"
+    },
+    "validation_oof_comparison": [
+      {
+        "method": "uncalibrated",
+        "accuracy": 0.6529832936,
+        "log_loss": 0.5956209003,
+        "brier_score": 0.2074169306,
+        "ece10": 0.0078818119,
+        "auc": 0.718575383
+      },
+      {
+        "method": "sigmoid",
+        "accuracy": 0.6526252983,
+        "log_loss": 0.5958877261,
+        "brier_score": 0.2075044656,
+        "ece10": 0.0073799301,
+        "auc": 0.718170796
+      },
+      {
+        "method": "isotonic",
+        "accuracy": 0.6492840095,
+        "log_loss": 0.6005337918,
+        "brier_score": 0.207920144,
+        "ece10": 0.0078991018,
+        "auc": 0.7141339124
+      }
+    ],
+    "test_comparison": [
+      {
+        "method": "uncalibrated",
+        "selected_by_validation": true,
+        "accuracy": 0.6507670182,
+        "log_loss": 0.59143698,
+        "brier_score": 0.2052005929,
+        "ece10": 0.018874544,
+        "auc": 0.7278463079,
+        "log_loss_change_vs_uncalibrated": 0.0,
+        "brier_score_change_vs_uncalibrated": 0.0,
+        "ece10_change_vs_uncalibrated": 0.0,
+        "accuracy_change_vs_uncalibrated": 0.0,
+        "auc_change_vs_uncalibrated": 0.0
+      },
+      {
+        "method": "sigmoid",
+        "selected_by_validation": false,
+        "accuracy": 0.6514860978,
+        "log_loss": 0.5913525279,
+        "brier_score": 0.2051665763,
+        "ece10": 0.0177572578,
+        "auc": 0.7278463079,
+        "log_loss_change_vs_uncalibrated": -8.44521e-05,
+        "brier_score_change_vs_uncalibrated": -3.40166e-05,
+        "ece10_change_vs_uncalibrated": -0.0011172862,
+        "accuracy_change_vs_uncalibrated": 0.0007190796,
+        "auc_change_vs_uncalibrated": 0.0
+      },
+      {
+        "method": "isotonic",
+        "selected_by_validation": false,
+        "accuracy": 0.6498082454,
+        "log_loss": 0.5944333576,
+        "brier_score": 0.2058664218,
+        "ece10": 0.0207572742,
+        "auc": 0.7261280371,
+        "log_loss_change_vs_uncalibrated": 0.0029963776,
+        "brier_score_change_vs_uncalibrated": 0.000665829,
+        "ece10_change_vs_uncalibrated": 0.0018827302,
+        "accuracy_change_vs_uncalibrated": -0.0009587728,
+        "auc_change_vs_uncalibrated": -0.0017182708
+      }
+    ]
+  },
+  "errors": {
+    "definition": "wrong and assigned predicted-side probability >= 0.80",
+    "available": 76,
+    "reviewed": 30,
+    "review_target": 30,
+    "first_kill_usage": "post-hoc diagnosis only; never a pre-round feature",
+    "pre_round_pattern_counts": {
+      "favored_side_major_equipment_upset": 76
+    },
+    "outcome_pattern_counts": {
+      "predicted_favorite_lost_first_kill": 54,
+      "predicted_favorite_lost_after_first_kill": 22
+    }
+  },
+  "external_comparison_rows": 4,
+  "environment": {
+    "python_version": "3.10.20",
+    "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+    "lightgbm_version": "4.6.0",
+    "device_type": "cpu",
+    "cuda_required": false
+  },
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 6.057225499999731,
+    "test_count": 176,
+    "skipped": false
+  },
+  "source_compile": {
+    "passed": true,
+    "return_code": 0
+  },
+  "next_stage": "M25 LightGBM explanation and leakage audit"
+}

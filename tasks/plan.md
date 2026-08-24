@@ -36,4 +36,8 @@ validation-only calibration, high-confidence error review, and reproducible evid
 
 ## Outcome
 
-M24 is in progress. The specification and targets are frozen before implementation.
+M24 completed. The frozen M23 model was replayed with zero fit calls; all global,
+paired, grouped, calibration, error-review, reporting, and reproducibility outputs
+were generated with 2,000 series bootstraps. All 16 blockers and 176 tests passed.
+All five LightGBM point metrics beat XGBoost, but every paired 95% interval included
+zero. M25 will explain the frozen model without changing it.

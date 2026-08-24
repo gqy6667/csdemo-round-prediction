@@ -1,0 +1,17 @@
+check,passed,blocking
+m23_prerequisite,True,True
+split_and_key_contract,True,True
+prediction_replay,True,True
+global_bootstrap,True,True
+global_metric_minimum,True,True
+paired_comparison,True,True
+group_outputs,True,True
+source_stability,True,True
+large_map_minimum,True,True
+calibration_protocol,True,True
+calibration_no_material_harm,True,True
+error_review,True,True
+external_report,True,True
+automated_tests,True,True
+source_compile,True,True
+reproduction_entrypoint,True,True
