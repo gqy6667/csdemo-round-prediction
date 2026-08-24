@@ -1,41 +1,39 @@
-# M23 Implementation Plan
+# M24 Implementation Plan
 
 ## Scope
 
-Tune the accepted M22 pre-round LightGBM baseline with a validation-only greedy
-sequential search. Keep data, grouped split, feature encoding, test rows, metrics,
-and M22/XGBoost references fixed.
+Evaluate the accepted M23 pre-round LightGBM without training or tuning. Add
+series-level uncertainty, paired XGBoost differences, fixed robustness slices,
+validation-only calibration, high-confidence error review, and reproducible evidence.
 
 ## Slices
 
-1. Freeze the nine tuning phases, 36 candidates, selection threshold, seed limits,
-   stage goals, test-use policy, and blockers.
-2. Add failing tests for grid integrity, validation-only signatures and tables,
-   deterministic selection, frozen parameters, seed stability, and exact test keys.
-3. Implement sequential search and prove focused logic tests green.
-4. Run the real search, freeze seed 42, evaluate test once, and generate all evidence.
-5. Run the complete suite and compile checks, update learning docs, commit, and push.
+1. Freeze M24 inputs, interval targets, paired comparison policy, group definitions,
+   calibration protocol, error threshold, outputs, and blockers.
+2. Add failing tests for exact replay, complete-key joins, paired series bootstrap,
+   interval/group assessment, calibration isolation, and acceptance behavior.
+3. Implement frozen-model replay and statistical evaluation, then make focused tests green.
+4. Add calibration, error review, external comparison, report, manifest, and one-click runner.
+5. Run the formal 2,000-bootstrap experiment, full suite and compile checks; document,
+   commit, and push the complete stage.
 
 ## Risks
 
-- Test leakage: search and seed functions accept only train/validation and output no test columns.
-- Greedy-order dependence: freeze phase order and preserve every rejected candidate.
-- Tiny noise gains: require at least 0.0001 validation Log Loss improvement per phase.
-- Seed instability: enforce five-seed Log Loss and AUC range gates before test evaluation.
-- Test over-interpretation: report M23 versus M22/XGBoost even when tuning loses.
-- Artifact drift: verify M22 data hash, encoded columns, test keys, and baseline metrics.
+- Test leakage: calibration selection accepts validation predictions only; test is evaluated later.
+- False superiority: paired bootstrap reports intervals and never requires LightGBM to win.
+- Correlated rounds: all uncertainty resamples complete series, never individual rows.
+- Identity drift: every join uses series_id, game_id, and round_id together.
+- Post-outcome leakage: first-kill fields appear only in saved error diagnostics.
+- Artifact drift: verify M23 data/model hashes, feature columns, exact keys, and probabilities.
 
 ## Review Gates
 
-- Gate A: the M23 specification exists before tests or implementation.
-- Gate B: focused M23 tests fail because the module does not yet exist.
+- Gate A: the M24 specification exists before tests or implementation.
+- Gate B: focused M24 tests fail because the module does not yet exist.
 - Gate C: focused tests pass before the formal real-artifact run.
-- Gate D: all tuning tables remain validation-only and the formal run passes 14 blockers.
+- Gate D: the formal run completes all interval, robustness, calibration, and error outputs.
 - Gate E: the complete suite, compile check, artifact parsing, and Git checks pass.
 
 ## Outcome
 
-M23 completed. All 36 candidates and five seeds were evaluated without test metrics
-in the selection tables. No candidate met the fixed 0.0001 validation Log Loss
-improvement, so the accepted model retained M22 parameters and metrics. All 14
-blockers and 165 tests passed; M24 will evaluate the frozen model without tuning.
+M24 is in progress. The specification and targets are frozen before implementation.
