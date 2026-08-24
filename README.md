@@ -317,8 +317,22 @@ M21 passes all 17 blocking checks and all 145 automated tests. It inventories al
 cross-split series/game/round overlap, and replays all 4,170 test probabilities to
 `1.11e-16` maximum absolute error. All five metrics reproduce exactly, all ten
 formal targets retain zero remaining gap, and no XGBoost fit call occurs. The
-post-first-kill XGBoost track is complete; the next independent stage is a
-LightGBM controlled comparison on the identical data, split, features, and metrics.
+post-first-kill XGBoost track is complete. M22 then starts an independent LightGBM
+controlled comparison on the identical data, split, features, and metrics.
 
 Use `-RebuildFirstKill` to rerun M15-M20 from accepted M14 artifacts, or
 `-FullRebuild` to rebuild the whole local pipeline from the raw ESTA files.
+
+Run the M22 pre-round LightGBM controlled baseline:
+
+```powershell
+.\scripts\run_pre_round_lightgbm_baseline.ps1
+```
+
+M22 keeps the accepted 41,074 pre-round rows, grouped 70/20/10 split, 36 raw/43
+encoded features, and five metrics fixed. All 13 blocking checks and all 155 tests
+pass. The untuned LightGBM baseline reaches Accuracy 0.650767, AUC 0.727846, Log
+Loss 0.591437, Brier 0.205201, and ECE10 0.018875. It is slightly better than the
+frozen XGBoost on all five point metrics, but the margins are small. The next stage
+is M23 validation-only controlled LightGBM tuning; test metrics must not be used to
+select candidates.

@@ -105,7 +105,8 @@ src\csdemo\predict_first_kill.py M20 首杀后单条 JSON/CSV 校验与胜率预
 src\csdemo\m20_first_kill_interface.py M20 接口、模型/校准器哈希和阶段验收
 src\csdemo\m21_first_kill_acceptance.py M21 最终验收、概率回放、实验清单和进度报告
 src\csdemo\benchmark_comparison.py  各阶段外部模型差值报告
-src\csdemo\train_lgbm.py       后续 LightGBM 对比
+src\csdemo\train_lgbm.py       LightGBM 固定训练器、五项指标和 validation 早停
+src\csdemo\m22_pre_round_lightgbm_baseline.py M22 开局前公平对照、回放和验收报告
 src\csdemo\schema.py           特征列和 ID 列定义
 src\csdemo\config.py           路径、随机种子和 70/20/10 比例
 ```
@@ -360,6 +361,25 @@ reports\esta_full_m21\m21_first_kill_final_acceptance_report.md
 reports\m6_to_m21_progress_report.md
 ```
 
+M22 开局前 LightGBM 受控基线：
+
+```text
+models\esta_full_m22\pre_round_lightgbm_baseline.joblib   本地模型，Git 忽略
+reports\esta_full_m22\m22_summary.json
+reports\esta_full_m22\m22_checks.csv
+reports\esta_full_m22\m22_experiment_manifest.json
+reports\esta_full_m22\m22_model_comparison.csv
+reports\esta_full_m22\m22_test_predictions.csv
+reports\esta_full_m22\feature_contract.csv
+reports\esta_full_m22\encoded_feature_columns.csv
+reports\esta_full_m22\lightgbm_training_history.csv
+reports\esta_full_m22\external_benchmark_comparison.csv
+reports\esta_full_m22\external_benchmark_comparison.md
+reports\esta_full_m22\m22_pre_round_lightgbm_baseline_report.md
+reports\xgboost_final_summary.md
+reports\m6_to_m22_progress_report.md
+```
+
 ## 文档路径
 
 ```text
@@ -381,6 +401,7 @@ docs\m18_first_kill_evaluation_spec.md M18 固定模型评估、分组和校准�
 docs\m19_first_kill_explanation_spec.md M19 解释方法、泄漏合同和目标距离定义
 docs\m20_first_kill_prediction_interface_spec.md M20 单条输入、模型/校准器和错误合同
 docs\m21_first_kill_final_acceptance_spec.md M21 最终验收、一键复现和进度报告合同
+docs\m22_pre_round_lightgbm_baseline_spec.md M22 固定数据、特征、训练和公平对照合同
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -528,6 +549,12 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_first_kill --input 
 .\scripts\run_first_kill_pipeline.ps1
 ```
 
+运行 M22 开局前 LightGBM 受控基线：
+
+```powershell
+.\scripts\run_pre_round_lightgbm_baseline.ps1
+```
+
 只从 M14 产物重建首杀后流水线：
 
 ```powershell
@@ -568,7 +595,13 @@ TreeSHAP；82 个编码列全部映射到 40 个允许原始特征，泄漏失�
 不改变固定测试指标。10 个阻断检查和 131 项测试通过。M21 已完成最终验收：17/17
 阻断项和 145 项测试通过，4,170 条测试概率的最大回放误差为 1.11e-16，五项指标误差
 为 0，十项目标 Remaining 全部为 0，series/game/round 跨集合交叉均为 0。首杀后
-XGBoost 已完成，下一阶段是相同数据合同下的 LightGBM 控制变量对照。
+XGBoost 已完成；M22 随后在相同数据合同下开始 LightGBM 控制变量对照。
+
+M22 已完成第一版开局前 LightGBM 公平基线：13/13 阻断项和 155 项测试通过，最佳
+迭代为 115。测试 Accuracy/AUC/Log Loss/Brier/ECE10 为 0.650767/0.727846/
+0.591437/0.205201/0.018875；相对冻结 XGBoost 分别变化 +0.003356/+0.000724/
+-0.000296/-0.000094/-0.004323。五项最低门槛全部通过，但更高目标只通过 ECE10，
+下一阶段为 M23：只按 validation Log Loss 做 LightGBM 控制变量调参。
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。

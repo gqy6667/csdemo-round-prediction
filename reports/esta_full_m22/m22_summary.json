@@ -1,0 +1,321 @@
+{
+  "stage": "M22",
+  "generated_at_utc": "2026-08-24T10:48:32.805303+00:00",
+  "task": "pre_round",
+  "definition": "freeze-time end after purchases and before combat",
+  "experiment_policy": "fixed M14 data/split/features/metrics; replace only model algorithm",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 13,
+    "blocking_total": 13,
+    "m22_lightgbm_baseline_complete": true,
+    "ready_for_m23": true
+  },
+  "checks": {
+    "m14_prerequisite": true,
+    "data_identity": true,
+    "split_contract": true,
+    "feature_contract": true,
+    "lightgbm_environment": true,
+    "validation_only_training": true,
+    "frozen_xgboost_replay": true,
+    "probability_contract": true,
+    "minimum_metrics": true,
+    "controlled_comparison": true,
+    "external_report": true,
+    "automated_tests": true,
+    "reproduction_entrypoint": true
+  },
+  "data": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/pre_round.parquet",
+    "bytes": 1255792,
+    "sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "rows": 41074,
+    "series": 782,
+    "games": 1558,
+    "split_rows": {
+      "train": 28522,
+      "val": 8380,
+      "test": 4172
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0
+  },
+  "features": {
+    "raw_count": 36,
+    "encoded_count": 43,
+    "raw_features": [
+      "map_name",
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct"
+    ],
+    "encoded_columns_match_xgboost": true
+  },
+  "model": {
+    "library": "lightgbm",
+    "version": "4.6.0",
+    "params": {
+      "boosting_type": "gbdt",
+      "class_weight": null,
+      "colsample_bytree": 0.85,
+      "importance_type": "split",
+      "learning_rate": 0.03,
+      "max_depth": -1,
+      "min_child_samples": 20,
+      "min_child_weight": 0.001,
+      "min_split_gain": 0.0,
+      "n_estimators": 3000,
+      "n_jobs": -1,
+      "num_leaves": 15,
+      "objective": "binary",
+      "random_state": 42,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "subsample": 0.85,
+      "subsample_for_bin": 200000,
+      "subsample_freq": 1,
+      "device_type": "cpu",
+      "verbosity": -1,
+      "deterministic": true,
+      "force_col_wise": true
+    },
+    "best_iteration": 115,
+    "model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m22/pre_round_lightgbm_baseline.joblib",
+      "bytes": 214987,
+      "sha256": "1e72fd6b163377a6ad477ecc6a317e58e0ff3e7ad6679ad35e8fd74761bd65f1"
+    }
+  },
+  "metrics": {
+    "accuracy": 0.6507670182166826,
+    "auc": 0.7278463079406734,
+    "log_loss": 0.5914369800026945,
+    "brier_score": 0.20520059289240616,
+    "ece10": 0.018874543992825548
+  },
+  "test_metrics_by_model": {
+    "constant_train_prior": {
+      "accuracy": 0.5244487056567594,
+      "auc": 0.5,
+      "log_loss": 0.6926395479297667,
+      "brier_score": 0.2497445328676048,
+      "ece10": 0.0185005966362075
+    },
+    "logistic_regression": {
+      "accuracy": 0.6584372003835091,
+      "auc": 0.7272291678952645,
+      "log_loss": 0.5925383368538701,
+      "brier_score": 0.2055083000518434,
+      "ece10": 0.0086235942527998
+    },
+    "xgboost_frozen": {
+      "accuracy": 0.6474113135186961,
+      "auc": 0.7271219343412749,
+      "log_loss": 0.5917331887919193,
+      "brier_score": 0.20529449849711118,
+      "ece10": 0.023197745861465936
+    },
+    "lightgbm_baseline": {
+      "accuracy": 0.6507670182166826,
+      "auc": 0.7278463079406734,
+      "log_loss": 0.5914369800026945,
+      "brier_score": 0.20520059289240616,
+      "ece10": 0.018874543992825548
+    }
+  },
+  "metric_targets": {
+    "all_minimum_passed": true,
+    "all_stage_passed": false,
+    "minimum_passed_count": 5,
+    "stage_passed_count": 1,
+    "metrics": {
+      "accuracy": {
+        "value": 0.6507670182166826,
+        "minimum": 0.64,
+        "stage": 0.66,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": false,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.00923298178331744
+      },
+      "auc": {
+        "value": 0.7278463079406734,
+        "minimum": 0.7,
+        "stage": 0.73,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": false,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.002153692059326584
+      },
+      "log_loss": {
+        "value": 0.5914369800026945,
+        "minimum": 0.61,
+        "stage": 0.58,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": false,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.011436980002694552
+      },
+      "brier_score": {
+        "value": 0.20520059289240616,
+        "minimum": 0.21,
+        "stage": 0.195,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": false,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.010200592892406157
+      },
+      "ece10": {
+        "value": 0.018874543992825548,
+        "minimum": 0.05,
+        "stage": 0.03,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      }
+    }
+  },
+  "lightgbm_vs_xgboost_test": {
+    "accuracy": {
+      "lightgbm": 0.6507670182166826,
+      "xgboost": 0.6474113135186961,
+      "raw_lightgbm_minus_xgboost": 0.003355704697986517,
+      "performance_advantage_lightgbm": 0.003355704697986517,
+      "lightgbm_performs_better": true
+    },
+    "auc": {
+      "lightgbm": 0.7278463079406734,
+      "xgboost": 0.7271219343412749,
+      "raw_lightgbm_minus_xgboost": 0.0007243735993984757,
+      "performance_advantage_lightgbm": 0.0007243735993984757,
+      "lightgbm_performs_better": true
+    },
+    "log_loss": {
+      "lightgbm": 0.5914369800026945,
+      "xgboost": 0.5917331887919193,
+      "raw_lightgbm_minus_xgboost": -0.0002962087892247611,
+      "performance_advantage_lightgbm": 0.0002962087892247611,
+      "lightgbm_performs_better": true
+    },
+    "brier_score": {
+      "lightgbm": 0.20520059289240616,
+      "xgboost": 0.20529449849711118,
+      "raw_lightgbm_minus_xgboost": -9.390560470501352e-05,
+      "performance_advantage_lightgbm": 9.390560470501352e-05,
+      "lightgbm_performs_better": true
+    },
+    "ece10": {
+      "lightgbm": 0.018874543992825548,
+      "xgboost": 0.023197745861465936,
+      "raw_lightgbm_minus_xgboost": -0.0043232018686403875,
+      "performance_advantage_lightgbm": 0.0043232018686403875,
+      "lightgbm_performs_better": true
+    }
+  },
+  "xgboost_replay": {
+    "passed": true,
+    "tolerance": 1e-07,
+    "replayed_rows": 4172,
+    "saved_rows": 4172,
+    "matched_rows": 4172,
+    "replayed_duplicate_key_rows": 0,
+    "saved_duplicate_key_rows": 0,
+    "key_mismatch_count": 0,
+    "label_mismatch_count": 0,
+    "invalid_probability_cells": 0,
+    "max_absolute_probability_difference": 2.977752688870794e-08
+  },
+  "xgboost_metric_replay": {
+    "passed": true,
+    "tolerance": 1e-07,
+    "absolute_differences": {
+      "accuracy": 0.0,
+      "auc": 0.0,
+      "log_loss": 0.0,
+      "brier_score": 0.0,
+      "ece10": 0.0
+    },
+    "max_absolute_difference": 0.0
+  },
+  "xgboost_fit_calls": 0,
+  "prediction_audit": {
+    "passed": true,
+    "rows": 4172,
+    "expected_rows": 4172,
+    "invalid_probability_cells": 0,
+    "duplicate_key_rows": 0
+  },
+  "training_policy": {
+    "passed": true,
+    "fit_split": "train",
+    "early_stopping_split": "val",
+    "test_used_for_fit_or_selection": false,
+    "eval_metric": "binary_logloss",
+    "early_stopping_rounds": 100
+  },
+  "environment": {
+    "passed": true,
+    "runtime_version": "4.6.0",
+    "locked_version": "4.6.0",
+    "device_type": "cpu",
+    "python_version": "3.10.20",
+    "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+    "cuda_required": false
+  },
+  "external_comparison_rows": 4,
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 19.3990303999999,
+    "test_count": 155,
+    "skipped": false
+  },
+  "next_stage": "M23 validation-only controlled LightGBM tuning"
+}

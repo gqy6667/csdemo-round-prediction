@@ -35,5 +35,7 @@ data, grouped split, feature encoding, XGBoost test probabilities, and metrics f
 
 ## Outcome
 
-In progress. M22 will record the first fair LightGBM baseline and the exact metric
-differences from the frozen pre-round XGBoost before any LightGBM tuning begins.
+M22 completed. All 13 blockers and 155 tests passed. The fixed LightGBM baseline
+slightly improved all five point metrics over frozen XGBoost while preserving the
+same 41,074 rows, grouped split, 36 raw/43 encoded features, and 4,172 test keys.
+The next stage is M23 validation-only controlled LightGBM tuning.

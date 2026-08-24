@@ -1,0 +1,189 @@
+{
+  "stage": "M22",
+  "generated_at_utc": "2026-08-24T10:48:32.805303+00:00",
+  "code": {
+    "commit": "8ab27016d96937f02e41e45c54ca524e6d2bdb93",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_status": [
+      "?? reports/esta_full_m22/"
+    ]
+  },
+  "input_artifacts": {
+    "pre_round_data": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/pre_round.parquet",
+      "bytes": 1255792,
+      "sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72"
+    },
+    "frozen_xgboost": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m8_tuned/pre_round_xgb.joblib",
+      "bytes": 289541,
+      "sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d"
+    },
+    "saved_m9_predictions": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m9/test_predictions.csv",
+      "bytes": 729889,
+      "sha256": "1215111a8996c2b8266cbda3aaad64c3d4eff3824edf146ce90194e69d6f9d33"
+    },
+    "requirements_lock": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/requirements-lock.txt",
+      "bytes": 201,
+      "sha256": "5533564a59b311cf8de4d043f89624a756e6b85c18b57cf18297986c87526a61"
+    }
+  },
+  "output_artifacts": {
+    "lightgbm_model": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m22/pre_round_lightgbm_baseline.joblib",
+      "bytes": 214987,
+      "sha256": "1e72fd6b163377a6ad477ecc6a317e58e0ff3e7ad6679ad35e8fd74761bd65f1"
+    }
+  },
+  "contract": {
+    "raw_features": [
+      "map_name",
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct"
+    ],
+    "encoded_columns": [
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "map_name_de_ancient",
+      "map_name_de_dust2",
+      "map_name_de_inferno",
+      "map_name_de_mirage",
+      "map_name_de_nuke",
+      "map_name_de_overpass",
+      "map_name_de_train",
+      "map_name_de_vertigo"
+    ],
+    "split_rows": {
+      "train": 28522,
+      "val": 8380,
+      "test": 4172
+    },
+    "training_policy": {
+      "passed": true,
+      "fit_split": "train",
+      "early_stopping_split": "val",
+      "test_used_for_fit_or_selection": false,
+      "eval_metric": "binary_logloss",
+      "early_stopping_rounds": 100
+    },
+    "metric_targets": {
+      "accuracy": {
+        "minimum": 0.64,
+        "stage": 0.66,
+        "higher_is_better": true
+      },
+      "auc": {
+        "minimum": 0.7,
+        "stage": 0.73,
+        "higher_is_better": true
+      },
+      "log_loss": {
+        "minimum": 0.61,
+        "stage": 0.58,
+        "higher_is_better": false
+      },
+      "brier_score": {
+        "minimum": 0.21,
+        "stage": 0.195,
+        "higher_is_better": false
+      },
+      "ece10": {
+        "minimum": 0.05,
+        "stage": 0.03,
+        "higher_is_better": false
+      }
+    }
+  },
+  "checks": {
+    "m14_prerequisite": true,
+    "data_identity": true,
+    "split_contract": true,
+    "feature_contract": true,
+    "lightgbm_environment": true,
+    "validation_only_training": true,
+    "frozen_xgboost_replay": true,
+    "probability_contract": true,
+    "minimum_metrics": true,
+    "controlled_comparison": true,
+    "external_report": true,
+    "automated_tests": true,
+    "reproduction_entrypoint": true
+  },
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 13,
+    "blocking_total": 13,
+    "m22_lightgbm_baseline_complete": true,
+    "ready_for_m23": true
+  }
+}
