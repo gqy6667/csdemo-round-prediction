@@ -1,0 +1,4 @@
+series_id,game_id,round_id,y_true,ct_win_probability,t_win_probability,predicted_label,correct,map_name,round_num,row_position,prediction_confidence,case_type
+f7282b88-c653-4ce5-b4b6-8a2963548662,lan:00b7d807-ecf2-49c5-aa70-0ee1bfc0478c,lan:00b7d807-ecf2-49c5-aa70-0ee1bfc0478c_17,1,0.9705590660622517,0.02944093393774827,1,True,de_nuke,17,16,0.9705590660622517,ct_high_probability
+f9f86156-544c-4b95-b4ca-cb5b33386198,online:58775236-4620-43ad-8433-594691181531,online:58775236-4620-43ad-8433-594691181531_17,0,0.044116307837031875,0.9558836921629681,0,True,de_vertigo,17,2933,0.9558836921629681,t_high_probability
+90da2c53-5a02-4f16-8abe-f2235da5ffbd,online:478d378e-e7c1-4d64-a3f3-679ee18f27b5,online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17,0,0.9704182077374078,0.029581792262592166,1,False,de_nuke,17,2785,0.9704182077374078,high_confidence_error

@@ -7,9 +7,9 @@
 - [x] Implement complete feature leakage audit and source-level aggregation.
 - [x] Implement M12 XGBoost rank comparison and three fixed case explanations.
 - [x] Add plots, formal report, manifest, and one-click entrypoint.
-- [ ] Run focused tests and commit executable M25 code.
-- [ ] Run the formal 20-repeat M25 experiment.
-- [ ] Verify all explanation, leakage, comparison, and case artifacts.
-- [ ] Run the complete suite and compile checks.
-- [ ] Update README, project paths, and roadmap without a new progress report.
-- [ ] Commit and push M25 to GitHub.
+- [x] Run focused tests and commit executable M25 code.
+- [x] Run the formal 20-repeat M25 experiment.
+- [x] Verify all explanation, leakage, comparison, and case artifacts.
+- [x] Run the complete suite and compile checks.
+- [x] Update README, project paths, and roadmap without a new progress report.
+- [x] Commit and push M25 to GitHub.

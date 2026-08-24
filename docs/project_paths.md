@@ -108,6 +108,8 @@ src\csdemo\benchmark_comparison.py  各阶段外部模型差值报告
 src\csdemo\train_lgbm.py       LightGBM 固定训练器、五项指标和 validation 早停
 src\csdemo\m22_pre_round_lightgbm_baseline.py M22 开局前公平对照、回放和验收报告
 src\csdemo\m23_pre_round_lightgbm_tuning.py M23 validation-only 调参、稳定性和冻结评估
+src\csdemo\m24_pre_round_lightgbm_evaluation.py M24 固定评估、配对 bootstrap、稳健性和校准
+src\csdemo\m25_pre_round_lightgbm_explanation.py M25 三种解释、分组置换、泄漏和 XGBoost 对照
 src\csdemo\schema.py           特征列和 ID 列定义
 src\csdemo\config.py           路径、随机种子和 70/20/10 比例
 ```
@@ -396,6 +398,43 @@ reports\esta_full_m23\m23_pre_round_lightgbm_tuning_report.md
 reports\lightgbm_xgboost_external_metrics.md
 ```
 
+M24 开局前 LightGBM 固定模型评估：
+
+```text
+models\esta_full_m24\pre_round_lightgbm_calibrator.joblib   本地校准器，Git 忽略
+reports\esta_full_m24\m24_summary.json
+reports\esta_full_m24\m24_checks.csv
+reports\esta_full_m24\m24_experiment_manifest.json
+reports\esta_full_m24\global_bootstrap_95ci.csv
+reports\esta_full_m24\paired_lightgbm_vs_xgboost_bootstrap.csv
+reports\esta_full_m24\metrics_by_map_with_ci.csv
+reports\esta_full_m24\metrics_by_source_with_ci.csv
+reports\esta_full_m24\test_calibration_comparison.csv
+reports\esta_full_m24\reviewed_top30_errors.csv
+reports\esta_full_m24\m24_pre_round_lightgbm_evaluation_report.md
+```
+
+M25 开局前 LightGBM 模型解释与泄漏审计：
+
+```text
+reports\esta_full_m25\m25_summary.json
+reports\esta_full_m25\m25_checks.csv
+reports\esta_full_m25\m25_experiment_manifest.json
+reports\esta_full_m25\gain_importance.csv
+reports\esta_full_m25\permutation_importance_auc.csv
+reports\esta_full_m25\grouped_permutation_importance_auc.csv
+reports\esta_full_m25\macro_group_permutation_auc.csv
+reports\esta_full_m25\shap_importance.csv
+reports\esta_full_m25\source_feature_importance.csv
+reports\esta_full_m25\all_feature_leakage_audit.csv
+reports\esta_full_m25\xgboost_lightgbm_importance_comparison.csv
+reports\esta_full_m25\model_importance_agreement.csv
+reports\esta_full_m25\selected_cases.csv
+reports\esta_full_m25\case_explanations.csv
+reports\esta_full_m25\external_benchmark_comparison.csv
+reports\esta_full_m25\m25_pre_round_lightgbm_explanation_report.md
+```
+
 ## 文档路径
 
 ```text
@@ -419,6 +458,8 @@ docs\m20_first_kill_prediction_interface_spec.md M20 单条输入、模型/校�
 docs\m21_first_kill_final_acceptance_spec.md M21 最终验收、一键复现和进度报告合同
 docs\m22_pre_round_lightgbm_baseline_spec.md M22 固定数据、特征、训练和公平对照合同
 docs\m23_pre_round_lightgbm_tuning_spec.md M23 九阶段网格、validation-only 和稳定性合同
+docs\m24_pre_round_lightgbm_evaluation_spec.md M24 固定模型区间、分组、校准和错误审计合同
+docs\m25_pre_round_lightgbm_explanation_spec.md M25 解释、泄漏和 XGBoost 排名对照合同
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -584,6 +625,12 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_first_kill --input 
 .\scripts\run_pre_round_lightgbm_evaluation.ps1
 ```
 
+运行 M25 开局前 LightGBM 模型解释与泄漏审计：
+
+```powershell
+.\scripts\run_pre_round_lightgbm_explanation.ps1
+```
+
 只从 M14 产物重建首杀后流水线：
 
 ```powershell
@@ -639,16 +686,19 @@ M23 已完成 9 阶段 36 候选和 5 个种子。没有候选达到 `0.0001` �
 M24 已完成固定 LightGBM 的系列赛级 2,000 次 bootstrap、四类稳健性分组、五项
 LightGBM-XGBoost 配对区间、validation-only 校准和 30 个高置信错误复核。16/16
 阻断项、176 项测试和源码编译通过。点指标均略优于 XGBoost，但配对区间全部包含 0；
-下一阶段为 M25 LightGBM 解释与泄漏审计。核心文件为：
+M25 已完成固定模型的 Gain/Split、20 次编码列/36 个原始特征/五个宏观组
+Permutation、原生 TreeSHAP、完整泄漏审计和 M12 XGBoost 解释对照。43 个编码列全部
+映射成功，泄漏失败为 0，SHAP 概率重建误差为 7.77e-16。14/14 阻断项、192 项测试和
+源码编译通过。下一阶段为 M26 LightGBM 单条 JSON/CSV 预测接口。M25 核心文件为：
 
 ```text
-src\csdemo\m24_pre_round_lightgbm_evaluation.py
-tests\test_m24_pre_round_lightgbm_evaluation.py
-scripts\run_pre_round_lightgbm_evaluation.ps1
-docs\m24_pre_round_lightgbm_evaluation_spec.md
-reports\esta_full_m24\m24_pre_round_lightgbm_evaluation_report.md
-reports\esta_full_m24\m24_summary.json
-reports\esta_full_m24\m24_experiment_manifest.json
+src\csdemo\m25_pre_round_lightgbm_explanation.py
+tests\test_m25_pre_round_lightgbm_explanation.py
+scripts\run_pre_round_lightgbm_explanation.ps1
+docs\m25_pre_round_lightgbm_explanation_spec.md
+reports\esta_full_m25\m25_pre_round_lightgbm_explanation_report.md
+reports\esta_full_m25\m25_summary.json
+reports\esta_full_m25\m25_experiment_manifest.json
 ```
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和

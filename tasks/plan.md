@@ -37,4 +37,9 @@ contract, and a same-feature explanation comparison with M12 XGBoost.
 
 ## Outcome
 
-Pending.
+M25 completed. The frozen 115-tree LightGBM replayed all 4,172 M24 probabilities
+with zero metric drift and no fit calls. All 43 encoded features mapped to 36
+purchase-end features and five macro groups with zero leakage failures. Native
+TreeSHAP reconstructed probability to 7.77e-16; the formal 20-repeat importance
+run, M12 XGBoost comparison, three cases, 14 blockers, 192 tests, and compile check
+all passed. M26 will build the frozen LightGBM JSON/CSV prediction interface.

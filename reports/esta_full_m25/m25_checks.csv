@@ -1,0 +1,15 @@
+check,passed,blocking
+m24_prerequisite,True,True
+model_replay,True,True
+model_unchanged,True,True
+importance_methods,True,True
+feature_mapping_and_leakage,True,True
+shap_reconstruction,True,True
+source_and_macro_groups,True,True
+xgboost_explanation_comparison,True,True
+case_explanations,True,True
+external_report,True,True
+automated_tests,True,True
+source_compile,True,True
+reproduction_entrypoint,True,True
+artifact_manifest,True,True

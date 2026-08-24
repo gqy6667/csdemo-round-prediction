@@ -151,3 +151,21 @@ C:\Users\admin\11\envs\game\python.exe -m compileall src tests
 
 M25 通过后进入 M26：为冻结的购买结束 LightGBM 建立单条 JSON/CSV 预测接口，并复用
 M24 validation-only 选择的 identity 校准器。
+
+## 12. 实际结果（2026-08-25）
+
+- 14/14 阻断检查、192 项自动化测试和源码编译全部通过，可进入 M26；
+- 4,172 条 M24 测试概率最大回放误差为 `1.11e-16`，五项指标最大差为 `0`，
+  LightGBM fit 调用为 `0`；
+- 模型运行前后 SHA-256 均为
+  `3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd`；
+- 43 个编码列全部映射到 36 个允许原始特征和五个 M14 宏观组，完整审计及 SHAP
+  前 20 的泄漏失败数均为 `0`；
+- 原生 TreeSHAP 概率重建最大绝对误差为 `7.77e-16`；
+- `eq_value_diff_ct` 的 Gain、原始特征分组 Permutation 和 SHAP 均排第 1，打乱后
+  测试 AUC 平均下降 `0.074344`；
+- economy 宏观组最重要，整体打乱后测试 AUC 平均下降 `0.133319`；
+- LightGBM 与 M12 XGBoost 的 Gain/Permutation/TreeSHAP/平均排名 Spearman 分别为
+  `0.730/0.751/0.866/0.835`，Top 10 交集分别为 `8/9/9/9`；
+- 三类固定案例和每例前 10 个贡献均已生成；
+- 正式结果见 `reports/esta_full_m25/m25_pre_round_lightgbm_explanation_report.md`。
