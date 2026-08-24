@@ -1,0 +1,493 @@
+{
+  "stage": "M23",
+  "generated_at_utc": "2026-08-24T11:18:57.822088+00:00",
+  "code": {
+    "commit": "8bf0e4259ed28e824043b7ef44db657381b39e48",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_clean_before_report_generation": true,
+    "working_tree_status_before_report_generation": [],
+    "ignored_report_status": [
+      "?? reports/esta_full_m23/"
+    ]
+  },
+  "input_artifacts": {
+    "pre_round_data": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/pre_round.parquet",
+      "bytes": 1255792,
+      "sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72"
+    },
+    "m22_summary": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m22/m22_summary.json",
+      "bytes": 9257,
+      "sha256": "cb66f5c578c0079adfedc930ca51825a67c0a11f13c7edeb7ff6ba7224c19d49"
+    },
+    "m22_test_predictions": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m22/m22_test_predictions.csv",
+      "bytes": 763544,
+      "sha256": "980657597fa77f198e5497ce42e934f4a980059c8df3a8e87d003a51f1bde80e"
+    },
+    "m22_model_comparison": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m22/m22_model_comparison.csv",
+      "bytes": 1441,
+      "sha256": "ae99ac463b95d3a3bbdd6670cf2f3601dd0cdb4b856ecb8e4f1fae50d15a63c3"
+    },
+    "m22_encoded_columns": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m22/encoded_feature_columns.csv",
+      "bytes": 577,
+      "sha256": "eb5bff118d34c422f3fa311f8e5d56c03d8601ecdecb6041dbfcf43cb5c303ea"
+    },
+    "requirements_lock": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/requirements-lock.txt",
+      "bytes": 201,
+      "sha256": "5533564a59b311cf8de4d043f89624a756e6b85c18b57cf18297986c87526a61"
+    }
+  },
+  "output_artifacts": {
+    "lightgbm_tuned_model": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "bytes": 215024,
+      "sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+    }
+  },
+  "contract": {
+    "base_params": {
+      "boosting_type": "gbdt",
+      "n_estimators": 3000,
+      "learning_rate": 0.03,
+      "num_leaves": 15,
+      "min_child_samples": 20,
+      "subsample": 0.85,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "max_depth": -1,
+      "min_split_gain": 0.0,
+      "random_state": 42
+    },
+    "frozen_params": {
+      "boosting_type": "gbdt",
+      "n_estimators": 3000,
+      "learning_rate": 0.03,
+      "num_leaves": 15,
+      "min_child_samples": 20,
+      "subsample": 0.85,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "max_depth": -1,
+      "min_split_gain": 0.0,
+      "random_state": 42
+    },
+    "phase_definitions": [
+      {
+        "name": "num_leaves",
+        "allowed_parameters": [
+          "num_leaves"
+        ],
+        "candidates": [
+          {
+            "id": "num_leaves_7",
+            "label": "7",
+            "overrides": {
+              "num_leaves": 7
+            }
+          },
+          {
+            "id": "num_leaves_15",
+            "label": "15",
+            "overrides": {
+              "num_leaves": 15
+            }
+          },
+          {
+            "id": "num_leaves_31",
+            "label": "31",
+            "overrides": {
+              "num_leaves": 31
+            }
+          },
+          {
+            "id": "num_leaves_63",
+            "label": "63",
+            "overrides": {
+              "num_leaves": 63
+            }
+          }
+        ]
+      },
+      {
+        "name": "max_depth",
+        "allowed_parameters": [
+          "max_depth"
+        ],
+        "candidates": [
+          {
+            "id": "max_depth_-1",
+            "label": "-1",
+            "overrides": {
+              "max_depth": -1
+            }
+          },
+          {
+            "id": "max_depth_3",
+            "label": "3",
+            "overrides": {
+              "max_depth": 3
+            }
+          },
+          {
+            "id": "max_depth_4",
+            "label": "4",
+            "overrides": {
+              "max_depth": 4
+            }
+          },
+          {
+            "id": "max_depth_5",
+            "label": "5",
+            "overrides": {
+              "max_depth": 5
+            }
+          },
+          {
+            "id": "max_depth_6",
+            "label": "6",
+            "overrides": {
+              "max_depth": 6
+            }
+          }
+        ]
+      },
+      {
+        "name": "min_child_samples",
+        "allowed_parameters": [
+          "min_child_samples"
+        ],
+        "candidates": [
+          {
+            "id": "min_child_samples_10",
+            "label": "10",
+            "overrides": {
+              "min_child_samples": 10
+            }
+          },
+          {
+            "id": "min_child_samples_20",
+            "label": "20",
+            "overrides": {
+              "min_child_samples": 20
+            }
+          },
+          {
+            "id": "min_child_samples_40",
+            "label": "40",
+            "overrides": {
+              "min_child_samples": 40
+            }
+          },
+          {
+            "id": "min_child_samples_80",
+            "label": "80",
+            "overrides": {
+              "min_child_samples": 80
+            }
+          },
+          {
+            "id": "min_child_samples_160",
+            "label": "160",
+            "overrides": {
+              "min_child_samples": 160
+            }
+          }
+        ]
+      },
+      {
+        "name": "reg_lambda",
+        "allowed_parameters": [
+          "reg_lambda"
+        ],
+        "candidates": [
+          {
+            "id": "reg_lambda_0.0",
+            "label": "0.0",
+            "overrides": {
+              "reg_lambda": 0.0
+            }
+          },
+          {
+            "id": "reg_lambda_1.0",
+            "label": "1.0",
+            "overrides": {
+              "reg_lambda": 1.0
+            }
+          },
+          {
+            "id": "reg_lambda_3.0",
+            "label": "3.0",
+            "overrides": {
+              "reg_lambda": 3.0
+            }
+          },
+          {
+            "id": "reg_lambda_10.0",
+            "label": "10.0",
+            "overrides": {
+              "reg_lambda": 10.0
+            }
+          }
+        ]
+      },
+      {
+        "name": "reg_alpha",
+        "allowed_parameters": [
+          "reg_alpha"
+        ],
+        "candidates": [
+          {
+            "id": "reg_alpha_0.0",
+            "label": "0.0",
+            "overrides": {
+              "reg_alpha": 0.0
+            }
+          },
+          {
+            "id": "reg_alpha_0.1",
+            "label": "0.1",
+            "overrides": {
+              "reg_alpha": 0.1
+            }
+          },
+          {
+            "id": "reg_alpha_0.5",
+            "label": "0.5",
+            "overrides": {
+              "reg_alpha": 0.5
+            }
+          },
+          {
+            "id": "reg_alpha_1.0",
+            "label": "1.0",
+            "overrides": {
+              "reg_alpha": 1.0
+            }
+          }
+        ]
+      },
+      {
+        "name": "subsample",
+        "allowed_parameters": [
+          "subsample"
+        ],
+        "candidates": [
+          {
+            "id": "subsample_0.7",
+            "label": "0.7",
+            "overrides": {
+              "subsample": 0.7
+            }
+          },
+          {
+            "id": "subsample_0.85",
+            "label": "0.85",
+            "overrides": {
+              "subsample": 0.85
+            }
+          },
+          {
+            "id": "subsample_1.0",
+            "label": "1.0",
+            "overrides": {
+              "subsample": 1.0
+            }
+          }
+        ]
+      },
+      {
+        "name": "colsample_bytree",
+        "allowed_parameters": [
+          "colsample_bytree"
+        ],
+        "candidates": [
+          {
+            "id": "colsample_bytree_0.7",
+            "label": "0.7",
+            "overrides": {
+              "colsample_bytree": 0.7
+            }
+          },
+          {
+            "id": "colsample_bytree_0.85",
+            "label": "0.85",
+            "overrides": {
+              "colsample_bytree": 0.85
+            }
+          },
+          {
+            "id": "colsample_bytree_1.0",
+            "label": "1.0",
+            "overrides": {
+              "colsample_bytree": 1.0
+            }
+          }
+        ]
+      },
+      {
+        "name": "min_split_gain",
+        "allowed_parameters": [
+          "min_split_gain"
+        ],
+        "candidates": [
+          {
+            "id": "min_split_gain_0.0",
+            "label": "0.0",
+            "overrides": {
+              "min_split_gain": 0.0
+            }
+          },
+          {
+            "id": "min_split_gain_0.01",
+            "label": "0.01",
+            "overrides": {
+              "min_split_gain": 0.01
+            }
+          },
+          {
+            "id": "min_split_gain_0.05",
+            "label": "0.05",
+            "overrides": {
+              "min_split_gain": 0.05
+            }
+          },
+          {
+            "id": "min_split_gain_0.1",
+            "label": "0.1",
+            "overrides": {
+              "min_split_gain": 0.1
+            }
+          }
+        ]
+      },
+      {
+        "name": "learning_rate",
+        "allowed_parameters": [
+          "learning_rate"
+        ],
+        "candidates": [
+          {
+            "id": "learning_rate_0.01",
+            "label": "0.01",
+            "overrides": {
+              "learning_rate": 0.01
+            }
+          },
+          {
+            "id": "learning_rate_0.02",
+            "label": "0.02",
+            "overrides": {
+              "learning_rate": 0.02
+            }
+          },
+          {
+            "id": "learning_rate_0.03",
+            "label": "0.03",
+            "overrides": {
+              "learning_rate": 0.03
+            }
+          },
+          {
+            "id": "learning_rate_0.05",
+            "label": "0.05",
+            "overrides": {
+              "learning_rate": 0.05
+            }
+          }
+        ]
+      }
+    ],
+    "minimum_phase_improvement": 0.0001,
+    "stability_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "stability_limits": {
+      "val_log_loss": 0.002,
+      "val_auc": 0.003
+    },
+    "encoded_columns": [
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "map_name_de_ancient",
+      "map_name_de_dust2",
+      "map_name_de_inferno",
+      "map_name_de_mirage",
+      "map_name_de_nuke",
+      "map_name_de_overpass",
+      "map_name_de_train",
+      "map_name_de_vertigo"
+    ],
+    "test_use": "once after parameters and seed protocol were frozen"
+  },
+  "checks": {
+    "m22_prerequisite": true,
+    "data_contract": true,
+    "feature_contract": true,
+    "candidate_grid": true,
+    "validation_only": true,
+    "phase_selection": true,
+    "frozen_model": true,
+    "seed_stability": true,
+    "final_predictions": true,
+    "minimum_metrics": true,
+    "controlled_comparison": true,
+    "external_report": true,
+    "automated_tests": true,
+    "reproduction_entrypoint": true
+  },
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 14,
+    "blocking_total": 14,
+    "m23_lightgbm_tuning_complete": true,
+    "ready_for_m24": true
+  }
+}

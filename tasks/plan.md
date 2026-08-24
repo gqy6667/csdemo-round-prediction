@@ -35,5 +35,7 @@ and M22/XGBoost references fixed.
 
 ## Outcome
 
-In progress. M23 will preserve every candidate result and select only by validation
-Log Loss before a single frozen-model test evaluation.
+M23 completed. All 36 candidates and five seeds were evaluated without test metrics
+in the selection tables. No candidate met the fixed 0.0001 validation Log Loss
+improvement, so the accepted model retained M22 parameters and metrics. All 14
+blockers and 165 tests passed; M24 will evaluate the frozen model without tuning.

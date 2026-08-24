@@ -336,3 +336,17 @@ Loss 0.591437, Brier 0.205201, and ECE10 0.018875. It is slightly better than th
 frozen XGBoost on all five point metrics, but the margins are small. The next stage
 is M23 validation-only controlled LightGBM tuning; test metrics must not be used to
 select candidates.
+
+Run the M23 validation-only LightGBM tuning stage:
+
+```powershell
+.\scripts\run_pre_round_lightgbm_tuning.ps1
+```
+
+M23 evaluates 36 candidates across nine one-parameter phases and five fixed seeds.
+No candidate improves validation Log Loss by the predeclared 0.0001 minimum, so the
+accepted model deliberately retains the M22 parameters and test metrics. All 14
+blocking checks and 165 tests pass. See `reports/lightgbm_xgboost_external_metrics.md`
+for the consolidated LightGBM, final XGBoost, logistic-regression, and public-model
+comparison. M24 will evaluate the frozen model with grouped confidence intervals,
+robustness slices, and calibration diagnostics without further tuning.

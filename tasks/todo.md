@@ -6,8 +6,8 @@
 - [x] Implement frozen-model evaluation, comparisons, manifest, and report.
 - [x] Add the M23 one-click reproduction entrypoint.
 - [x] Run focused tests and commit executable M23 code.
-- [ ] Run the formal 36-candidate and five-seed experiment.
-- [ ] Verify test metrics, M22/XGBoost deltas, external deltas, and artifacts.
-- [ ] Run the complete suite and compile checks.
-- [ ] Update README, project paths, roadmap, and progress report.
-- [ ] Commit and push M23 to GitHub.
+- [x] Run the formal 36-candidate and five-seed experiment.
+- [x] Verify test metrics, M22/XGBoost deltas, external deltas, and artifacts.
+- [x] Run the complete suite and compile checks.
+- [x] Update README, project paths, roadmap, and progress report.
+- [x] Commit and push M23 to GitHub.

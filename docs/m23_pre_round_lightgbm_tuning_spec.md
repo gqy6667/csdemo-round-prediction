@@ -134,3 +134,13 @@ reports/esta_full_m23/m23_pre_round_lightgbm_tuning_report.md
 
 M23 通过后进入 M24：不再调参，冻结 M23 模型并做系列赛 bootstrap 置信区间、地图与
 LAN/online 稳健性、校准方法选择和错误分析。M24 不得根据 test 结果返回 M23 改网格。
+
+## 11. 正式运行结果
+
+M23 正式运行 36 个候选和 5 个固定种子。九个阶段均没有候选达到 `0.0001` 的 validation
+Log Loss 改善要求，因此接受参数变化数为 0，保留 M22 参数。最接近的
+`min_child_samples=10` 只改善 `0.000025`，`max_depth=4` 只改善 `0.000002`。
+
+最终测试 Accuracy/AUC/Log Loss/Brier/ECE10 仍为
+`0.650767/0.727846/0.591437/0.205201/0.018875`。五种子 Log Loss/AUC 范围为
+`0.000331/0.000547`。14/14 阻断项和 165 项完整测试通过，可以进入 M24。
