@@ -1,12 +1,13 @@
-# M22 Checklist
+# M23 Checklist
 
-- [x] Audit M14/M21 evidence and freeze the M22 specification.
-- [x] Write the consolidated XGBoost final summary.
-- [x] Add failing M22 LightGBM contract tests.
-- [x] Implement the LightGBM trainer and M22 acceptance runner.
-- [x] Add the M22 one-click reproduction entrypoint.
-- [x] Run focused tests and the real M22 experiment.
-- [x] Verify all metrics, internal differences, external differences, and artifacts.
-- [x] Run the complete suite and compile checks.
-- [x] Update README, project paths, roadmap, and learning record.
-- [x] Commit and push M22 to GitHub.
+- [x] Audit M22 evidence and freeze the M23 tuning specification.
+- [x] Add failing grid, validation isolation, selection, stability, and key tests.
+- [x] Implement the nine-phase sequential LightGBM search.
+- [x] Implement frozen-model evaluation, comparisons, manifest, and report.
+- [x] Add the M23 one-click reproduction entrypoint.
+- [x] Run focused tests and commit executable M23 code.
+- [ ] Run the formal 36-candidate and five-seed experiment.
+- [ ] Verify test metrics, M22/XGBoost deltas, external deltas, and artifacts.
+- [ ] Run the complete suite and compile checks.
+- [ ] Update README, project paths, roadmap, and progress report.
+- [ ] Commit and push M23 to GitHub.
