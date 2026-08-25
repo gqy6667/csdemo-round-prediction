@@ -8,7 +8,7 @@
 - [x] Update documentation, commit, and push the completed M27 stage.
 - [x] Write and verify the independent pre-round XGBoost teacher report.
 - [x] Write and verify the independent pre-round LightGBM teacher report.
-- [ ] Write and verify the independent post-first-kill XGBoost teacher report.
+- [x] Write and verify the independent post-first-kill XGBoost teacher report.
 - [ ] Freeze the M28 first-kill LightGBM controlled-baseline specification.
 - [ ] Add failing M28 data, feature, training, prediction, and paired-comparison tests.
 - [ ] Implement and train M28 without using test for fitting or selection.

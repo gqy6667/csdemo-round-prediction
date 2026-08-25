@@ -165,6 +165,69 @@ class TeacherReviewReportTests(unittest.TestCase):
         self.assertIn(pipeline["sha256"], report)
         self.assert_local_markdown_links_exist(report_path)
 
+    def test_post_first_kill_xgboost_report_matches_frozen_sources(self) -> None:
+        report_path = self.report_dir / "03_post_first_kill_xgboost_report.md"
+        report = report_path.read_text(encoding="utf-8")
+        m15 = self.load_json("reports/esta_full_m15/m15_summary.json")
+        m16 = self.load_json("reports/esta_full_m16/m16_summary.json")
+        m17 = self.load_json("reports/esta_full_m17/m17_summary.json")
+        m18 = self.load_json("reports/esta_full_m18/m18_summary.json")
+        m19 = self.load_json("reports/esta_full_m19/m19_summary.json")
+        m21 = self.load_json("reports/esta_full_m21/m21_summary.json")
+        manifest = self.load_json("reports/esta_full_m21/m21_experiment_manifest.json")
+
+        self.assertIn("购买完成后最早一次有效敌对击杀刚刚发生", report)
+        self.assertIn("不是算法提升", report)
+        self.assertIn("测试集只在参数和种子协议冻结后评估一次", report)
+        self.assertIn("首杀后 LightGBM 尚未完成", report)
+
+        for value in m21["metrics"].values():
+            self.assertIn(f"{value:.6f}", report)
+
+        with (self.root / "reports/esta_full_m18/global_bootstrap_95ci.csv").open(
+            newline="", encoding="utf-8"
+        ) as handle:
+            confidence_intervals = list(csv.DictReader(handle))
+        self.assertEqual(len(confidence_intervals), 5)
+        for row in confidence_intervals:
+            interval = (
+                f"[{float(row['ci_lower_95']):.6f}, "
+                f"{float(row['ci_upper_95']):.6f}]"
+            )
+            self.assertIn(interval, report)
+
+        self.assertIn(f"{m15['counts']['sample_rows']:,}", report)
+        self.assertIn(str(m15["counts"]["excluded_rounds"]), report)
+        self.assertIn(
+            f"{m15['previous_dataset_comparison']['event_changed_rows']:,}", report
+        )
+        for count in m21["data"]["split_rows"].values():
+            self.assertIn(f"{count:,}", report)
+        for count in m21["data"]["split_series"].values():
+            self.assertIn(f"{count:,}", report)
+
+        self.assertIn(m21["data"]["sha256"], report)
+        self.assertIn(m21["artifacts"]["model"]["sha256"], report)
+        self.assertIn(m21["artifacts"]["calibrator"]["sha256"], report)
+        self.assertIn(str(m16["features"]["raw_count"]), report)
+        self.assertIn(str(m16["features"]["encoded_count"]), report)
+        self.assertIn(str(m17["tuning"]["phase_count"]), report)
+        self.assertIn(str(m17["tuning"]["candidate_count"]), report)
+        self.assertIn(str(m17["frozen_model"]["best_tree_count"]), report)
+        self.assertIn(m18["calibration"]["selected_method"], report)
+        self.assertIn(
+            f"{m19['shap_reconstruction_max_abs_error']:.6e}", report
+        )
+        self.assertIn("非因果", report)
+        self.assertIn("17/17", report)
+        self.assertIn(
+            manifest["artifact_fingerprints"][
+                "scripts/run_first_kill_pipeline.ps1"
+            ]["sha256"],
+            report,
+        )
+        self.assert_local_markdown_links_exist(report_path)
+
 
 if __name__ == "__main__":
     unittest.main()

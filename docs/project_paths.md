@@ -770,11 +770,13 @@ reports\esta_full_m27\m27_experiment_manifest.json
 老师查收材料采用统一规格并逐份验收。前两份“购买结束、交火前”报告已经完成：
 XGBoost 报告对照 M9-M14，LightGBM 报告对照 M22-M27。五项指标、全局系列赛
 bootstrap 区间、LightGBM-XGBoost 配对区间、切分数量、训练合同和关键哈希均由
-自动测试核对，本地链接检查通过；完成第二份报告后的全量测试为 213 项。
+自动测试核对，本地链接检查通过。第三份“首杀后 XGBoost”报告也已对照 M15-M21
+完成，明确区分首杀信息增量与算法提升；完成该报告后的全量测试为 214 项。
 
 ```text
 docs\teacher_review_reports_spec.md
 reports\teacher_review\01_pre_round_xgboost_report.md
 reports\teacher_review\02_pre_round_lightgbm_report.md
+reports\teacher_review\03_post_first_kill_xgboost_report.md
 tests\test_teacher_review_reports.py
 ```
