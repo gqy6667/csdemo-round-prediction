@@ -1,49 +1,51 @@
-# M26 Implementation Plan
+# M27-M28 Implementation Plan
 
 ## Scope
 
-Package the accepted M23/M24/M25 pre-round LightGBM as a strict one-row JSON/CSV
-prediction interface. Bind inference to the frozen model, identity calibrator,
-feature order, map vocabulary, deployment tree count, and artifact hashes.
+First close the frozen pre-round LightGBM line with M27 final acceptance. Then create
+independent teacher-review reports for the accepted pre-round XGBoost, pre-round
+LightGBM, and post-first-kill XGBoost lines. Only after those reports are verified,
+start M28 by replacing the accepted first-kill M21 XGBoost algorithm with a fixed
+LightGBM baseline while retaining data, grouped split, prediction point, features,
+and metrics. The fourth report must use completed LightGBM evidence, never placeholders.
 
 ## Slices
 
-1. Freeze M26 artifacts, input/output contracts, invalid cases, outputs, and blockers.
-2. Add failing tests for model/calibrator drift, input validation, real prediction,
-   JSON/CSV equality, CLI behavior, and acceptance artifacts.
-3. Implement the strict LightGBM predictor and make focused tests green.
-4. Implement prerequisite checks, invalid-case audit, frozen metrics, external
-   comparison, report, manifest, and one-click runner.
-5. Run the formal interface acceptance, full suite and compile checks; document,
-   commit, and push the complete stage.
+1. Freeze M27 inputs, blockers, reproduction modes, outputs, and no-fit policy.
+2. Add failing M27 contract tests, implement replay and acceptance, then run the
+   formal real-artifact gate.
+3. Commit and push M27 before opening the first-kill LightGBM stage.
+4. Build and verify three independent frozen-result reports with one consistent
+   review structure; do not compare different prediction times as algorithm effects.
+5. Freeze M28 baseline parameters, metrics, paired-series uncertainty, and
+   acceptance thresholds before training.
+6. Add failing M28 tests, implement the controlled baseline, train using train with
+   validation-only early stopping, and evaluate test exactly once.
+7. Complete the post-first-kill LightGBM evaluation and acceptance, then write its
+   independent report and the teacher review index.
+8. Run focused/full tests and compile checks, verify manifests and links, document,
+   commit, and push the report deliverables and LightGBM stages.
 
 ## Risks
 
-- Interface drift: require exact 36 raw and 43 encoded columns in saved order.
-- Artifact mismatch: bind calibrator model/data hashes to the loaded model.
-- Silent category fallback: reject maps absent from the training vocabulary.
-- Invalid snapshots: collect type, range, round, inventory, future, and identity errors.
-- Metric misuse: example probability never becomes a performance metric.
-- Training leakage: no fit path exists in the predictor or stage acceptance.
+- Test leakage: no test metric can appear in M27 replay selection or M28 training.
+- Contract drift: require exact M21 first-kill rows, keys, split, and feature order.
+- False superiority: paired confidence intervals govern claims, not point metrics.
+- Artifact drift: hash model, calibrator, data, summaries, and outputs.
+- Scope mixing: M27 must pass and be committed before M28 implementation begins.
+- Report drift: every number and hash must trace to a frozen machine-readable artifact.
+- Timing confusion: pre-round and post-first-kill metrics are not fair algorithm comparisons.
 
 ## Review Gates
 
-- Gate A: the M26 specification exists before tests or implementation.
-- Gate B: focused M26 tests fail because the modules do not yet exist.
-- Gate C: focused tests pass before the formal real-artifact run.
-- Gate D: JSON/CSV and CLI paths pass against frozen artifacts, including all invalid cases.
-- Gate E: the complete suite, compile check, artifact parsing, and Git checks pass.
+- Gate A: M27 specification exists before M27 tests and code.
+- Gate B: M27 focused tests fail for the missing module, then pass after implementation.
+- Gate C: M27 formal artifacts, hashes, full suite, compile, commit, and push pass.
+- Gate D: the first three teacher reports agree with their accepted source artifacts.
+- Gate E: M28 specification exists before training code or model fitting.
+- Gate F: the fourth report is created only after completed M28+ evidence exists.
+- Gate G: all four reports and the index pass number, hash, link, and test checks.
 
 ## Outcome
 
-M26 passed all 15 blocking checks. The frozen M23 LightGBM and M24 identity
-calibrator now support strict one-row JSON/CSV inference with 27 required inputs,
-9 derived CT-minus-T features, 36 raw features, 43 encoded features, 8 known maps,
-and 115 deployment trees. JSON and CSV probabilities match exactly, all 10 invalid
-cases are rejected, and the example predicts CT/T at
-`0.5507644902 / 0.4492355098`.
-
-The formal run made zero LightGBM fit calls, preserved both artifact hashes, kept
-all five M25 metrics unchanged, passed 201 automated tests and source compilation,
-and verified all 25 manifest input/output hashes. M26 is ready for M27 final
-pre-round LightGBM acceptance and one-command reproduction.
+In progress.
