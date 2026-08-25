@@ -766,3 +766,13 @@ reports\esta_full_m27\m27_experiment_manifest.json
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和
 `external_benchmark_comparison.md`，统一说明与公开模型的数值差和可比性。
+
+老师查收材料采用统一规格并逐份验收。当前第一份“购买结束、交火前 XGBoost”报告
+已经对照 M9-M14 冻结产物完成，五项指标、系列赛 bootstrap 区间、切分数量、训练
+合同和关键哈希均由自动测试核对，本地链接检查通过；完成该报告后的全量测试为 212 项。
+
+```text
+docs\teacher_review_reports_spec.md
+reports\teacher_review\01_pre_round_xgboost_report.md
+tests\test_teacher_review_reports.py
+```
