@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "checks": {
+    "m25_accepted": true,
+    "m24_accepted": true,
+    "model_sha256": true,
+    "model_bytes": true,
+    "calibrator_sha256": true,
+    "calibrator_bytes": true,
+    "model_contract": true,
+    "calibrator_contract": true,
+    "deployment_tree_contract": true,
+    "data_contract": true,
+    "frozen_metrics": true
+  },
+  "model_artifact": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+    "bytes": 215024,
+    "sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+  },
+  "expected_model_artifact": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+    "bytes": 215024,
+    "sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+  },
+  "calibrator_artifact": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+    "bytes": 494,
+    "sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1"
+  },
+  "expected_calibrator_artifact": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+    "bytes": 494,
+    "sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1"
+  },
+  "model_contract": {
+    "passed": true,
+    "task": "pre_round",
+    "model_name": "lightgbm_tuned",
+    "profile": "M14_pre_round_features",
+    "definition": "freeze-time end after purchases and before combat",
+    "raw_feature_count": 36,
+    "encoded_feature_count": 43,
+    "known_map_count": 8,
+    "known_maps": [
+      "de_ancient",
+      "de_dust2",
+      "de_inferno",
+      "de_mirage",
+      "de_nuke",
+      "de_overpass",
+      "de_train",
+      "de_vertigo"
+    ],
+    "deployment_tree_count": 115,
+    "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "selection_metric": "validation_log_loss",
+    "official_seed": 42
+  },
+  "calibrator_contract": {
+    "passed": true,
+    "task": "pre_round",
+    "method": "uncalibrated",
+    "base_model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+    "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "selection_data": "validation only",
+    "validation_folds": 5
+  }
+}

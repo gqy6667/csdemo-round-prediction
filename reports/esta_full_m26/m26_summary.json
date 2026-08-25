@@ -1,0 +1,241 @@
+{
+  "stage": "M26",
+  "generated_at_utc": "2026-08-25T12:46:14.644879+00:00",
+  "task": "pre_round",
+  "definition": "freeze-time end after purchases and before combat",
+  "model_policy": "M23/M24 artifacts frozen; one-row inference only; no fit or tuning",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 15,
+    "blocking_total": 15,
+    "m26_lightgbm_interface_complete": true,
+    "ready_for_m27": true
+  },
+  "checks": {
+    "m25_m24_prerequisite": true,
+    "artifact_contracts": true,
+    "json_csv_validation": true,
+    "json_csv_prediction_match": true,
+    "probability_contract": true,
+    "invalid_examples": true,
+    "feature_alignment": true,
+    "fixed_metrics": true,
+    "artifact_integrity": true,
+    "external_report": true,
+    "cli_contract": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true,
+    "artifact_manifest": true
+  },
+  "prerequisite": {
+    "passed": true,
+    "checks": {
+      "m25_accepted": true,
+      "m24_accepted": true,
+      "model_sha256": true,
+      "model_bytes": true,
+      "calibrator_sha256": true,
+      "calibrator_bytes": true,
+      "model_contract": true,
+      "calibrator_contract": true,
+      "deployment_tree_contract": true,
+      "data_contract": true,
+      "frozen_metrics": true
+    },
+    "model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "bytes": 215024,
+      "sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+    },
+    "expected_model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "bytes": 215024,
+      "sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+    },
+    "calibrator_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+      "bytes": 494,
+      "sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1"
+    },
+    "expected_calibrator_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+      "bytes": 494,
+      "sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1"
+    },
+    "model_contract": {
+      "passed": true,
+      "task": "pre_round",
+      "model_name": "lightgbm_tuned",
+      "profile": "M14_pre_round_features",
+      "definition": "freeze-time end after purchases and before combat",
+      "raw_feature_count": 36,
+      "encoded_feature_count": 43,
+      "known_map_count": 8,
+      "known_maps": [
+        "de_ancient",
+        "de_dust2",
+        "de_inferno",
+        "de_mirage",
+        "de_nuke",
+        "de_overpass",
+        "de_train",
+        "de_vertigo"
+      ],
+      "deployment_tree_count": 115,
+      "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+      "selection_metric": "validation_log_loss",
+      "official_seed": 42
+    },
+    "calibrator_contract": {
+      "passed": true,
+      "task": "pre_round",
+      "method": "uncalibrated",
+      "base_model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+      "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+      "selection_data": "validation only",
+      "validation_folds": 5
+    }
+  },
+  "model_performance_changed": false,
+  "lightgbm_fit_calls": 0,
+  "input_contract": {
+    "required_input_field_count": 27,
+    "derived_feature_count": 9,
+    "raw_feature_count": 36,
+    "encoded_feature_count": 43,
+    "known_map_count": 8,
+    "known_maps": [
+      "de_ancient",
+      "de_dust2",
+      "de_inferno",
+      "de_mirage",
+      "de_nuke",
+      "de_overpass",
+      "de_train",
+      "de_vertigo"
+    ],
+    "deployment_tree_count": 115
+  },
+  "artifacts": {
+    "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+    "calibrator_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+    "model_unchanged": true,
+    "calibrator_unchanged": true
+  },
+  "example_prediction": {
+    "task": "pre_round",
+    "model_name": "lightgbm_tuned",
+    "snapshot_definition": "freeze-time end after purchases and before combat",
+    "calibration_method": "uncalibrated",
+    "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+    "validation": {
+      "status": "passed",
+      "required_base_feature_count": 27,
+      "provided_field_count": 27,
+      "derived_features": [
+        "score_diff_ct",
+        "eq_value_diff_ct",
+        "cash_diff_ct",
+        "armor_diff_ct",
+        "helmet_diff_ct",
+        "grenade_diff_ct",
+        "awp_diff_ct",
+        "rifle_diff_ct",
+        "smg_diff_ct"
+      ],
+      "model_feature_count_before_encoding": 36,
+      "map_name": "de_nuke",
+      "raw_model_feature_count": 36,
+      "model_contract_verified": true,
+      "calibrator_contract_verified": true,
+      "deployment_tree_count": 115,
+      "encoded_model_feature_count": 43
+    },
+    "prediction": {
+      "base_ct_win_probability": 0.5507644901879069,
+      "ct_win_probability": 0.5507644901879069,
+      "t_win_probability": 0.44923550981209315,
+      "predicted_side": "CT",
+      "decision_threshold": 0.5,
+      "probability_sum": 1.0
+    }
+  },
+  "json_csv_probability_difference": 0.0,
+  "validation_cases": {
+    "passed": 10,
+    "total": 10
+  },
+  "fixed_test_metrics": {
+    "accuracy": 0.6507670182166826,
+    "log_loss": 0.5914369800026945,
+    "brier_score": 0.20520059289240616,
+    "ece10": 0.018874543992825548,
+    "auc": 0.7278463079406734
+  },
+  "fixed_metric_max_absolute_difference": 0.0,
+  "external_comparison": {
+    "passed": true,
+    "rows": 4,
+    "duplicate_benchmark_ids": 0,
+    "unknown_metrics": [],
+    "invalid_numeric_cells": 0,
+    "current_metric_max_absolute_difference_vs_m24": 0.0,
+    "tolerance": 1e-12
+  },
+  "cli_contract": {
+    "passed": true,
+    "checks": {
+      "success_exit_zero": true,
+      "success_json": true,
+      "success_output_file": true,
+      "invalid_exit_two": true,
+      "invalid_error_json": true,
+      "invalid_error_specific": true
+    },
+    "success_return_code": 0,
+    "failure_return_code": 2,
+    "success_stderr": "",
+    "failure_payload": {
+      "status": "error",
+      "error_type": "InputValidationError",
+      "message": "Input validation failed:\n- map_name 'de_cache' was not seen during training; choose one of ['de_ancient', 'de_dust2', 'de_inferno', 'de_mirage', 'de_nuke', 'de_overpass', 'de_train', 'de_vertigo']",
+      "errors": [
+        "map_name 'de_cache' was not seen during training; choose one of ['de_ancient', 'de_dust2', 'de_inferno', 'de_mirage', 'de_nuke', 'de_overpass', 'de_train', 'de_vertigo']"
+      ]
+    },
+    "output_path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/cli_prediction_output.json"
+  },
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 11.74761269999999,
+    "test_count": 201,
+    "skipped": false
+  },
+  "source_compile": {
+    "passed": true,
+    "return_code": 0,
+    "command": [
+      "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+      "-m",
+      "compileall",
+      "src",
+      "tests"
+    ],
+    "output": "Listing 'src'...\nListing 'src\\\\csdemo'...\nListing 'tests'...\n",
+    "skipped": false
+  },
+  "roadmap": {
+    "pre_round_xgboost": "complete_through_M14",
+    "first_kill_xgboost": "complete_through_M21",
+    "pre_round_lightgbm_current": "M26_interface_complete",
+    "next_stage": "M27 pre-round LightGBM final acceptance",
+    "later_tracks": [
+      "post-first-kill LightGBM controlled comparison",
+      "real-time win probability data and model"
+    ]
+  },
+  "next_stage": "M27 pre-round LightGBM final acceptance"
+}

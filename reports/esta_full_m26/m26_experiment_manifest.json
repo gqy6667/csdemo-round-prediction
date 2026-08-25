@@ -1,0 +1,147 @@
+{
+  "stage": "M26",
+  "generated_at_utc": "2026-08-25T12:46:14.652496+00:00",
+  "command": "powershell -File scripts/run_pre_round_lightgbm_interface.ps1",
+  "policy": "frozen one-row inference; no training or example-driven selection",
+  "inputs": [
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "bytes": 215024,
+      "sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+      "bytes": 494,
+      "sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/examples/pre_round_snapshot.json",
+      "bytes": 489,
+      "sha256": "e24e2580d51f29010d0a4b2d839c45d09ce8cb9035ec291155fc5f7ff00f4e65"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/examples/pre_round_snapshot.csv",
+      "bytes": 322,
+      "sha256": "53389aa21d0d53573844687aaa6f2aa90fd537b00e2087c143b31d2255849541"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m24/m24_summary.json",
+      "bytes": 10501,
+      "sha256": "94a2e320571d52cdfa997228b54dbe161b51ab7626ba80ae814357a9d1f85d84"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m25/m25_summary.json",
+      "bytes": 11671,
+      "sha256": "f160e6ee653063251477d48c9179023a9a6d3a219c682c5f630a00ddae44a516"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m25/external_benchmark_comparison.csv",
+      "bytes": 2298,
+      "sha256": "5936c841598da207ba47d8145b1d9b662cb03331a07b85f23859b33f51d903ad"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/docs/m26_pre_round_lightgbm_prediction_interface_spec.md",
+      "bytes": 7622,
+      "sha256": "057cf81cf3a20a3a24451e643fd22d6997687b53de8c7fc991d0e5546274f577"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/src/csdemo/predict_pre_round_lightgbm.py",
+      "bytes": 13288,
+      "sha256": "502a3d92a5fa4f6333b3b2d458e81239d32c30d81add9785a59a7efb83fcb54f"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/src/csdemo/m26_pre_round_lightgbm_interface.py",
+      "bytes": 27547,
+      "sha256": "75ac424fd1bfcf7e603081c1acb3ba1210c4357f3f35487f7319b7747cde38bc"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/scripts/run_pre_round_lightgbm_interface.ps1",
+      "bytes": 1124,
+      "sha256": "771f5d4465f4ec68ccfd2e37cc6cd324c0ebd6305b4f0929ba81fa9a9cb2c8b3"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/automated_test_output.txt",
+      "bytes": 24441,
+      "sha256": "01431d3048845b7a4e5755ef8f03b72efffa8a6f521b397504a8d206af95b8ff"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/cli_contract_audit.json",
+      "bytes": 982,
+      "sha256": "c2b71c05c570466ff7c1f6cc4abb969a6c8409e3b1a31ab6b5195a5e792ddbf0"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/cli_prediction_output.json",
+      "bytes": 1172,
+      "sha256": "59054084ec5356774fdeecea0fff31d0a167700a027a7478025c4bca9485d87a"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/example_prediction.json",
+      "bytes": 1172,
+      "sha256": "59054084ec5356774fdeecea0fff31d0a167700a027a7478025c4bca9485d87a"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/external_benchmark_comparison.csv",
+      "bytes": 2298,
+      "sha256": "5936c841598da207ba47d8145b1d9b662cb03331a07b85f23859b33f51d903ad"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/external_benchmark_comparison.md",
+      "bytes": 1334,
+      "sha256": "c8297c6649a89dc97deabb25712de438d60694863cf4e342fe0fd6d8fb537a0d"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/fixed_test_metrics.csv",
+      "bytes": 157,
+      "sha256": "06756d25f882bebf7462d6c618af06b4a1a28271b283a0f7d3caf6aeaa0f05c2"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/m26_checks.csv",
+      "bytes": 465,
+      "sha256": "8846ddd0e297494f013d23d2a653492bc3937fabbecc2b478fe029b35ee915f6"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/m26_pre_round_lightgbm_interface_report.md",
+      "bytes": 3150,
+      "sha256": "8c8dc24c1e239e6e76533b10956acb01cb2b32f6a59958519b1ae65961977ce5"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/m26_summary.json",
+      "bytes": 8333,
+      "sha256": "8f86b20e642ee9668732eeeb4d6a8caeaee2d5693f934340125cb0c05ba190ab"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/model_contract_audit.json",
+      "bytes": 2575,
+      "sha256": "3d6c0d59c3ea1c34ee35c7243cef69d7159622cc18ee0a95744543428d288568"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/source_compile_output.txt",
+      "bytes": 64,
+      "sha256": "5bcdbbe2733f092f7027f4e677038c42afeb792db3480d1a71d9e59f585b6a06"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/validation_error_examples.json",
+      "bytes": 1869,
+      "sha256": "8df94052becd76950047e9d3615dea7f7f75fa7fa492b1975f4efa5753bfedbb"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/examples/pre_round_lightgbm_prediction_output.json",
+      "bytes": 1172,
+      "sha256": "59054084ec5356774fdeecea0fff31d0a167700a027a7478025c4bca9485d87a"
+    }
+  ],
+  "model_sha256_before": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+  "model_sha256_after": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+  "calibrator_sha256_before": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+  "calibrator_sha256_after": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 15,
+    "blocking_total": 15,
+    "m26_lightgbm_interface_complete": true,
+    "ready_for_m27": true
+  }
+}

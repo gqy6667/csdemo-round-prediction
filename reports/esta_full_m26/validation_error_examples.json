@@ -1,0 +1,83 @@
+[
+  {
+    "case": "missing_required_field",
+    "rejected": true,
+    "error_count": 2,
+    "errors": [
+      "missing required fields: round_num",
+      "round_num: required field is missing"
+    ]
+  },
+  {
+    "case": "unknown_map",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "map_name 'de_cache' was not seen during training; choose one of ['de_ancient', 'de_dust2', 'de_inferno', 'de_mirage', 'de_nuke', 'de_overpass', 'de_train', 'de_vertigo']"
+    ]
+  },
+  {
+    "case": "round_score_inconsistency",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "round_num must equal ct_score + t_score + 1; expected 4, got 5"
+    ]
+  },
+  {
+    "case": "string_numeric_type",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "ct_eq_value must be an integer; got '22000'"
+    ]
+  },
+  {
+    "case": "inventory_inconsistency",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "ct_rifles (1) cannot be smaller than the named rifle total (3)"
+    ]
+  },
+  {
+    "case": "derived_feature_inconsistency",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "score_diff_ct must equal ct_score - t_score; expected 1, got 99"
+    ]
+  },
+  {
+    "case": "identifier_field",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "unknown fields: series_id"
+    ]
+  },
+  {
+    "case": "target_leakage",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "unknown fields: ct_win"
+    ]
+  },
+  {
+    "case": "future_first_kill_field",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "unknown fields: first_kill_time"
+    ]
+  },
+  {
+    "case": "team_identity_field",
+    "rejected": true,
+    "error_count": 1,
+    "errors": [
+      "unknown fields: team_name"
+    ]
+  }
+]

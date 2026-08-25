@@ -110,6 +110,8 @@ src\csdemo\m22_pre_round_lightgbm_baseline.py M22 开局前公平对照、回放
 src\csdemo\m23_pre_round_lightgbm_tuning.py M23 validation-only 调参、稳定性和冻结评估
 src\csdemo\m24_pre_round_lightgbm_evaluation.py M24 固定评估、配对 bootstrap、稳健性和校准
 src\csdemo\m25_pre_round_lightgbm_explanation.py M25 三种解释、分组置换、泄漏和 XGBoost 对照
+src\csdemo\predict_pre_round_lightgbm.py M26 单条 JSON/CSV 校验、特征对齐和概率预测
+src\csdemo\m26_pre_round_lightgbm_interface.py M26 工件合同、CLI、验收和报告生成
 src\csdemo\schema.py           特征列和 ID 列定义
 src\csdemo\config.py           路径、随机种子和 70/20/10 比例
 ```
@@ -435,6 +437,20 @@ reports\esta_full_m25\external_benchmark_comparison.csv
 reports\esta_full_m25\m25_pre_round_lightgbm_explanation_report.md
 ```
 
+M26 开局前 LightGBM 单条预测接口：
+
+```text
+examples\pre_round_lightgbm_prediction_output.json
+reports\esta_full_m26\m26_summary.json
+reports\esta_full_m26\m26_checks.csv
+reports\esta_full_m26\m26_experiment_manifest.json
+reports\esta_full_m26\model_contract_audit.json
+reports\esta_full_m26\validation_error_examples.json
+reports\esta_full_m26\fixed_test_metrics.csv
+reports\esta_full_m26\external_benchmark_comparison.csv
+reports\esta_full_m26\m26_pre_round_lightgbm_interface_report.md
+```
+
 ## 文档路径
 
 ```text
@@ -460,6 +476,7 @@ docs\m22_pre_round_lightgbm_baseline_spec.md M22 固定数据、特征、训练�
 docs\m23_pre_round_lightgbm_tuning_spec.md M23 九阶段网格、validation-only 和稳定性合同
 docs\m24_pre_round_lightgbm_evaluation_spec.md M24 固定模型区间、分组、校准和错误审计合同
 docs\m25_pre_round_lightgbm_explanation_spec.md M25 解释、泄漏和 XGBoost 排名对照合同
+docs\m26_pre_round_lightgbm_prediction_interface_spec.md M26 单条输入、工件绑定和 CLI 合同
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -631,6 +648,21 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_first_kill --input 
 .\scripts\run_pre_round_lightgbm_explanation.ps1
 ```
 
+运行 M26 开局前 LightGBM 单条 JSON/CSV 接口验收：
+
+```powershell
+.\scripts\run_pre_round_lightgbm_interface.ps1
+```
+
+直接预测一条 JSON 快照：
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_pre_round_lightgbm `
+  --input examples\pre_round_snapshot.json `
+  --model models\esta_full_m23\pre_round_lightgbm_tuned.joblib `
+  --calibrator models\esta_full_m24\pre_round_lightgbm_calibrator.joblib
+```
+
 只从 M14 产物重建首杀后流水线：
 
 ```powershell
@@ -689,16 +721,21 @@ LightGBM-XGBoost 配对区间、validation-only 校准和 30 个高置信错误�
 M25 已完成固定模型的 Gain/Split、20 次编码列/36 个原始特征/五个宏观组
 Permutation、原生 TreeSHAP、完整泄漏审计和 M12 XGBoost 解释对照。43 个编码列全部
 映射成功，泄漏失败为 0，SHAP 概率重建误差为 7.77e-16。14/14 阻断项、192 项测试和
-源码编译通过。下一阶段为 M26 LightGBM 单条 JSON/CSV 预测接口。M25 核心文件为：
+源码编译通过。M26 已把冻结 LightGBM 封装为单条 JSON/CSV 接口：27 个基础字段自动
+生成 9 个差值，严格对齐 36 个原始和 43 个编码特征，JSON/CSV 概率差为 0，10/10
+非法案例被拒绝。15/15 阻断项、201 项测试和源码编译通过，模型与校准器哈希不变，
+下一阶段为 M27 最终验收和一键复现。M26 核心文件为：
 
 ```text
-src\csdemo\m25_pre_round_lightgbm_explanation.py
-tests\test_m25_pre_round_lightgbm_explanation.py
-scripts\run_pre_round_lightgbm_explanation.ps1
-docs\m25_pre_round_lightgbm_explanation_spec.md
-reports\esta_full_m25\m25_pre_round_lightgbm_explanation_report.md
-reports\esta_full_m25\m25_summary.json
-reports\esta_full_m25\m25_experiment_manifest.json
+src\csdemo\predict_pre_round_lightgbm.py
+src\csdemo\m26_pre_round_lightgbm_interface.py
+tests\test_m26_pre_round_lightgbm_prediction.py
+scripts\run_pre_round_lightgbm_interface.ps1
+docs\m26_pre_round_lightgbm_prediction_interface_spec.md
+examples\pre_round_lightgbm_prediction_output.json
+reports\esta_full_m26\m26_pre_round_lightgbm_interface_report.md
+reports\esta_full_m26\m26_summary.json
+reports\esta_full_m26\m26_experiment_manifest.json
 ```
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和

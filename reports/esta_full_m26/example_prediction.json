@@ -1,0 +1,38 @@
+{
+  "task": "pre_round",
+  "model_name": "lightgbm_tuned",
+  "snapshot_definition": "freeze-time end after purchases and before combat",
+  "calibration_method": "uncalibrated",
+  "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+  "validation": {
+    "status": "passed",
+    "required_base_feature_count": 27,
+    "provided_field_count": 27,
+    "derived_features": [
+      "score_diff_ct",
+      "eq_value_diff_ct",
+      "cash_diff_ct",
+      "armor_diff_ct",
+      "helmet_diff_ct",
+      "grenade_diff_ct",
+      "awp_diff_ct",
+      "rifle_diff_ct",
+      "smg_diff_ct"
+    ],
+    "model_feature_count_before_encoding": 36,
+    "map_name": "de_nuke",
+    "raw_model_feature_count": 36,
+    "model_contract_verified": true,
+    "calibrator_contract_verified": true,
+    "deployment_tree_count": 115,
+    "encoded_model_feature_count": 43
+  },
+  "prediction": {
+    "base_ct_win_probability": 0.5507644901879069,
+    "ct_win_probability": 0.5507644901879069,
+    "t_win_probability": 0.44923550981209315,
+    "predicted_side": "CT",
+    "decision_threshold": 0.5,
+    "probability_sum": 1.0
+  }
+}

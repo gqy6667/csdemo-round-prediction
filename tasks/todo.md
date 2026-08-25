@@ -7,8 +7,8 @@
 - [x] Implement prerequisite, invalid-case, metric, external, and hash audits.
 - [x] Add report, summary, manifest, example output, and one-click entrypoint.
 - [x] Run focused tests; prepare executable M26 code for its implementation commit.
-- [ ] Run the formal M26 interface acceptance.
-- [ ] Verify all JSON/CSV/report artifacts and hashes.
-- [ ] Run the complete suite and compile checks.
-- [ ] Update README and project paths without a new progress report.
-- [ ] Commit and push M26 to GitHub.
+- [x] Run the formal M26 interface acceptance.
+- [x] Verify all JSON/CSV/report artifacts and hashes.
+- [x] Run the complete suite and compile checks.
+- [x] Update README and project paths without a new progress report.
+- [x] Commit and push the completed M26 stage to GitHub.

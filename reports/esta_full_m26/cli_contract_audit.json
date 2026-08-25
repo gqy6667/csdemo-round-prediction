@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "checks": {
+    "success_exit_zero": true,
+    "success_json": true,
+    "success_output_file": true,
+    "invalid_exit_two": true,
+    "invalid_error_json": true,
+    "invalid_error_specific": true
+  },
+  "success_return_code": 0,
+  "failure_return_code": 2,
+  "success_stderr": "",
+  "failure_payload": {
+    "status": "error",
+    "error_type": "InputValidationError",
+    "message": "Input validation failed:\n- map_name 'de_cache' was not seen during training; choose one of ['de_ancient', 'de_dust2', 'de_inferno', 'de_mirage', 'de_nuke', 'de_overpass', 'de_train', 'de_vertigo']",
+    "errors": [
+      "map_name 'de_cache' was not seen during training; choose one of ['de_ancient', 'de_dust2', 'de_inferno', 'de_mirage', 'de_nuke', 'de_overpass', 'de_train', 'de_vertigo']"
+    ]
+  },
+  "output_path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m26/cli_prediction_output.json"
+}

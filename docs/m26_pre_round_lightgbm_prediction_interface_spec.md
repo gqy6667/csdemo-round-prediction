@@ -182,3 +182,17 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_pre_round_lightgbm 
 
 M26 通过后进入 M27：购买结束 LightGBM 最终验收和一键复现。之后再决定首杀后
 LightGBM 与实时胜率模块的顺序。
+
+## 11. 实际结果
+
+M26 正式运行通过 15/15 个阻断检查、201 项自动化测试和源码编译。JSON 与 CSV 示例
+的 CT 概率差为 `0`，10/10 个非法输入案例全部被拒绝，LightGBM `fit` 调用为 `0`。
+模型和校准器运行前后 SHA-256 均未变化。
+
+示例购买结束快照输出 CT/T 胜率为 `0.5507644902 / 0.4492355098`，预测方为 CT；该值
+只说明接口可用，不是新增测试指标。五项测试指标原样保持为 Accuracy `0.650767`、
+AUC `0.727846`、Log Loss `0.591437`、Brier `0.205201`、ECE10 `0.018875`。
+
+正式状态为 `passed`、`ready_for_m27=True`。完整证据位于
+`reports/esta_full_m26/m26_pre_round_lightgbm_interface_report.md`、`m26_summary.json`
+和 `m26_experiment_manifest.json`。

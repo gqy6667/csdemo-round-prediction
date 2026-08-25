@@ -1,0 +1,16 @@
+check,passed,blocking
+m25_m24_prerequisite,True,True
+artifact_contracts,True,True
+json_csv_validation,True,True
+json_csv_prediction_match,True,True
+probability_contract,True,True
+invalid_examples,True,True
+feature_alignment,True,True
+fixed_metrics,True,True
+artifact_integrity,True,True
+external_report,True,True
+cli_contract,True,True
+automated_tests,True,True
+source_compile,True,True
+reproduction_entrypoint,True,True
+artifact_manifest,True,True

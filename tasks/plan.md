@@ -36,4 +36,14 @@ feature order, map vocabulary, deployment tree count, and artifact hashes.
 
 ## Outcome
 
-Pending.
+M26 passed all 15 blocking checks. The frozen M23 LightGBM and M24 identity
+calibrator now support strict one-row JSON/CSV inference with 27 required inputs,
+9 derived CT-minus-T features, 36 raw features, 43 encoded features, 8 known maps,
+and 115 deployment trees. JSON and CSV probabilities match exactly, all 10 invalid
+cases are rejected, and the example predicts CT/T at
+`0.5507644902 / 0.4492355098`.
+
+The formal run made zero LightGBM fit calls, preserved both artifact hashes, kept
+all five M25 metrics unchanged, passed 201 automated tests and source compilation,
+and verified all 25 manifest input/output hashes. M26 is ready for M27 final
+pre-round LightGBM acceptance and one-command reproduction.

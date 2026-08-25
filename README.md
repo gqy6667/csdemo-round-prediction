@@ -8,7 +8,7 @@ This project builds three round-win prediction tasks from ESTA/AWPY demo data:
 
 The first milestone focuses on the first two tasks with XGBoost, using a 70/20/10
 train/validation/test split. The pre-round LightGBM comparison is complete through
-M25 and uses the same frozen data, feature, and evaluation contract.
+M26 and uses the same frozen data, feature, and evaluation contract.
 
 ## Milestones
 
@@ -386,5 +386,25 @@ importance plus native TreeSHAP. All 43 encoded columns map to the accepted 36 r
 features with zero leakage failures; SHAP reconstructs probability to `7.77e-16`.
 `eq_value_diff_ct` ranks first by Gain, grouped permutation, and SHAP. LightGBM and
 M12 XGBoost share 8/10 Gain Top-10 features and 9/10 for permutation, SHAP, and mean
-rank. All 14 blockers and 192 tests pass. M26 is the frozen LightGBM JSON/CSV
-prediction-interface stage.
+rank. All 14 blockers and 192 tests pass.
+
+Run the M26 frozen LightGBM JSON/CSV prediction interface acceptance:
+
+```powershell
+.\scripts\run_pre_round_lightgbm_interface.ps1
+```
+
+For one JSON prediction, run:
+
+```powershell
+C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_pre_round_lightgbm `
+  --input examples\pre_round_snapshot.json `
+  --model models\esta_full_m23\pre_round_lightgbm_tuned.joblib `
+  --calibrator models\esta_full_m24\pre_round_lightgbm_calibrator.joblib
+```
+
+M26 validates 27 input fields, derives 9 CT-minus-T fields, and aligns the result to
+the frozen 36 raw and 43 encoded features. JSON and CSV predictions match exactly;
+all 10 invalid examples are rejected. The formal run passes all 15 blockers and 201
+tests without a LightGBM `fit` call or artifact hash change. M27 is the final
+pre-round LightGBM acceptance and one-command reproduction stage.
