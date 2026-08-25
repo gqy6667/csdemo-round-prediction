@@ -1,45 +1,39 @@
-# M25 Implementation Plan
+# M26 Implementation Plan
 
 ## Scope
 
-Explain the accepted M23/M24 pre-round LightGBM without training or tuning. Add
-native TreeSHAP, encoded/source/macro permutation importance, a complete leakage
-contract, and a same-feature explanation comparison with M12 XGBoost.
+Package the accepted M23/M24/M25 pre-round LightGBM as a strict one-row JSON/CSV
+prediction interface. Bind inference to the frozen model, identity calibrator,
+feature order, map vocabulary, deployment tree count, and artifact hashes.
 
 ## Slices
 
-1. Freeze M25 inputs, explanation methods, feature mapping, comparison policy,
-   outputs, and blockers.
-2. Add failing tests for mapping, leakage, grouped permutation, native TreeSHAP,
-   XGBoost rank comparison, and acceptance behavior.
-3. Implement exact M24 replay and the three LightGBM explanation methods.
-4. Add cases, M12 explanation comparison, plots, report, manifest, and one-click runner.
-5. Run the formal 20-repeat experiment, full suite and compile checks; document,
+1. Freeze M26 artifacts, input/output contracts, invalid cases, outputs, and blockers.
+2. Add failing tests for model/calibrator drift, input validation, real prediction,
+   JSON/CSV equality, CLI behavior, and acceptance artifacts.
+3. Implement the strict LightGBM predictor and make focused tests green.
+4. Implement prerequisite checks, invalid-case audit, frozen metrics, external
+   comparison, report, manifest, and one-click runner.
+5. Run the formal interface acceptance, full suite and compile checks; document,
    commit, and push the complete stage.
 
 ## Risks
 
-- Test-driven feature selection: explanation results never trigger retraining or feature removal.
-- Attribution mismatch: algorithm ranking agreement is reported, never required for acceptance.
-- Identity drift: replay joins use series_id, game_id, and round_id together.
-- Post-outcome leakage: only the 36 M14 purchase-end features may map into the model.
-- Artifact drift: verify M24 acceptance, data/model hashes, feature columns, and probabilities.
-- SHAP misuse: report model contributions, not causal effects.
+- Interface drift: require exact 36 raw and 43 encoded columns in saved order.
+- Artifact mismatch: bind calibrator model/data hashes to the loaded model.
+- Silent category fallback: reject maps absent from the training vocabulary.
+- Invalid snapshots: collect type, range, round, inventory, future, and identity errors.
+- Metric misuse: example probability never becomes a performance metric.
+- Training leakage: no fit path exists in the predictor or stage acceptance.
 
 ## Review Gates
 
-- Gate A: the M25 specification exists before tests or implementation.
-- Gate B: focused M25 tests fail because the module does not yet exist.
+- Gate A: the M26 specification exists before tests or implementation.
+- Gate B: focused M26 tests fail because the modules do not yet exist.
 - Gate C: focused tests pass before the formal real-artifact run.
-- Gate D: the formal run completes Gain, permutation, TreeSHAP, leakage, comparison,
-  and case outputs without changing the model.
+- Gate D: JSON/CSV and CLI paths pass against frozen artifacts, including all invalid cases.
 - Gate E: the complete suite, compile check, artifact parsing, and Git checks pass.
 
 ## Outcome
 
-M25 completed. The frozen 115-tree LightGBM replayed all 4,172 M24 probabilities
-with zero metric drift and no fit calls. All 43 encoded features mapped to 36
-purchase-end features and five macro groups with zero leakage failures. Native
-TreeSHAP reconstructed probability to 7.77e-16; the formal 20-repeat importance
-run, M12 XGBoost comparison, three cases, 14 blockers, 192 tests, and compile check
-all passed. M26 will build the frozen LightGBM JSON/CSV prediction interface.
+Pending.

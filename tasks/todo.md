@@ -1,15 +1,14 @@
-# M25 Checklist
+# M26 Checklist
 
-- [x] Audit M12/M19/M24 evidence and freeze the M25 explanation specification.
-- [x] Add failing mapping, leakage, permutation, TreeSHAP, comparison, and acceptance tests.
-- [x] Implement frozen LightGBM replay and artifact-integrity checks.
-- [x] Implement Gain/Split, encoded/source/macro permutation, and native TreeSHAP.
-- [x] Implement complete feature leakage audit and source-level aggregation.
-- [x] Implement M12 XGBoost rank comparison and three fixed case explanations.
-- [x] Add plots, formal report, manifest, and one-click entrypoint.
-- [x] Run focused tests and commit executable M25 code.
-- [x] Run the formal 20-repeat M25 experiment.
-- [x] Verify all explanation, leakage, comparison, and case artifacts.
-- [x] Run the complete suite and compile checks.
-- [x] Update README, project paths, and roadmap without a new progress report.
-- [x] Commit and push M25 to GitHub.
+- [x] Audit M13/M20/M24/M25 artifacts and freeze the M26 interface specification.
+- [x] Add failing model, calibrator, validation, prediction, CLI, and acceptance tests.
+- [x] Implement strict pre-round LightGBM model and calibrator contracts.
+- [x] Implement one-row JSON/CSV validation, feature alignment, prediction, and CLI.
+- [x] Implement prerequisite, invalid-case, metric, external, and hash audits.
+- [x] Add report, summary, manifest, example output, and one-click entrypoint.
+- [x] Run focused tests; prepare executable M26 code for its implementation commit.
+- [ ] Run the formal M26 interface acceptance.
+- [ ] Verify all JSON/CSV/report artifacts and hashes.
+- [ ] Run the complete suite and compile checks.
+- [ ] Update README and project paths without a new progress report.
+- [ ] Commit and push M26 to GitHub.
