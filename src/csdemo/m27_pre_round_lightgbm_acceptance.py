@@ -4,6 +4,7 @@ import argparse
 import importlib.metadata
 import json
 import platform
+import re
 import sys
 from collections.abc import Mapping
 from datetime import datetime, timezone
@@ -296,6 +297,11 @@ def decide_acceptance(checks: Mapping[str, Any]) -> dict[str, Any]:
         "pre_round_lightgbm_complete": not failures,
         "ready_for_m28": not failures,
     }
+
+
+def parse_unittest_count(output: str) -> int | None:
+    match = re.search(r"Ran (\d+) tests?", output)
+    return int(match.group(1)) if match else None
 
 
 def _read_json(path: str | Path) -> dict[str, Any]:
@@ -629,6 +635,9 @@ def run_acceptance(
     environment = _collect_runtime_environment(root, report_dir)
     if run_verification:
         automated_tests = run_automated_tests(root)
+        automated_tests["test_count"] = parse_unittest_count(
+            automated_tests.get("output", "")
+        )
         automated_tests["skipped"] = False
         source_compile = run_compile_check(root)
         source_compile["skipped"] = False

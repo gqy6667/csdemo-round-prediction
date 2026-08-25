@@ -12,6 +12,7 @@ from src.csdemo.m27_pre_round_lightgbm_acceptance import (
     audit_reproduction_entrypoint,
     audit_stage_chain,
     decide_acceptance,
+    parse_unittest_count,
     run_acceptance,
 )
 
@@ -37,6 +38,12 @@ def accepted_stage_summaries() -> dict[str, dict]:
 
 class M27PreRoundLightGBMAcceptanceTests(unittest.TestCase):
     root = Path(__file__).resolve().parents[1]
+
+    def test_unittest_count_is_parsed_for_the_formal_report(self) -> None:
+        output = "Ran 210 tests in 13.139s\n\nOK\n"
+
+        self.assertEqual(parse_unittest_count(output), 210)
+        self.assertIsNone(parse_unittest_count("no unittest summary"))
 
     def test_stage_chain_accepts_m22_through_m26(self) -> None:
         result = audit_stage_chain(accepted_stage_summaries())
