@@ -112,6 +112,7 @@ src\csdemo\m24_pre_round_lightgbm_evaluation.py M24 固定评估、配对 bootst
 src\csdemo\m25_pre_round_lightgbm_explanation.py M25 三种解释、分组置换、泄漏和 XGBoost 对照
 src\csdemo\predict_pre_round_lightgbm.py M26 单条 JSON/CSV 校验、特征对齐和概率预测
 src\csdemo\m26_pre_round_lightgbm_interface.py M26 工件合同、CLI、验收和报告生成
+src\csdemo\m27_pre_round_lightgbm_acceptance.py M27 冻结回放、阶段链和最终验收
 src\csdemo\schema.py           特征列和 ID 列定义
 src\csdemo\config.py           路径、随机种子和 70/20/10 比例
 ```
@@ -451,6 +452,20 @@ reports\esta_full_m26\external_benchmark_comparison.csv
 reports\esta_full_m26\m26_pre_round_lightgbm_interface_report.md
 ```
 
+M27 开局前 LightGBM 最终验收：
+
+```text
+reports\esta_full_m27\m27_summary.json
+reports\esta_full_m27\m27_checks.csv
+reports\esta_full_m27\m27_experiment_manifest.json
+reports\esta_full_m27\runtime_environment.json
+reports\esta_full_m27\split_assignments.csv
+reports\esta_full_m27\replayed_test_predictions.csv
+reports\esta_full_m27\fixed_test_metrics.csv
+reports\esta_full_m27\paired_lightgbm_vs_xgboost_bootstrap.csv
+reports\esta_full_m27\m27_pre_round_lightgbm_final_acceptance_report.md
+```
+
 ## 文档路径
 
 ```text
@@ -477,6 +492,7 @@ docs\m23_pre_round_lightgbm_tuning_spec.md M23 九阶段网格、validation-only
 docs\m24_pre_round_lightgbm_evaluation_spec.md M24 固定模型区间、分组、校准和错误审计合同
 docs\m25_pre_round_lightgbm_explanation_spec.md M25 解释、泄漏和 XGBoost 排名对照合同
 docs\m26_pre_round_lightgbm_prediction_interface_spec.md M26 单条输入、工件绑定和 CLI 合同
+docs\m27_pre_round_lightgbm_final_acceptance_spec.md M27 最终回放、哈希和三模式复现合同
 docs\external_benchmark_policy.md   每阶段外部模型差值和可比性规则
 reports\data_quality\esta_full\   M4 质量检查 CSV 和结论
 reports\pre_round_xgb_initial_to_current_report.md   初始到当前 XGBoost 总结报告
@@ -663,6 +679,15 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_pre_round_lightgbm 
   --calibrator models\esta_full_m24\pre_round_lightgbm_calibrator.joblib
 ```
 
+运行 M27 开局前 LightGBM 最终验收：
+
+```powershell
+.\scripts\run_pre_round_lightgbm_pipeline.ps1
+```
+
+从 M14 冻结产物重建 M22-M27 时增加 `-RebuildLightGBM`；从原始 ESTA 完整重建时
+增加 `-FullRebuild`。
+
 只从 M14 产物重建首杀后流水线：
 
 ```powershell
@@ -724,18 +749,19 @@ Permutation、原生 TreeSHAP、完整泄漏审计和 M12 XGBoost 解释对照�
 源码编译通过。M26 已把冻结 LightGBM 封装为单条 JSON/CSV 接口：27 个基础字段自动
 生成 9 个差值，严格对齐 36 个原始和 43 个编码特征，JSON/CSV 概率差为 0，10/10
 非法案例被拒绝。15/15 阻断项、201 项测试和源码编译通过，模型与校准器哈希不变，
-下一阶段为 M27 最终验收和一键复现。M26 核心文件为：
+M27 随后完成 4,172 条测试概率最终回放，最大误差为 `1.11e-16`，五项指标误差为 0，
+配对 bootstrap 显著领先指标仍为 0。19/19 阻断项、211 项测试、源码编译和三模式
+复现入口通过，购买结束 LightGBM 正式关闭。下一步先形成老师查收的独立正式报告，
+再进入 M28 首杀后 LightGBM 受控基线。M27 核心文件为：
 
 ```text
-src\csdemo\predict_pre_round_lightgbm.py
-src\csdemo\m26_pre_round_lightgbm_interface.py
-tests\test_m26_pre_round_lightgbm_prediction.py
-scripts\run_pre_round_lightgbm_interface.ps1
-docs\m26_pre_round_lightgbm_prediction_interface_spec.md
-examples\pre_round_lightgbm_prediction_output.json
-reports\esta_full_m26\m26_pre_round_lightgbm_interface_report.md
-reports\esta_full_m26\m26_summary.json
-reports\esta_full_m26\m26_experiment_manifest.json
+src\csdemo\m27_pre_round_lightgbm_acceptance.py
+tests\test_m27_pre_round_lightgbm_acceptance.py
+scripts\run_pre_round_lightgbm_pipeline.ps1
+docs\m27_pre_round_lightgbm_final_acceptance_spec.md
+reports\esta_full_m27\m27_pre_round_lightgbm_final_acceptance_report.md
+reports\esta_full_m27\m27_summary.json
+reports\esta_full_m27\m27_experiment_manifest.json
 ```
 
 从 M11 开始，每个阶段报告还要生成 `external_benchmark_comparison.csv` 和

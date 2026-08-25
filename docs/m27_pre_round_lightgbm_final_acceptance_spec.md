@@ -123,3 +123,18 @@ automated_tests, source_compile, reproduction_entrypoint, artifact_manifest
 3. 默认验收及两个可选重建模式均被代码与测试覆盖；
 4. 报告、清单、环境、切分、测试和源码编译证据可复核；
 5. 完成提交与推送后进入 M28 首杀后 LightGBM 受控基线。
+
+## 9. 实际结果
+
+M27 正式运行通过 19/19 个阻断检查、211 项自动化测试和源码编译。41,074 条数据仍按
+系列赛划分为 28,522 / 8,380 / 4,172，跨 split 的 series/game/round 和重复完整主键
+均为 0。4,172 条测试概率最大回放误差为 `1.11e-16`，五项指标最大误差为 0，
+LightGBM `fit()` 调用为 0。
+
+五项系列赛级配对 bootstrap 均为 2,000 次，显著领先指标数仍为 0；因此保留
+“LightGBM 点指标略好，但不能宣称稳定显著胜出”的结论。数据、模型和校准器哈希运行
+前后不变，27 个实验清单输入/输出哈希全部复核通过。
+
+正式状态为 `passed`、`pre_round_lightgbm_complete=true`、`ready_for_m28=true`。
+在开始 M28 前，先按老师查收要求形成购买结束 XGBoost、购买结束 LightGBM 和首杀后
+XGBoost 三份独立报告；首杀后 LightGBM 报告必须等待该实验真正完成。

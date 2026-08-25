@@ -4,8 +4,8 @@
 - [x] Add failing M27 stage-chain, replay, metric, uncertainty, and runner tests.
 - [x] Implement M27 frozen replay, contracts, report, manifest, and pipeline entrypoint.
 - [x] Run focused and complete tests plus source compilation for M27.
-- [ ] Run formal M27 acceptance and verify every artifact hash.
-- [ ] Update documentation, commit, and push the completed M27 stage.
+- [x] Run formal M27 acceptance and verify every artifact hash.
+- [x] Update documentation, commit, and push the completed M27 stage.
 - [ ] Write and verify the independent pre-round XGBoost teacher report.
 - [ ] Write and verify the independent pre-round LightGBM teacher report.
 - [ ] Write and verify the independent post-first-kill XGBoost teacher report.

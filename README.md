@@ -7,8 +7,8 @@ This project builds three round-win prediction tasks from ESTA/AWPY demo data:
 3. real-time win probability
 
 The first milestone focuses on the first two tasks with XGBoost, using a 70/20/10
-train/validation/test split. The pre-round LightGBM comparison is complete through
-M26 and uses the same frozen data, feature, and evaluation contract.
+train/validation/test split. The pre-round LightGBM comparison and final acceptance
+are complete through M27 under the same frozen data, feature, and evaluation contract.
 
 ## Milestones
 
@@ -406,5 +406,17 @@ C:\Users\admin\11\envs\game\python.exe -m src.csdemo.predict_pre_round_lightgbm 
 M26 validates 27 input fields, derives 9 CT-minus-T fields, and aligns the result to
 the frozen 36 raw and 43 encoded features. JSON and CSV predictions match exactly;
 all 10 invalid examples are rejected. The formal run passes all 15 blockers and 201
-tests without a LightGBM `fit` call or artifact hash change. M27 is the final
-pre-round LightGBM acceptance and one-command reproduction stage.
+tests without a LightGBM `fit` call or artifact hash change.
+
+Run the M27 final acceptance and one-command reproduction gate:
+
+```powershell
+.\scripts\run_pre_round_lightgbm_pipeline.ps1
+```
+
+M27 replays all 4,172 test probabilities with a maximum error of `1.11e-16`, keeps
+all five metrics unchanged, preserves the data/model/calibrator hashes, and records
+the honest paired conclusion that zero of five metrics show statistically stable
+LightGBM superiority. All 19 blockers, 211 tests, source compilation, and three
+reproduction modes pass. The pre-round LightGBM line is closed; teacher-review
+reports are prepared before the post-first-kill LightGBM controlled baseline.

@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "python_version": "3.10.20",
+  "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+  "environment_prefix": "C:\\Users\\admin\\11\\envs\\game",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "xgboost": "3.2.0",
+    "lightgbm": "4.6.0",
+    "pyarrow": "24.0.0",
+    "joblib": "1.5.3",
+    "matplotlib": "3.10.9"
+  },
+  "locked_packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "xgboost": "3.2.0",
+    "lightgbm": "4.6.0",
+    "pyarrow": "24.0.0",
+    "joblib": "1.5.3",
+    "matplotlib": "3.10.9"
+  },
+  "package_mismatches": [],
+  "python_lock_matches": true,
+  "lightgbm_device": "cpu",
+  "cuda_required": false,
+  "git": {
+    "commit": "b30c8c958c1c7b71b0b1a99aff939df7533b1eb9",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_clean_before_report_generation": false,
+    "working_tree_status_before_report_generation": [
+      "M README.md",
+      " M docs/m27_pre_round_lightgbm_final_acceptance_spec.md",
+      " M docs/pre_round_xgb_module_spec.md",
+      " M docs/project_paths.md",
+      " M tasks/todo.md"
+    ],
+    "ignored_existing_report_status": [
+      "?? reports/esta_full_m27/"
+    ]
+  }
+}
