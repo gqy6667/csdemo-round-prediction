@@ -44,7 +44,7 @@
 | 购买结束、交火前 XGBoost | `reports/esta_full_m14/` | `reports/esta_full_m9/`、`reports/esta_full_m10/`、`reports/esta_full_m11/` | `reports/esta_full_m8_tuned/`、`reports/esta_full_m12/`、`reports/esta_full_m13/` |
 | 购买结束、交火前 LightGBM | `reports/esta_full_m27/` | `reports/esta_full_m24/`、`reports/esta_full_m27/` | `reports/esta_full_m23/`、`reports/esta_full_m25/`、`reports/esta_full_m26/` |
 | 首杀后 XGBoost | `reports/esta_full_m21/` | `reports/esta_full_m18/` | `reports/esta_full_m17/`、`reports/esta_full_m19/`、`reports/esta_full_m20/` |
-| 首杀后 LightGBM | 待后续最终验收冻结 | 待控制变量实验完成 | 待控制变量实验完成 |
+| 首杀后 LightGBM | `reports/esta_full_m33/` | `reports/esta_full_m30/`、`reports/esta_full_m33/` | `reports/esta_full_m29/`、`reports/esta_full_m31/`、`reports/esta_full_m32/` |
 
 若同一事实同时出现在多个文件中，以最终验收清单中的身份、哈希和合同检查为准，以专项评估 CSV/JSON 中的完整精度指标及置信区间为准。
 

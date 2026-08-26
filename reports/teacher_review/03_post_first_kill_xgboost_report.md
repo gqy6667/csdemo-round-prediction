@@ -6,7 +6,7 @@
 
 冻结测试结果为：Accuracy `0.744125`、AUC `0.809837`、Log Loss `0.523146`、Brier `0.175656`、ECE10 `0.015450`。五项点指标、全局区间、来源差异和主要地图共 10 项正式目标全部通过。
 
-该结果回答的是“首杀刚发生后”的胜率问题，不是购买结束模型的直接替代。首杀后 LightGBM 尚未完成，因此本报告不预填或猜测第四份报告的任何结果。
+该结果回答的是“首杀刚发生后”的胜率问题，不是购买结束模型的直接替代。首杀后 LightGBM 现已完成 M33 最终验收；本报告仍只陈述 XGBoost 自身证据，公平比较见第四份报告：[首杀后 LightGBM 报告](04_post_first_kill_lightgbm_report.md)。
 
 正式证据见 [M21 最终验收报告](../esta_full_m21/m21_first_kill_final_acceptance_report.md)、[M21 summary](../esta_full_m21/m21_summary.json) 和 [M21 实验清单](../esta_full_m21/m21_experiment_manifest.json)。
 
@@ -166,7 +166,7 @@ M21 外部表中，公开 action-value 工作报告 AUC 0.7913、Log Loss 0.5353
 
 公开 DNN 的购买结束任务报告 Accuracy 0.679220、Log Loss 0.567860；本模型相差 +6.49 个百分点和 -0.044714，但预测时点不同，只能算部分参照。完整来源与可比性见 [M21 外部对照](../esta_full_m21/external_benchmark_comparison.md)。
 
-同理，M14 购买结束 XGBoost 到 M21 首杀后 XGBoost 的指标变化包含新增首杀信息和两条测试样本差异，不是纯调参收益，也不是算法提升。真正公平的算法比较要等待使用同一首杀后合同的 LightGBM。
+同理，M14 购买结束 XGBoost 到 M21 首杀后 XGBoost 的指标变化包含新增首杀信息和两条测试样本差异，不是纯调参收益，也不是算法提升。同一首杀后合同的 LightGBM 公平比较现已完成，见[第四份报告](04_post_first_kill_lightgbm_report.md)和[老师查收总索引](README.md)。
 
 ## 13. 局限性
 
@@ -212,6 +212,6 @@ M21 外部表中，公开 action-value 工作报告 AUC 0.7913、Log Loss 0.5353
 
 ## 15. 最终判断
 
-首杀后 XGBoost 已完成“事件主键修复 -> 固定系列赛切分 -> canonical 特征合同 -> validation-only 调参 -> 系列赛级不确定性与校准 -> 解释与接口 -> 最终哈希回放”的完整证据链。它达到 M21 的全部正式目标，可以作为首杀后 LightGBM 控制变量实验的冻结基线；在第四份报告完成前，不应对两种算法作结果比较。
+首杀后 XGBoost 已完成“事件主键修复 -> 固定系列赛切分 -> canonical 特征合同 -> validation-only 调参 -> 系列赛级不确定性与校准 -> 解释与接口 -> 最终哈希回放”的完整证据链。它达到 M21 的全部正式目标，并作为首杀后 LightGBM 控制变量实验的冻结基线；两种算法的配对比较应以第四份报告的同回合系列赛 bootstrap 为准。
 
 报告状态：**已完成并可复核**。

@@ -19,7 +19,7 @@
 - [x] Complete M31 frozen-model explanation and leakage audit.
 - [x] Complete M32 frozen JSON/CSV prediction interface.
 - [x] Complete M33 final stage-chain acceptance and one-command reproduction.
-- [ ] Write the post-first-kill LightGBM report only from completed accepted evidence.
-- [ ] Create and verify the teacher review index linking all four reports.
+- [x] Write the post-first-kill LightGBM report only from completed accepted evidence.
+- [x] Create the teacher review index linking all four reports.
 - [x] Update documentation and locally commit the completed M31-M33 deliverables.
-- [ ] Locally commit the fourth report and teacher review index after final verification.
+- [x] Locally commit the fourth report and teacher review index after final verification.
