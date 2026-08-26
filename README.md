@@ -8,9 +8,9 @@ This project builds three round-win prediction tasks from ESTA/AWPY demo data:
 
 The first milestone focuses on the first two tasks with XGBoost, using a 70/20/10
 train/validation/test split. The pre-round LightGBM comparison and final acceptance
-are complete through M27. The post-first-kill LightGBM controlled baseline and
-validation-only tuning and frozen-model evaluation are complete through M30 under
-the frozen M21 data, feature, split, and evaluation contract.
+are complete through M27. The post-first-kill LightGBM controlled baseline,
+validation-only tuning, frozen-model evaluation, and explanation audit are complete
+through M31 under the frozen M21 data, feature, split, and evaluation contract.
 
 ## Milestones
 
@@ -480,3 +480,17 @@ there is no statistically stable winner. All eight robustness families pass, the
 LAN-online AUC gap is -0.012561 with CI `[-0.036757, 0.011680]`, and validation OOF
 selects the uncalibrated identity method. All 18 blockers, 246 tests, source
 compilation, and 40 artifact hashes pass. M31 is frozen-model explanation.
+
+Run the M31 frozen post-first-kill LightGBM explanation audit:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_explanation.ps1
+```
+
+M31 exactly replays all 4,170 M30 test probabilities with maximum absolute error
+`1.11e-16`; native TreeSHAP reconstructs them within `7.77e-16`. All 82 encoded
+columns map once to the 40 frozen raw features and two timing groups, with zero
+full-table or top-20 leakage failures. LightGBM versus M19 XGBoost importance-rank
+Spearman correlations range from 0.512 to 0.871 and are descriptive rather than an
+acceptance target. All 14 blockers, 254 tests, source compilation, and 37 manifest
+artifact hashes pass. M32 is the frozen JSON/CSV prediction interface.

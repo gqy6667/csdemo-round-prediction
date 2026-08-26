@@ -1,0 +1,375 @@
+{
+  "stage": "M31",
+  "generated_at_utc": "2026-08-26T15:19:59.659443+00:00",
+  "task": "post_first_kill",
+  "definition": "purchase complete, immediately after earliest valid enemy kill",
+  "model_policy": "M29/M30 LightGBM frozen; no fit, tuning, feature selection, threshold change, or calibration change",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 14,
+    "blocking_total": 14,
+    "m31_lightgbm_explanation_complete": true,
+    "ready_for_m32": true
+  },
+  "checks": {
+    "m30_prerequisite": true,
+    "model_replay": true,
+    "model_unchanged": true,
+    "importance_methods": true,
+    "feature_mapping_and_leakage": true,
+    "shap_reconstruction": true,
+    "source_and_macro_groups": true,
+    "xgboost_explanation_comparison": true,
+    "case_explanations": true,
+    "external_report": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true,
+    "artifact_manifest": true
+  },
+  "prerequisite": {
+    "passed": true,
+    "checks": {
+      "m30_accepted": true,
+      "m30_task": true,
+      "data_sha256": true,
+      "model_sha256": true,
+      "bundle_task": true,
+      "bundle_model_name": true,
+      "raw_feature_contract": true,
+      "encoded_feature_contract": true,
+      "deployment_tree_contract": true,
+      "predictor_available": true
+    },
+    "data_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/first_kill.parquet",
+      "bytes": 1479873,
+      "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    },
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "deployment_tree_count": 211,
+    "available_tree_count": 211
+  },
+  "model_replay": {
+    "passed": true,
+    "tolerance": 1e-12,
+    "saved_rows": 4170,
+    "replayed_rows": 4170,
+    "saved_duplicate_key_rows": 0,
+    "replayed_duplicate_key_rows": 0,
+    "key_mismatch_count": 0,
+    "label_mismatch_count": 0,
+    "invalid_probability_cells": 0,
+    "max_absolute_probability_difference": 1.1102230246251565e-16,
+    "metric_max_absolute_difference": 0.0,
+    "metrics": {
+      "accuracy": 0.7429256594724221,
+      "log_loss": 0.5240626574288818,
+      "brier_score": 0.1760026226340809,
+      "ece10": 0.014190844077173683,
+      "auc": 0.808255446182
+    },
+    "lightgbm_fit_calls": 0,
+    "data_contract_passed": true,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0
+  },
+  "model_integrity": {
+    "unchanged": true,
+    "sha256_before": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "sha256_after": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "lightgbm_fit_calls": 0
+  },
+  "metrics": {
+    "accuracy": 0.7429256594724221,
+    "log_loss": 0.5240626574288818,
+    "brier_score": 0.1760026226340809,
+    "ece10": 0.014190844077173683,
+    "auc": 0.808255446182
+  },
+  "test_rounds": 4170,
+  "raw_features": 40,
+  "encoded_features": 82,
+  "available_tree_count": 211,
+  "deployment_tree_count": 211,
+  "permutation_repeats": 20,
+  "seed": 42,
+  "shap_method": "lightgbm_native_tree_shap_pred_contrib",
+  "shap_units": "log_odds",
+  "shap_reconstruction_max_abs_error": 7.771561172376096e-16,
+  "shap_reconstruction_mean_abs_error": 1.2537266721726288e-16,
+  "feature_audit": {
+    "all_feature_failures": 0,
+    "top20_failures": 0,
+    "mapped_source_features": 40,
+    "mapped_macro_groups": 2
+  },
+  "top_features": {
+    "encoded_gain": [
+      "first_kill_advantage_ct",
+      "eq_value_diff_ct",
+      "ct_eq_value",
+      "helmet_diff_ct",
+      "grenade_diff_ct",
+      "t_eq_value",
+      "rifle_diff_ct",
+      "first_kill_weapon_AK-47",
+      "armor_diff_ct",
+      "ct_armor"
+    ],
+    "encoded_permutation": [
+      "first_kill_advantage_ct",
+      "eq_value_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "map_name_de_inferno",
+      "helmet_diff_ct",
+      "score_diff_ct",
+      "ct_armor",
+      "ct_m4a1_s",
+      "first_kill_time"
+    ],
+    "encoded_shap": [
+      "first_kill_advantage_ct",
+      "eq_value_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "helmet_diff_ct",
+      "rifle_diff_ct",
+      "ct_armor",
+      "grenade_diff_ct",
+      "armor_diff_ct",
+      "first_kill_weapon_AK-47"
+    ],
+    "source_mean_rank": [
+      "first_kill_advantage_ct",
+      "eq_value_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "helmet_diff_ct",
+      "rifle_diff_ct",
+      "map_name",
+      "armor_diff_ct",
+      "ct_armor",
+      "grenade_diff_ct"
+    ],
+    "source_grouped_permutation": [
+      "first_kill_advantage_ct",
+      "eq_value_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "map_name",
+      "helmet_diff_ct",
+      "score_diff_ct",
+      "rifle_diff_ct",
+      "ct_m4a1_s",
+      "armor_diff_ct"
+    ]
+  },
+  "importance_rank_spearman": {
+    "gain_rank": {
+      "gain_rank": 1.0,
+      "permutation_rank": 0.4256266257441691,
+      "shap_rank": 0.9910536454762138
+    },
+    "permutation_rank": {
+      "gain_rank": 0.4256266257441691,
+      "permutation_rank": 1.0,
+      "shap_rank": 0.4482210685560671
+    },
+    "shap_rank": {
+      "gain_rank": 0.9910536454762138,
+      "permutation_rank": 0.4482210685560671,
+      "shap_rank": 1.0
+    }
+  },
+  "macro_group_permutation": [
+    {
+      "grouped_permutation_rank": 1,
+      "feature_group": "purchase_end",
+      "encoded_column_count": 43,
+      "baseline_auc": 0.8082554462,
+      "auc_decrease_mean": 0.1447985134,
+      "auc_decrease_std": 0.0072287069,
+      "auc_decrease_min": 0.1291999338,
+      "auc_decrease_max": 0.1562205415,
+      "n_repeats": 20
+    },
+    {
+      "grouped_permutation_rank": 2,
+      "feature_group": "first_kill_event",
+      "encoded_column_count": 39,
+      "baseline_auc": 0.8082554462,
+      "auc_decrease_mean": 0.1324962828,
+      "auc_decrease_std": 0.0056684602,
+      "auc_decrease_min": 0.1222407057,
+      "auc_decrease_max": 0.143012893,
+      "n_repeats": 20
+    }
+  ],
+  "xgboost_explanation_agreement": [
+    {
+      "method": "gain",
+      "feature_count": 82,
+      "spearman_rank": 0.8181125586,
+      "top_n": 10,
+      "top_overlap_count": 8,
+      "top_union_count": 12,
+      "top_jaccard": 0.6666666667
+    },
+    {
+      "method": "permutation_auc",
+      "feature_count": 82,
+      "spearman_rank": 0.5121733547,
+      "top_n": 10,
+      "top_overlap_count": 8,
+      "top_union_count": 12,
+      "top_jaccard": 0.6666666667
+    },
+    {
+      "method": "tree_shap",
+      "feature_count": 82,
+      "spearman_rank": 0.8711158999,
+      "top_n": 10,
+      "top_overlap_count": 8,
+      "top_union_count": 12,
+      "top_jaccard": 0.6666666667
+    },
+    {
+      "method": "mean_rank",
+      "feature_count": 82,
+      "spearman_rank": 0.8403650853,
+      "top_n": 10,
+      "top_overlap_count": 9,
+      "top_union_count": 11,
+      "top_jaccard": 0.8181818182
+    }
+  ],
+  "selected_cases": [
+    {
+      "series_id": "63e0d98d-fd95-4698-9d12-808508005ee2",
+      "game_id": "online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b",
+      "round_id": "online:1f4b1506-6f45-43ee-8b4c-82961eb4bd5b_8",
+      "y_true": 1,
+      "ct_win_probability": 0.9914688054469083,
+      "t_win_probability": 0.008531194553091703,
+      "predicted_label": 1,
+      "correct": true,
+      "map_name": "de_vertigo",
+      "round_num": 8,
+      "source_subset": "online",
+      "first_kill_time": 8.3671875,
+      "first_kill_advantage_ct": 1,
+      "first_kill_weapon": "AK-47",
+      "first_kill_headshot": 0,
+      "row_position": 2248,
+      "prediction_confidence": 0.9914688054469083,
+      "case_type": "ct_high_probability"
+    },
+    {
+      "series_id": "343edef3-916d-4f85-93b4-3b32c0c70d00",
+      "game_id": "lan:f912d2b7-3bec-47a2-9609-0ab73fb263e3",
+      "round_id": "lan:f912d2b7-3bec-47a2-9609-0ab73fb263e3_17",
+      "y_true": 0,
+      "ct_win_probability": 0.014660640006060785,
+      "t_win_probability": 0.9853393599939392,
+      "predicted_label": 0,
+      "correct": true,
+      "map_name": "de_mirage",
+      "round_num": 17,
+      "source_subset": "lan",
+      "first_kill_time": 23.10236220472441,
+      "first_kill_advantage_ct": -1,
+      "first_kill_weapon": "Galil AR",
+      "first_kill_headshot": 1,
+      "row_position": 1758,
+      "prediction_confidence": 0.9853393599939392,
+      "case_type": "t_high_probability"
+    },
+    {
+      "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+      "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+      "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17",
+      "y_true": 0,
+      "ct_win_probability": 0.9898388852132408,
+      "t_win_probability": 0.010161114786759184,
+      "predicted_label": 1,
+      "correct": false,
+      "map_name": "de_nuke",
+      "round_num": 17,
+      "source_subset": "online",
+      "first_kill_time": 28.6953125,
+      "first_kill_advantage_ct": 1,
+      "first_kill_weapon": "MP9",
+      "first_kill_headshot": 1,
+      "row_position": 2784,
+      "prediction_confidence": 0.9898388852132408,
+      "case_type": "high_confidence_error"
+    }
+  ],
+  "external_comparison": {
+    "passed": true,
+    "rows": 7,
+    "duplicate_benchmark_ids": 0,
+    "unknown_metrics": [],
+    "invalid_numeric_cells": 0,
+    "current_metric_max_absolute_difference_vs_m30": 0.0,
+    "tolerance": 1e-12,
+    "copied_byte_for_byte": true
+  },
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 15.650703999999678,
+    "test_count": 254
+  },
+  "source_compile": {
+    "passed": true,
+    "return_code": 0,
+    "command": [
+      "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+      "-m",
+      "compileall",
+      "src",
+      "tests"
+    ],
+    "output": "Listing 'src'...\nListing 'src\\\\csdemo'...\nListing 'tests'...\n"
+  },
+  "reproduction_entrypoint": {
+    "passed": true,
+    "missing_tokens": []
+  },
+  "environment": {
+    "python": "3.10.20",
+    "lightgbm": "4.6.0",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.7.2"
+  },
+  "roadmap": {
+    "pre_round_xgboost": "complete_through_M14",
+    "first_kill_xgboost": "complete_through_M21",
+    "pre_round_lightgbm": "complete_through_M27",
+    "post_first_kill_lightgbm_current": "M31_explanation_complete",
+    "next_stage": "M32 post-first-kill LightGBM JSON/CSV prediction interface"
+  },
+  "next_stage": "M32 post-first-kill LightGBM prediction interface"
+}

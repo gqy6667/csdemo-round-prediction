@@ -1,0 +1,216 @@
+{
+  "stage": "M31",
+  "generated_at_utc": "2026-08-26T15:19:59.666234+00:00",
+  "command": "python -m src.csdemo.m31_post_first_kill_lightgbm_explanation --permutation-repeats 20 --seed 42",
+  "policy": "frozen model explanation; no training or test-driven selection",
+  "parameters": {
+    "permutation_repeats": 20,
+    "seed": 42,
+    "case_features": 10
+  },
+  "inputs": [
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/first_kill.parquet",
+      "bytes": 1479873,
+      "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m30/m30_summary.json",
+      "bytes": 10484,
+      "sha256": "f0cd4fc3080acede85a3c486167e6845fa92d9fc782273d759ff4b34eb21fe6e"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m30/test_predictions_enriched.csv",
+      "bytes": 1165897,
+      "sha256": "8f3cf9fb10dc2edef4b2a1a34100ee4d20ffb6528984b0b9b08e7c395f0c123b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m19/gain_importance.csv",
+      "bytes": 4940,
+      "sha256": "45afc127c090c07b1eca3201a22dc30069dfecf55fd58bcd3e8a8d500ad9336b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m19/permutation_importance_auc.csv",
+      "bytes": 4578,
+      "sha256": "bab1d8a4f1a8a956a89b5aec9ee371f20a274a0f553574e8d7f526f2a7954b63"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m19/shap_importance.csv",
+      "bytes": 4097,
+      "sha256": "54d026d2198cbadbecb116cf001e05b06830b37c310dccf9c9464627baf5b02c"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m19/importance_comparison.csv",
+      "bytes": 8017,
+      "sha256": "5c1c5e745501bde36901c9e4ea348f390d463457b12dd266c6b1b5a03014d030"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m19/macro_group_permutation_auc.csv",
+      "bytes": 400,
+      "sha256": "76059202c344e41438a1b1287c46e44389179cccb6897d26b6e70d2c1770c559"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m30/external_benchmark_comparison.csv",
+      "bytes": 3994,
+      "sha256": "babcc2f4cec10b34a9566eb4406aef178569d9f11eb164e4af3a7e2a4986f3c7"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m30/external_benchmark_comparison.md",
+      "bytes": 4370,
+      "sha256": "5adc25ea4be9e7b24c25ff818c0626963389570da54400613bcb1d2c4aedd7d3"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/docs/m31_post_first_kill_lightgbm_explanation_spec.md",
+      "bytes": 5880,
+      "sha256": "f4fea03683a6dcf1745f4e7907f22cbd223ee3ea6962edc7c219397f8b13993a"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/src/csdemo/m31_post_first_kill_lightgbm_explanation.py",
+      "bytes": 42534,
+      "sha256": "d1b6511f811199c89fe4d0794fe2b372bdb7a7966fde1f49e26c0bb26391ceee"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/scripts/run_post_first_kill_lightgbm_explanation.ps1",
+      "bytes": 1217,
+      "sha256": "cb1268676d1012c52bd8a3ced58934de2f06f9d87772a6a2a43a7c2307fda239"
+    }
+  ],
+  "model_sha256_before": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+  "model_sha256_after": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+  "outputs": [
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/all_feature_leakage_audit.csv",
+      "bytes": 9987,
+      "sha256": "91f0a4d3637cdad20d7f2fd8324ae96cc20cc904d957048269f767b2ee90a23b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/automated_test_output.txt",
+      "bytes": 32142,
+      "sha256": "7a83e961b725705e77ef27aa5eb3f677e974ee4f5ee2c2f75a9fc48b39f39d36"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/case_explanations.csv",
+      "bytes": 11452,
+      "sha256": "a0ae851d4390955461f93264cbc227edc0fe8d94a0ff99aa903a0e0117bdbc58"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/encoded_feature_contract.csv",
+      "bytes": 8488,
+      "sha256": "4ec96aa098f0bb762940020341a3ee3063d6d5025ca91eaf0c7a00dc7267b127"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/external_benchmark_comparison.csv",
+      "bytes": 3994,
+      "sha256": "babcc2f4cec10b34a9566eb4406aef178569d9f11eb164e4af3a7e2a4986f3c7"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/external_benchmark_comparison.md",
+      "bytes": 4370,
+      "sha256": "5adc25ea4be9e7b24c25ff818c0626963389570da54400613bcb1d2c4aedd7d3"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/gain_importance.csv",
+      "bytes": 5118,
+      "sha256": "1ca90368d83aac77865a8a0387cfa7c1b4880fc8d18009b75ac3c7118393c8ca"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/grouped_permutation_importance_auc.csv",
+      "bytes": 5074,
+      "sha256": "b76e29d9135d36317b9f8600af0a56b6c7477677af88a89cd21d120ce6f6af21"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/importance_comparison.csv",
+      "bytes": 8368,
+      "sha256": "bdf6e0d6aaa5740212ec38da5ebfb0371ffd555b5039a5cbf89282df73db0370"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/m31_checks.csv",
+      "bytes": 452,
+      "sha256": "ba80d0f87fe1682e6b133625dab990fc87352b876542ad06442e024277261368"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/m31_post_first_kill_lightgbm_explanation_report.md",
+      "bytes": 5576,
+      "sha256": "f4248239cdfa1a2131a27098fd77776830d9aec83d9388c0b523a778bfae64c2"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/m31_summary.json",
+      "bytes": 11303,
+      "sha256": "c70f224b60bc7f766166b96aaba80c98636ffe0c32cc487873a31ec4cbcdd8a5"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/macro_group_permutation_auc.csv",
+      "bytes": 393,
+      "sha256": "f22d2812f66c84ccf38b3e95900f4cbf79d8ed76ed2d9488878fc25c5a404c73"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/model_importance_comparison_summary.csv",
+      "bytes": 329,
+      "sha256": "b16eced53d0d3da618f9c3f425ffad37565122dc6d414d29cd40497a7fd85ec4"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/permutation_importance_auc.csv",
+      "bytes": 8644,
+      "sha256": "feece2e78f3915190eea07a6ed64e6c3e45e86835f2d7311f5180efe1401c0a5"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/selected_cases.csv",
+      "bytes": 1039,
+      "sha256": "bff8e64be08742c2e3c6d29cfab48cda9b1e3af0c9a9c33ca9aa38de255967a2"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/shap_importance.csv",
+      "bytes": 5615,
+      "sha256": "ff2390c2e2af8a929cf037ab266ffcb6d9137d8ec1554abb9358e55d167cfa5b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/source_compile_output.txt",
+      "bytes": 64,
+      "sha256": "5bcdbbe2733f092f7027f4e677038c42afeb792db3480d1a71d9e59f585b6a06"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/source_feature_importance.csv",
+      "bytes": 5688,
+      "sha256": "fc11fbc2b839bb3b304fff0dc01589ebcfa00ac65cdf7aca0086eb4225c0760d"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/test_predictions.csv",
+      "bytes": 903402,
+      "sha256": "d8ae6610e6a982dce981662516bb4ac2da09da4d353e4a1eefb4f624c72f750b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/top20_feature_audit.csv",
+      "bytes": 2489,
+      "sha256": "35478229fe42b66a22d895060710d1f70494fb876db7a8b47a2d3196e4d70213"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/xgboost_lightgbm_importance_comparison.csv",
+      "bytes": 7445,
+      "sha256": "ae88c1bd6ce1abaead32ca06619220aa5116daf6cc3498a99a9c29e686a8b380"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/xgboost_macro_group_permutation_auc.csv",
+      "bytes": 391,
+      "sha256": "056a51d2d51616df925d3af493689e36f16e235a7a578eed4f6bb6f40c663a92"
+    }
+  ],
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 14,
+    "blocking_total": 14,
+    "m31_lightgbm_explanation_complete": true,
+    "ready_for_m32": true
+  },
+  "environment": {
+    "python": "3.10.20",
+    "lightgbm": "4.6.0",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.7.2"
+  }
+}

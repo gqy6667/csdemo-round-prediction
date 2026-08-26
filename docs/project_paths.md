@@ -868,4 +868,31 @@ reports\esta_full_m30\validation_oof_calibration.csv
 reports\esta_full_m30\all_high_confidence_errors.csv
 ```
 
-下一阶段为 M31 冻结模型解释；第四份老师报告仍等待解释、接口和最终验收证据。
+M31 已冻结 M29/M30 模型并完成解释与泄漏审计。4,170 条 M30 测试概率最大回放误差
+为 `1.11e-16`，LightGBM 原生 TreeSHAP 概率重建最大误差为 `7.77e-16`。82 个编码列
+全部且仅映射到 40 个原始特征和 `purchase_end`、`first_kill_event` 两个时点组；完整
+特征表及 TreeSHAP 前 20 的泄漏失败均为 0。与 M19 XGBoost 同 82 列的 Gain、置换、
+TreeSHAP 和平均排名 Spearman 分别为 0.818、0.512、0.871、0.840，只作描述，不作为
+模型优劣门槛。14/14 阻断项、254 项测试、源码编译和 37 个清单哈希通过。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_explanation.ps1
+```
+
+M31 核心文件：
+
+```text
+docs\m31_post_first_kill_lightgbm_explanation_spec.md
+src\csdemo\m31_post_first_kill_lightgbm_explanation.py
+tests\test_m31_post_first_kill_lightgbm_explanation.py
+scripts\run_post_first_kill_lightgbm_explanation.ps1
+reports\esta_full_m31\m31_summary.json
+reports\esta_full_m31\m31_experiment_manifest.json
+reports\esta_full_m31\m31_post_first_kill_lightgbm_explanation_report.md
+reports\esta_full_m31\source_feature_importance.csv
+reports\esta_full_m31\macro_group_permutation_auc.csv
+reports\esta_full_m31\model_importance_comparison_summary.csv
+reports\esta_full_m31\case_explanations.csv
+```
+
+下一阶段为 M32 单条 JSON/CSV 推理接口；第四份老师报告仍等待接口和最终验收证据。
