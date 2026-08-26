@@ -1,0 +1,358 @@
+{
+  "stage": "M28",
+  "generated_at_utc": "2026-08-25T20:34:15.229162+00:00",
+  "policy": "fixed M21 data/split/features/metrics; replace only model algorithm",
+  "code": {
+    "commit": "acd13c7068b6a0e72739b13769380272f88cae84",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_status": [
+      "?? docs/m28_post_first_kill_lightgbm_controlled_baseline_spec.md",
+      "?? scripts/run_post_first_kill_lightgbm_baseline.ps1",
+      "?? src/csdemo/m28_post_first_kill_lightgbm_baseline.py",
+      "?? tests/test_m28_post_first_kill_lightgbm_baseline.py"
+    ]
+  },
+  "inputs": {
+    "first_kill_data": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/first_kill.parquet",
+      "bytes": 1479873,
+      "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "frozen_xgboost": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "bytes": 425536,
+      "sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279"
+    },
+    "saved_m17_predictions": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m17/test_predictions.csv",
+      "bytes": 884082,
+      "sha256": "d91ece894b6c7ea2c4e40972804859c6533963462dc960ab0544089ed03a5eae"
+    },
+    "m21_summary": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m21/m21_summary.json",
+      "bytes": 13213,
+      "sha256": "4d9edbbb0477451d7c1cf7a94068d243f622071d993f82f5e5036ca833c85321"
+    },
+    "m28_spec": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/docs/m28_post_first_kill_lightgbm_controlled_baseline_spec.md",
+      "bytes": 5052,
+      "sha256": "1cc830c08689a798ce841aafedac359a7c9932d68f869db1602127a8aa1acda7"
+    },
+    "m28_module": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/src/csdemo/m28_post_first_kill_lightgbm_baseline.py",
+      "bytes": 41091,
+      "sha256": "d213b8c818f677bcdc89e27287187318201cd308a9887853372ee36ffd76edc9"
+    },
+    "m28_tests": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/tests/test_m28_post_first_kill_lightgbm_baseline.py",
+      "bytes": 12702,
+      "sha256": "7b0851276cde9df07b144cb65510f5475b6428d967078c19a9bb6b821d0b9e3a"
+    },
+    "feature_schema": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/src/csdemo/schema.py",
+      "bytes": 2427,
+      "sha256": "dea0df7e6f7a03194dae7a42e1446cf9d64c15c57d172fba195cb15511eac656"
+    },
+    "lightgbm_trainer": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/src/csdemo/train_lgbm.py",
+      "bytes": 4063,
+      "sha256": "36c21b097ff4799892ecaec8b0d50db570654463832189d32532d626860f148e"
+    },
+    "reproduction_script": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/scripts/run_post_first_kill_lightgbm_baseline.ps1",
+      "bytes": 824,
+      "sha256": "fb1c7b6abd98e86ada2009b129d5e406c741e52190d50b53abae88e02e3fb819"
+    },
+    "environment": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/environment.yml",
+      "bytes": 450,
+      "sha256": "0be4b4b0524f223f52fdf831516f120dce3623e7482d9e814e41e1fa8b3df10f"
+    },
+    "requirements_lock": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/requirements-lock.txt",
+      "bytes": 201,
+      "sha256": "5533564a59b311cf8de4d043f89624a756e6b85c18b57cf18297986c87526a61"
+    }
+  },
+  "outputs": {
+    "models/esta_full_m28/post_first_kill_lightgbm_baseline.joblib": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m28/post_first_kill_lightgbm_baseline.joblib",
+      "bytes": 298762,
+      "sha256": "da0259966d0e0b7f89644131b9cafe2f7d37886cf3fdad05b16582915e1013db"
+    },
+    "reports/esta_full_m28/m28_model_comparison.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_model_comparison.csv",
+      "bytes": 767,
+      "sha256": "39ed7240642b9fcb11a1efa9e6d4be10609210b8a555a4b1001ea2750e050eb1"
+    },
+    "reports/esta_full_m28/m28_test_predictions.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_test_predictions.csv",
+      "bytes": 764258,
+      "sha256": "c6782a599e1450606b50a1d10a344835360d002037b020ffa1df841e3605b4d3"
+    },
+    "reports/esta_full_m28/global_bootstrap_95ci.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/global_bootstrap_95ci.csv",
+      "bytes": 496,
+      "sha256": "c7c0a0b6af552e9cc0385dec2e3c1c830ef54ffe1992a403790942f5b18ce30f"
+    },
+    "reports/esta_full_m28/paired_lightgbm_vs_xgboost_bootstrap.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/paired_lightgbm_vs_xgboost_bootstrap.csv",
+      "bytes": 1097,
+      "sha256": "42b0666aad2b2a1e1ff38b7b2ff32126247ee432d266a99f770c317eed2d5cf1"
+    },
+    "reports/esta_full_m28/feature_contract.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/feature_contract.csv",
+      "bytes": 2790,
+      "sha256": "71100db7cc981e8a7d889120d1af29ce2bed15af285d77e7a64061f536c07efe"
+    },
+    "reports/esta_full_m28/encoded_feature_columns.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/encoded_feature_columns.csv",
+      "bytes": 1590,
+      "sha256": "1559edb17788e496d93ae241ee875b0a08ed7ae6b06a81213e0d5f5779280527"
+    },
+    "reports/esta_full_m28/lightgbm_training_history.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/lightgbm_training_history.csv",
+      "bytes": 6131,
+      "sha256": "8850f275726a098532f7214922dd1ce7bb63cb6d42ed1272cadb4a735eea5e9e"
+    },
+    "reports/esta_full_m28/external_benchmark_comparison.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/external_benchmark_comparison.csv",
+      "bytes": 2299,
+      "sha256": "72874d5e75d9105d2eb61a3c554929e6b7cf0cc90e459734c4d52487ee77624f"
+    },
+    "reports/esta_full_m28/external_benchmark_comparison.md": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/external_benchmark_comparison.md",
+      "bytes": 2920,
+      "sha256": "3b3f0b9c3496e26bb79910f50da38e92aeacd340fb361dbe489f9174678e8df0"
+    },
+    "reports/esta_full_m28/automated_test_output.txt": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/automated_test_output.txt",
+      "bytes": 27808,
+      "sha256": "968934b7793909f2bc9d7e6a3d3d4acdf540bcaabf92c957c2cd89cc2ba1e46c"
+    },
+    "reports/esta_full_m28/source_compile_output.txt": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/source_compile_output.txt",
+      "bytes": 64,
+      "sha256": "5bcdbbe2733f092f7027f4e677038c42afeb792db3480d1a71d9e59f585b6a06"
+    },
+    "reports/esta_full_m28/m28_checks.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_checks.csv",
+      "bytes": 501,
+      "sha256": "7f86d70e476004416ca0109a2fd08b02dc8429d3a09661bc692f11616c77f9cd"
+    },
+    "reports/esta_full_m28/m28_summary.json": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_summary.json",
+      "bytes": 9974,
+      "sha256": "e93a5cf91419429e7c191043a499ab1133963894b2b43079001261100b5205f3"
+    },
+    "reports/esta_full_m28/m28_post_first_kill_lightgbm_controlled_baseline_report.md": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_post_first_kill_lightgbm_controlled_baseline_report.md",
+      "bytes": 2298,
+      "sha256": "744eaaa74b01c2902c8b436c5c91a2792d7f93c49437e5bf502b97b16c5fe6d8"
+    }
+  },
+  "contract": {
+    "raw_features": [
+      "map_name",
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "first_kill_advantage_ct",
+      "first_kill_time",
+      "first_kill_headshot",
+      "first_kill_weapon"
+    ],
+    "encoded_columns": [
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "first_kill_advantage_ct",
+      "first_kill_time",
+      "first_kill_headshot",
+      "map_name_de_ancient",
+      "map_name_de_dust2",
+      "map_name_de_inferno",
+      "map_name_de_mirage",
+      "map_name_de_nuke",
+      "map_name_de_overpass",
+      "map_name_de_train",
+      "map_name_de_vertigo",
+      "first_kill_weapon_AK-47",
+      "first_kill_weapon_AUG",
+      "first_kill_weapon_AWP",
+      "first_kill_weapon_CZ75 Auto",
+      "first_kill_weapon_Desert Eagle",
+      "first_kill_weapon_Dual Berettas",
+      "first_kill_weapon_FAMAS",
+      "first_kill_weapon_Five-SeveN",
+      "first_kill_weapon_G3SG1",
+      "first_kill_weapon_Galil AR",
+      "first_kill_weapon_Glock-18",
+      "first_kill_weapon_HE Grenade",
+      "first_kill_weapon_Incendiary Grenade",
+      "first_kill_weapon_Knife",
+      "first_kill_weapon_M4A1",
+      "first_kill_weapon_M4A4",
+      "first_kill_weapon_MAC-10",
+      "first_kill_weapon_MAG-7",
+      "first_kill_weapon_MP5-SD",
+      "first_kill_weapon_MP7",
+      "first_kill_weapon_MP9",
+      "first_kill_weapon_Molotov",
+      "first_kill_weapon_Negev",
+      "first_kill_weapon_Nova",
+      "first_kill_weapon_P2000",
+      "first_kill_weapon_P250",
+      "first_kill_weapon_P90",
+      "first_kill_weapon_PP-Bizon",
+      "first_kill_weapon_SCAR-20",
+      "first_kill_weapon_SG 553",
+      "first_kill_weapon_SSG 08",
+      "first_kill_weapon_Tec-9",
+      "first_kill_weapon_UMP-45",
+      "first_kill_weapon_USP-S",
+      "first_kill_weapon_XM1014",
+      "first_kill_weapon_Zeus x27"
+    ],
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "training_policy": {
+      "passed": true,
+      "fit_split": "train",
+      "early_stopping_split": "val",
+      "test_used_for_fit_or_selection": false,
+      "selection_metric": "validation_binary_logloss",
+      "early_stopping_rounds": 100,
+      "candidate_search": false,
+      "official_seed": 42
+    },
+    "metric_targets": {
+      "accuracy": {
+        "minimum": 0.68,
+        "stage": 0.7,
+        "higher_is_better": true
+      },
+      "auc": {
+        "minimum": 0.75,
+        "stage": 0.78,
+        "higher_is_better": true
+      },
+      "log_loss": {
+        "minimum": 0.58,
+        "stage": 0.55,
+        "higher_is_better": false
+      },
+      "brier_score": {
+        "minimum": 0.2,
+        "stage": 0.185,
+        "higher_is_better": false
+      },
+      "ece10": {
+        "minimum": 0.05,
+        "stage": 0.03,
+        "higher_is_better": false
+      }
+    },
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 42
+  },
+  "checks": {
+    "m21_prerequisite": true,
+    "data_contract": true,
+    "feature_contract": true,
+    "lightgbm_environment": true,
+    "validation_only_training": true,
+    "frozen_xgboost_replay": true,
+    "probability_contract": true,
+    "minimum_metrics": true,
+    "controlled_comparison": true,
+    "global_uncertainty": true,
+    "paired_uncertainty": true,
+    "external_report": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true,
+    "artifact_manifest": true
+  },
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 16,
+    "blocking_total": 16,
+    "m28_lightgbm_baseline_complete": true,
+    "ready_for_m29": true
+  }
+}

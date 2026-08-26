@@ -1,0 +1,351 @@
+{
+  "stage": "M28",
+  "generated_at_utc": "2026-08-25T20:34:15.229162+00:00",
+  "task": "post_first_kill",
+  "definition": "purchase complete, immediately after earliest valid enemy kill",
+  "experiment_policy": "fixed M21 data/split/features/metrics; replace only model algorithm",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 16,
+    "blocking_total": 16,
+    "m28_lightgbm_baseline_complete": true,
+    "ready_for_m29": true
+  },
+  "checks": {
+    "m21_prerequisite": true,
+    "data_contract": true,
+    "feature_contract": true,
+    "lightgbm_environment": true,
+    "validation_only_training": true,
+    "frozen_xgboost_replay": true,
+    "probability_contract": true,
+    "minimum_metrics": true,
+    "controlled_comparison": true,
+    "global_uncertainty": true,
+    "paired_uncertainty": true,
+    "external_report": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true,
+    "artifact_manifest": true
+  },
+  "data": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/first_kill.parquet",
+    "bytes": 1479873,
+    "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "rows": 41027,
+    "series": 782,
+    "games": 1558,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0
+  },
+  "features": {
+    "profile": "canonical_event",
+    "raw_count": 40,
+    "encoded_count": 82,
+    "raw_features": [
+      "map_name",
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "first_kill_advantage_ct",
+      "first_kill_time",
+      "first_kill_headshot",
+      "first_kill_weapon"
+    ],
+    "encoded_columns_match_xgboost": true
+  },
+  "model": {
+    "library": "lightgbm",
+    "version": "4.6.0",
+    "params": {
+      "boosting_type": "gbdt",
+      "class_weight": null,
+      "colsample_bytree": 0.85,
+      "importance_type": "split",
+      "learning_rate": 0.03,
+      "max_depth": -1,
+      "min_child_samples": 20,
+      "min_child_weight": 0.001,
+      "min_split_gain": 0.0,
+      "n_estimators": 3000,
+      "n_jobs": -1,
+      "num_leaves": 15,
+      "objective": "binary",
+      "random_state": 42,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "subsample": 0.85,
+      "subsample_for_bin": 200000,
+      "subsample_freq": 1,
+      "device_type": "cpu",
+      "verbosity": -1,
+      "deterministic": true,
+      "force_col_wise": true
+    },
+    "best_iteration": 160,
+    "deployment_tree_count": 160,
+    "model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m28/post_first_kill_lightgbm_baseline.joblib",
+      "bytes": 298762,
+      "sha256": "da0259966d0e0b7f89644131b9cafe2f7d37886cf3fdad05b16582915e1013db"
+    }
+  },
+  "metrics": {
+    "accuracy": 0.746043165467626,
+    "auc": 0.8090699061203482,
+    "log_loss": 0.523798701954496,
+    "brier_score": 0.17589401370056693,
+    "ece10": 0.013621860929997832
+  },
+  "test_metrics_by_model": {
+    "xgboost_frozen": {
+      "accuracy": 0.7441247002398081,
+      "auc": 0.8098368635821109,
+      "log_loss": 0.5231460210364541,
+      "brier_score": 0.17565589988309552,
+      "ece10": 0.01544967890679123
+    },
+    "lightgbm_baseline": {
+      "accuracy": 0.746043165467626,
+      "auc": 0.8090699061203482,
+      "log_loss": 0.523798701954496,
+      "brier_score": 0.17589401370056693,
+      "ece10": 0.013621860929997832
+    }
+  },
+  "metric_targets": {
+    "all_minimum_passed": true,
+    "all_stage_passed": true,
+    "minimum_passed_count": 5,
+    "stage_passed_count": 5,
+    "metrics": {
+      "accuracy": {
+        "value": 0.746043165467626,
+        "minimum": 0.68,
+        "stage": 0.7,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "auc": {
+        "value": 0.8090699061203482,
+        "minimum": 0.75,
+        "stage": 0.78,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "log_loss": {
+        "value": 0.523798701954496,
+        "minimum": 0.58,
+        "stage": 0.55,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "brier_score": {
+        "value": 0.17589401370056693,
+        "minimum": 0.2,
+        "stage": 0.185,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "ece10": {
+        "value": 0.013621860929997832,
+        "minimum": 0.05,
+        "stage": 0.03,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      }
+    }
+  },
+  "lightgbm_vs_xgboost_test": {
+    "accuracy": {
+      "lightgbm": 0.746043165467626,
+      "xgboost": 0.7441247002398081,
+      "raw_lightgbm_minus_xgboost": 0.0019184652278178005,
+      "performance_advantage_lightgbm": 0.0019184652278178005,
+      "lightgbm_performs_better": true
+    },
+    "auc": {
+      "lightgbm": 0.8090699061203482,
+      "xgboost": 0.8098368635821109,
+      "raw_lightgbm_minus_xgboost": -0.0007669574617626962,
+      "performance_advantage_lightgbm": -0.0007669574617626962,
+      "lightgbm_performs_better": false
+    },
+    "log_loss": {
+      "lightgbm": 0.523798701954496,
+      "xgboost": 0.5231460210364541,
+      "raw_lightgbm_minus_xgboost": 0.0006526809180418258,
+      "performance_advantage_lightgbm": -0.0006526809180418258,
+      "lightgbm_performs_better": false
+    },
+    "brier_score": {
+      "lightgbm": 0.17589401370056693,
+      "xgboost": 0.17565589988309552,
+      "raw_lightgbm_minus_xgboost": 0.00023811381747140814,
+      "performance_advantage_lightgbm": -0.00023811381747140814,
+      "lightgbm_performs_better": false
+    },
+    "ece10": {
+      "lightgbm": 0.013621860929997832,
+      "xgboost": 0.01544967890679123,
+      "raw_lightgbm_minus_xgboost": -0.0018278179767933986,
+      "performance_advantage_lightgbm": 0.0018278179767933986,
+      "lightgbm_performs_better": true
+    }
+  },
+  "global_uncertainty": {
+    "passed": true,
+    "missing_columns": [],
+    "metric_count": 5,
+    "expected_bootstraps": 2000
+  },
+  "paired_uncertainty": {
+    "passed": true,
+    "missing_columns": [],
+    "metric_count": 5,
+    "significant_better_count": 0,
+    "significant_better_metrics": [],
+    "all_intervals_include_zero": true,
+    "expected_bootstraps": 2000
+  },
+  "bootstrap": {
+    "samples": 2000,
+    "seed": 42,
+    "unit": "series_id"
+  },
+  "xgboost_replay": {
+    "passed": true,
+    "tolerance": 1e-07,
+    "replayed_rows": 4170,
+    "saved_rows": 4170,
+    "matched_rows": 4170,
+    "replayed_duplicate_key_rows": 0,
+    "saved_duplicate_key_rows": 0,
+    "key_mismatch_count": 0,
+    "label_mismatch_count": 0,
+    "invalid_probability_cells": 0,
+    "max_absolute_probability_difference": 1.1102230246251565e-16,
+    "metrics": {
+      "accuracy": 0.7441247002398081,
+      "log_loss": 0.5231460210364541,
+      "brier_score": 0.17565589988309552,
+      "ece10": 0.01544967890679123,
+      "auc": 0.8098368635821109
+    },
+    "metric_absolute_differences": {
+      "accuracy": 0.0,
+      "auc": 0.0,
+      "log_loss": 0.0,
+      "brier_score": 0.0,
+      "ece10": 0.0
+    },
+    "metric_replay_passed": true
+  },
+  "xgboost_fit_calls": 0,
+  "prediction_audit": {
+    "passed": true,
+    "rows": 4170,
+    "expected_rows": 4170,
+    "invalid_probability_cells": 0,
+    "duplicate_key_rows": 0
+  },
+  "training_policy": {
+    "passed": true,
+    "fit_split": "train",
+    "early_stopping_split": "val",
+    "test_used_for_fit_or_selection": false,
+    "selection_metric": "validation_binary_logloss",
+    "early_stopping_rounds": 100,
+    "candidate_search": false,
+    "official_seed": 42
+  },
+  "environment": {
+    "passed": true,
+    "runtime_version": "4.6.0",
+    "locked_version": "4.6.0",
+    "device_type": "cpu",
+    "python_version": "3.10.20",
+    "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+    "cuda_required": false,
+    "frozen_params_match": true
+  },
+  "external_comparison_rows": 4,
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 12.381570700003067,
+    "test_count": 225,
+    "skipped": false
+  },
+  "source_compile": {
+    "passed": true,
+    "return_code": 0,
+    "skipped": false
+  },
+  "reproduction_entrypoint": {
+    "passed": true,
+    "missing_tokens": []
+  },
+  "next_stage": "M29 validation-only post-first-kill LightGBM tuning"
+}

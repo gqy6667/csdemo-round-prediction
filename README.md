@@ -8,7 +8,8 @@ This project builds three round-win prediction tasks from ESTA/AWPY demo data:
 
 The first milestone focuses on the first two tasks with XGBoost, using a 70/20/10
 train/validation/test split. The pre-round LightGBM comparison and final acceptance
-are complete through M27 under the same frozen data, feature, and evaluation contract.
+are complete through M27. The post-first-kill LightGBM controlled baseline is complete
+through M28 under the frozen M21 data, feature, split, and evaluation contract.
 
 ## Milestones
 
@@ -45,6 +46,9 @@ Chinese project documentation:
 - `docs/m23_pre_round_lightgbm_tuning_spec.md`
 - `docs/m24_pre_round_lightgbm_evaluation_spec.md`
 - `docs/m25_pre_round_lightgbm_explanation_spec.md`
+- `docs/m27_pre_round_lightgbm_final_acceptance_spec.md`
+- `docs/m28_post_first_kill_lightgbm_controlled_baseline_spec.md`
+- `docs/teacher_review_reports_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
 - `reports/esta_full_m11/external_benchmark_comparison.md`
@@ -71,6 +75,11 @@ Chinese project documentation:
 - `reports/esta_full_m23/m23_pre_round_lightgbm_tuning_report.md`
 - `reports/esta_full_m24/m24_pre_round_lightgbm_evaluation_report.md`
 - `reports/esta_full_m25/m25_pre_round_lightgbm_explanation_report.md`
+- `reports/esta_full_m27/m27_pre_round_lightgbm_final_acceptance_report.md`
+- `reports/esta_full_m28/m28_post_first_kill_lightgbm_controlled_baseline_report.md`
+- `reports/teacher_review/01_pre_round_xgboost_report.md`
+- `reports/teacher_review/02_pre_round_lightgbm_report.md`
+- `reports/teacher_review/03_post_first_kill_xgboost_report.md`
 - `reports/m6_to_m24_progress_report.md`
 
 Current purchase-complete XGBoost test metrics after controlled tuning:
@@ -420,3 +429,19 @@ the honest paired conclusion that zero of five metrics show statistically stable
 LightGBM superiority. All 19 blockers, 211 tests, source compilation, and three
 reproduction modes pass. The pre-round LightGBM line is closed; teacher-review
 reports are prepared before the post-first-kill LightGBM controlled baseline.
+
+Run the M28 post-first-kill LightGBM controlled baseline on Windows:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_baseline.ps1
+```
+
+M28 keeps the 41,027 M21 rows, 547/156/79 series split, and exact 40 raw/82
+encoded feature contract, changing only the model algorithm. The fixed LightGBM
+baseline stops at 160 trees and reaches Accuracy 0.746043, AUC 0.809070, Log Loss
+0.523799, Brier 0.175894, and ECE10 0.013622. Against the frozen M21 XGBoost,
+Accuracy and ECE10 point estimates improve while AUC, Log Loss, and Brier worsen
+slightly; all five paired series-bootstrap intervals include zero, so neither model
+has a statistically stable advantage. All 16 blockers, 225 tests, source compilation,
+and 27 artifact hash checks pass. M29 is validation-only controlled tuning; no fourth
+teacher report is created until the later evaluation and final acceptance stages pass.

@@ -780,3 +780,32 @@ reports\teacher_review\02_pre_round_lightgbm_report.md
 reports\teacher_review\03_post_first_kill_xgboost_report.md
 tests\test_teacher_review_reports.py
 ```
+
+M28 已在 M21 冻结合同上完成首杀后 LightGBM 公平基线：数据仍为 41,027 行，
+系列赛切分仍为 547/156/79，特征仍为 40 个原始列和 82 个编码列。固定参数
+LightGBM 在 validation 早停于 160 棵树，测试 Accuracy/AUC/Log Loss/Brier/ECE10
+为 0.746043/0.809070/0.523799/0.175894/0.013622。相对 M21 XGBoost，Accuracy
+和 ECE10 点估计略好，其余三项略差；五项配对 95% CI 全部包含 0，不能宣布任一
+算法显著领先。16/16 阻断项、225 项测试、源码编译和 27 个清单哈希检查通过。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_baseline.ps1
+```
+
+M28 核心文件：
+
+```text
+docs\m28_post_first_kill_lightgbm_controlled_baseline_spec.md
+src\csdemo\m28_post_first_kill_lightgbm_baseline.py
+tests\test_m28_post_first_kill_lightgbm_baseline.py
+scripts\run_post_first_kill_lightgbm_baseline.ps1
+models\esta_full_m28\post_first_kill_lightgbm_baseline.joblib
+reports\esta_full_m28\m28_summary.json
+reports\esta_full_m28\m28_experiment_manifest.json
+reports\esta_full_m28\m28_post_first_kill_lightgbm_controlled_baseline_report.md
+reports\esta_full_m28\global_bootstrap_95ci.csv
+reports\esta_full_m28\paired_lightgbm_vs_xgboost_bootstrap.csv
+```
+
+下一阶段 M29 只使用 train/validation 做 LightGBM 受控调参；第四份老师报告仍需等待
+固定模型评估、解释、接口和最终验收完成。

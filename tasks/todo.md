@@ -9,11 +9,12 @@
 - [x] Write and verify the independent pre-round XGBoost teacher report.
 - [x] Write and verify the independent pre-round LightGBM teacher report.
 - [x] Write and verify the independent post-first-kill XGBoost teacher report.
-- [ ] Freeze the M28 first-kill LightGBM controlled-baseline specification.
-- [ ] Add failing M28 data, feature, training, prediction, and paired-comparison tests.
-- [ ] Implement and train M28 without using test for fitting or selection.
-- [ ] Report five metrics and paired series-level uncertainty against M21 XGBoost.
-- [ ] Run M28 formal acceptance, focused/full tests, compile, and hash verification.
+- [x] Freeze the M28 first-kill LightGBM controlled-baseline specification.
+- [x] Add failing M28 data, feature, training, prediction, and paired-comparison tests.
+- [x] Implement and train M28 without using test for fitting or selection.
+- [x] Report five metrics and paired series-level uncertainty against M21 XGBoost.
+- [x] Run M28 formal acceptance, focused/full tests, compile, and hash verification.
+- [ ] Complete M29+ tuning, evaluation, explanation, interface, and final acceptance.
 - [ ] Write the post-first-kill LightGBM report only from completed accepted evidence.
 - [ ] Create and verify the teacher review index linking all four reports.
-- [ ] Update documentation, commit, and push the completed M28 and report deliverables.
+- [ ] Update documentation, commit, and push the completed M29+ and report deliverables.
