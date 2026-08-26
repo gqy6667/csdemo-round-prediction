@@ -48,6 +48,6 @@ and metrics. The fourth report must use completed LightGBM evidence, never place
 
 ## Outcome
 
-M27, the first three teacher reports, and M28-M32 are complete. M33 final
-post-first-kill LightGBM stage-chain acceptance and one-command reproduction is next;
-the fourth report remains blocked on final acceptance evidence.
+M27, the first three teacher reports, and M28-M33 are complete. The fourth
+post-first-kill LightGBM teacher report and teacher review index are now unblocked and
+are the only remaining deliverables before the real-time track.

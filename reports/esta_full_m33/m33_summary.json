@@ -1,0 +1,450 @@
+{
+  "stage": "M33",
+  "generated_at_utc": "2026-08-26T15:35:48.302714+00:00",
+  "task": "post_first_kill",
+  "definition": "purchase complete, immediately after earliest valid enemy kill",
+  "policy": "M28-M32 frozen; final replay only; no fit, tuning, or test selection",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 19,
+    "blocking_total": 19,
+    "post_first_kill_lightgbm_complete": true,
+    "ready_for_teacher_report": true
+  },
+  "checks": {
+    "m21_prerequisite": true,
+    "stage_chain": true,
+    "required_artifacts": true,
+    "data_identity": true,
+    "split_contract": true,
+    "model_contract": true,
+    "calibrator_contract": true,
+    "prediction_replay": true,
+    "fixed_metrics": true,
+    "paired_uncertainty": true,
+    "robustness_calibration": true,
+    "explanation": true,
+    "prediction_interface": true,
+    "external_comparison": true,
+    "environment_lock": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true,
+    "artifact_manifest": true
+  },
+  "required_artifacts": {
+    "passed": true,
+    "required_count": 23,
+    "missing": []
+  },
+  "stage_chain": {
+    "passed": true,
+    "accepted_stages": 5,
+    "expected_stages": 5,
+    "failed_stages": [],
+    "details": {
+      "M28": {
+        "passed": true,
+        "status": "passed",
+        "handoff": "ready_for_m29",
+        "handoff_value": true
+      },
+      "M29": {
+        "passed": true,
+        "status": "passed",
+        "handoff": "ready_for_m30",
+        "handoff_value": true
+      },
+      "M30": {
+        "passed": true,
+        "status": "passed",
+        "handoff": "ready_for_m31",
+        "handoff_value": true
+      },
+      "M31": {
+        "passed": true,
+        "status": "passed",
+        "handoff": "ready_for_m32",
+        "handoff_value": true
+      },
+      "M32": {
+        "passed": true,
+        "status": "passed",
+        "handoff": "ready_for_m33",
+        "handoff_value": true
+      }
+    }
+  },
+  "m21_prerequisite": true,
+  "data_identity": {
+    "passed": true,
+    "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "observed_hashes": {
+      "current": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "m21": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "m28": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "m29": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "m30": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "m31": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "m32": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "expected_rows": 41027,
+    "observed_rows": 41027
+  },
+  "data": {
+    "passed": true,
+    "missing_columns": [],
+    "rows": 41027,
+    "series": 782,
+    "games": 1558,
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0,
+    "invalid_split_rows": 0,
+    "invalid_label_rows": 0,
+    "null_identity_cells": 0,
+    "null_feature_cells": 0,
+    "all_splits_present": true,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    }
+  },
+  "split_contract": {
+    "passed": true,
+    "missing_columns": [],
+    "rows": 41027,
+    "series": 782,
+    "games": 1558,
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0,
+    "invalid_split_rows": 0,
+    "invalid_label_rows": 0,
+    "null_identity_cells": 0,
+    "null_feature_cells": 0,
+    "all_splits_present": true,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "expected_split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "expected_split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    }
+  },
+  "model_contract": {
+    "passed": true,
+    "task": "post_first_kill",
+    "model_name": "lightgbm_tuned",
+    "profile": "M21_first_kill_canonical_features",
+    "definition": "purchase complete, immediately after earliest valid enemy kill",
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "known_map_count": 8,
+    "known_maps": [
+      "de_ancient",
+      "de_dust2",
+      "de_inferno",
+      "de_mirage",
+      "de_nuke",
+      "de_overpass",
+      "de_train",
+      "de_vertigo"
+    ],
+    "known_weapon_count": 36,
+    "known_weapons": [
+      "AK-47",
+      "AUG",
+      "AWP",
+      "CZ75 Auto",
+      "Desert Eagle",
+      "Dual Berettas",
+      "FAMAS",
+      "Five-SeveN",
+      "G3SG1",
+      "Galil AR",
+      "Glock-18",
+      "HE Grenade",
+      "Incendiary Grenade",
+      "Knife",
+      "M4A1",
+      "M4A4",
+      "MAC-10",
+      "MAG-7",
+      "MP5-SD",
+      "MP7",
+      "MP9",
+      "Molotov",
+      "Negev",
+      "Nova",
+      "P2000",
+      "P250",
+      "P90",
+      "PP-Bizon",
+      "SCAR-20",
+      "SG 553",
+      "SSG 08",
+      "Tec-9",
+      "UMP-45",
+      "USP-S",
+      "XM1014",
+      "Zeus x27"
+    ],
+    "deployment_tree_count": 211,
+    "booster_space_sanitized_count": 9,
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "selection_metric": "validation_log_loss",
+    "official_seed": 42,
+    "artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    },
+    "expected_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    }
+  },
+  "calibrator_contract": {
+    "passed": true,
+    "task": "post_first_kill",
+    "method": "uncalibrated",
+    "base_model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "selection_data": "validation only",
+    "validation_folds": 5,
+    "artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+      "bytes": 506,
+      "sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5"
+    },
+    "expected_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+      "bytes": 506,
+      "sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5"
+    }
+  },
+  "model_replay": {
+    "passed": true,
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "encoded_columns_match_m29": true,
+    "split_rows": {
+      "val": 8368,
+      "test": 4170
+    },
+    "lightgbm_fit_calls": 0
+  },
+  "prediction_replay": {
+    "passed": true,
+    "missing_saved_columns": [],
+    "missing_replayed_columns": [],
+    "saved_rows": 4170,
+    "replayed_rows": 4170,
+    "saved_duplicate_key_rows": 0,
+    "replayed_duplicate_key_rows": 0,
+    "key_mismatch_count": 0,
+    "label_mismatch_count": 0,
+    "invalid_probability_cells": 0,
+    "max_absolute_probability_difference": 1.1102230246251565e-16,
+    "tolerance": 1e-12
+  },
+  "metrics": {
+    "accuracy": 0.7429256594724221,
+    "auc": 0.808255446182,
+    "log_loss": 0.5240626574288818,
+    "brier_score": 0.1760026226340809,
+    "ece10": 0.014190844077173683
+  },
+  "metric_audit": {
+    "passed": true,
+    "missing_current_metrics": [],
+    "missing_expected_metrics": [],
+    "absolute_differences": {
+      "accuracy": 0.0,
+      "auc": 0.0,
+      "log_loss": 0.0,
+      "brier_score": 0.0,
+      "ece10": 0.0
+    },
+    "max_absolute_difference": 0.0,
+    "tolerance": 1e-12
+  },
+  "metric_sources_match": true,
+  "paired_uncertainty": {
+    "passed": true,
+    "checks": {
+      "five_unique_metrics": true,
+      "finite_ordered_intervals": true,
+      "zero_flags_match_intervals": true,
+      "all_intervals_include_zero": true,
+      "no_significant_superiority": true,
+      "matches_m24_claim": true,
+      "bootstrap_count": true,
+      "bootstrap_unit": true
+    },
+    "missing_columns": [],
+    "metric_count": 5,
+    "significant_better_count": 0,
+    "expected_bootstraps": 2000
+  },
+  "robustness_calibration": {
+    "passed": true,
+    "selected_calibration": "uncalibrated",
+    "global_assessment": {
+      "bootstrap_complete": true,
+      "auc_ci_lower_95": 0.7961944420899766,
+      "log_loss_ci_upper_95": 0.5370709609687583,
+      "minimum_passed": true,
+      "stage_passed": true,
+      "minimum_thresholds": {
+        "auc_ci_lower_95": 0.78,
+        "log_loss_ci_upper_95": 0.55
+      },
+      "stage_thresholds": {
+        "auc_ci_lower_95": 0.79,
+        "log_loss_ci_upper_95": 0.54
+      }
+    },
+    "robustness": {
+      "outputs_complete": true,
+      "large_map_count": 7,
+      "large_map_min_auc": 0.7821985815602838,
+      "large_map_min_auc_ci_lower": 0.7482536545754818,
+      "large_map_minimum_passed": true,
+      "large_map_stage_passed": true,
+      "large_map_ci_stage_passed": true,
+      "source_gap_passed": true,
+      "source_gap_ci_includes_zero": true
+    }
+  },
+  "evidence": {
+    "explanation": true,
+    "prediction_interface": true,
+    "external_comparison": {
+      "passed": true,
+      "rows": 7,
+      "hash_matches_m31": true
+    }
+  },
+  "artifacts": {
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "calibrator_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+    "unchanged": true
+  },
+  "lightgbm_fit_calls": 0,
+  "runtime_environment": {
+    "passed": true,
+    "python_version": "3.10.20",
+    "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+    "environment_prefix": "C:\\Users\\admin\\11\\envs\\game",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2",
+      "xgboost": "3.2.0",
+      "lightgbm": "4.6.0",
+      "pyarrow": "24.0.0",
+      "joblib": "1.5.3",
+      "matplotlib": "3.10.9"
+    },
+    "locked_packages": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2",
+      "xgboost": "3.2.0",
+      "lightgbm": "4.6.0",
+      "pyarrow": "24.0.0",
+      "joblib": "1.5.3",
+      "matplotlib": "3.10.9"
+    },
+    "package_mismatches": [],
+    "python_lock_matches": true,
+    "lightgbm_device": "cpu",
+    "cuda_required": false,
+    "git": {
+      "commit": "d27766d31d0ec212f8d78b4fcf4100235525e332",
+      "branch": "main",
+      "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+      "working_tree_clean_before_report_generation": false,
+      "working_tree_status_before_report_generation": [
+        "?? docs/m33_post_first_kill_lightgbm_final_acceptance_spec.md",
+        "?? scripts/run_post_first_kill_lightgbm_pipeline.ps1",
+        "?? src/csdemo/m33_post_first_kill_lightgbm_acceptance.py",
+        "?? tests/test_m33_post_first_kill_lightgbm_acceptance.py"
+      ],
+      "ignored_existing_report_status": []
+    }
+  },
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 18.218361500003084,
+    "command": [
+      "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "output": "test_higher_is_better_metric_reports_percentage_point_gap (test_benchmark_comparison.BenchmarkComparisonTests) ... ok\ntest_lower_is_better_metric_flips_performance_direction (test_benchmark_comparison.BenchmarkComparisonTests) ... ok\ntest_missing_current_metric_is_kept_and_marked (test_benchmark_comparison.BenchmarkComparisonTests) ... ok\ntest_non_comparable_report_does_not_claim_model_superiority (test_benchmark_comparison.BenchmarkComparisonTests) ... ok\ntest_unknown_metric_direction_is_rejected (test_benchmark_comparison.BenchmarkComparisonTests) ... ok\ntest_builds_post_kill_alive_state_from_the_5v5_snapshot (test_first_kill_features.FirstKillFeatureTests) ... ok\ntest_ignores_non_enemy_kills_before_selecting_the_event (test_first_kill_features.FirstKillFeatureTests) ... ok\ntest_requires_tick_for_reliable_event_ordering (test_first_kill_features.FirstKillFeatureTests) ... ok\ntest_selects_earliest_tick_when_seconds_reset (test_first_kill_features.FirstKillFeatureTests) ... ok\ntest_group_fold_assignments_keep_each_series_in_one_fold (test_m10_calibration.M10CalibrationTests) ... ok\ntest_identity_calibrator_does_not_change_probabilities (test_m10_calibration.M10CalibrationTests) ... ok\ntest_method_selection_uses_lowest_validation_oof_log_loss (test_m10_calibration.M10CalibrationTests) ... ok\ntest_persisted_calibrators_use_a_stable_import_module (test_m10_calibration.M10CalibrationTests) ... ok\ntest_sigmoid_calibrator_outputs_monotonic_valid_probabilities (test_m10_calibration.M10CalibrationTests) ... ok\ntest_error_patterns_separate_pre_round_and_first_kill_information (test_m11_robustness.M11RobustnessTests) ... ok\ntest_group_metrics_include_sample_size_and_series_bootstrap_ci (test_m11_robustness.M11RobustnessTests) ... ok\ntest_high_confidence_selection_keeps_only_wrong_predictions (test_m11_robustness.M11RobustnessTests) ... ok\ntest_round_stage_and_equipment_bands_have_fixed_boundaries (test_m11_robustness.M11RobustnessTests) ... ok\ntest_case_explanations_keep_top_contributions_and_probability (test_m12_explanation.M12ExplanationTests) ... ok\ntest_case_selection_returns_ct_t_and_wrong_examples (test_m12_explanation.M12ExplanationTests) ... ok\ntest_feature_audit_allows_pre_round_defuse_kits_and_flags_leakage (test_m12_explanation.M12ExplanationTests) ... ok\ntest_importance_comparison_keeps_each_methods_native_units (test_m12_explanation.M12ExplanationTests) ... ok\ntest_permutation_auc_importance_ranks_signal_above_noise (test_m12_explanation.M12ExplanationTests) ... ok\ntest_shap_importance_uses_mean_absolute_contribution (test_m12_explanation.M12ExplanationTests) ... ok\ntest_tree_shap_reconstructs_early_stopped_model_probability (test_m12_explanation.M12ExplanationTests) ... ok\ntest_acceptance_runner_writes_interface_and_benchmark_reports (test_m13_prediction.M13PredictionTests) ... ok\ntest_load_snapshot_rejects_multiple_csv_rows (test_m13_prediction.M13PredictionTests) ... ok\ntest_load_snapshot_supports_one_json_object_and_one_csv_row (test_m13_prediction.M13PredictionTests) ... ok\ntest_real_predictor_outputs_valid_complementary_probabilities (test_m13_prediction.M13PredictionTests) ... ok\ntest_validation_computes_all_difference_features (test_m13_prediction.M13PredictionTests) ... ok\ntest_validation_rejects_round_and_inventory_inconsistency (test_m13_prediction.M13PredictionTests) ... ok\ntest_validation_rejects_unknown_map_and_inconsistent_difference (test_m13_prediction.M13PredictionTests) ... ok\ntest_validation_reports_all_missing_required_fields (test_m13_prediction.M13PredictionTests) ... ok\ntest_data_identity_connects_rounds_kills_and_model_rows (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_data_identity_rejects_orphan_kills_and_row_loss (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_file_fingerprint_records_size_and_sha256 (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_metric_assessment_separates_minimum_gate_from_stage_targets (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_module_entrypoint_runs_after_all_function_definitions (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_quality_audit_allows_info_but_blocks_warning_or_error (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_readiness_uses_only_declared_blockers (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_required_artifact_audit_lists_missing_relative_paths (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_split_assignments_save_one_row_per_series (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_split_audit_passes_grouped_unique_rows (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_split_audit_rejects_cross_split_series_and_duplicate_rounds (test_m14_acceptance.M14AcceptanceTests) ... ok\ntest_audit_passes_and_records_rounds_without_valid_kills (test_m15_first_kill_data.M15FirstKillDataTests) ... ok\ntest_audit_rejects_a_split_that_differs_from_m14 (test_m15_first_kill_data.M15FirstKillDataTests) ... ok\ntest_audit_rejects_an_event_from_the_wrong_kill (test_m15_first_kill_data.M15FirstKillDataTests) ... ok\ntest_rerun_preserves_the_original_repair_comparison (test_m15_first_kill_data.M15FirstKillDataTests) ... ok\ntest_split_manifest_is_applied_without_resplitting (test_m15_first_kill_data.M15FirstKillDataTests) ... ok\ntest_split_manifest_rejects_an_unassigned_series (test_m15_first_kill_data.M15FirstKillDataTests) ... ok\ntest_acceptance_reports_the_exact_blocking_failure (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_canonical_profile_contains_one_side_signal_without_redundancy (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_external_metrics_map_to_the_declared_local_model (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_feature_contract_records_canonical_and_redundant_columns (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_formal_xgboost_is_the_frozen_untuned_first_kill_model (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_m15_artifact_verification_rejects_a_hash_change (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_metric_assessment_respects_high_and_low_directions (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_prediction_table_keeps_keys_and_validates_every_model_probability (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_profile_preparation_uses_only_training_categories_and_aligns_columns (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_training_data_audit_rejects_cross_split_series_and_duplicate_keys (test_m16_first_kill_baselines.M16FirstKillBaselineTests) ... ok\ntest_acceptance_lists_only_failed_declared_blockers (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_final_prediction_table_requires_exact_m16_test_keys (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_frozen_grid_has_eight_phases_and_exactly_39_candidates (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_frozen_parameter_audit_detects_a_single_mismatch (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_phase_selection_accepts_a_real_validation_log_loss_gain (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_phase_selection_keeps_incumbent_below_minimum_improvement (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_seed_stability_uses_validation_ranges_and_fixed_thresholds (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_tree_policy_is_the_only_phase_allowed_to_change_two_parameters (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_tuning_entrypoint_cannot_receive_a_test_split (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_tuning_table_rejects_any_test_metric_column (test_m17_first_kill_tuning.M17FirstKillTuningTests) ... ok\ntest_analysis_join_rejects_an_incomplete_key_set (test_m18_first_kill_evaluation.M18FirstKillEvaluationTests) ... ok\ntest_analysis_join_uses_the_complete_three_column_key (test_m18_first_kill_evaluation.M18FirstKillEvaluationTests) ... ok\ntest_error_pattern_separates_first_kill_and_equipment_support (test_m18_first_kill_evaluation.M18FirstKillEvaluationTests) ... ok\ntest_fixed_time_bands_use_documented_boundaries (test_m18_first_kill_evaluation.M18FirstKillEvaluationTests) ... ok\ntest_probability_replay_requires_keys_and_values_to_match (test_m18_first_kill_evaluation.M18FirstKillEvaluationTests) ... ok\ntest_source_auc_gap_bootstraps_complete_series (test_m18_first_kill_evaluation.M18FirstKillEvaluationTests) ... ok\ntest_source_parser_is_strict_about_game_id_prefix (test_m18_first_kill_evaluation.M18FirstKillEvaluationTests) ... ok\ntest_weapon_families_cover_each_fixed_category (test_m18_first_kill_evaluation.M18FirstKillEvaluationTests) ... ok\ntest_encoded_feature_mapping_handles_numeric_map_and_weapon_columns (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_encoded_feature_mapping_rejects_an_unknown_column (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_grouped_permutation_ranks_real_signal_above_noise (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_internal_gap_respects_metric_direction_without_inventing_a_target (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_leakage_audit_allows_only_the_post_first_kill_contract (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_macro_groups_keep_four_first_kill_features_separate_from_purchase (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_source_groups_cover_every_encoded_column_exactly_once (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_source_importance_aggregates_encoded_gain_and_shap (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_target_gap_reports_margin_when_higher_metric_passes (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_target_gap_reports_remaining_when_lower_metric_misses (test_m19_first_kill_explanation.M19FirstKillExplanationTests) ... ok\ntest_acceptance_runner_writes_all_m20_artifacts (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_calibrator_contract_rejects_model_or_data_drift (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_cli_succeeds_and_returns_code_two_for_invalid_input (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_headshot_accepts_boolean_or_zero_one_integer (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_json_and_csv_predictions_match_exactly (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_load_snapshot_supports_one_json_object_and_one_csv_row (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_model_bundle_contract_rejects_task_and_feature_drift (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_real_predictor_outputs_valid_complementary_probabilities (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_validation_builds_the_exact_40_feature_contract (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_validation_rejects_invalid_event_values_together (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_validation_rejects_purchase_errors_and_future_fields (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_validation_rejects_string_event_types (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_validation_reports_all_missing_first_kill_fields (test_m20_first_kill_prediction.M20FirstKillPredictionTests) ... ok\ntest_final_decision_requires_every_declared_blocker (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_first_kill_data_audit_confirms_grouped_split_contract (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_first_kill_data_audit_rejects_duplicate_and_cross_split_rows (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_formal_target_audit_requires_identical_ten_passed_targets (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_frozen_metric_audit_uses_strict_tolerance (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_module_entrypoint_follows_all_function_definitions (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_prediction_replay_matches_by_complete_key_not_row_order (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_prediction_replay_rejects_probability_drift (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_progress_report_explains_that_first_kill_gain_is_not_tuning_only (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_progress_tables_separate_fair_and_timing_comparisons (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_real_artifact_runner_writes_complete_m21_evidence (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_reproduction_entrypoint_requires_all_three_modes_and_m15_to_m21 (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_stage_chain_accepts_m15_through_m20 (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_stage_chain_rejects_a_missing_readiness_handoff (test_m21_first_kill_acceptance.M21FirstKillAcceptanceTests) ... ok\ntest_acceptance_requires_every_declared_blocker_but_not_a_model_win (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_data_audit_rejects_duplicate_keys_and_cross_split_series (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_feature_contract_is_exactly_the_accepted_36_pre_round_features (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_fit_uses_train_for_learning_and_validation_only_for_early_stopping (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_frozen_xgboost_replay_aligns_keys_without_calling_fit (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_lightgbm_baseline_parameters_are_frozen_and_cpu_only (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_metric_targets_and_model_differences_respect_metric_direction (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_prediction_table_rejects_invalid_probabilities (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_preparation_learns_categories_from_train_only_and_aligns_all_splits (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_real_runner_writes_complete_controlled_baseline_evidence (test_m22_pre_round_lightgbm_baseline.M22PreRoundLightGBMBaselineTests) ... ok\ntest_acceptance_requires_all_blockers_but_not_test_improvement (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_every_phase_changes_one_parameter_and_contains_the_incumbent (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_final_predictions_require_exact_m22_keys_and_valid_probability (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_frozen_grid_has_nine_phases_and_exactly_36_candidates (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_frozen_parameter_audit_detects_drift (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_search_entrypoint_cannot_receive_test_data (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_seed_stability_uses_fixed_seeds_limits_and_no_test_columns (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_selection_accepts_validation_log_loss_gain_at_threshold (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_selection_keeps_incumbent_when_gain_is_below_threshold (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_validation_tables_reject_test_metric_columns (test_m23_pre_round_lightgbm_tuning.M23PreRoundLightGBMTuningTests) ... ok\ntest_acceptance_requires_every_blocker_but_not_model_superiority (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_analysis_join_rejects_incomplete_feature_key_set (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_analysis_join_uses_complete_key_for_features_and_first_kill (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_calibration_protocol_is_validation_only_and_grouped (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_frozen_replay_predicts_validation_and_test_without_fit (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_global_interval_assessment_separates_minimum_and_stage_targets (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_group_assessment_requires_four_outputs_but_not_stage_targets (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_m23_prerequisite_rejects_model_or_task_drift (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_paired_bootstrap_uses_performance_direction_and_complete_series (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_prediction_replay_aligns_complete_keys_and_detects_drift (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_reproduction_script_freezes_m23_inputs_and_bootstrap_count (test_m24_pre_round_lightgbm_evaluation.M24PreRoundLightGBMEvaluationTests) ... ok\ntest_acceptance_requires_every_blocking_check (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_encoded_feature_mapping_handles_numeric_and_map_columns (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_encoded_feature_mapping_rejects_unknown_or_future_columns (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_encoded_permutation_preserves_repeat_range (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_grouped_permutation_ranks_signal_above_noise (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_leakage_audit_allows_only_purchase_end_contract (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_lightgbm_gain_includes_zero_importance_columns_and_tree_contract (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_m12_loader_tolerates_only_csv_scale_mean_rank_rounding (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_macro_groups_follow_the_five_m14_feature_groups (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_model_importance_comparison_rejects_feature_set_mismatch (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_model_importance_comparison_reports_rank_and_top_overlap (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_native_tree_shap_reconstructs_lightgbm_probability (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_prediction_replay_joins_complete_keys_not_row_order (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_prediction_replay_rejects_duplicate_complete_key (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_source_groups_cover_each_encoded_column_exactly_once (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_tree_shap_rejects_wrong_column_order (test_m25_pre_round_lightgbm_explanation.M25PreRoundLightGBMExplanationTests) ... ok\ntest_acceptance_requires_every_declared_blocker (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_acceptance_runner_writes_all_m26_artifacts (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_calibrator_contract_binds_model_data_and_validation_selection (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_cli_succeeds_and_returns_code_two_for_invalid_input (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_json_and_csv_predictions_match_exactly (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_model_contract_rejects_task_feature_and_tree_drift (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_predictor_builds_exact_raw_contract_and_rejects_forbidden_fields (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_real_model_bundle_has_exact_lightgbm_deployment_contract (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_real_predictor_outputs_strict_feature_and_probability_contract (test_m26_pre_round_lightgbm_prediction.M26PreRoundLightGBMPredictionTests) ... ok\ntest_final_decision_requires_every_declared_blocker (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_frozen_metrics_require_all_five_and_strict_tolerance (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_paired_uncertainty_requires_five_series_bootstraps_and_honest_claim (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_prediction_replay_joins_complete_keys_not_row_order (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_prediction_replay_rejects_probability_drift (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_real_artifact_runner_writes_complete_m27_evidence (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_reproduction_entrypoint_requires_three_modes_and_m22_to_m27 (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_stage_chain_accepts_m22_through_m26 (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_stage_chain_rejects_missing_handoff (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_unittest_count_is_parsed_for_the_formal_report (test_m27_pre_round_lightgbm_acceptance.M27PreRoundLightGBMAcceptanceTests) ... ok\ntest_acceptance_does_not_require_lightgbm_to_win (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_data_audit_rejects_duplicate_keys_and_cross_split_series (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_feature_contract_is_exact_m21_canonical_profile (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_fit_uses_train_and_validation_without_test (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_frozen_xgboost_replay_aligns_complete_keys_without_fit (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_lightgbm_parameters_and_bootstrap_protocol_are_frozen (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_metric_targets_and_differences_respect_metric_direction (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_paired_bootstrap_uses_five_metrics_and_complete_series (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_prediction_table_rejects_invalid_probability (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_preparation_learns_map_and_weapon_categories_from_train_only (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_real_runner_writes_controlled_baseline_and_uncertainty (test_m28_post_first_kill_lightgbm_baseline.M28PostFirstKillLightGBMBaselineTests) ... ok\ntest_acceptance_requires_all_blockers_but_not_a_model_win (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_every_phase_changes_one_parameter_and_contains_incumbent (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_final_predictions_require_exact_m28_keys (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_frozen_grid_has_nine_phases_and_exactly_36_candidates (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_frozen_parameter_audit_detects_drift (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_reproduction_entrypoint_requires_m29_first_kill_paths (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_search_entrypoint_cannot_receive_test_data (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_seed_stability_uses_five_frozen_seeds_without_test_columns (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_selection_uses_only_real_validation_improvement (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_stage_goals_compare_tuned_validation_to_m28_baseline (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_validation_tables_reject_test_metric_columns (test_m29_post_first_kill_lightgbm_tuning.M29PostFirstKillLightGBMTuningTests) ... ok\ntest_acceptance_does_not_require_lightgbm_superiority (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_calibration_protocol_rejects_test_metric_columns (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_frozen_replay_predicts_validation_and_test_without_fit (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_global_interval_assessment_uses_post_first_kill_thresholds (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_group_assessment_requires_all_eight_outputs (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_m29_prerequisite_rejects_task_or_model_drift (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_paired_table_and_bootstrap_use_identical_series_rows (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_prediction_replay_joins_complete_keys_and_detects_drift (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_reproduction_script_freezes_m29_inputs_and_bootstrap_count (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_source_gap_text_uses_the_frozen_signed_difference_field (test_m30_post_first_kill_lightgbm_evaluation.M30PostFirstKillLightGBMEvaluationTests) ... ok\ntest_acceptance_requires_evidence_but_not_rank_agreement_target (test_m31_post_first_kill_lightgbm_explanation.M31PostFirstKillLightGBMExplanationTests) ... ok\ntest_gain_importance_preserves_bundle_names_when_booster_sanitizes_spaces (test_m31_post_first_kill_lightgbm_explanation.M31PostFirstKillLightGBMExplanationTests) ... ok\ntest_leakage_audit_allows_first_kill_contract_and_rejects_future (test_m31_post_first_kill_lightgbm_explanation.M31PostFirstKillLightGBMExplanationTests) ... ok\ntest_mapping_handles_numeric_map_and_first_kill_weapon_columns (test_m31_post_first_kill_lightgbm_explanation.M31PostFirstKillLightGBMExplanationTests) ... ok\ntest_model_importance_comparison_reports_rank_agreement (test_m31_post_first_kill_lightgbm_explanation.M31PostFirstKillLightGBMExplanationTests) ... ok\ntest_prerequisite_rejects_task_or_tree_drift (test_m31_post_first_kill_lightgbm_explanation.M31PostFirstKillLightGBMExplanationTests) ... ok\ntest_reproduction_entrypoint_freezes_model_and_twenty_repeats (test_m31_post_first_kill_lightgbm_explanation.M31PostFirstKillLightGBMExplanationTests) ... ok\ntest_source_and_macro_groups_cover_columns_once (test_m31_post_first_kill_lightgbm_explanation.M31PostFirstKillLightGBMExplanationTests) ... ok\ntest_acceptance_requires_every_declared_blocker (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_acceptance_runner_writes_all_m32_artifacts (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_calibrator_contract_binds_model_data_and_validation_selection (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_cli_succeeds_and_returns_code_two_for_invalid_input (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_json_and_csv_predictions_match_exactly (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_model_contract_rejects_task_feature_column_and_tree_drift (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_predictor_builds_exact_raw_contract_and_rejects_forbidden_fields (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_real_model_bundle_has_exact_lightgbm_deployment_contract (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_real_predictor_outputs_strict_feature_and_probability_contract (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_reproduction_entrypoint_freezes_expected_artifacts (test_m32_post_first_kill_lightgbm_prediction.M32PostFirstKillLightGBMPredictionTests) ... ok\ntest_final_decision_requires_every_declared_blocker (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_frozen_metrics_require_all_five_and_strict_tolerance (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_paired_uncertainty_requires_honest_no_winner_claim (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_prediction_replay_joins_complete_keys_not_row_order (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_prediction_replay_rejects_probability_drift (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_real_artifact_runner_writes_complete_m33_evidence (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_reproduction_entrypoint_requires_three_modes_and_m28_to_m33 (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_stage_chain_accepts_m28_through_m32 (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_stage_chain_rejects_missing_handoff (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_unittest_count_is_parsed_for_formal_report (test_m33_post_first_kill_lightgbm_acceptance.M33PostFirstKillLightGBMAcceptanceTests) ... ok\ntest_esta_m4a1_name_is_counted_as_m4a1_s_and_rifle (test_m4_normalization.M4NormalizationTests) ... ok\ntest_non_five_v_five_snapshot_and_its_kills_are_excluded (test_m4_normalization.M4NormalizationTests) ... ok\ntest_one_player_contributes_at_most_one_rifle (test_m4_normalization.M4NormalizationTests) ... ok\ntest_player_utility_is_recomputed_and_capped_at_four (test_m4_normalization.M4NormalizationTests) ... ok\ntest_ablation_model_does_not_randomly_drop_rows_or_features (test_m6_features.M6FeatureTests) ... ok\ntest_ablation_removes_only_the_requested_group (test_m6_features.M6FeatureTests) ... ok\ntest_all_common_differences_are_ct_minus_t (test_m6_features.M6FeatureTests) ... ok\ntest_constant_precombat_alive_columns_are_not_model_features (test_m6_features.M6FeatureTests) ... ok\ntest_targeted_economy_ablations_separate_cash_and_equipment_value (test_m6_features.M6FeatureTests) ... ok\ntest_validation_categories_are_aligned_to_training_vocabulary (test_m6_features.M6FeatureTests) ... ok\ntest_constant_model_predicts_training_ct_win_rate (test_m7_baselines.M7BaselineTests) ... ok\ntest_logistic_model_is_scaled_and_reproducible (test_m7_baselines.M7BaselineTests) ... ok\ntest_probability_metrics_include_calibration_metrics (test_m7_baselines.M7BaselineTests) ... ok\ntest_first_kill_model_keeps_untuned_baseline (test_m8_tuning.M8TuningTests) ... ok\ntest_pre_round_model_uses_controlled_tuning_winner (test_m8_tuning.M8TuningTests) ... ok\ntest_calibration_table_uses_equal_width_probability_bins (test_m9_evaluation.M9EvaluationTests) ... ok\ntest_confusion_counts_names_all_four_outcomes (test_m9_evaluation.M9EvaluationTests) ... ok\ntest_group_bootstrap_is_reproducible_and_reports_core_metrics (test_m9_evaluation.M9EvaluationTests) ... ok\ntest_find_table_accepts_a_string_directory (test_quality.QualityTests) ... ok\ntest_hard_errors_are_reported_and_block_the_pipeline (test_quality.QualityTests) ... ok\ntest_orphan_kill_example_identifies_the_orphan_row (test_quality.QualityTests) ... ok\ntest_suspicious_pre_combat_values_are_warnings (test_quality.QualityTests) ... ok\ntest_valid_tables_have_no_errors_or_warnings (test_quality.QualityTests) ... ok\ntest_all_games_in_one_series_receive_the_same_split (test_round_identity.RoundIdentityTests) ... ok\ntest_duplicate_round_identity_is_rejected (test_round_identity.RoundIdentityTests) ... ok\ntest_first_kill_stays_attached_to_its_map (test_round_identity.RoundIdentityTests) ... ok\ntest_sample_tables_follow_the_new_identity_contract (test_round_identity.RoundIdentityTests) ... ok\ntest_two_maps_in_one_series_get_distinct_game_and_round_ids (test_round_identity.RoundIdentityTests) ... ok\ntest_inspection_uses_nearest_freeze_end_frame_and_lists_inventory (test_snapshot_inspection.SnapshotInspectionTests) ... ok\ntest_missing_round_number_raises_clear_error (test_snapshot_inspection.SnapshotInspectionTests) ... ok\ntest_post_first_kill_xgboost_report_matches_frozen_sources (test_teacher_review_reports.TeacherReviewReportTests) ... ok\ntest_pre_round_lightgbm_report_matches_frozen_sources (test_teacher_review_reports.TeacherReviewReportTests) ... ok\ntest_pre_round_xgboost_report_matches_frozen_sources (test_teacher_review_reports.TeacherReviewReportTests) ... ok\n\n----------------------------------------------------------------------\nRan 274 tests in 16.751s\n\nOK\n",
+    "test_count": 274,
+    "skipped": false
+  },
+  "source_compile": {
+    "passed": true,
+    "return_code": 0,
+    "command": [
+      "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+      "-m",
+      "compileall",
+      "src",
+      "tests"
+    ],
+    "output": "Listing 'src'...\nListing 'src\\\\csdemo'...\nListing 'tests'...\n",
+    "skipped": false
+  },
+  "reproduction_entrypoint": {
+    "passed": true,
+    "required_tokens": [
+      "run_first_kill_pipeline.ps1",
+      "run_post_first_kill_lightgbm_baseline.ps1",
+      "run_post_first_kill_lightgbm_tuning.ps1",
+      "run_post_first_kill_lightgbm_evaluation.ps1",
+      "run_post_first_kill_lightgbm_explanation.ps1",
+      "run_post_first_kill_lightgbm_interface.ps1",
+      "src.csdemo.m33_post_first_kill_lightgbm_acceptance",
+      "RebuildLightGBM",
+      "FullRebuild"
+    ],
+    "missing_tokens": []
+  },
+  "next_stage": "teacher report 04 and teacher review index"
+}

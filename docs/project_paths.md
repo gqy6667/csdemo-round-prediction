@@ -925,3 +925,32 @@ reports\esta_full_m32\validation_error_examples.json
 ```
 
 下一阶段为 M33 最终阶段链与一键复现验收；第四份老师报告必须等 M33 通过后生成。
+
+M33 已完成首杀后 LightGBM 最终阶段链与一键复现验收。M21 前置基线和 M28–M32
+五阶段交接均通过。41,027 行数据、28,489/8,368/4,170 行系列赛级切分及
+547/156/79 个系列赛保持不变；跨 split 泄漏和重复完整主键为 0。4,170 条测试概率
+最大回放误差 `1.11e-16`，五项指标最大漂移为 0，LightGBM `fit` 调用为 0。相对
+M21 XGBoost 的五项 2,000 次系列赛配对 bootstrap 区间全部包含 0，保留“没有稳定
+胜者”的结论。19/19 阻断项、274 项测试、源码编译、环境锁和 35 个清单工件哈希通过。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_pipeline.ps1
+```
+
+M33 核心文件：
+
+```text
+docs\m33_post_first_kill_lightgbm_final_acceptance_spec.md
+src\csdemo\m33_post_first_kill_lightgbm_acceptance.py
+tests\test_m33_post_first_kill_lightgbm_acceptance.py
+scripts\run_post_first_kill_lightgbm_pipeline.ps1
+reports\esta_full_m33\m33_summary.json
+reports\esta_full_m33\m33_experiment_manifest.json
+reports\esta_full_m33\m33_post_first_kill_lightgbm_final_acceptance_report.md
+reports\esta_full_m33\replayed_test_predictions.csv
+reports\esta_full_m33\paired_lightgbm_vs_xgboost_bootstrap.csv
+reports\esta_full_m33\runtime_environment.json
+```
+
+首杀后 LightGBM 研究线已关闭并解锁第四份老师正式报告。实时胜率必须等四份报告和
+老师查收总索引完成后另立数据合同。

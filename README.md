@@ -10,8 +10,9 @@ The first milestone focuses on the first two tasks with XGBoost, using a 70/20/1
 train/validation/test split. The pre-round LightGBM comparison and final acceptance
 are complete through M27. The post-first-kill LightGBM controlled baseline,
 validation-only tuning, frozen-model evaluation, and explanation audit are complete
-through M31; its strict one-row JSON/CSV interface is complete through M32 under
-the frozen M21 data, feature, split, and evaluation contract.
+through M31; its strict one-row JSON/CSV interface and final stage-chain acceptance
+are complete through M33 under the frozen M21 data, feature, split, and evaluation
+contract.
 
 ## Milestones
 
@@ -508,3 +509,16 @@ weapons, 211 trees, and the validation-only identity calibrator. JSON and CSV ex
 probabilities match exactly; all 10 invalid-input cases and both CLI paths pass.
 All 15 blockers, 264 tests, source compilation, and 26 manifest artifact hashes pass.
 M33 is final stage-chain acceptance and one-command reproduction.
+
+Run the M33 final acceptance without retraining:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_pipeline.ps1
+```
+
+M33 verifies M21 and the complete M28-M32 handoff chain, replays all 4,170 frozen
+test probabilities within `1.11e-16`, and reproduces all five metrics with zero
+drift. The five 2,000-sample paired series-bootstrap intervals against M21 XGBoost
+still include zero, so neither model is declared a stable winner. All 19 blockers,
+274 tests, source compilation, environment lock, and 35 manifest artifact hashes
+pass. The post-first-kill LightGBM track is accepted and ready for its teacher report.

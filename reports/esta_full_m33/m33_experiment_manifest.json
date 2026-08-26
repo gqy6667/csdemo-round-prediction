@@ -1,0 +1,199 @@
+{
+  "stage": "M33",
+  "generated_at_utc": "2026-08-26T15:35:48.335002+00:00",
+  "command": "powershell -File scripts/run_post_first_kill_lightgbm_pipeline.ps1",
+  "policy": "M28-M32 frozen; final replay only; no fit, tuning, or test selection",
+  "inputs": [
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/first_kill.parquet",
+      "bytes": 1479873,
+      "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+      "bytes": 506,
+      "sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m21/m21_summary.json",
+      "bytes": 13213,
+      "sha256": "4d9edbbb0477451d7c1cf7a94068d243f622071d993f82f5e5036ca833c85321"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_summary.json",
+      "bytes": 9974,
+      "sha256": "e93a5cf91419429e7c191043a499ab1133963894b2b43079001261100b5205f3"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/m29_summary.json",
+      "bytes": 10703,
+      "sha256": "dbdfeb7446bc7e394acb78df738d233581dd6425c981f6c753cd3987b7c5dfea"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m30/m30_summary.json",
+      "bytes": 10484,
+      "sha256": "f0cd4fc3080acede85a3c486167e6845fa92d9fc782273d759ff4b34eb21fe6e"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/m31_summary.json",
+      "bytes": 11303,
+      "sha256": "c70f224b60bc7f766166b96aaba80c98636ffe0c32cc487873a31ec4cbcdd8a5"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m32/m32_summary.json",
+      "bytes": 10057,
+      "sha256": "6f46fb4c1ed38569231bb9f46bd0dcd9d2eb1361b02d248e1ef67b0fb779a577"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m30/test_predictions_enriched.csv",
+      "bytes": 1165897,
+      "sha256": "8f3cf9fb10dc2edef4b2a1a34100ee4d20ffb6528984b0b9b08e7c395f0c123b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m30/paired_lightgbm_vs_xgboost_bootstrap.csv",
+      "bytes": 1098,
+      "sha256": "4aa498b3543450a5cea01df5acffd9afba1630343a0124f7ac785482a1a54d8b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m32/external_benchmark_comparison.csv",
+      "bytes": 3994,
+      "sha256": "babcc2f4cec10b34a9566eb4406aef178569d9f11eb164e4af3a7e2a4986f3c7"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m32/external_benchmark_comparison.md",
+      "bytes": 4370,
+      "sha256": "5adc25ea4be9e7b24c25ff818c0626963389570da54400613bcb1d2c4aedd7d3"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/external_benchmark_comparison.csv",
+      "bytes": 3994,
+      "sha256": "babcc2f4cec10b34a9566eb4406aef178569d9f11eb164e4af3a7e2a4986f3c7"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/all_feature_leakage_audit.csv",
+      "bytes": 9987,
+      "sha256": "91f0a4d3637cdad20d7f2fd8324ae96cc20cc904d957048269f767b2ee90a23b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m31/model_importance_comparison_summary.csv",
+      "bytes": 329,
+      "sha256": "b16eced53d0d3da618f9c3f425ffad37565122dc6d414d29cd40497a7fd85ec4"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m32/example_prediction.json",
+      "bytes": 1334,
+      "sha256": "e93c4a9a52c67baf6c460e4a56b50743b302c8d8ee127b70ef1206b55354a3b2"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m32/model_contract_audit.json",
+      "bytes": 3395,
+      "sha256": "d6a4776c1b904f2fc9d394a1955e3ce72f0f0dfbde7b7dedf98bb85dca7134ed"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/docs/m33_post_first_kill_lightgbm_final_acceptance_spec.md",
+      "bytes": 4986,
+      "sha256": "fec8190937272cbc0ebf46160437d5a2ca0b365b40c0299f982b2cadc188e991"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/src/csdemo/m33_post_first_kill_lightgbm_acceptance.py",
+      "bytes": 28893,
+      "sha256": "4098c048376e4ba98c764ac28879e28d07553d32058bb438a30392989708761c"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/scripts/run_post_first_kill_lightgbm_pipeline.ps1",
+      "bytes": 2141,
+      "sha256": "cb8862ef1baee10bcef17ffaae806dda3ef468500c47af871fec8cef546cd2e5"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/environment.yml",
+      "bytes": 450,
+      "sha256": "0be4b4b0524f223f52fdf831516f120dce3623e7482d9e814e41e1fa8b3df10f"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/requirements-lock.txt",
+      "bytes": 201,
+      "sha256": "5533564a59b311cf8de4d043f89624a756e6b85c18b57cf18297986c87526a61"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/automated_test_output.txt",
+      "bytes": 35147,
+      "sha256": "eb08d9f558d639937b523a2b7c1060b3723bfa8b7d73760815870ac8b450ab60"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/external_benchmark_comparison.csv",
+      "bytes": 3966,
+      "sha256": "e3adc97ad121b6cbf2a4de71794e271e9610fb2a1f89f19b69f756d20051d772"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/external_benchmark_comparison.md",
+      "bytes": 4370,
+      "sha256": "5adc25ea4be9e7b24c25ff818c0626963389570da54400613bcb1d2c4aedd7d3"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/fixed_test_metrics.csv",
+      "bytes": 152,
+      "sha256": "567df88ce4ce2c5e22c3a0d9ff2fd2f503cf04cae25bb65e55a5c16f3e2a80f6"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/m33_checks.csv",
+      "bytes": 457,
+      "sha256": "c471985e32adc61270f5ca0036bcff5f20fd3132e5192fed55ab7e0aecbb417c"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/m33_post_first_kill_lightgbm_final_acceptance_report.md",
+      "bytes": 1791,
+      "sha256": "f14755ebf5b7e125d2fc3205ddeda652b903b0428baa6e3f5eb8b1e433a90d3b"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/m33_summary.json",
+      "bytes": 48506,
+      "sha256": "4d76cce3bb5da7b11f602165c9444f55121f8c0c294f1877b357f6e7a20baa41"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/paired_lightgbm_vs_xgboost_bootstrap.csv",
+      "bytes": 1037,
+      "sha256": "e72412999b6fd94f3d05e94c73c6018c1f10b24f3b7829ac12ca526b093fb1c3"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/replayed_test_predictions.csv",
+      "bytes": 790568,
+      "sha256": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/runtime_environment.json",
+      "bytes": 1420,
+      "sha256": "ee508302a2ffaac268cbe06bccaba2b9ca77a0d0ddf1494fe1c11f5833e94417"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/source_compile_output.txt",
+      "bytes": 64,
+      "sha256": "5bcdbbe2733f092f7027f4e677038c42afeb792db3480d1a71d9e59f585b6a06"
+    },
+    {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m33/split_assignments.csv",
+      "bytes": 34034,
+      "sha256": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5"
+    }
+  ],
+  "data_sha256_before": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+  "data_sha256_after": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+  "model_sha256_before": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+  "model_sha256_after": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+  "calibrator_sha256_before": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+  "calibrator_sha256_after": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 19,
+    "blocking_total": 19,
+    "post_first_kill_lightgbm_complete": true,
+    "ready_for_teacher_report": true
+  }
+}
