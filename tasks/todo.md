@@ -15,7 +15,8 @@
 - [x] Report five metrics and paired series-level uncertainty against M21 XGBoost.
 - [x] Run M28 formal acceptance, focused/full tests, compile, and hash verification.
 - [x] Complete M29 validation-only controlled tuning and formal acceptance.
-- [ ] Complete M30+ evaluation, explanation, interface, and final acceptance.
+- [x] Complete M30 paired uncertainty, robustness, calibration, and formal evaluation.
+- [ ] Complete M31+ explanation, interface, and final acceptance.
 - [ ] Write the post-first-kill LightGBM report only from completed accepted evidence.
 - [ ] Create and verify the teacher review index linking all four reports.
-- [ ] Update documentation, commit, and push the completed M30+ and report deliverables.
+- [ ] Update documentation and locally commit the completed M31+ and report deliverables.

@@ -837,3 +837,35 @@ reports\esta_full_m29\test_predictions.csv
 ```
 
 下一阶段为 M30 冻结模型评估；第四份老师报告仍需等待评估、解释、接口和最终验收完成。
+
+M30 已冻结 M29 模型并完成系列赛级正式评估，LightGBM `fit` 调用为 0。4,170 条
+测试概率最大回放误差为 `1.11e-16`。AUC 0.808255 的 95% CI 为
+`[0.796194, 0.820185]`，Log Loss 0.524063 的区间为 `[0.510784, 0.537071]`。
+相对 M21 XGBoost，Accuracy/AUC/Log Loss/Brier/ECE10 五项配对性能优势 CI 全部包含
+0，不能宣布任一模型稳定领先。八类分组均生成；LAN-online AUC 差为 -0.012561，
+95% CI `[-0.036757, 0.011680]`；validation OOF 选择不校准。18/18 阻断项、246 项
+测试、源码编译和 40 个清单哈希通过。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_evaluation.ps1
+```
+
+M30 核心文件：
+
+```text
+docs\m30_post_first_kill_lightgbm_evaluation_spec.md
+src\csdemo\m30_post_first_kill_lightgbm_evaluation.py
+tests\test_m30_post_first_kill_lightgbm_evaluation.py
+scripts\run_post_first_kill_lightgbm_evaluation.ps1
+models\esta_full_m30\post_first_kill_lightgbm_calibrator.joblib
+reports\esta_full_m30\m30_summary.json
+reports\esta_full_m30\m30_experiment_manifest.json
+reports\esta_full_m30\m30_post_first_kill_lightgbm_evaluation_report.md
+reports\esta_full_m30\global_bootstrap_95ci.csv
+reports\esta_full_m30\paired_lightgbm_vs_xgboost_bootstrap.csv
+reports\esta_full_m30\metrics_by_map_with_ci.csv
+reports\esta_full_m30\validation_oof_calibration.csv
+reports\esta_full_m30\all_high_confidence_errors.csv
+```
+
+下一阶段为 M31 冻结模型解释；第四份老师报告仍等待解释、接口和最终验收证据。

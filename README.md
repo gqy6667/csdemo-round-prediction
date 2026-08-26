@@ -9,8 +9,8 @@ This project builds three round-win prediction tasks from ESTA/AWPY demo data:
 The first milestone focuses on the first two tasks with XGBoost, using a 70/20/10
 train/validation/test split. The pre-round LightGBM comparison and final acceptance
 are complete through M27. The post-first-kill LightGBM controlled baseline and
-validation-only tuning are complete through M29 under the frozen M21 data, feature,
-split, and evaluation contract.
+validation-only tuning and frozen-model evaluation are complete through M30 under
+the frozen M21 data, feature, split, and evaluation contract.
 
 ## Milestones
 
@@ -50,6 +50,7 @@ Chinese project documentation:
 - `docs/m27_pre_round_lightgbm_final_acceptance_spec.md`
 - `docs/m28_post_first_kill_lightgbm_controlled_baseline_spec.md`
 - `docs/m29_post_first_kill_lightgbm_tuning_spec.md`
+- `docs/m30_post_first_kill_lightgbm_evaluation_spec.md`
 - `docs/teacher_review_reports_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
@@ -80,6 +81,7 @@ Chinese project documentation:
 - `reports/esta_full_m27/m27_pre_round_lightgbm_final_acceptance_report.md`
 - `reports/esta_full_m28/m28_post_first_kill_lightgbm_controlled_baseline_report.md`
 - `reports/esta_full_m29/m29_post_first_kill_lightgbm_tuning_report.md`
+- `reports/esta_full_m30/m30_post_first_kill_lightgbm_evaluation_report.md`
 - `reports/teacher_review/01_pre_round_xgboost_report.md`
 - `reports/teacher_review/02_pre_round_lightgbm_report.md`
 - `reports/teacher_review/03_post_first_kill_xgboost_report.md`
@@ -463,3 +465,18 @@ the final model stops at 211 trees. Frozen test Accuracy/AUC/Log Loss/Brier/ECE1
 worse than M28 on all five metrics and worse than M21 XGBoost on four of five, so M29
 does not claim a model win. All 16 blockers, 236 tests, source compilation, and 28
 artifact hashes pass. M30 will determine uncertainty with series-level paired analysis.
+
+Run the M30 frozen post-first-kill LightGBM evaluation:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_evaluation.ps1
+```
+
+M30 replays all 4,170 M29 test probabilities with maximum absolute error
+`1.11e-16` and zero LightGBM fit calls. Series-level 95% intervals are
+AUC `[0.796194, 0.820185]` and Log Loss `[0.510784, 0.537071]`. Against the
+same-row M21 XGBoost, all five paired performance-advantage intervals include zero;
+there is no statistically stable winner. All eight robustness families pass, the
+LAN-online AUC gap is -0.012561 with CI `[-0.036757, 0.011680]`, and validation OOF
+selects the uncalibrated identity method. All 18 blockers, 246 tests, source
+compilation, and 40 artifact hashes pass. M31 is frozen-model explanation.
