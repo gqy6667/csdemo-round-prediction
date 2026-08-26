@@ -1,0 +1,110 @@
+{
+  "passed": true,
+  "checks": {
+    "m31_accepted": true,
+    "m30_accepted": true,
+    "model_sha256": true,
+    "model_bytes": true,
+    "calibrator_sha256": true,
+    "calibrator_bytes": true,
+    "model_contract": true,
+    "calibrator_contract": true,
+    "deployment_tree_contract": true,
+    "feature_contract": true,
+    "data_contract": true,
+    "frozen_metrics": true
+  },
+  "model_artifact": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+    "bytes": 229629,
+    "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+  },
+  "expected_model_artifact": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+    "bytes": 229629,
+    "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+  },
+  "calibrator_artifact": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+    "bytes": 506,
+    "sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5"
+  },
+  "expected_calibrator_artifact": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+    "bytes": 506,
+    "sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5"
+  },
+  "model_contract": {
+    "passed": true,
+    "task": "post_first_kill",
+    "model_name": "lightgbm_tuned",
+    "profile": "M21_first_kill_canonical_features",
+    "definition": "purchase complete, immediately after earliest valid enemy kill",
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "known_map_count": 8,
+    "known_maps": [
+      "de_ancient",
+      "de_dust2",
+      "de_inferno",
+      "de_mirage",
+      "de_nuke",
+      "de_overpass",
+      "de_train",
+      "de_vertigo"
+    ],
+    "known_weapon_count": 36,
+    "known_weapons": [
+      "AK-47",
+      "AUG",
+      "AWP",
+      "CZ75 Auto",
+      "Desert Eagle",
+      "Dual Berettas",
+      "FAMAS",
+      "Five-SeveN",
+      "G3SG1",
+      "Galil AR",
+      "Glock-18",
+      "HE Grenade",
+      "Incendiary Grenade",
+      "Knife",
+      "M4A1",
+      "M4A4",
+      "MAC-10",
+      "MAG-7",
+      "MP5-SD",
+      "MP7",
+      "MP9",
+      "Molotov",
+      "Negev",
+      "Nova",
+      "P2000",
+      "P250",
+      "P90",
+      "PP-Bizon",
+      "SCAR-20",
+      "SG 553",
+      "SSG 08",
+      "Tec-9",
+      "UMP-45",
+      "USP-S",
+      "XM1014",
+      "Zeus x27"
+    ],
+    "deployment_tree_count": 211,
+    "booster_space_sanitized_count": 9,
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "selection_metric": "validation_log_loss",
+    "official_seed": 42
+  },
+  "calibrator_contract": {
+    "passed": true,
+    "task": "post_first_kill",
+    "method": "uncalibrated",
+    "base_model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "selection_data": "validation only",
+    "validation_folds": 5
+  }
+}

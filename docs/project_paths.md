@@ -896,3 +896,32 @@ reports\esta_full_m31\case_explanations.csv
 ```
 
 下一阶段为 M32 单条 JSON/CSV 推理接口；第四份老师报告仍等待接口和最终验收证据。
+
+M32 已完成首杀后 LightGBM 单条 JSON/CSV 推理接口。用户提供 27 个购买基础字段和
+4 个首杀事件字段，接口生成 9 个差值后严格形成 40 个原始特征与 82 个编码列。
+模型合同锁定 8 张地图、36 种首杀武器和 211 棵树；M30 identity 校准器绑定同一
+模型与数据，并记录仅用 validation 5 折选择。JSON/CSV 示例概率差为 0，10 类非法
+输入与 CLI 成功/失败路径均通过。15/15 阻断项、264 项测试、源码编译和 26 个清单
+工件哈希通过，模型与校准器运行前后哈希不变。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_interface.ps1
+```
+
+M32 核心文件：
+
+```text
+docs\m32_post_first_kill_lightgbm_prediction_interface_spec.md
+src\csdemo\predict_first_kill_lightgbm.py
+src\csdemo\m32_post_first_kill_lightgbm_interface.py
+tests\test_m32_post_first_kill_lightgbm_prediction.py
+scripts\run_post_first_kill_lightgbm_interface.ps1
+examples\first_kill_lightgbm_prediction_output.json
+reports\esta_full_m32\m32_summary.json
+reports\esta_full_m32\m32_experiment_manifest.json
+reports\esta_full_m32\m32_post_first_kill_lightgbm_interface_report.md
+reports\esta_full_m32\model_contract_audit.json
+reports\esta_full_m32\validation_error_examples.json
+```
+
+下一阶段为 M33 最终阶段链与一键复现验收；第四份老师报告必须等 M33 通过后生成。

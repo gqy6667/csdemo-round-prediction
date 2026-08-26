@@ -48,6 +48,6 @@ and metrics. The fourth report must use completed LightGBM evidence, never place
 
 ## Outcome
 
-M27, the first three teacher reports, and M28-M31 are complete. M32 frozen-model
-post-first-kill LightGBM prediction interface is next; the fourth report remains
-blocked on interface and final acceptance evidence.
+M27, the first three teacher reports, and M28-M32 are complete. M33 final
+post-first-kill LightGBM stage-chain acceptance and one-command reproduction is next;
+the fourth report remains blocked on final acceptance evidence.

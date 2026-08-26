@@ -1,0 +1,330 @@
+{
+  "stage": "M32",
+  "generated_at_utc": "2026-08-26T15:28:58.309298+00:00",
+  "task": "post_first_kill",
+  "definition": "purchase complete, immediately after earliest valid enemy kill",
+  "model_policy": "M29/M30 artifacts frozen; one-row inference only; no fit or tuning",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 15,
+    "blocking_total": 15,
+    "m32_lightgbm_interface_complete": true,
+    "ready_for_m33": true
+  },
+  "checks": {
+    "m31_m30_prerequisite": true,
+    "artifact_contracts": true,
+    "json_csv_validation": true,
+    "json_csv_prediction_match": true,
+    "probability_contract": true,
+    "invalid_examples": true,
+    "feature_alignment": true,
+    "fixed_metrics": true,
+    "artifact_integrity": true,
+    "external_report": true,
+    "cli_contract": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true,
+    "artifact_manifest": true
+  },
+  "prerequisite": {
+    "passed": true,
+    "checks": {
+      "m31_accepted": true,
+      "m30_accepted": true,
+      "model_sha256": true,
+      "model_bytes": true,
+      "calibrator_sha256": true,
+      "calibrator_bytes": true,
+      "model_contract": true,
+      "calibrator_contract": true,
+      "deployment_tree_contract": true,
+      "feature_contract": true,
+      "data_contract": true,
+      "frozen_metrics": true
+    },
+    "model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    },
+    "expected_model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    },
+    "calibrator_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+      "bytes": 506,
+      "sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5"
+    },
+    "expected_calibrator_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+      "bytes": 506,
+      "sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5"
+    },
+    "model_contract": {
+      "passed": true,
+      "task": "post_first_kill",
+      "model_name": "lightgbm_tuned",
+      "profile": "M21_first_kill_canonical_features",
+      "definition": "purchase complete, immediately after earliest valid enemy kill",
+      "raw_feature_count": 40,
+      "encoded_feature_count": 82,
+      "known_map_count": 8,
+      "known_maps": [
+        "de_ancient",
+        "de_dust2",
+        "de_inferno",
+        "de_mirage",
+        "de_nuke",
+        "de_overpass",
+        "de_train",
+        "de_vertigo"
+      ],
+      "known_weapon_count": 36,
+      "known_weapons": [
+        "AK-47",
+        "AUG",
+        "AWP",
+        "CZ75 Auto",
+        "Desert Eagle",
+        "Dual Berettas",
+        "FAMAS",
+        "Five-SeveN",
+        "G3SG1",
+        "Galil AR",
+        "Glock-18",
+        "HE Grenade",
+        "Incendiary Grenade",
+        "Knife",
+        "M4A1",
+        "M4A4",
+        "MAC-10",
+        "MAG-7",
+        "MP5-SD",
+        "MP7",
+        "MP9",
+        "Molotov",
+        "Negev",
+        "Nova",
+        "P2000",
+        "P250",
+        "P90",
+        "PP-Bizon",
+        "SCAR-20",
+        "SG 553",
+        "SSG 08",
+        "Tec-9",
+        "UMP-45",
+        "USP-S",
+        "XM1014",
+        "Zeus x27"
+      ],
+      "deployment_tree_count": 211,
+      "booster_space_sanitized_count": 9,
+      "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "selection_metric": "validation_log_loss",
+      "official_seed": 42
+    },
+    "calibrator_contract": {
+      "passed": true,
+      "task": "post_first_kill",
+      "method": "uncalibrated",
+      "base_model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+      "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "selection_data": "validation only",
+      "validation_folds": 5
+    }
+  },
+  "model_performance_changed": false,
+  "lightgbm_fit_calls": 0,
+  "input_contract": {
+    "required_input_field_count": 31,
+    "required_purchase_base_feature_count": 27,
+    "required_first_kill_feature_count": 4,
+    "derived_feature_count": 9,
+    "raw_feature_count": 40,
+    "encoded_feature_count": 82,
+    "known_map_count": 8,
+    "known_maps": [
+      "de_ancient",
+      "de_dust2",
+      "de_inferno",
+      "de_mirage",
+      "de_nuke",
+      "de_overpass",
+      "de_train",
+      "de_vertigo"
+    ],
+    "known_weapon_count": 36,
+    "known_weapons": [
+      "AK-47",
+      "AUG",
+      "AWP",
+      "CZ75 Auto",
+      "Desert Eagle",
+      "Dual Berettas",
+      "FAMAS",
+      "Five-SeveN",
+      "G3SG1",
+      "Galil AR",
+      "Glock-18",
+      "HE Grenade",
+      "Incendiary Grenade",
+      "Knife",
+      "M4A1",
+      "M4A4",
+      "MAC-10",
+      "MAG-7",
+      "MP5-SD",
+      "MP7",
+      "MP9",
+      "Molotov",
+      "Negev",
+      "Nova",
+      "P2000",
+      "P250",
+      "P90",
+      "PP-Bizon",
+      "SCAR-20",
+      "SG 553",
+      "SSG 08",
+      "Tec-9",
+      "UMP-45",
+      "USP-S",
+      "XM1014",
+      "Zeus x27"
+    ],
+    "deployment_tree_count": 211,
+    "booster_space_sanitized_count": 9
+  },
+  "artifacts": {
+    "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "calibrator_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+    "model_unchanged": true,
+    "calibrator_unchanged": true
+  },
+  "example_prediction": {
+    "task": "post_first_kill",
+    "model_name": "lightgbm_tuned",
+    "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+    "calibration_method": "uncalibrated",
+    "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "validation": {
+      "status": "passed",
+      "required_purchase_base_feature_count": 27,
+      "required_first_kill_feature_count": 4,
+      "provided_field_count": 31,
+      "derived_features": [
+        "score_diff_ct",
+        "eq_value_diff_ct",
+        "cash_diff_ct",
+        "armor_diff_ct",
+        "helmet_diff_ct",
+        "grenade_diff_ct",
+        "awp_diff_ct",
+        "rifle_diff_ct",
+        "smg_diff_ct"
+      ],
+      "derived_feature_count": 9,
+      "raw_model_feature_count": 40,
+      "map_name": "de_nuke",
+      "first_kill_side": "CT",
+      "first_kill_weapon": "AK-47",
+      "required_input_field_count": 31,
+      "model_contract_verified": true,
+      "calibrator_contract_verified": true,
+      "encoded_model_feature_count": 82,
+      "deployment_tree_count": 211
+    },
+    "prediction": {
+      "base_ct_win_probability": 0.7052604306783065,
+      "ct_win_probability": 0.7052604306783065,
+      "t_win_probability": 0.29473956932169354,
+      "predicted_side": "CT",
+      "decision_threshold": 0.5,
+      "probability_sum": 1.0
+    }
+  },
+  "json_csv_probability_difference": 0.0,
+  "validation_cases": {
+    "passed": 10,
+    "total": 10
+  },
+  "fixed_test_metrics": {
+    "accuracy": 0.7429256594724221,
+    "log_loss": 0.5240626574288818,
+    "brier_score": 0.1760026226340809,
+    "ece10": 0.014190844077173683,
+    "auc": 0.808255446182
+  },
+  "fixed_metric_max_absolute_difference": 0.0,
+  "external_comparison": {
+    "passed": true,
+    "rows": 7,
+    "duplicate_benchmark_ids": 0,
+    "unknown_metrics": [],
+    "invalid_numeric_cells": 0,
+    "current_metric_max_absolute_difference_vs_m30": 0.0,
+    "tolerance": 1e-12,
+    "copied_byte_for_byte": true
+  },
+  "cli_contract": {
+    "passed": true,
+    "checks": {
+      "success_exit_zero": true,
+      "success_json": true,
+      "success_output_file": true,
+      "invalid_exit_two": true,
+      "invalid_error_json": true,
+      "invalid_error_specific": true
+    },
+    "success_return_code": 0,
+    "failure_return_code": 2,
+    "success_stderr": "",
+    "failure_payload": {
+      "status": "error",
+      "error_type": "FirstKillInputValidationError",
+      "message": "Input validation failed:\n- first_kill_advantage_ct must be -1 or 1; got 0",
+      "errors": [
+        "first_kill_advantage_ct must be -1 or 1; got 0"
+      ]
+    },
+    "output_path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m32/cli_prediction_output.json"
+  },
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 18.332849800000986,
+    "test_count": 264,
+    "skipped": false
+  },
+  "source_compile": {
+    "passed": true,
+    "return_code": 0,
+    "command": [
+      "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+      "-m",
+      "compileall",
+      "src",
+      "tests"
+    ],
+    "output": "Listing 'src'...\nListing 'src\\\\csdemo'...\nListing 'tests'...\n",
+    "skipped": false
+  },
+  "reproduction_entrypoint": {
+    "passed": true,
+    "missing_tokens": []
+  },
+  "roadmap": {
+    "pre_round_xgboost": "complete_through_M14",
+    "first_kill_xgboost": "complete_through_M21",
+    "pre_round_lightgbm": "complete_through_M27",
+    "post_first_kill_lightgbm_current": "M32_interface_complete",
+    "next_stage": "M33 post-first-kill LightGBM final acceptance"
+  },
+  "next_stage": "M33 post-first-kill LightGBM final acceptance"
+}

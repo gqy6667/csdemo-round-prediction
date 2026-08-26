@@ -10,7 +10,8 @@ The first milestone focuses on the first two tasks with XGBoost, using a 70/20/1
 train/validation/test split. The pre-round LightGBM comparison and final acceptance
 are complete through M27. The post-first-kill LightGBM controlled baseline,
 validation-only tuning, frozen-model evaluation, and explanation audit are complete
-through M31 under the frozen M21 data, feature, split, and evaluation contract.
+through M31; its strict one-row JSON/CSV interface is complete through M32 under
+the frozen M21 data, feature, split, and evaluation contract.
 
 ## Milestones
 
@@ -494,3 +495,16 @@ full-table or top-20 leakage failures. LightGBM versus M19 XGBoost importance-ra
 Spearman correlations range from 0.512 to 0.871 and are descriptive rather than an
 acceptance target. All 14 blockers, 254 tests, source compilation, and 37 manifest
 artifact hashes pass. M32 is the frozen JSON/CSV prediction interface.
+
+Run the M32 post-first-kill LightGBM JSON/CSV interface acceptance:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_interface.ps1
+```
+
+M32 accepts 31 supplied fields, derives 9 purchase differences, and aligns exactly
+to 40 raw and 82 encoded model features. The contract freezes 8 maps, 36 first-kill
+weapons, 211 trees, and the validation-only identity calibrator. JSON and CSV example
+probabilities match exactly; all 10 invalid-input cases and both CLI paths pass.
+All 15 blockers, 264 tests, source compilation, and 26 manifest artifact hashes pass.
+M33 is final stage-chain acceptance and one-command reproduction.

@@ -17,7 +17,8 @@
 - [x] Complete M29 validation-only controlled tuning and formal acceptance.
 - [x] Complete M30 paired uncertainty, robustness, calibration, and formal evaluation.
 - [x] Complete M31 frozen-model explanation and leakage audit.
-- [ ] Complete M32 prediction interface and M33 final acceptance.
+- [x] Complete M32 frozen JSON/CSV prediction interface.
+- [ ] Complete M33 final stage-chain acceptance and one-command reproduction.
 - [ ] Write the post-first-kill LightGBM report only from completed accepted evidence.
 - [ ] Create and verify the teacher review index linking all four reports.
 - [ ] Update documentation and locally commit the completed M31+ and report deliverables.
