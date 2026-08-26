@@ -807,5 +807,33 @@ reports\esta_full_m28\global_bootstrap_95ci.csv
 reports\esta_full_m28\paired_lightgbm_vs_xgboost_bootstrap.csv
 ```
 
-下一阶段 M29 只使用 train/validation 做 LightGBM 受控调参；第四份老师报告仍需等待
-固定模型评估、解释、接口和最终验收完成。
+M29 随后只使用 train/validation 完成 9 阶段、36 候选的 LightGBM 受控调参。
+唯一达到 `0.0001` 接受门槛的变化是 `max_depth=-1` 改为 `max_depth=3`，validation
+Log Loss 相对 M28 改善 0.000738；五种子 Log Loss/AUC 范围为
+0.000362/0.000565。冻结模型使用 211 棵树，测试 Accuracy/AUC/Log Loss/Brier/ECE10
+为 0.742926/0.808255/0.524063/0.176003/0.014191。测试点指标相对 M28 五项均略差，
+不能返回使用测试集修改参数；M30 将用系列赛配对 bootstrap 判断差异的不确定性。
+16/16 阻断项、236 项测试、源码编译和 28 个清单哈希检查通过。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_tuning.ps1
+```
+
+M29 核心文件：
+
+```text
+docs\m29_post_first_kill_lightgbm_tuning_spec.md
+src\csdemo\m29_post_first_kill_lightgbm_tuning.py
+tests\test_m29_post_first_kill_lightgbm_tuning.py
+scripts\run_post_first_kill_lightgbm_tuning.ps1
+models\esta_full_m29\post_first_kill_lightgbm_tuned.joblib
+reports\esta_full_m29\m29_summary.json
+reports\esta_full_m29\m29_experiment_manifest.json
+reports\esta_full_m29\m29_post_first_kill_lightgbm_tuning_report.md
+reports\esta_full_m29\tuning_candidates.csv
+reports\esta_full_m29\phase_selections.csv
+reports\esta_full_m29\seed_stability.csv
+reports\esta_full_m29\test_predictions.csv
+```
+
+下一阶段为 M30 冻结模型评估；第四份老师报告仍需等待评估、解释、接口和最终验收完成。

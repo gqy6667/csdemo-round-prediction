@@ -1,0 +1,683 @@
+{
+  "stage": "M29",
+  "generated_at_utc": "2026-08-26T14:54:18.911171+00:00",
+  "policy": "M28 data/split/features frozen; validation-only sequential tuning",
+  "code": {
+    "commit": "0ab6fa47fc1498467d73da4cbefdda8a53d43b76",
+    "branch": "main",
+    "remote": "https://github.com/gqy6667/csdemo-round-prediction.git",
+    "working_tree_status": [
+      "?? docs/m29_post_first_kill_lightgbm_tuning_spec.md",
+      "?? scripts/run_post_first_kill_lightgbm_tuning.ps1",
+      "?? src/csdemo/m29_post_first_kill_lightgbm_tuning.py",
+      "?? tests/test_m29_post_first_kill_lightgbm_tuning.py"
+    ]
+  },
+  "inputs": {
+    "first_kill_data": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/first_kill.parquet",
+      "bytes": 1479873,
+      "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492"
+    },
+    "m28_summary": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_summary.json",
+      "bytes": 9974,
+      "sha256": "e93a5cf91419429e7c191043a499ab1133963894b2b43079001261100b5205f3"
+    },
+    "m28_test_predictions": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_test_predictions.csv",
+      "bytes": 764258,
+      "sha256": "c6782a599e1450606b50a1d10a344835360d002037b020ffa1df841e3605b4d3"
+    },
+    "m28_model_comparison": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/m28_model_comparison.csv",
+      "bytes": 767,
+      "sha256": "39ed7240642b9fcb11a1efa9e6d4be10609210b8a555a4b1001ea2750e050eb1"
+    },
+    "m28_encoded_columns": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m28/encoded_feature_columns.csv",
+      "bytes": 1590,
+      "sha256": "1559edb17788e496d93ae241ee875b0a08ed7ae6b06a81213e0d5f5779280527"
+    },
+    "m28_baseline_model": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m28/post_first_kill_lightgbm_baseline.joblib",
+      "bytes": 298762,
+      "sha256": "da0259966d0e0b7f89644131b9cafe2f7d37886cf3fdad05b16582915e1013db"
+    },
+    "m29_spec": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/docs/m29_post_first_kill_lightgbm_tuning_spec.md",
+      "bytes": 5496,
+      "sha256": "434cc4a21cf3cac12b03322c3a886f6e7f8132cc344d75fd000f578cd8d58b2d"
+    },
+    "m29_module": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/src/csdemo/m29_post_first_kill_lightgbm_tuning.py",
+      "bytes": 31164,
+      "sha256": "982b684df3d3dfe7bbeb105d26cc448038d9ece30bad06c0ec21d728d36d0f60"
+    },
+    "m29_tests": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/tests/test_m29_post_first_kill_lightgbm_tuning.py",
+      "bytes": 8011,
+      "sha256": "8078ac7cac3132437ca552f839141fcbf729cbf38b41126fd0224ae2962c2d12"
+    },
+    "reproduction_script": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/scripts/run_post_first_kill_lightgbm_tuning.ps1",
+      "bytes": 791,
+      "sha256": "0431fc94d45790a15703549518405cb0a4165c623d58a9cbaf91409ea0088021"
+    },
+    "environment": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/environment.yml",
+      "bytes": 450,
+      "sha256": "0be4b4b0524f223f52fdf831516f120dce3623e7482d9e814e41e1fa8b3df10f"
+    },
+    "requirements_lock": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/requirements-lock.txt",
+      "bytes": 201,
+      "sha256": "5533564a59b311cf8de4d043f89624a756e6b85c18b57cf18297986c87526a61"
+    }
+  },
+  "outputs": {
+    "models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    },
+    "reports/esta_full_m29/tuning_candidates.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/tuning_candidates.csv",
+      "bytes": 10661,
+      "sha256": "4720af1f29a37ead28c30730749ba04e1044526684fe3be9feed869862482041"
+    },
+    "reports/esta_full_m29/phase_selections.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/phase_selections.csv",
+      "bytes": 4450,
+      "sha256": "3cab5d9a4abcdef7b2aa8d0ac1ce34b93d53584fafa1d0eea7199a221240c671"
+    },
+    "reports/esta_full_m29/seed_stability.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/seed_stability.csv",
+      "bytes": 1280,
+      "sha256": "f73cf69365c2f59cec41a5122b6e61ad55af222629121390346c9281e40d77fe"
+    },
+    "reports/esta_full_m29/test_predictions.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/test_predictions.csv",
+      "bytes": 849992,
+      "sha256": "e0f34d43e33604c9e5d3283f175f1200b26ddb2878617b3cc7ac3512ab5f2bb9"
+    },
+    "reports/esta_full_m29/m29_model_comparison.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/m29_model_comparison.csv",
+      "bytes": 1103,
+      "sha256": "d308302e9b84bdca020686cc8f06d1c89dfcaba426900dcbbadf469c51898462"
+    },
+    "reports/esta_full_m29/lightgbm_training_history.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/lightgbm_training_history.csv",
+      "bytes": 7361,
+      "sha256": "9caae7534a7b09e16f2aeb4804fc20bc77e9e8f0fe922024689d8eba71e8ff97"
+    },
+    "reports/esta_full_m29/encoded_feature_columns.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/encoded_feature_columns.csv",
+      "bytes": 1590,
+      "sha256": "1559edb17788e496d93ae241ee875b0a08ed7ae6b06a81213e0d5f5779280527"
+    },
+    "reports/esta_full_m29/frozen_params.json": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/frozen_params.json",
+      "bytes": 391,
+      "sha256": "452cdf475e6214d6b7bd807dbf4734f98802559a135b0cfe259a261515b01aac"
+    },
+    "reports/esta_full_m29/external_benchmark_comparison.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/external_benchmark_comparison.csv",
+      "bytes": 2305,
+      "sha256": "0b887a46278cc1f03d64a155f28f95bf587b66653b3623928418247662a27329"
+    },
+    "reports/esta_full_m29/external_benchmark_comparison.md": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/external_benchmark_comparison.md",
+      "bytes": 2920,
+      "sha256": "51141e33f977c99ae045114c28d89dbb97b66fccf772ec483c76b113f43e54d0"
+    },
+    "reports/esta_full_m29/automated_test_output.txt": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/automated_test_output.txt",
+      "bytes": 29364,
+      "sha256": "56bf13e00f13fbe45a32ea83198414c88e43c797eaffc63331a764c2a30e3b27"
+    },
+    "reports/esta_full_m29/source_compile_output.txt": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/source_compile_output.txt",
+      "bytes": 64,
+      "sha256": "5bcdbbe2733f092f7027f4e677038c42afeb792db3480d1a71d9e59f585b6a06"
+    },
+    "reports/esta_full_m29/m29_checks.csv": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/m29_checks.csv",
+      "bytes": 467,
+      "sha256": "4bd23e428d4953da4ccaf89052aea8024cfea08abd100b751695310c24408c78"
+    },
+    "reports/esta_full_m29/m29_summary.json": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/m29_summary.json",
+      "bytes": 10703,
+      "sha256": "dbdfeb7446bc7e394acb78df738d233581dd6425c981f6c753cd3987b7c5dfea"
+    },
+    "reports/esta_full_m29/m29_post_first_kill_lightgbm_tuning_report.md": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/reports/esta_full_m29/m29_post_first_kill_lightgbm_tuning_report.md",
+      "bytes": 4553,
+      "sha256": "015da58dfdbd30249d0653d48abd815030a2a690503eebd674890cec2e40a17d"
+    }
+  },
+  "contract": {
+    "base_params": {
+      "boosting_type": "gbdt",
+      "n_estimators": 3000,
+      "learning_rate": 0.03,
+      "num_leaves": 15,
+      "min_child_samples": 20,
+      "subsample": 0.85,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "max_depth": -1,
+      "min_split_gain": 0.0,
+      "random_state": 42
+    },
+    "frozen_params": {
+      "boosting_type": "gbdt",
+      "n_estimators": 3000,
+      "learning_rate": 0.03,
+      "num_leaves": 15,
+      "min_child_samples": 20,
+      "subsample": 0.85,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "max_depth": 3,
+      "min_split_gain": 0.0,
+      "random_state": 42
+    },
+    "phase_definitions": [
+      {
+        "name": "num_leaves",
+        "allowed_parameters": [
+          "num_leaves"
+        ],
+        "candidates": [
+          {
+            "id": "num_leaves_7",
+            "label": "7",
+            "overrides": {
+              "num_leaves": 7
+            }
+          },
+          {
+            "id": "num_leaves_15",
+            "label": "15",
+            "overrides": {
+              "num_leaves": 15
+            }
+          },
+          {
+            "id": "num_leaves_31",
+            "label": "31",
+            "overrides": {
+              "num_leaves": 31
+            }
+          },
+          {
+            "id": "num_leaves_63",
+            "label": "63",
+            "overrides": {
+              "num_leaves": 63
+            }
+          }
+        ]
+      },
+      {
+        "name": "max_depth",
+        "allowed_parameters": [
+          "max_depth"
+        ],
+        "candidates": [
+          {
+            "id": "max_depth_-1",
+            "label": "-1",
+            "overrides": {
+              "max_depth": -1
+            }
+          },
+          {
+            "id": "max_depth_3",
+            "label": "3",
+            "overrides": {
+              "max_depth": 3
+            }
+          },
+          {
+            "id": "max_depth_4",
+            "label": "4",
+            "overrides": {
+              "max_depth": 4
+            }
+          },
+          {
+            "id": "max_depth_5",
+            "label": "5",
+            "overrides": {
+              "max_depth": 5
+            }
+          },
+          {
+            "id": "max_depth_6",
+            "label": "6",
+            "overrides": {
+              "max_depth": 6
+            }
+          }
+        ]
+      },
+      {
+        "name": "min_child_samples",
+        "allowed_parameters": [
+          "min_child_samples"
+        ],
+        "candidates": [
+          {
+            "id": "min_child_samples_10",
+            "label": "10",
+            "overrides": {
+              "min_child_samples": 10
+            }
+          },
+          {
+            "id": "min_child_samples_20",
+            "label": "20",
+            "overrides": {
+              "min_child_samples": 20
+            }
+          },
+          {
+            "id": "min_child_samples_40",
+            "label": "40",
+            "overrides": {
+              "min_child_samples": 40
+            }
+          },
+          {
+            "id": "min_child_samples_80",
+            "label": "80",
+            "overrides": {
+              "min_child_samples": 80
+            }
+          },
+          {
+            "id": "min_child_samples_160",
+            "label": "160",
+            "overrides": {
+              "min_child_samples": 160
+            }
+          }
+        ]
+      },
+      {
+        "name": "reg_lambda",
+        "allowed_parameters": [
+          "reg_lambda"
+        ],
+        "candidates": [
+          {
+            "id": "reg_lambda_0.0",
+            "label": "0.0",
+            "overrides": {
+              "reg_lambda": 0.0
+            }
+          },
+          {
+            "id": "reg_lambda_1.0",
+            "label": "1.0",
+            "overrides": {
+              "reg_lambda": 1.0
+            }
+          },
+          {
+            "id": "reg_lambda_3.0",
+            "label": "3.0",
+            "overrides": {
+              "reg_lambda": 3.0
+            }
+          },
+          {
+            "id": "reg_lambda_10.0",
+            "label": "10.0",
+            "overrides": {
+              "reg_lambda": 10.0
+            }
+          }
+        ]
+      },
+      {
+        "name": "reg_alpha",
+        "allowed_parameters": [
+          "reg_alpha"
+        ],
+        "candidates": [
+          {
+            "id": "reg_alpha_0.0",
+            "label": "0.0",
+            "overrides": {
+              "reg_alpha": 0.0
+            }
+          },
+          {
+            "id": "reg_alpha_0.1",
+            "label": "0.1",
+            "overrides": {
+              "reg_alpha": 0.1
+            }
+          },
+          {
+            "id": "reg_alpha_0.5",
+            "label": "0.5",
+            "overrides": {
+              "reg_alpha": 0.5
+            }
+          },
+          {
+            "id": "reg_alpha_1.0",
+            "label": "1.0",
+            "overrides": {
+              "reg_alpha": 1.0
+            }
+          }
+        ]
+      },
+      {
+        "name": "subsample",
+        "allowed_parameters": [
+          "subsample"
+        ],
+        "candidates": [
+          {
+            "id": "subsample_0.7",
+            "label": "0.7",
+            "overrides": {
+              "subsample": 0.7
+            }
+          },
+          {
+            "id": "subsample_0.85",
+            "label": "0.85",
+            "overrides": {
+              "subsample": 0.85
+            }
+          },
+          {
+            "id": "subsample_1.0",
+            "label": "1.0",
+            "overrides": {
+              "subsample": 1.0
+            }
+          }
+        ]
+      },
+      {
+        "name": "colsample_bytree",
+        "allowed_parameters": [
+          "colsample_bytree"
+        ],
+        "candidates": [
+          {
+            "id": "colsample_bytree_0.7",
+            "label": "0.7",
+            "overrides": {
+              "colsample_bytree": 0.7
+            }
+          },
+          {
+            "id": "colsample_bytree_0.85",
+            "label": "0.85",
+            "overrides": {
+              "colsample_bytree": 0.85
+            }
+          },
+          {
+            "id": "colsample_bytree_1.0",
+            "label": "1.0",
+            "overrides": {
+              "colsample_bytree": 1.0
+            }
+          }
+        ]
+      },
+      {
+        "name": "min_split_gain",
+        "allowed_parameters": [
+          "min_split_gain"
+        ],
+        "candidates": [
+          {
+            "id": "min_split_gain_0.0",
+            "label": "0.0",
+            "overrides": {
+              "min_split_gain": 0.0
+            }
+          },
+          {
+            "id": "min_split_gain_0.01",
+            "label": "0.01",
+            "overrides": {
+              "min_split_gain": 0.01
+            }
+          },
+          {
+            "id": "min_split_gain_0.05",
+            "label": "0.05",
+            "overrides": {
+              "min_split_gain": 0.05
+            }
+          },
+          {
+            "id": "min_split_gain_0.1",
+            "label": "0.1",
+            "overrides": {
+              "min_split_gain": 0.1
+            }
+          }
+        ]
+      },
+      {
+        "name": "learning_rate",
+        "allowed_parameters": [
+          "learning_rate"
+        ],
+        "candidates": [
+          {
+            "id": "learning_rate_0.01",
+            "label": "0.01",
+            "overrides": {
+              "learning_rate": 0.01
+            }
+          },
+          {
+            "id": "learning_rate_0.02",
+            "label": "0.02",
+            "overrides": {
+              "learning_rate": 0.02
+            }
+          },
+          {
+            "id": "learning_rate_0.03",
+            "label": "0.03",
+            "overrides": {
+              "learning_rate": 0.03
+            }
+          },
+          {
+            "id": "learning_rate_0.05",
+            "label": "0.05",
+            "overrides": {
+              "learning_rate": 0.05
+            }
+          }
+        ]
+      }
+    ],
+    "minimum_phase_improvement": 0.0001,
+    "stability_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "stability_limits": {
+      "val_log_loss": 0.002,
+      "val_auc": 0.003
+    },
+    "raw_features": [
+      "map_name",
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "first_kill_advantage_ct",
+      "first_kill_time",
+      "first_kill_headshot",
+      "first_kill_weapon"
+    ],
+    "encoded_columns": [
+      "round_num",
+      "ct_score",
+      "t_score",
+      "score_diff_ct",
+      "ct_eq_value",
+      "t_eq_value",
+      "eq_value_diff_ct",
+      "ct_cash",
+      "t_cash",
+      "cash_diff_ct",
+      "ct_armor",
+      "t_armor",
+      "armor_diff_ct",
+      "ct_helmets",
+      "t_helmets",
+      "helmet_diff_ct",
+      "ct_defuse_kits",
+      "ct_grenades",
+      "t_grenades",
+      "grenade_diff_ct",
+      "ct_ak47",
+      "t_ak47",
+      "ct_m4a4",
+      "t_m4a4",
+      "ct_m4a1_s",
+      "t_m4a1_s",
+      "ct_awp",
+      "t_awp",
+      "awp_diff_ct",
+      "ct_rifles",
+      "t_rifles",
+      "rifle_diff_ct",
+      "ct_smgs",
+      "t_smgs",
+      "smg_diff_ct",
+      "first_kill_advantage_ct",
+      "first_kill_time",
+      "first_kill_headshot",
+      "map_name_de_ancient",
+      "map_name_de_dust2",
+      "map_name_de_inferno",
+      "map_name_de_mirage",
+      "map_name_de_nuke",
+      "map_name_de_overpass",
+      "map_name_de_train",
+      "map_name_de_vertigo",
+      "first_kill_weapon_AK-47",
+      "first_kill_weapon_AUG",
+      "first_kill_weapon_AWP",
+      "first_kill_weapon_CZ75 Auto",
+      "first_kill_weapon_Desert Eagle",
+      "first_kill_weapon_Dual Berettas",
+      "first_kill_weapon_FAMAS",
+      "first_kill_weapon_Five-SeveN",
+      "first_kill_weapon_G3SG1",
+      "first_kill_weapon_Galil AR",
+      "first_kill_weapon_Glock-18",
+      "first_kill_weapon_HE Grenade",
+      "first_kill_weapon_Incendiary Grenade",
+      "first_kill_weapon_Knife",
+      "first_kill_weapon_M4A1",
+      "first_kill_weapon_M4A4",
+      "first_kill_weapon_MAC-10",
+      "first_kill_weapon_MAG-7",
+      "first_kill_weapon_MP5-SD",
+      "first_kill_weapon_MP7",
+      "first_kill_weapon_MP9",
+      "first_kill_weapon_Molotov",
+      "first_kill_weapon_Negev",
+      "first_kill_weapon_Nova",
+      "first_kill_weapon_P2000",
+      "first_kill_weapon_P250",
+      "first_kill_weapon_P90",
+      "first_kill_weapon_PP-Bizon",
+      "first_kill_weapon_SCAR-20",
+      "first_kill_weapon_SG 553",
+      "first_kill_weapon_SSG 08",
+      "first_kill_weapon_Tec-9",
+      "first_kill_weapon_UMP-45",
+      "first_kill_weapon_USP-S",
+      "first_kill_weapon_XM1014",
+      "first_kill_weapon_Zeus x27"
+    ],
+    "test_use": "once after parameters and official seed were frozen"
+  },
+  "checks": {
+    "m28_prerequisite": true,
+    "data_contract": true,
+    "feature_contract": true,
+    "candidate_grid": true,
+    "validation_only": true,
+    "phase_selection": true,
+    "frozen_model": true,
+    "seed_stability": true,
+    "final_predictions": true,
+    "minimum_metrics": true,
+    "controlled_comparison": true,
+    "external_report": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true,
+    "artifact_manifest": true
+  },
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 16,
+    "blocking_total": 16,
+    "m29_lightgbm_tuning_complete": true,
+    "ready_for_m30": true
+  }
+}

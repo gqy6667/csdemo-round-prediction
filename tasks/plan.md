@@ -48,6 +48,6 @@ and metrics. The fourth report must use completed LightGBM evidence, never place
 
 ## Outcome
 
-M27, the first three teacher reports, and M28 are complete. M29 validation-only
-post-first-kill LightGBM tuning is next; the fourth report remains blocked on the
-later fixed-model evaluation, explanation, interface, and final acceptance evidence.
+M27, the first three teacher reports, M28, and M29 are complete. M30 frozen-model
+post-first-kill LightGBM evaluation is next; the fourth report remains blocked on
+evaluation, explanation, interface, and final acceptance evidence.

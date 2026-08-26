@@ -8,8 +8,9 @@ This project builds three round-win prediction tasks from ESTA/AWPY demo data:
 
 The first milestone focuses on the first two tasks with XGBoost, using a 70/20/10
 train/validation/test split. The pre-round LightGBM comparison and final acceptance
-are complete through M27. The post-first-kill LightGBM controlled baseline is complete
-through M28 under the frozen M21 data, feature, split, and evaluation contract.
+are complete through M27. The post-first-kill LightGBM controlled baseline and
+validation-only tuning are complete through M29 under the frozen M21 data, feature,
+split, and evaluation contract.
 
 ## Milestones
 
@@ -48,6 +49,7 @@ Chinese project documentation:
 - `docs/m25_pre_round_lightgbm_explanation_spec.md`
 - `docs/m27_pre_round_lightgbm_final_acceptance_spec.md`
 - `docs/m28_post_first_kill_lightgbm_controlled_baseline_spec.md`
+- `docs/m29_post_first_kill_lightgbm_tuning_spec.md`
 - `docs/teacher_review_reports_spec.md`
 - `docs/external_benchmark_policy.md`
 - `reports/esta_full_m11/m11_robustness_report.md`
@@ -77,6 +79,7 @@ Chinese project documentation:
 - `reports/esta_full_m25/m25_pre_round_lightgbm_explanation_report.md`
 - `reports/esta_full_m27/m27_pre_round_lightgbm_final_acceptance_report.md`
 - `reports/esta_full_m28/m28_post_first_kill_lightgbm_controlled_baseline_report.md`
+- `reports/esta_full_m29/m29_post_first_kill_lightgbm_tuning_report.md`
 - `reports/teacher_review/01_pre_round_xgboost_report.md`
 - `reports/teacher_review/02_pre_round_lightgbm_report.md`
 - `reports/teacher_review/03_post_first_kill_xgboost_report.md`
@@ -445,3 +448,18 @@ slightly; all five paired series-bootstrap intervals include zero, so neither mo
 has a statistically stable advantage. All 16 blockers, 225 tests, source compilation,
 and 27 artifact hash checks pass. M29 is validation-only controlled tuning; no fourth
 teacher report is created until the later evaluation and final acceptance stages pass.
+
+Run the M29 post-first-kill LightGBM validation-only tuning stage:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_post_first_kill_lightgbm_tuning.ps1
+```
+
+M29 evaluates 36 frozen-order candidates and five stability seeds without exposing
+test metrics to selection. Only `max_depth=-1` to `max_depth=3` clears the 0.0001
+validation Log Loss improvement rule; validation Log Loss improves by 0.000738 and
+the final model stops at 211 trees. Frozen test Accuracy/AUC/Log Loss/Brier/ECE10 are
+0.742926/0.808255/0.524063/0.176003/0.014191. These point estimates are slightly
+worse than M28 on all five metrics and worse than M21 XGBoost on four of five, so M29
+does not claim a model win. All 16 blockers, 236 tests, source compilation, and 28
+artifact hashes pass. M30 will determine uncertainty with series-level paired analysis.

@@ -1,0 +1,17 @@
+check,passed,blocking
+m28_prerequisite,True,True
+data_contract,True,True
+feature_contract,True,True
+candidate_grid,True,True
+validation_only,True,True
+phase_selection,True,True
+frozen_model,True,True
+seed_stability,True,True
+final_predictions,True,True
+minimum_metrics,True,True
+controlled_comparison,True,True
+external_report,True,True
+automated_tests,True,True
+source_compile,True,True
+reproduction_entrypoint,True,True
+artifact_manifest,True,True

@@ -1,0 +1,376 @@
+{
+  "stage": "M29",
+  "generated_at_utc": "2026-08-26T14:54:18.911171+00:00",
+  "task": "post_first_kill",
+  "definition": "purchase complete, immediately after earliest valid enemy kill",
+  "experiment_policy": "validation-only greedy sequential LightGBM tuning",
+  "acceptance": {
+    "status": "passed",
+    "blocking_failures": [],
+    "blocking_passed": 16,
+    "blocking_total": 16,
+    "m29_lightgbm_tuning_complete": true,
+    "ready_for_m30": true
+  },
+  "checks": {
+    "m28_prerequisite": true,
+    "data_contract": true,
+    "feature_contract": true,
+    "candidate_grid": true,
+    "validation_only": true,
+    "phase_selection": true,
+    "frozen_model": true,
+    "seed_stability": true,
+    "final_predictions": true,
+    "minimum_metrics": true,
+    "controlled_comparison": true,
+    "external_report": true,
+    "automated_tests": true,
+    "source_compile": true,
+    "reproduction_entrypoint": true,
+    "artifact_manifest": true
+  },
+  "data": {
+    "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/data/processed/esta_full/first_kill.parquet",
+    "bytes": 1479873,
+    "sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "rows": 41027,
+    "series": 782,
+    "games": 1558,
+    "split_rows": {
+      "train": 28489,
+      "val": 8368,
+      "test": 4170
+    },
+    "split_series": {
+      "train": 547,
+      "val": 156,
+      "test": 79
+    },
+    "duplicate_key_rows": 0,
+    "cross_split_series": 0,
+    "cross_split_games": 0,
+    "cross_split_rounds": 0
+  },
+  "features": {
+    "profile": "canonical_event",
+    "raw_count": 40,
+    "encoded_count": 82,
+    "encoded_columns_match_m28": true
+  },
+  "search": {
+    "selection_metric": "validation_log_loss",
+    "minimum_phase_improvement": 0.0001,
+    "phase_count": 9,
+    "candidate_count": 36,
+    "accepted_change_count": 1,
+    "accepted_phases": [
+      "max_depth"
+    ],
+    "test_columns_in_candidate_tables": {
+      "passed": true,
+      "tables": {
+        "tuning_candidates": {
+          "passed": true,
+          "rows": 36,
+          "forbidden_columns": []
+        },
+        "phase_selections": {
+          "passed": true,
+          "rows": 9,
+          "forbidden_columns": []
+        },
+        "seed_stability": {
+          "passed": true,
+          "rows": 5,
+          "forbidden_columns": []
+        }
+      }
+    },
+    "test_used_for_selection": false,
+    "formal_test_evaluations": 1
+  },
+  "model": {
+    "library": "lightgbm",
+    "version": "4.6.0",
+    "official_seed": 42,
+    "params": {
+      "boosting_type": "gbdt",
+      "n_estimators": 3000,
+      "learning_rate": 0.03,
+      "num_leaves": 15,
+      "min_child_samples": 20,
+      "subsample": 0.85,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "max_depth": 3,
+      "min_split_gain": 0.0,
+      "random_state": 42
+    },
+    "best_iteration": 211,
+    "deployment_tree_count": 211,
+    "model_artifact": {
+      "path": "C:/Users/admin/Documents/Codex/2026-07-06/th/work/csdemo_round_prediction/models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "bytes": 229629,
+      "sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5"
+    }
+  },
+  "metrics": {
+    "accuracy": 0.7429256594724221,
+    "auc": 0.808255446182,
+    "log_loss": 0.5240626574288818,
+    "brier_score": 0.1760026226340809,
+    "ece10": 0.014190844077173683
+  },
+  "test_metrics_by_model": {
+    "xgboost_frozen": {
+      "accuracy": 0.7441247002398081,
+      "auc": 0.8098368635821109,
+      "log_loss": 0.5231460210364541,
+      "brier_score": 0.1756558998830955,
+      "ece10": 0.0154496789067912
+    },
+    "lightgbm_baseline": {
+      "accuracy": 0.746043165467626,
+      "auc": 0.8090699061203482,
+      "log_loss": 0.523798701954496,
+      "brier_score": 0.1758940137005669,
+      "ece10": 0.0136218609299978
+    },
+    "lightgbm_tuned": {
+      "accuracy": 0.7429256594724221,
+      "auc": 0.808255446182,
+      "log_loss": 0.5240626574288818,
+      "brier_score": 0.1760026226340809,
+      "ece10": 0.014190844077173683
+    }
+  },
+  "metric_targets": {
+    "all_minimum_passed": true,
+    "all_stage_passed": true,
+    "minimum_passed_count": 5,
+    "stage_passed_count": 5,
+    "metrics": {
+      "accuracy": {
+        "value": 0.7429256594724221,
+        "minimum": 0.68,
+        "stage": 0.7,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "auc": {
+        "value": 0.808255446182,
+        "minimum": 0.75,
+        "stage": 0.78,
+        "higher_is_better": true,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "log_loss": {
+        "value": 0.5240626574288818,
+        "minimum": 0.58,
+        "stage": 0.55,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "brier_score": {
+        "value": 0.1760026226340809,
+        "minimum": 0.2,
+        "stage": 0.185,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      },
+      "ece10": {
+        "value": 0.014190844077173683,
+        "minimum": 0.05,
+        "stage": 0.03,
+        "higher_is_better": false,
+        "minimum_passed": true,
+        "stage_passed": true,
+        "minimum_gap": 0.0,
+        "stage_gap": 0.0
+      }
+    }
+  },
+  "stage_goals": {
+    "all_passed": true,
+    "passed_count": 3,
+    "goal_count": 3,
+    "goals": {
+      "validation_log_loss_improvement": {
+        "value": 0.0007376390057119986,
+        "target": 0.0005,
+        "direction": "higher",
+        "passed": true
+      },
+      "validation_auc": {
+        "value": 0.8031616131874311,
+        "target": 0.8008628624398364,
+        "direction": "higher",
+        "passed": true
+      },
+      "train_validation_auc_gap": {
+        "value": 0.01354644509363856,
+        "target": 0.03,
+        "direction": "lower",
+        "passed": true
+      }
+    }
+  },
+  "tuned_vs_m28_test": {
+    "accuracy": {
+      "left": 0.7429256594724221,
+      "right": 0.746043165467626,
+      "raw_left_minus_right": -0.003117505995203884,
+      "performance_advantage_left": -0.003117505995203884,
+      "left_performs_better": false
+    },
+    "auc": {
+      "left": 0.808255446182,
+      "right": 0.8090699061203482,
+      "raw_left_minus_right": -0.0008144599383482776,
+      "performance_advantage_left": -0.0008144599383482776,
+      "left_performs_better": false
+    },
+    "log_loss": {
+      "left": 0.5240626574288818,
+      "right": 0.523798701954496,
+      "raw_left_minus_right": 0.0002639554743858463,
+      "performance_advantage_left": -0.0002639554743858463,
+      "left_performs_better": false
+    },
+    "brier_score": {
+      "left": 0.1760026226340809,
+      "right": 0.1758940137005669,
+      "raw_left_minus_right": 0.00010860893351399836,
+      "performance_advantage_left": -0.00010860893351399836,
+      "left_performs_better": false
+    },
+    "ece10": {
+      "left": 0.014190844077173683,
+      "right": 0.0136218609299978,
+      "raw_left_minus_right": 0.0005689831471758829,
+      "performance_advantage_left": -0.0005689831471758829,
+      "left_performs_better": false
+    }
+  },
+  "tuned_vs_xgboost_test": {
+    "accuracy": {
+      "left": 0.7429256594724221,
+      "right": 0.7441247002398081,
+      "raw_left_minus_right": -0.0011990407673860837,
+      "performance_advantage_left": -0.0011990407673860837,
+      "left_performs_better": false
+    },
+    "auc": {
+      "left": 0.808255446182,
+      "right": 0.8098368635821109,
+      "raw_left_minus_right": -0.0015814174001109738,
+      "performance_advantage_left": -0.0015814174001109738,
+      "left_performs_better": false
+    },
+    "log_loss": {
+      "left": 0.5240626574288818,
+      "right": 0.5231460210364541,
+      "raw_left_minus_right": 0.0009166363924276721,
+      "performance_advantage_left": -0.0009166363924276721,
+      "left_performs_better": false
+    },
+    "brier_score": {
+      "left": 0.1760026226340809,
+      "right": 0.1756558998830955,
+      "raw_left_minus_right": 0.0003467227509854065,
+      "performance_advantage_left": -0.0003467227509854065,
+      "left_performs_better": false
+    },
+    "ece10": {
+      "left": 0.014190844077173683,
+      "right": 0.0154496789067912,
+      "raw_left_minus_right": -0.0012588348296175174,
+      "performance_advantage_left": 0.0012588348296175174,
+      "left_performs_better": true
+    }
+  },
+  "seed_stability": {
+    "passed": true,
+    "observed_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "forbidden_columns": [],
+    "val_log_loss_range": 0.000362133300420564,
+    "val_auc_range": 0.0005653181790202799,
+    "limits": {
+      "val_log_loss": 0.002,
+      "val_auc": 0.003
+    }
+  },
+  "seed42_replay": {
+    "passed": true,
+    "tolerance": 1e-12,
+    "absolute_differences": {
+      "accuracy": 0.0,
+      "auc": 0.0,
+      "log_loss": 0.0,
+      "brier_score": 0.0,
+      "ece10": 0.0
+    },
+    "max_absolute_difference": 0.0
+  },
+  "prediction_audit": {
+    "passed": true,
+    "rows": 4170,
+    "expected_rows": 4170,
+    "invalid_probability_cells": 0,
+    "duplicate_key_rows": 0
+  },
+  "training_policy": {
+    "fit_split": "train",
+    "early_stopping_split": "val",
+    "selection_metric": "validation_binary_logloss",
+    "test_used_for_fit_or_selection": false,
+    "candidate_count": 36,
+    "official_seed": 42
+  },
+  "environment": {
+    "python_version": "3.10.20",
+    "python_executable": "C:\\Users\\admin\\11\\envs\\game\\python.exe",
+    "lightgbm_version": "4.6.0",
+    "device_type": "cpu",
+    "cuda_required": false
+  },
+  "external_comparison_rows": 4,
+  "automated_tests": {
+    "passed": true,
+    "return_code": 0,
+    "elapsed_seconds": 16.32724309999685,
+    "test_count": 236,
+    "skipped": false
+  },
+  "source_compile": {
+    "passed": true,
+    "return_code": 0,
+    "skipped": false
+  },
+  "reproduction_entrypoint": {
+    "passed": true,
+    "missing_tokens": []
+  },
+  "next_stage": "M30 frozen post-first-kill LightGBM evaluation"
+}
