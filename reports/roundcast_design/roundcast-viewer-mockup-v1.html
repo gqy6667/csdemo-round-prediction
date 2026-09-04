@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROUNDCAST 比赛观众页面样板 v2</title>
+  <style>
+    :root {
+      --paper: #f2f3f4;
+      --surface: #ffffff;
+      --surface-soft: #f7f8f8;
+      --ink: #171a1e;
+      --muted: #69727b;
+      --faint: #969da4;
+      --line: #dce0e3;
+      --line-strong: #b8c0c6;
+      --accent: #496d66;
+      --accent-deep: #31564f;
+      --accent-soft: #e7eeec;
+      --ct: #4d7c9d;
+      --ct-soft: #e8eff4;
+      --t: #b36c4f;
+      --t-soft: #f4e9e4;
+      --amber: #a57834;
+      --danger: #a55353;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-width: 1180px; background: var(--paper); color: var(--ink); }
+    body { font-family: "Microsoft YaHei UI", "Segoe UI", Arial, sans-serif; font-size: 14px; line-height: 1.45; }
+
+    .shell { width: 1440px; min-height: 1020px; margin: 0 auto; background: var(--paper); }
+    .topbar {
+      height: 66px;
+      padding: 0 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 8px; color: white; background: var(--ink); font-weight: 700; letter-spacing: .04em; }
+    .brand-name { font-size: 16px; font-weight: 700; letter-spacing: .11em; }
+    .brand-sub { margin-top: 1px; color: var(--muted); font-size: 11px; }
+    .top-meta { display: flex; align-items: center; gap: 9px; }
+    .chip { display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--surface-soft); color: var(--muted); font-size: 11px; }
+    .chip.accent { background: var(--accent-soft); color: var(--accent-deep); font-weight: 600; }
+    .chip.demo { background: #f7f0e4; color: var(--amber); font-weight: 600; }
+
+    .match-head {
+      height: 124px;
+      padding: 18px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 1fr;
+      align-items: center;
+      gap: 26px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .team { display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .team.right { justify-content: flex-end; text-align: right; }
+    .side-rail { width: 8px; height: 42px; border-radius: 3px; flex: 0 0 auto; }
+    .side-rail.ct { background: var(--ct); }
+    .side-rail.t { background: var(--t); }
+    .eyebrow { color: var(--muted); font-size: 11px; letter-spacing: .02em; }
+    .team-name { margin-top: 2px; font-size: 18px; font-weight: 650; }
+    .score-box { text-align: center; }
+    .score { display: flex; align-items: baseline; justify-content: center; gap: 14px; margin-top: 3px; }
+    .score strong { font-size: 38px; line-height: 1; font-weight: 650; font-variant-numeric: tabular-nums; }
+    .score span { color: var(--line-strong); font-size: 24px; }
+    .match-status { margin-top: 8px; color: var(--muted); font-size: 11px; }
+
+    .view-nav { height: 46px; padding: 0 28px; display: flex; align-items: stretch; gap: 28px; background: var(--surface); border-bottom: 1px solid var(--line); }
+    .view-nav span { position: relative; display: flex; align-items: center; color: var(--muted); font-size: 12px; }
+    .view-nav .active { color: var(--ink); font-weight: 650; }
+    .view-nav .active::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--accent); content: ""; }
+
+    .content { padding: 18px 22px 24px; }
+    .section-title { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 10px; }
+    .section-title h1 { margin: 2px 0 0; font-size: 20px; line-height: 1.25; font-weight: 650; }
+    .section-title p { margin: 0; color: var(--muted); font-size: 11px; }
+
+    .rounds { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 7px; margin-bottom: 12px; }
+    .round { height: 50px; padding: 6px 5px; text-align: center; background: var(--surface); border: 1px solid var(--line); border-top-width: 3px; border-radius: 7px; }
+    .round.ct { border-top-color: var(--ct); }
+    .round.t { border-top-color: var(--t); }
+    .round.current { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+    .round b { display: block; font-size: 12px; font-weight: 650; }
+    .round small { color: var(--muted); font-size: 10px; }
+
+    .dashboard { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(360px, .85fr); gap: 12px; }
+    .left-column, .right-column { display: grid; align-content: start; gap: 12px; }
+    .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .panel-pad { padding: 14px 15px; }
+    .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .panel-head h2 { margin: 2px 0 0; font-size: 14px; font-weight: 650; }
+    .panel-head .side-note { color: var(--muted); font-size: 11px; }
+
+    .overview-grid { display: grid; grid-template-columns: 1.55fr .72fr .72fr; gap: 12px; }
+    .score-trend { min-height: 214px; }
+    .chart-area { position: relative; height: 130px; margin: 8px 7px 0 38px; border-left: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); background: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, var(--line) 32px, transparent 33px); }
+    .chart-area svg { position: absolute; inset: 5px 4px 4px 4px; width: calc(100% - 8px); height: calc(100% - 9px); overflow: visible; }
+    .chart-area .x-labels { position: absolute; right: 0; bottom: -21px; left: 0; display: flex; justify-content: space-between; color: var(--faint); font-size: 9px; }
+    .chart-area .y-labels { position: absolute; top: -5px; bottom: 0; left: -34px; display: flex; flex-direction: column; justify-content: space-between; color: var(--faint); font-size: 9px; }
+    .legend { display: flex; gap: 16px; margin-top: 22px; color: var(--muted); font-size: 10px; }
+    .legend i { display: inline-block; width: 18px; margin-right: 5px; vertical-align: middle; border-top: 2px solid; }
+    .legend .ct { border-color: var(--ct); }
+    .legend .t { border-color: var(--t); }
+    .round-result-band { display: grid; grid-template-columns: repeat(9, 1fr); gap: 3px; margin-top: 9px; }
+    .round-result-band span { height: 9px; border-radius: 2px; }
+    .round-result-band .ct { background: var(--ct); }
+    .round-result-band .t { background: var(--t); }
+    .band-caption { display: flex; justify-content: space-between; margin-top: 4px; color: var(--faint); font-size: 8px; }
+
+    .situation { display: grid; align-content: space-between; min-height: 190px; padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .situation-value { margin-top: 7px; font-size: 32px; line-height: 1; font-weight: 650; }
+    .situation-value small { color: var(--line-strong); font-size: 17px; }
+    .side-status { display: grid; gap: 7px; }
+    .status-line { display: flex; justify-content: space-between; gap: 8px; padding-top: 7px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    .status-line b { color: var(--ink); font-weight: 600; }
+
+    .probability-placeholder { min-height: 190px; padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .probability-value { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; }
+    .probability-value strong { font-size: 27px; font-weight: 650; }
+    .split-meter { display: flex; height: 9px; margin-top: 9px; overflow: hidden; border-radius: 9px; background: #e9ecee; }
+    .split-meter .ct { width: 64%; background: var(--ct); }
+    .split-meter .t { width: 36%; background: var(--t); }
+    .placeholder-copy { margin-top: 17px; padding: 8px 9px; color: var(--muted); background: var(--surface-soft); border-left: 3px solid var(--accent); font-size: 10px; }
+
+    .timeline { min-height: 252px; }
+    .timeline-head { margin-bottom: 8px; display: flex; align-items: end; justify-content: space-between; }
+    .timeline-head h2 { margin: 2px 0 0; font-size: 14px; font-weight: 650; }
+    .time-axis { display: grid; grid-template-columns: repeat(6, 1fr); margin-left: 88px; color: var(--faint); font-size: 9px; }
+    .time-axis span:not(:first-child):not(:last-child) { text-align: center; }
+    .time-axis span:last-child { text-align: right; }
+    .lane { display: grid; grid-template-columns: 78px minmax(0, 1fr); align-items: center; gap: 10px; min-height: 36px; }
+    .lane-label { color: var(--muted); font-size: 10px; }
+    .track { position: relative; height: 25px; border-bottom: 1px solid var(--line); background-image: linear-gradient(to right, transparent calc(20% - 1px), var(--line) 20%, transparent calc(20% + 1px)); background-size: 20% 100%; }
+    .track::before { position: absolute; top: 10px; right: 0; left: 0; height: 4px; border-radius: 4px; background: #e9ecee; content: ""; }
+    .segment { position: absolute; top: 10px; height: 4px; border-radius: 4px; }
+    .segment.ct { background: var(--ct); }
+    .segment.t { background: var(--t); }
+    .segment.accent { background: var(--accent); }
+    .event { position: absolute; top: 5px; width: 14px; height: 14px; transform: translateX(-50%); border: 2px solid white; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 1px var(--line-strong); }
+    .event.ct { background: var(--ct); }
+    .event.t { background: var(--t); }
+    .event.accent { background: var(--accent); }
+    .event-labels { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 6px; margin: 10px 0 0 88px; }
+    .event-label { padding: 7px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-soft); font-size: 9px; }
+    .event-label b { display: block; margin-bottom: 2px; color: var(--muted); font-weight: 500; }
+
+    .lower-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 12px; }
+    .players { min-height: 238px; }
+    .players-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 10px; }
+    .players-table th, .players-table td { height: 29px; padding: 5px 7px; border-bottom: 1px solid var(--line); text-align: right; }
+    .players-table th { color: var(--muted); font-weight: 500; }
+    .players-table th:first-child, .players-table td:first-child { text-align: left; }
+    .players-table .player { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+    .players-table .side-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .players-table .side-dot.ct { background: var(--ct); }
+    .players-table .side-dot.t { background: var(--t); }
+    .players-table tr.highlighted td { background: var(--accent-soft); border-bottom-color: #c8d8d4; }
+    .players-table tr.highlighted td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+    .player-tag { display: inline-flex; margin-left: 5px; padding: 2px 5px; border-radius: 999px; color: var(--accent-deep); background: white; font-size: 8px; font-weight: 600; }
+    .hp { display: inline-block; width: 42px; height: 5px; margin-left: 5px; vertical-align: middle; border-radius: 5px; background: #e8ebed; }
+    .hp i { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+
+    .mini-map { min-height: 238px; }
+    .map-field { position: relative; height: 174px; overflow: hidden; border-radius: 7px; background: linear-gradient(34deg, transparent 44%, #e5e8ea 45%, #e5e8ea 52%, transparent 53%), linear-gradient(127deg, transparent 42%, #e8ebed 43%, #e8ebed 49%, transparent 50%), #f0f2f3; }
+    .zone { position: absolute; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 6px; background: rgba(255,255,255,.82); color: var(--muted); font-size: 9px; }
+    .zone.active { color: var(--accent-deep); border-color: var(--accent); background: rgba(231,238,236,.92); box-shadow: 0 0 0 5px rgba(73,109,102,.08); }
+    .zone.a { top: 16px; left: 26px; width: 105px; height: 60px; }
+    .zone.mid { top: 63px; left: 150px; width: 96px; height: 54px; }
+    .zone.b { right: 29px; bottom: 18px; width: 106px; height: 63px; }
+    .pos { position: absolute; width: 11px; height: 11px; transform: translate(-50%,-50%); border: 2px solid white; border-radius: 50%; box-shadow: 0 0 0 1px rgba(0,0,0,.14); }
+    .pos.ct { background: var(--ct); }
+    .pos.t { background: var(--t); }
+    .pos.highlight { width: 16px; height: 16px; z-index: 5; box-shadow: 0 0 0 4px rgba(77,124,157,.20), 0 0 0 8px rgba(77,124,157,.08); }
+    .map-player-label { position: absolute; z-index: 6; padding: 3px 6px; border-radius: 5px; color: white; background: var(--ct); font-size: 8px; font-weight: 600; }
+    .bomb-map-marker { position: absolute; z-index: 4; width: 10px; height: 10px; border-radius: 50%; background: var(--t); box-shadow: 0 0 0 8px rgba(179,108,79,.15), 0 0 0 16px rgba(179,108,79,.07); }
+
+    .economy { min-height: 212px; }
+    .economy-side { padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .economy-side:last-child { border-bottom: 0; }
+    .eco-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .eco-top strong { font-size: 17px; font-weight: 650; }
+    .eco-bars { display: grid; grid-template-columns: 1.8fr .8fr .55fr; gap: 3px; height: 7px; margin-top: 8px; }
+    .eco-bars span { border-radius: 5px; }
+    .eco-bars span:first-child { background: var(--accent); }
+    .eco-bars span:nth-child(2) { background: var(--line-strong); }
+    .eco-bars span:nth-child(3) { background: var(--faint); }
+    .eco-tags { display: flex; gap: 6px; margin-top: 8px; color: var(--muted); font-size: 9px; }
+    .eco-tags span { padding: 3px 6px; border-radius: 4px; background: var(--surface-soft); }
+
+    .bomb { min-height: 210px; }
+    .bomb-layout { display: grid; grid-template-columns: minmax(0,1fr) 72px; align-items: center; gap: 12px; }
+    .bomb-flow { display: grid; grid-template-columns: auto 1fr auto 1fr auto 1fr auto; align-items: center; gap: 5px; margin-top: 12px; }
+    .bomb-step { text-align: center; font-size: 9px; }
+    .bomb-icon { width: 32px; height: 32px; margin: 0 auto 5px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--surface-soft); font-weight: 650; }
+    .bomb-step.active .bomb-icon { color: var(--accent-deep); border-color: var(--accent); background: var(--accent-soft); }
+    .flow { height: 1px; background: var(--line-strong); }
+    .countdown-ring { position: relative; width: 66px; height: 66px; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(var(--t) 0 70%, #e7eaec 70% 100%); }
+    .countdown-ring::before { position: absolute; inset: 7px; border-radius: 50%; background: var(--surface); content: ""; }
+    .countdown-ring::after { position: absolute; inset: -6px; border: 1px solid rgba(179,108,79,.28); border-radius: 50%; box-shadow: 0 0 0 6px rgba(179,108,79,.08); content: ""; }
+    .countdown-ring strong { position: relative; z-index: 2; font-size: 13px; font-weight: 650; }
+    .countdown-label { margin-top: 8px; text-align: center; color: var(--muted); font-size: 8px; }
+    .bomb-summary { margin-top: 12px; padding: 7px 8px; color: var(--muted); background: var(--surface-soft); border-left: 3px solid var(--accent); font-size: 9px; }
+
+    .key-events { min-height: 186px; }
+    .event-stack { display: grid; gap: 7px; }
+    .key-event { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 7px; background: var(--surface-soft); font-size: 10px; }
+    .key-event time { color: var(--muted); font-variant-numeric: tabular-nums; }
+    .key-event b { font-weight: 600; }
+    .key-event small { color: var(--muted); font-size: 9px; }
+
+    .footer { height: 34px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; color: var(--muted); background: var(--surface); border-top: 1px solid var(--line); font-size: 9px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">RC</div>
+        <div><div class="brand-name">ROUNDCAST</div><div class="brand-sub">CS 比赛观众页面 · 静态设计样板</div></div>
+      </div>
+      <div class="top-meta">
+        <span class="chip demo">演示数据</span>
+        <span class="chip accent">MIRAGE · 地图主题</span>
+        <span class="chip">BO3 · MAP 1</span>
+        <span class="chip">设计确认稿 v2</span>
+      </div>
+    </header>
+
+    <section class="match-head">
+      <div class="team"><span class="side-rail ct"></span><div><div class="eyebrow">CT · 防守方</div><div class="team-name">NORTHWAVE</div></div></div>
+      <div class="score-box"><div class="eyebrow">当前比分 · 第 19 回合</div><div class="score"><strong>10</strong><span>:</span><strong>8</strong></div><div class="match-status">第一张地图 · 常规时间 · 直播画面布局示意</div></div>
+      <div class="team right"><div><div class="eyebrow">T · 进攻方</div><div class="team-name">EMBER FIVE</div></div><span class="side-rail t"></span></div>
+    </section>
+
+    <nav class="view-nav" aria-label="页面角色示意"><span class="active">比赛观众</span><span>比赛分析人员</span><span>技术分析人员</span></nav>
+
+    <main class="content">
+      <div class="section-title"><div><div class="eyebrow">ROUND OVERVIEW</div><h1>第 19 回合 · 观众视角</h1></div><p>本页仅确认信息层级与排版，不含真实数据、模型或交互</p></div>
+
+      <div class="rounds">
+        <div class="round t"><b>R11</b><small>5 : 6</small></div><div class="round ct"><b>R12</b><small>6 : 6</small></div><div class="round ct"><b>R13</b><small>7 : 6</small></div><div class="round t"><b>R14</b><small>7 : 7</small></div><div class="round t"><b>R15</b><small>7 : 8</small></div><div class="round ct"><b>R16</b><small>8 : 8</small></div><div class="round ct"><b>R17</b><small>9 : 8</small></div><div class="round ct"><b>R18</b><small>10 : 8</small></div><div class="round current ct"><b>R19</b><small>进行中</small></div>
+      </div>
+
+      <div class="overview-grid">
+        <section class="panel panel-pad score-trend">
+          <div class="panel-head"><div><div class="eyebrow">MATCH FLOW</div><h2>比分趋势</h2></div><span class="side-note">最近 9 回合</span></div>
+          <div class="chart-area">
+            <div class="y-labels"><span>10</span><span>8</span><span>6</span><span>4</span></div>
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="双方比分阶梯趋势样板图"><path d="M1 87 H13 V87 H25 V74 H37 V61 H49 V61 H61 V61 H73 V48 H85 V35 H99 V22" fill="none" stroke="var(--ct)" stroke-width="2.2" vector-effect="non-scaling-stroke"></path><path d="M1 74 H13 V61 H25 V61 H37 V61 H49 V48 H61 V35 H73 V35 H85 V35 H99 V35" fill="none" stroke="var(--t)" stroke-width="2.2" vector-effect="non-scaling-stroke"></path><g fill="var(--ct)"><circle cx="25" cy="74" r="2.2"></circle><circle cx="73" cy="48" r="2.2"></circle><circle cx="99" cy="22" r="2.2"></circle></g><g fill="var(--t)"><circle cx="13" cy="61" r="2.2"></circle><circle cx="61" cy="35" r="2.2"></circle><circle cx="99" cy="35" r="2.2"></circle></g></svg>
+            <div class="x-labels"><span>R11</span><span>R13</span><span>R15</span><span>R17</span><span>R19</span></div>
+          </div>
+          <div class="legend"><span><i class="ct"></i>NORTHWAVE</span><span><i class="t"></i>EMBER FIVE</span></div>
+          <div class="round-result-band" aria-label="每回合胜方色带"><span class="t"></span><span class="ct"></span><span class="ct"></span><span class="t"></span><span class="t"></span><span class="ct"></span><span class="ct"></span><span class="ct"></span><span class="ct"></span></div>
+          <div class="band-caption"><span>R11</span><span>回合胜负色带</span><span>R19</span></div>
+        </section>
+
+        <section class="situation">
+          <div><div class="eyebrow">LIVE SITUATION</div><div class="panel-head"><h2>人数优势</h2><span class="chip accent">CT 领先</span></div><div class="situation-value">5 <small>vs</small> 4</div></div>
+          <div class="side-status"><div class="status-line"><span>本回合首杀</span><b>NORTHWAVE</b></div><div class="status-line"><span>优势持续</span><b>18 秒</b></div><div class="status-line"><span>当前阶段</span><b>A 点回防</b></div></div>
+        </section>
+
+        <section class="probability-placeholder">
+          <div class="eyebrow">DISPLAY PLACEHOLDER</div><div class="panel-head"><h2>胜率展示占位</h2><span class="chip demo">非模型结果</span></div>
+          <div class="probability-value"><strong style="color:var(--ct)">64%</strong><span class="eyebrow">展示样式</span><strong style="color:var(--t)">36%</strong></div>
+          <div class="split-meter"><span class="ct"></span><span class="t"></span></div>
+          <div class="placeholder-copy">仅用于确认未来胜率信息的位置、大小和阅读方式；当前没有连接任何预测模型。</div>
+        </section>
+      </div>
+
+      <div class="dashboard" style="margin-top:12px">
+        <div class="left-column">
+          <section class="panel panel-pad timeline">
+            <div class="timeline-head"><div><div class="eyebrow">ROUND TIMELINE</div><h2>回合时间轴</h2></div><span class="chip accent">1:55 → 0:00</span></div>
+            <div class="time-axis"><span>1:55</span><span>1:30</span><span>1:00</span><span>0:40</span><span>0:20</span><span>0:00</span></div>
+            <div class="lane"><span class="lane-label">回合阶段</span><div class="track"><span class="segment accent" style="left:0;width:24%"></span><span class="segment ct" style="left:24%;width:46%"></span><span class="segment t" style="left:70%;width:24%"></span></div></div>
+            <div class="lane"><span class="lane-label">关键事件</span><div class="track"><span class="event accent" style="left:6%"></span><span class="event" style="left:30%"></span><span class="event ct" style="left:48%"></span><span class="event t" style="left:76%"></span><span class="event ct" style="left:94%"></span></div></div>
+            <div class="lane"><span class="lane-label">人数变化</span><div class="track"><span class="segment ct" style="left:0;width:48%"></span><span class="segment ct" style="left:48%;width:27%;opacity:.72"></span><span class="segment ct" style="left:75%;width:22%;opacity:.45"></span></div></div>
+            <div class="lane"><span class="lane-label">炸弹状态</span><div class="track"><span class="segment t" style="left:74%;width:20%"></span></div></div>
+            <div class="event-labels"><div class="event-label"><b>1:55</b>购买完成</div><div class="event-label"><b>1:24</b>烟雾封锁</div><div class="event-label"><b>1:02</b>首杀发生</div><div class="event-label"><b>0:31</b>A 点下包</div><div class="event-label"><b>0:07</b>拆弹完成</div></div>
+          </section>
+
+          <div class="lower-grid">
+            <section class="panel panel-pad players">
+              <div class="panel-head"><div><div class="eyebrow">PLAYER STATUS</div><h2>玩家数据</h2></div><span class="side-note">生命值 / 击杀 / 装备</span></div>
+              <table class="players-table" aria-label="玩家数据样板"><thead><tr><th>玩家</th><th>生命值</th><th>K</th><th>主要装备</th></tr></thead><tbody><tr class="highlighted"><td><span class="player"><i class="side-dot ct"></i>Linx <span class="player-tag">关键玩家</span></span></td><td>82 <span class="hp"><i style="width:82%"></i></span></td><td>2</td><td>M4A1-S</td></tr><tr><td><span class="player"><i class="side-dot ct"></i>Rook</span></td><td>67 <span class="hp"><i style="width:67%"></i></span></td><td>1</td><td>AWP</td></tr><tr><td><span class="player"><i class="side-dot ct"></i>Vale</span></td><td>100 <span class="hp"><i style="width:100%"></i></span></td><td>0</td><td>M4A4</td></tr><tr><td><span class="player"><i class="side-dot t"></i>Axle</span></td><td>41 <span class="hp"><i style="width:41%;background:var(--t)"></i></span></td><td>1</td><td>AK-47</td></tr><tr><td><span class="player"><i class="side-dot t"></i>Nova</span></td><td>74 <span class="hp"><i style="width:74%;background:var(--t)"></i></span></td><td>0</td><td>AK-47</td></tr></tbody></table>
+            </section>
+
+            <section class="panel panel-pad mini-map">
+              <div class="panel-head"><div><div class="eyebrow">POSITION OVERVIEW</div><h2>位置数据占位</h2></div><span class="side-note">首杀后 5 秒</span></div>
+              <div class="map-field"><span class="zone a active">A SITE · 已下包</span><span class="zone mid">MID</span><span class="zone b">B SITE</span><i class="pos ct highlight" style="left:25%;top:28%"></i><span class="map-player-label" style="left:14%;top:35%">Linx · 关键玩家</span><i class="pos ct" style="left:39%;top:43%"></i><i class="pos ct" style="left:53%;top:60%"></i><i class="pos ct" style="left:72%;top:73%"></i><i class="pos t" style="left:46%;top:38%"></i><i class="pos t" style="left:62%;top:55%"></i><i class="pos t" style="left:80%;top:65%"></i><span class="bomb-map-marker" style="left:30%;top:37%"></span></div>
+            </section>
+          </div>
+        </div>
+
+        <aside class="right-column">
+          <section class="panel panel-pad economy">
+            <div class="panel-head"><div><div class="eyebrow">BUY & ECONOMY</div><h2>购买类型与经济</h2></div><span class="chip accent">双方全起</span></div>
+            <div class="economy-side"><div class="eco-top"><span><i class="side-dot ct" style="display:inline-block;margin-right:6px"></i>CT · NORTHWAVE</span><strong>$25.7K</strong></div><div class="eco-bars"><span></span><span></span><span></span></div><div class="eco-tags"><span>步枪 4</span><span>AWP 1</span><span>道具 17</span><span>护甲 5</span></div></div>
+            <div class="economy-side"><div class="eco-top"><span><i class="side-dot t" style="display:inline-block;margin-right:6px"></i>T · EMBER FIVE</span><strong>$24.9K</strong></div><div class="eco-bars"><span style="background:var(--t)"></span><span></span><span></span></div><div class="eco-tags"><span>步枪 5</span><span>AWP 0</span><span>道具 15</span><span>护甲 5</span></div></div>
+          </section>
+
+          <section class="panel panel-pad bomb">
+            <div class="panel-head"><div><div class="eyebrow">OBJECTIVE</div><h2>炸弹事件</h2></div><span class="side-note">A 点</span></div>
+            <div class="bomb-layout"><div><div class="bomb-flow"><div class="bomb-step"><div class="bomb-icon">1</div>携带</div><span class="flow"></span><div class="bomb-step"><div class="bomb-icon">2</div>掉落</div><span class="flow"></span><div class="bomb-step active"><div class="bomb-icon">3</div>安放</div><span class="flow"></span><div class="bomb-step"><div class="bomb-icon">4</div>拆除/爆炸</div></div><div class="bomb-summary">0:31 完成安放 · A 点同步高亮 · 剩余 CT 5 / T 4</div></div><div><div class="countdown-ring"><strong>0:28</strong></div><div class="countdown-label">炸弹倒计时</div></div></div>
+          </section>
+
+          <section class="panel panel-pad key-events">
+            <div class="panel-head"><div><div class="eyebrow">KEY MOMENTS</div><h2>关键战术事件</h2></div><span class="side-note">观众简化表达</span></div>
+            <div class="event-stack"><div class="key-event"><time>1:24</time><b>烟雾封锁 A 连接</b><small>区域控制</small></div><div class="key-event"><time>1:02</time><b>Linx 取得首杀</b><small>5 vs 4</small></div><div class="key-event"><time>0:31</time><b>进攻方完成下包</b><small>A 点</small></div><div class="key-event"><time>0:07</time><b>防守方完成拆弹</b><small>回合获胜</small></div></div>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer"><span>ROUNDCAST · 比赛观众页面静态设计样板 v2</span><span>所有队伍、比分、经济、胜率与事件均为排版演示数据</span></footer>
+  </div>
+</body>
+</html>

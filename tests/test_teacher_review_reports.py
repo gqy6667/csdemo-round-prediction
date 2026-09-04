@@ -1,6 +1,7 @@
 import csv
 import json
 import re
+import statistics
 import unittest
 from pathlib import Path
 
@@ -313,6 +314,102 @@ class TeacherReviewReportTests(unittest.TestCase):
         self.assertIn(pipeline["sha256"], report)
         self.assert_local_markdown_links_exist(report_path)
 
+    def test_model_replacement_verification_matches_frozen_sources(self) -> None:
+        report_path = (
+            self.report_dir / "05_post_first_kill_model_replacement_verification.md"
+        )
+        report = report_path.read_text(encoding="utf-8")
+        m21 = self.load_json("reports/esta_full_m21/m21_summary.json")
+        m28 = self.load_json("reports/esta_full_m28/m28_summary.json")
+        m29 = self.load_json("reports/esta_full_m29/m29_summary.json")
+        m33 = self.load_json("reports/esta_full_m33/m33_summary.json")
+
+        self.assertIn("模型已经更换成功", report)
+        self.assertIn("xgboost.sklearn.XGBClassifier", report)
+        self.assertIn("lightgbm.sklearn.LGBMClassifier", report)
+        self.assertIn(m21["artifacts"]["model"]["sha256"], report)
+        self.assertIn(m28["model"]["model_artifact"]["sha256"], report)
+        self.assertIn(m29["model"]["model_artifact"]["sha256"], report)
+
+        self.assertEqual(m21["data"]["sha256"], m28["data"]["sha256"])
+        self.assertEqual(m28["data"]["sha256"], m33["data_identity"]["sha256"])
+        self.assertIn(m33["data_identity"]["sha256"], report)
+        for count in m33["data"]["split_rows"].values():
+            self.assertIn(f"{count:,}", report)
+        for count in m33["data"]["split_series"].values():
+            self.assertIn(f"{count:,}", report)
+
+        self.assertIn(str(m28["features"]["raw_count"]), report)
+        self.assertIn(str(m28["features"]["encoded_count"]), report)
+        for model_metrics in m29["test_metrics_by_model"].values():
+            for value in model_metrics.values():
+                self.assertIn(f"{value:.6f}", report)
+
+        prediction_path = self.root / "reports/esta_full_m29/test_predictions.csv"
+        with prediction_path.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        xgboost = [float(row["xgboost_frozen_probability"]) for row in rows]
+        lightgbm = [float(row["lightgbm_tuned_probability"]) for row in rows]
+        exact_matches = sum(xgb == lgb for xgb, lgb in zip(xgboost, lightgbm))
+        disagreements = sum(
+            (xgb >= 0.5) != (lgb >= 0.5)
+            for xgb, lgb in zip(xgboost, lightgbm)
+        )
+        self.assertEqual(len(rows), 4170)
+        self.assertEqual(exact_matches, 0)
+        self.assertEqual(disagreements, 29)
+        self.assertIn(f"{statistics.correlation(xgboost, lightgbm):.6f}", report)
+
+        with (
+            self.root
+            / "reports/esta_full_m33/paired_lightgbm_vs_xgboost_bootstrap.csv"
+        ).open(newline="", encoding="utf-8") as handle:
+            paired_intervals = list(csv.DictReader(handle))
+        for row in paired_intervals:
+            self.assertIn(
+                f"{float(row['performance_advantage_lightgbm']):.6f}", report
+            )
+            interval = (
+                f"[{float(row['performance_advantage_ci_lower_95']):.6f}, "
+                f"{float(row['performance_advantage_ci_upper_95']):.6f}]"
+            )
+            self.assertIn(interval, report)
+            self.assertEqual(row["ci_includes_zero"], "True")
+
+        self.assertIn("显著更好：未证明", report)
+        self.assert_local_markdown_links_exist(report_path)
+
+    def test_supplementary_reports_keep_scientific_boundaries(self) -> None:
+        article_path = (
+            self.report_dir / "06_xgboost_article_applicability_review.md"
+        )
+        article = article_path.read_text(encoding="utf-8")
+        self.assertIn("有帮助", article)
+        self.assertIn("不能证明模型是否更换", article)
+        self.assertIn("series_id", article)
+        self.assertIn("随机按行切分", article)
+        self.assertIn("不需要人为制造一个胜者", article)
+        self.assert_local_markdown_links_exist(article_path)
+
+        visualization_path = (
+            self.report_dir / "07_win_probability_visualization_proposal.md"
+        )
+        visualization = visualization_path.read_text(encoding="utf-8")
+        self.assertIn("模型审计页 + 单回合分析页 + 整场比赛回合带", visualization)
+        self.assertNotIn("老师", visualization)
+        primary_schemes = re.findall(
+            r"^## \d+\. 方案 ([A-G])：", visualization, flags=re.MULTILINE
+        )
+        self.assertEqual(primary_schemes, list("ABCDEFG"))
+        self.assertNotIn("关键时刻单页简报", visualization)
+        self.assertNotIn("自动文字简报", visualization)
+        self.assertIn("购买结束、交火前", visualization)
+        self.assertIn("最早有效敌对首杀刚发生", visualization)
+        self.assertIn("只能显示事件标记", visualization)
+        self.assertIn("第一颗烟雾弹爆炸", visualization)
+        self.assertIn("不能直接转换成某个回合", visualization)
+        self.assert_local_markdown_links_exist(visualization_path)
+
     def test_teacher_review_index_links_four_reports_and_keeps_fair_groups(self) -> None:
         index_path = self.report_dir / "README.md"
         index = index_path.read_text(encoding="utf-8")
@@ -324,6 +421,13 @@ class TeacherReviewReportTests(unittest.TestCase):
             "04_post_first_kill_lightgbm_report.md",
         )
         for report in expected_reports:
+            self.assertIn(report, index)
+        expected_supplementary_reports = (
+            "05_post_first_kill_model_replacement_verification.md",
+            "06_xgboost_article_applicability_review.md",
+            "07_win_probability_visualization_proposal.md",
+        )
+        for report in expected_supplementary_reports:
             self.assertIn(report, index)
         self.assertEqual(index.count("已完成并可复核"), 4)
         self.assertIn("购买结束、交火前：XGBoost vs LightGBM", index)

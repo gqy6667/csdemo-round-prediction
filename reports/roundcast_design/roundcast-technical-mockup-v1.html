@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROUNDCAST 技术分析人员页面样板 v1</title>
+  <link rel="stylesheet" href="roundcast-static-pages.css">
+  <style>
+    .tech-shell { min-height: 1400px; }
+    .truth-banner { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 48px; margin-bottom: 11px; padding: 9px 12px; color: var(--ink); background: var(--amber-soft); border: 1px solid #ead8b9; border-left: 4px solid var(--amber); border-radius: 8px; font-size: 10px; }
+    .truth-banner strong { color: var(--amber); white-space: nowrap; }
+    .prediction-flow { display: grid; grid-template-columns: 1fr 90px 1fr; align-items: center; gap: 14px; }
+    .prediction-node { min-height: 112px; padding: 13px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface-soft); }
+    .prediction-node.accent { border-color: var(--accent); background: var(--accent-soft); }
+    .prediction-node h3 { margin: 3px 0 8px; font-size: 14px; font-weight: 650; }
+    .prediction-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+    .prediction-meta div { padding-top: 6px; border-top: 1px solid var(--line); }
+    .prediction-meta span { display: block; color: var(--muted); font-size: 8px; }
+    .prediction-meta b { display: block; margin-top: 2px; font-size: 10px; font-weight: 600; }
+    .flow-arrow { text-align: center; color: var(--accent); font-size: 26px; }
+    .flow-arrow small { display: block; color: var(--muted); font-size: 7px; }
+
+    .metric-table td, .metric-table th { height: 33px; }
+    .direction-up { color: var(--ct); }
+    .direction-down { color: var(--t); }
+    .metric-demo { margin-left: 4px; color: var(--amber); font-size: 7px; }
+
+    .calibration { position: relative; height: 244px; margin: 3px 10px 0 42px; border-left: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); background-image: linear-gradient(to right, transparent calc(25% - 1px), var(--line) 25%, transparent calc(25% + 1px)), linear-gradient(to bottom, transparent calc(25% - 1px), var(--line) 25%, transparent calc(25% + 1px)); background-size: 25% 100%, 100% 25%; }
+    .calibration svg { position: absolute; inset: 5px; width: calc(100% - 10px); height: calc(100% - 10px); overflow: visible; }
+    .ideal { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+    .curve-a { fill: none; stroke: var(--ct); stroke-width: 2.2; vector-effect: non-scaling-stroke; }
+    .curve-b { fill: none; stroke: var(--t); stroke-width: 2.2; vector-effect: non-scaling-stroke; }
+    .calibration circle.a { fill: white; stroke: var(--ct); stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .calibration circle.b { fill: white; stroke: var(--t); stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .cal-axis-x { position: absolute; right: 0; bottom: -23px; left: 0; color: var(--muted); font-size: 8px; text-align: center; }
+    .cal-axis-y { position: absolute; top: 50%; left: -42px; width: 80px; transform: rotate(-90deg); color: var(--muted); font-size: 8px; text-align: center; }
+    .prob-bars { position: absolute; right: 8px; bottom: 7px; left: 8px; height: 26px; display: flex; align-items: end; gap: 4px; opacity: .22; }
+    .prob-bars i { flex: 1; background: var(--accent); }
+
+    .feature-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+    .feature-row { display: grid; grid-template-columns: 114px minmax(0,1fr) 52px; align-items: center; gap: 8px; margin-top: 9px; font-size: 9px; }
+    .feature-row .name { color: var(--muted); }
+    .feature-track { position: relative; height: 8px; border-radius: 8px; background: linear-gradient(to right, #e8ebed 0 49.5%, var(--line-strong) 49.5% 50.5%, #e8ebed 50.5% 100%); }
+    .feature-pos, .feature-neg { position: absolute; top: 0; height: 100%; border-radius: 8px; }
+    .feature-pos { left: 50%; background: var(--ct); }
+    .feature-neg { right: 50%; background: var(--t); }
+    .feature-value { text-align: right; font-variant-numeric: tabular-nums; }
+    .local-explain { padding: 10px; border-radius: 8px; background: var(--surface-soft); }
+    .waterfall { display: grid; gap: 7px; margin-top: 8px; }
+    .waterfall-row { display: grid; grid-template-columns: 88px minmax(0,1fr) 45px; align-items: center; gap: 6px; font-size: 8px; }
+    .waterfall-bar { height: 7px; border-radius: 7px; background: var(--ct); }
+    .waterfall-bar.neg { background: var(--t); }
+    .local-total { display: flex; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 10px; }
+
+    .quality-list { display: grid; gap: 8px; }
+    .quality-row { display: grid; grid-template-columns: 1fr 78px; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 9px; }
+    .quality-row span:first-child { color: var(--muted); }
+    .quality-row b { text-align: right; font-weight: 600; }
+    .meta-list { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .meta-item { padding: 8px; border-radius: 7px; background: var(--surface-soft); }
+    .meta-item span { display: block; color: var(--muted); font-size: 8px; }
+    .meta-item b { display: block; margin-top: 2px; font-family: Consolas, monospace; font-size: 9px; font-weight: 500; overflow-wrap: anywhere; }
+    .error-table .case-id { font-weight: 650; }
+    .error-table .confidence { color: var(--danger); font-weight: 650; }
+    .technical-note { margin-top: 8px; color: var(--muted); font-size: 8px; }
+  </style>
+</head>
+<body>
+  <div class="shell tech-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">RC</div><div><div class="brand-name">ROUNDCAST</div><div class="brand-sub">技术分析人员页面 · 静态设计样板</div></div></div>
+      <div class="top-meta"><span class="chip demo">演示数据</span><span class="chip accent">MODEL REVIEW</span><span class="chip">两个预测时点</span><span class="chip">设计确认稿 v1</span></div>
+    </header>
+
+    <section class="match-head">
+      <div class="team"><span class="side-rail ct"></span><div><div class="eyebrow">数据切片 · CT</div><div class="team-name">NORTHWAVE</div></div></div>
+      <div class="score-box"><div class="eyebrow">当前展示样本 · Mirage R18</div><div class="score"><strong>10</strong><span>:</span><strong>8</strong></div><div class="match-status">仅用作技术页面上下文 · 不代表真实实验数据</div></div>
+      <div class="team right"><div><div class="eyebrow">数据切片 · T</div><div class="team-name">EMBER FIVE</div></div><span class="side-rail t"></span></div>
+    </section>
+
+    <nav class="view-nav"><span>比赛观众</span><span>比赛分析人员</span><span class="active">技术分析人员</span></nav>
+
+    <main class="content">
+      <div class="page-title"><div><div class="eyebrow">MODEL EVALUATION & DIAGNOSTICS</div><h1>技术分析视角 · 模型评估与诊断</h1></div><p>检查未来概率输出的性能、可信度、失效场景与实验可复现性</p></div>
+      <div class="truth-banner"><strong>静态设计声明</strong><span>本页算法名称、版本、样本量、指标和图形均为排版演示值；当前未连接数据处理流程、训练程序或实时预测服务。</span><span class="chip demo">非真实模型结果</span></div>
+
+      <div class="summary-row"><div class="summary"><span>数据快照</span><strong>DEMO-2026-08</strong></div><div class="summary"><span>分组方式</span><strong>按 series 划分</strong></div><div class="summary"><span>展示样本</span><strong>41,027 · 示例</strong></div><div class="summary"><span>实验状态</span><strong style="color:var(--amber)">尚未连接</strong></div></div>
+
+      <div class="grid-12">
+        <section class="panel span-12">
+          <div class="panel-head"><div><div class="eyebrow">PREDICTION CONTRACT</div><h2>模型版本与两个预测时点</h2></div><span class="chip accent">未来输出结构</span></div>
+          <div class="prediction-flow">
+            <div class="prediction-node"><span class="tag demo">模型占位 A</span><h3>预测时点 A · 购买阶段结束</h3><div class="prediction-meta"><div><span>示例版本</span><b>PRE-ROUND v0.3</b></div><div><span>数据截止</span><b>购买结束</b></div><div><span>未来输出</span><b>CT / T 概率</b></div></div></div>
+            <div class="flow-arrow">→<small>首杀发生后更新</small></div>
+            <div class="prediction-node accent"><span class="tag">模型占位 B</span><h3>预测时点 B · 首杀事件发生后</h3><div class="prediction-meta"><div><span>示例版本</span><b>POST-FK v0.2</b></div><div><span>数据截止</span><b>首杀发生</b></div><div><span>未来输出</span><b>更新后概率</b></div></div></div>
+          </div>
+          <p class="technical-note">预测时点之后的信息不得进入对应模型；烟雾弹、人数变化和炸弹事件在当前设计中仅作为上下文标签。</p>
+        </section>
+
+        <section class="panel span-7">
+          <div class="panel-head"><div><div class="eyebrow">METRIC COMPARISON</div><h2>指标对比</h2></div><span class="chip demo">全部为示例值</span></div>
+          <table class="table metric-table"><thead><tr><th>指标</th><th class="num">基线</th><th class="num">时点 A</th><th class="num">时点 B</th><th class="num">阅读方向</th></tr></thead><tbody><tr><td>AUC <span class="metric-demo">示例</span></td><td class="num">0.500</td><td class="num">0.660</td><td class="num">0.740</td><td class="num direction-up">越高越好</td></tr><tr><td>Log Loss <span class="metric-demo">示例</span></td><td class="num">0.693</td><td class="num">0.642</td><td class="num">0.574</td><td class="num direction-down">越低越好</td></tr><tr><td>Brier Score <span class="metric-demo">示例</span></td><td class="num">0.250</td><td class="num">0.225</td><td class="num">0.195</td><td class="num direction-down">越低越好</td></tr><tr><td>ECE <span class="metric-demo">示例</span></td><td class="num">0.041</td><td class="num">0.034</td><td class="num">0.028</td><td class="num direction-down">越低越好</td></tr><tr><td>Accuracy <span class="metric-demo">示例</span></td><td class="num">0.500</td><td class="num">0.612</td><td class="num">0.681</td><td class="num direction-up">辅助指标</td></tr></tbody></table>
+          <p class="technical-note">AUC 用于排序能力；Log Loss、Brier 与 ECE 更直接检查概率是否准确可信。当前数值不用于任何实验结论。</p>
+        </section>
+
+        <section class="panel span-5">
+          <div class="panel-head"><div><div class="eyebrow">CALIBRATION</div><h2>概率校准与分布</h2></div><span class="side-note">演示形状</span></div>
+          <div class="calibration"><div class="cal-axis-y">实际发生比例</div><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path class="ideal" d="M0 100 L100 0"></path><path class="curve-a" d="M5 94 L20 83 L35 70 L50 55 L65 39 L80 24 L95 9"></path><path class="curve-b" d="M5 96 L20 79 L35 68 L50 49 L65 34 L80 18 L95 6"></path><g><circle class="a" cx="20" cy="83" r="2"></circle><circle class="a" cx="50" cy="55" r="2"></circle><circle class="a" cx="80" cy="24" r="2"></circle><circle class="b" cx="20" cy="79" r="2"></circle><circle class="b" cx="50" cy="49" r="2"></circle><circle class="b" cx="80" cy="18" r="2"></circle></g></svg><div class="prob-bars"><i style="height:20%"></i><i style="height:42%"></i><i style="height:68%"></i><i style="height:84%"></i><i style="height:65%"></i><i style="height:48%"></i><i style="height:25%"></i></div><div class="cal-axis-x">预测概率</div></div>
+          <div class="legend"><span><i class="legend-dot ct"></i>预测时点 A</span><span><i class="legend-dot t"></i>预测时点 B</span><span>虚线：理想校准</span></div>
+        </section>
+
+        <section class="panel span-7">
+          <div class="panel-head"><div><div class="eyebrow">FEATURE ATTRIBUTION</div><h2>全局特征贡献与单回合解释</h2></div><span class="chip demo">解释占位</span></div>
+          <div class="feature-grid">
+            <div><div class="feature-row"><span class="name">首杀归属</span><div class="feature-track"><span class="feature-pos" style="width:42%"></span></div><span class="feature-value">+0.112</span></div><div class="feature-row"><span class="name">装备价值差</span><div class="feature-track"><span class="feature-neg" style="width:22%"></span></div><span class="feature-value">-0.041</span></div><div class="feature-row"><span class="name">存活人数差</span><div class="feature-track"><span class="feature-pos" style="width:31%"></span></div><span class="feature-value">+0.067</span></div><div class="feature-row"><span class="name">地图 / 阵营</span><div class="feature-track"><span class="feature-pos" style="width:16%"></span></div><span class="feature-value">+0.025</span></div><div class="feature-row"><span class="name">道具差</span><div class="feature-track"><span class="feature-neg" style="width:11%"></span></div><span class="feature-value">-0.018</span></div><div class="feature-row"><span class="name">连续胜负</span><div class="feature-track"><span class="feature-pos" style="width:9%"></span></div><span class="feature-value">+0.013</span></div></div>
+            <div class="local-explain"><div class="eyebrow">单次预测解释 · R18</div><div class="waterfall"><div class="waterfall-row"><span>基础值</span><div class="waterfall-bar" style="width:50%;background:var(--line-strong)"></div><b>50%</b></div><div class="waterfall-row"><span>首杀归属</span><div class="waterfall-bar" style="width:72%"></div><b>+11</b></div><div class="waterfall-row"><span>装备差</span><div class="waterfall-bar neg" style="width:29%"></div><b>-4</b></div><div class="waterfall-row"><span>人数差</span><div class="waterfall-bar" style="width:48%"></div><b>+7</b></div></div><div class="local-total"><span>示例输出</span><strong>64%</strong></div></div>
+          </div>
+          <p class="technical-note">特征贡献只表示未来模型对某次输出的使用方式，不代表现实中的因果关系。</p>
+        </section>
+
+        <section class="panel span-5">
+          <div class="panel-head"><div><div class="eyebrow">SLICE PERFORMANCE</div><h2>数据切片表现</h2></div><span class="side-note">当前展示切片</span></div>
+          <table class="table"><thead><tr><th>切片</th><th class="num">样本量</th><th class="num">AUC</th><th class="num">Brier</th></tr></thead><tbody><tr><td>LAN</td><td class="num">12,480</td><td class="num">0.742</td><td class="num">0.193</td></tr><tr><td>Online</td><td class="num">28,547</td><td class="num">0.731</td><td class="num">0.201</td></tr><tr class="highlight"><td>Mirage</td><td class="num">8,904</td><td class="num">0.751</td><td class="num">0.188</td></tr><tr><td>CT Side</td><td class="num">20,624</td><td class="num">0.744</td><td class="num">0.194</td></tr><tr><td>经济局</td><td class="num">2,118</td><td class="num">0.681</td><td class="num">0.229</td></tr><tr><td>小样本切片</td><td class="num">184</td><td class="num">—</td><td class="num">—</td></tr></tbody></table>
+          <p class="technical-note">“小样本切片”仅提示样本不足，暂不作结论。全部数值为排版演示。</p>
+        </section>
+
+        <section class="panel span-7" style="align-self:start">
+          <div class="panel-head"><div><div class="eyebrow">HIGH-CONFIDENCE ERRORS</div><h2>错误案例与复核方向</h2></div><span class="chip danger">3 个演示案例</span></div>
+          <table class="table error-table"><thead><tr><th>案例</th><th>预测时点</th><th class="num">演示概率</th><th>实际结果</th><th>切片</th><th>复核方向</th></tr></thead><tbody><tr><td class="case-id">R20</td><td>首杀后</td><td class="num confidence">CT 72%</td><td>T 胜</td><td>Mirage · 强起</td><td>残局反转</td></tr><tr><td class="case-id">R13</td><td>购买后</td><td class="num confidence">CT 81%</td><td>T 胜</td><td>经济差较大</td><td>经济信息异常</td></tr><tr><td class="case-id">R07</td><td>首杀后</td><td class="num confidence">T 76%</td><td>CT 胜</td><td>快速换点</td><td>事件时间检查</td></tr></tbody></table>
+          <p class="technical-note">“复核方向”是人工提出的检查线索，不是已经确认的错误原因。</p>
+          <div class="panel-head" style="margin-top:20px"><div><div class="eyebrow">MODEL BOUNDARY CHECKS</div><h2>模型边界检查占位</h2></div><span class="chip demo">待真实运行</span></div>
+          <div class="quality-list"><div class="quality-row"><span>训练 / 测试按 series 隔离</span><b>设计要求</b></div><div class="quality-row"><span>购买后预测的数据截止时间</span><b>待验证</b></div><div class="quality-row"><span>首杀后预测的数据截止时间</span><b>待验证</b></div><div class="quality-row"><span>未来信息泄漏审计</span><b style="color:var(--amber)">待运行</b></div><div class="quality-row"><span>模型与数据哈希记录</span><b>字段占位</b></div></div>
+        </section>
+
+        <div class="span-5" style="display:grid;gap:12px;align-content:start">
+          <section class="panel">
+            <div class="panel-head"><div><div class="eyebrow">DATA QUALITY</div><h2>数据质量</h2></div><span class="chip demo">演示状态</span></div>
+            <div class="quality-list"><div class="quality-row"><span>解析成功率</span><b>98.7% · 示例</b></div><div class="quality-row"><span>字段缺失率</span><b>1.3% · 示例</b></div><div class="quality-row"><span>重复样本</span><b>0.2% · 示例</b></div><div class="quality-row"><span>标签平衡</span><b>CT 51 / T 49</b></div><div class="quality-row"><span>时间信息泄漏检查</span><b style="color:var(--amber)">待真实运行</b></div></div>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><div><div class="eyebrow">EXPERIMENT METADATA</div><h2>实验元数据</h2></div><span class="side-note">复现字段占位</span></div>
+            <div class="meta-list"><div class="meta-item"><span>Experiment ID</span><b>DEMO-EXP-017</b></div><div class="meta-item"><span>Dataset Snapshot</span><b>DEMO-2026-08</b></div><div class="meta-item"><span>Feature Schema</span><b>DEMO-v0.4</b></div><div class="meta-item"><span>Random Seed</span><b>42</b></div><div class="meta-item"><span>Split Strategy</span><b>GROUP-BY-SERIES</b></div><div class="meta-item"><span>Code Revision</span><b>demo-placeholder</b></div></div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="footer"><span>ROUNDCAST · 技术分析人员页面静态设计样板 v1</span><span>所有模型名称、版本、指标、图形和状态均为排版演示值 · 尚未连接真实模型</span></footer>
+  </div>
+</body>
+</html>

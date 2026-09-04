@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROUNDCAST 比赛分析人员页面样板 v1</title>
+  <link rel="stylesheet" href="roundcast-static-pages.css">
+  <style>
+    .compare-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; margin-top: 5px; }
+    .compare-side { padding: 9px; border-radius: 7px; background: var(--surface-soft); }
+    .compare-side strong { display: block; margin-top: 3px; font-size: 18px; }
+    .compare-arrow { color: var(--accent); font-weight: 700; }
+    .mini-stats { display: grid; gap: 6px; margin-top: 9px; }
+    .mini-stat { display: grid; grid-template-columns: 1fr 52px 52px; gap: 6px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 9px; }
+    .mini-stat span:first-child { color: var(--muted); }
+    .mini-stat span:not(:first-child) { text-align: right; }
+    .advantage-path { display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; gap: 3px; margin-top: 11px; }
+    .advantage-node { position: relative; padding: 7px 4px; text-align: center; border: 1px solid var(--line); border-radius: 7px; background: var(--surface-soft); font-size: 9px; }
+    .advantage-node.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-deep); font-weight: 650; }
+    .advantage-node small { display: block; margin-top: 2px; color: var(--muted); font-size: 7px; }
+    .scatter-circle { opacity: .82; }
+    .scatter-selected { fill: var(--accent); stroke: white; stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+    .scatter-anomaly { fill: var(--amber); stroke: white; stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .quadrant { stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+    .scatter-label { position: absolute; z-index: 3; padding: 3px 5px; border-radius: 4px; color: var(--muted); background: rgba(255,255,255,.9); font-size: 8px; }
+    .scatter-label.current { color: var(--accent-deep); border-left: 2px solid var(--accent); }
+    .scatter-label.warning { color: var(--amber); border-left: 2px solid var(--amber); }
+    .right-stack { display: grid; gap: 12px; align-content: start; }
+    .tactical { min-height: 214px; }
+    .matchup { min-height: 250px; }
+    .matchup-head { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 7px; margin-bottom: 8px; text-align: center; }
+    .matchup-player { padding: 8px; border-radius: 7px; background: var(--surface-soft); }
+    .matchup-player.highlight { color: var(--accent-deep); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+    .matchup-player strong { display: block; font-size: 13px; }
+    .matchup-player small { color: var(--muted); font-size: 8px; }
+    .vs { color: var(--faint); font-size: 10px; }
+    .metric-note { margin-top: 8px; color: var(--muted); font-size: 8px; }
+    .analyst-map { min-height: 440px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">RC</div><div><div class="brand-name">ROUNDCAST</div><div class="brand-sub">CS 比赛分析人员页面 · 静态设计样板</div></div></div>
+      <div class="top-meta"><span class="chip demo">演示数据</span><span class="chip accent">MIRAGE · R18</span><span class="chip">赛后回合复盘</span><span class="chip">设计确认稿 v1</span></div>
+    </header>
+
+    <section class="match-head">
+      <div class="team"><span class="side-rail ct"></span><div><div class="eyebrow">CT · 防守方</div><div class="team-name">NORTHWAVE</div></div></div>
+      <div class="score-box"><div class="eyebrow">第 18 回合结束后比分</div><div class="score"><strong>10</strong><span>:</span><strong>8</strong></div><div class="match-status">第一张地图 · 已结束回合复盘 · 所有数据均为演示</div></div>
+      <div class="team right"><div><div class="eyebrow">T · 进攻方</div><div class="team-name">EMBER FIVE</div></div><span class="side-rail t"></span></div>
+    </section>
+
+    <nav class="view-nav"><span>比赛观众</span><span class="active">比赛分析人员</span><span>技术分析人员</span></nav>
+
+    <main class="content">
+      <div class="page-title"><div><div class="eyebrow">ANALYST REVIEW</div><h1>第 18 回合 · 分析视角</h1></div><p>静态设计样板 · 仅展示复盘结构，不含自动分析或模型结果</p></div>
+      <div class="rounds"><div class="round t"><b>R11</b><small>5 : 6</small></div><div class="round ct"><b>R12</b><small>6 : 6</small></div><div class="round ct"><b>R13</b><small>7 : 6</small></div><div class="round t"><b>R14</b><small>7 : 7</small></div><div class="round t"><b>R15</b><small>7 : 8</small></div><div class="round ct"><b>R16</b><small>8 : 8</small></div><div class="round ct"><b>R17</b><small>9 : 8</small></div><div class="round current ct"><b>R18</b><small>10 : 8</small></div><div class="round live"><b>R19</b><small>进行中</small></div></div>
+
+      <div class="summary-row"><div class="summary"><span>回合结果</span><strong style="color:var(--ct)">CT 防守获胜</strong></div><div class="summary"><span>结束方式</span><strong>拆弹成功</strong></div><div class="summary"><span>回合时长</span><strong>1:48</strong></div><div class="summary"><span>购买类型</span><strong>双方全起</strong></div></div>
+      <div class="anomaly"><b>人工示例标注</b><span>R18：EMBER FIVE 在 0:31 完成 A 点下包，但未能保持人数与站位优势。建议复盘 0:31-0:07 的二次站位、补枪间距与道具保留。</span></div>
+
+      <div class="grid-12">
+        <section class="panel timeline span-12">
+          <div class="panel-head"><div><div class="eyebrow">ROUND TIMELINE</div><h2>回合时间轴</h2></div><span class="chip accent">1:55 → 0:00 · 完整复盘</span></div>
+          <div class="time-axis"><span>1:55</span><span>1:30</span><span>1:00</span><span>0:40</span><span>0:20</span><span>0:00</span></div>
+          <div class="lane"><span class="lane-label">回合阶段</span><div class="track"><span class="segment accent" style="left:0;width:25%"></span><span class="segment ct" style="left:25%;width:30%"></span><span class="segment t" style="left:55%;width:23%"></span><span class="segment ct" style="left:78%;width:19%"></span></div></div>
+          <div class="lane"><span class="lane-label">道具事件</span><div class="track"><span class="event t" style="left:28%"></span><span class="event ct" style="left:43%"></span><span class="event t" style="left:66%"></span></div></div>
+          <div class="lane"><span class="lane-label">击杀事件</span><div class="track"><span class="event accent" style="left:47%"></span><span class="event t" style="left:58%"></span><span class="event ct" style="left:74%"></span><span class="event ct" style="left:88%"></span></div></div>
+          <div class="lane"><span class="lane-label">人数变化</span><div class="track"><span class="segment ct" style="left:0;width:47%"></span><span class="segment ct" style="left:47%;width:11%;opacity:.85"></span><span class="segment" style="left:58%;width:16%;background:var(--line-strong)"></span><span class="segment ct" style="left:74%;width:22%;opacity:.6"></span></div></div>
+          <div class="lane"><span class="lane-label">炸弹状态</span><div class="track"><span class="segment t" style="left:77%;width:18%"></span></div></div>
+          <div class="event-labels"><div class="event-label"><b>1:24</b>T 封锁连接烟</div><div class="event-label"><b>1:02</b>Linx 完成首杀</div><div class="event-label"><b>0:49</b>T 方完成补枪</div><div class="event-label"><b>0:31</b>A 点完成下包</div><div class="event-label"><b>0:07</b>CT 完成拆弹</div></div>
+        </section>
+
+        <section class="panel span-8">
+          <div class="panel-head"><div><div class="eyebrow">ECONOMY IMPACT</div><h2>经济投入与回合效果</h2></div><span class="chip demo">R1-R18 · 演示分布</span></div>
+          <div class="plot" aria-label="装备价值差和存活人数差散点图"><div class="axis-y">回合结束存活人数差（CT − T）</div><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line class="quadrant" x1="50" y1="0" x2="50" y2="100"></line><line class="quadrant" x1="0" y1="50" x2="100" y2="50"></line><g class="scatter-circle" fill="var(--ct)"><circle cx="18" cy="72" r="2.5"></circle><circle cx="28" cy="58" r="2.4"></circle><circle cx="39" cy="46" r="2.6"></circle><circle cx="58" cy="43" r="2.3"></circle><circle cx="67" cy="31" r="2.7"></circle><circle cx="78" cy="26" r="2.5"></circle><circle cx="88" cy="19" r="2.7"></circle></g><g class="scatter-circle" fill="var(--t)"><circle cx="16" cy="38" r="2.4"></circle><circle cx="31" cy="32" r="2.5"></circle><circle cx="45" cy="67" r="2.4"></circle><circle cx="61" cy="61" r="2.4"></circle><circle cx="73" cy="54" r="2.3"></circle><circle cx="84" cy="70" r="2.6"></circle></g><circle class="scatter-selected" cx="58" cy="35" r="3.8"></circle><circle class="scatter-anomaly" cx="24" cy="29" r="3.5"></circle></svg><span class="scatter-label current" style="left:60%;top:28%">R18 · 拆弹胜</span><span class="scatter-label warning" style="left:25%;top:20%">R14 · 人工异常标签</span><div class="axis-x">开局装备价值差（CT − T，$）</div></div>
+          <p class="plot-note">绿色外圈：当前选中回合；琥珀点：人工复盘标签。散点只表达分布与关联，不代表因果结论。</p>
+        </section>
+
+        <section class="panel span-4">
+          <div class="panel-head"><div><div class="eyebrow">FIRST-KILL IMPACT</div><h2>首杀前后局势变化</h2></div><span class="side-note">前后各 5 秒</span></div>
+          <div class="compare-grid"><div class="compare-side"><span class="eyebrow">首杀前</span><strong>5 : 5</strong><span class="side-note">CT : T</span></div><span class="compare-arrow">→</span><div class="compare-side" style="background:var(--accent-soft)"><span class="eyebrow">首杀后</span><strong>5 : 4</strong><span class="side-note">CT : T</span></div></div>
+          <div class="mini-stats"><div class="mini-stat"><span>总生命值 CT:T</span><span>472:451</span><span>458:341</span></div><div class="mini-stat"><span>剩余道具 CT:T</span><span>8:7</span><span>7:5</span></div><div class="mini-stat"><span>中路人数 CT:T</span><span>2:3</span><span>3:1</span></div></div>
+          <div class="panel-head" style="margin-top:12px;margin-bottom:5px"><h2>人数优势路径</h2><span class="side-note">统计示意</span></div>
+          <div class="advantage-path"><div class="advantage-node">5v5<small>1:55</small></div><div class="advantage-node active">5v4<small>1:02</small></div><div class="advantage-node">4v4<small>0:49</small></div><div class="advantage-node">4v3<small>0:21</small></div><div class="advantage-node">3v2<small>0:07</small></div></div>
+        </section>
+
+        <section class="panel span-7">
+          <div class="panel-head"><div><div class="eyebrow">POSITION HEATMAP</div><h2>位置热区与关键路径</h2></div><span class="chip accent">Mirage · R18</span></div>
+          <div class="map-field analyst-map"><span class="zone a active">A SITE · 下包</span><span class="zone mid">MID</span><span class="zone b">B SITE</span><span class="heat ct" style="left:40%;top:43%"></span><span class="heat ct" style="left:67%;top:65%"></span><span class="heat t" style="left:53%;top:49%"></span><span class="heat t" style="left:25%;top:29%"></span><span class="path-line" style="left:34%;top:36%;width:210px;transform:rotate(19deg)"></span><span class="path-line" style="left:57%;top:58%;width:160px;transform:rotate(12deg)"></span><i class="pos ct highlight" style="left:39%;top:39%"></i><span class="map-label" style="left:27%;top:30%">Linx · 关键玩家</span><i class="pos ct" style="left:52%;top:55%"></i><i class="pos ct" style="left:69%;top:67%"></i><i class="pos t" style="left:47%;top:43%"></i><i class="pos t" style="left:61%;top:58%"></i><i class="pos t" style="left:77%;top:70%"></i></div>
+          <div class="legend"><span><i class="legend-dot ct"></i>CT 热区</span><span><i class="legend-dot t"></i>T 热区</span><span><i class="legend-dot accent"></i>关键玩家 / 首杀位置</span><span>虚线：移动路径</span></div>
+        </section>
+
+        <div class="right-stack span-5">
+          <section class="panel tactical">
+            <div class="panel-head"><div><div class="eyebrow">TACTICAL INDICATORS</div><h2>战术执行指标</h2></div><span class="side-note">当前回合</span></div>
+            <div class="bar-list"><div class="bar-row"><span class="label">道具伤害</span><div class="bar-track"><span class="bar-fill ct" style="width:76%"></span></div><span class="bar-value">CT 92</span></div><div class="bar-row"><span class="label">闪光助攻</span><div class="bar-track"><span class="bar-fill ct" style="width:64%"></span></div><span class="bar-value">CT 2</span></div><div class="bar-row"><span class="label">补枪响应</span><div class="bar-track"><span class="bar-fill t" style="width:43%"></span></div><span class="bar-value">T 13s</span></div><div class="bar-row"><span class="label">A 点执行</span><div class="bar-track"><span class="bar-fill t" style="width:70%"></span></div><span class="bar-value">下包</span></div><div class="bar-row"><span class="label">A 点回防</span><div class="bar-track"><span class="bar-fill ct" style="width:88%"></span></div><span class="bar-value">拆弹</span></div></div>
+            <p class="metric-note">数值仅用于确认信息层级与指标表现形式。</p>
+          </section>
+          <section class="panel matchup">
+            <div class="panel-head"><div><div class="eyebrow">PLAYER MATCHUP</div><h2>关键玩家对位</h2></div><span class="tag">关键玩家联动</span></div>
+            <div class="matchup-head"><div class="matchup-player highlight"><strong>Linx</strong><small>CT · NORTHWAVE</small></div><span class="vs">VS</span><div class="matchup-player"><strong>Axle</strong><small>T · EMBER FIVE</small></div></div>
+            <table class="table"><thead><tr><th>指标</th><th class="num">Linx</th><th class="num">Axle</th></tr></thead><tbody><tr><td>本回合直接对位</td><td class="num">1</td><td class="num">0</td></tr><tr><td>全场 K-D</td><td class="num">15-11</td><td class="num">12-15</td></tr><tr><td>ADR</td><td class="num">86.4</td><td class="num">72.1</td></tr><tr><td>首杀对局</td><td class="num">3-1</td><td class="num">2-3</td></tr><tr><td>道具伤害</td><td class="num">38</td><td class="num">21</td></tr></tbody></table>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="footer"><span>ROUNDCAST · 比赛分析人员页面静态设计样板 v1</span><span>所有队名、数值、热区和事件均为排版演示数据 · 不代表自动分析结果</span></footer>
+  </div>
+</body>
+</html>
