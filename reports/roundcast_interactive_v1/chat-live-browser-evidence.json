@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "mode": "real-codex-no-mocks",
+  "checks": [
+    "quick-question-does-not-send",
+    "single-send-bound-to-trusted-prediction",
+    "model-can-rerun-during-chat",
+    "real-answer-matches-model-probabilities",
+    "answer-retains-original-context",
+    "desktop-mobile-no-overflow",
+    "clear-local-transcript"
+  ],
+  "errors": [],
+  "reply": "当前地图为 de_ancient，第 4 回合，算法为 XGBoost，CT 胜率约为 62.92%，T 胜率约为 37.08%。\n不能据此确定实际赛果：模型预测更看好 CT，但高概率不保证获胜，当前快照也未提供实际结果。",
+  "selection": {
+    "message": "请只用两句话回答：当前地图、回合、算法及 CT/T 胜率是什么？能否据此确定实际赛果？不要使用工具。",
+    "example_id": "A",
+    "stage": "pre_round",
+    "algorithm": "xgboost",
+    "request_id": "532dbf79-4b66-4ced-8337-ae76c9a84e24",
+    "history": []
+  }
+}

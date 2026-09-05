@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ROUNDCAST：真实历史回合的本地模型演示。">
+  <title>ROUNDCAST · 回合观察</title>
+  <link rel="icon" href="data:,"><link rel="stylesheet" href="/styles.css">
+  <script defer src="/chat.js"></script><script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/">ROUNDCAST<span class="brand-mark">/</span></a><span class="environment">LOCAL DEMO <span class="dot"></span> 历史回合演示 · 非实时比赛</span></header>
+  <main>
+    <nav class="views" aria-label="受众视图"><span aria-current="page">比赛观众</span><span class="unavailable">比赛分析 <small>后续开放</small></span><span class="unavailable">技术分析 <small>后续开放</small></span><span class="version">P1 · 单案例预览</span></nav>
+    <section class="intro"><div><p class="eyebrow">ROUND OBSERVER</p><h1>读懂一个回合。</h1><p class="muted">从购买结束时的状态，运行模型估计 CT / T 获胜概率。</p></div><div class="map-label"><span id="map-name">—</span><small id="round-num">正在读取回合</small></div></section>
+    <section class="controls" aria-label="预测选择">
+      <label>历史案例<select id="case-select"><option value="A">案例 A · Ancient R4</option><option disabled>案例 B · 后续开放</option><option disabled>案例 C · 后续开放</option></select></label>
+      <label>预测时点<select id="stage-select"><option value="pre_round">购买结束</option><option disabled>首杀后 · 后续开放</option></select></label>
+      <label>算法<select id="algorithm-select"><option value="xgboost">XGBoost</option><option disabled>LightGBM · 后续开放</option></select></label>
+      <button id="run" class="primary" disabled>运行模型 <span aria-hidden="true">↗</span></button><button id="reload" class="text-button">重新连接</button>
+    </section>
+    <div class="layout">
+      <div class="main-column">
+        <section class="panel probability-panel" aria-labelledby="probability-title">
+          <div class="panel-heading"><h2 id="probability-title">回合胜率</h2><span id="status" class="status" role="status" aria-live="polite">正在连接</span></div>
+          <div class="score-context"><span>购买结束前比分 <strong id="score">—</strong></span><span>CT / T 为阵营，非固定战队</span></div>
+          <div class="probability-values"><div><span class="side ct">CT</span><strong id="ct-probability">—</strong><small>反恐精英</small></div><span class="versus">VS</span><div class="right"><span class="side t">T</span><strong id="t-probability">—</strong><small>恐怖分子</small></div></div>
+          <div id="probability-bar" class="probability-bar empty" role="img" aria-label="尚未运行模型"><div id="ct-fill"></div><div id="t-fill"></div></div>
+          <p id="prediction-note" class="prediction-note" aria-live="polite">点击运行，使用已保存的真实模型进行本次预测。</p>
+          <div class="mini-meta"><span>阈值 <b id="threshold">—</b></span><span>校准 <b id="calibration">—</b></span><span>本次处理 <b id="elapsed">—</b></span></div>
+        </section>
+        <section class="panel" aria-labelledby="economy-title"><div class="panel-heading"><h2 id="economy-title">购买结束 · 经济快照</h2><span class="legend"><i class="ct-swatch"></i> CT <i class="t-swatch"></i> T</span></div>
+          <div id="economy-chart" class="economy-chart"><p class="muted">正在读取真实装备与现金</p></div>
+          <p class="footnote">装备价值与剩余现金分别比较，不是队伍总资产或经济投入的因果效果。</p>
+        </section>
+        <section class="panel timeline-panel"><div class="panel-heading"><h2>回合时间轴</h2><span class="muted">离散时点 · 不做逐秒插值</span></div><div class="timeline"><div class="timeline-node active"><i></i><strong>购买结束</strong><small>当前已接通</small></div><div class="timeline-track"></div><div class="timeline-node"><i></i><strong>首杀后</strong><small>后续开放</small></div></div><p class="footnote">当前仅展示购买结束信息；数据未提供精确帧对齐，不表示已与比赛视频同步。</p></section>
+      </div>
+      <aside>
+        <section class="panel outcome-panel"><p class="eyebrow">AFTER THE ROUND</p><h2>实际赛果</h2><p id="outcome" aria-live="polite">暂不揭示。先观察输入，再比较预测与实际结果。</p><button id="reveal" class="secondary" disabled>查看实际结果</button><small>这是已结束的历史回合。赛果不作为模型输入。</small></section>
+        <section class="panel source-panel"><div class="panel-heading"><h2>本次预测来源</h2><span class="source-dot"></span></div><p class="muted">只在成功运行后显示对应记录。</p><dl><dt>模型</dt><dd id="model-version">—</dd><dt>输入检查</dt><dd id="validation">—</dd><dt>模型 SHA-256</dt><dd id="model-hash" class="mono">—</dd><dt>请求标识</dt><dd id="request-id" class="mono">—</dd></dl><details><summary>回合身份与数据来源</summary><pre id="source-detail">尚未运行</pre></details></section>
+        <section class="data-note"><strong>数据边界</strong><p>玩家、位置、烟雾与炸弹事件尚未接入，本页不显示模拟数据。</p><p>此案例用于演示，不代表总体准确率或算法排名。</p></section>
+      </aside>
+    </div>
+    <section class="panel chat-panel" aria-labelledby="chat-title">
+      <div class="panel-heading"><div><p class="eyebrow">ASK ABOUT THIS ROUND</p><h2 id="chat-title">和 Codex 聊聊这个回合</h2></div><button id="chat-clear" class="text-button" type="button" disabled>清空对话</button></div>
+      <p class="chat-description">解释胜率、比较指标、梳理下一步。这里是独立的 ROUNDCAST 对话，不与 Codex 桌面任务自动同步。</p>
+      <div class="chat-connection"><span id="chat-status" class="status" role="status">正在检查本地连接…</span><button id="chat-reconnect" class="text-button" type="button">检查连接</button><span class="footnote">本地检查不代表已连通远程服务。</span></div>
+      <div class="chat-context"><span class="chat-context-caption">本次提问将附上</span><span id="chat-context">等待回合数据</span></div>
+      <div class="chat-question-list" aria-label="提问建议">
+        <button type="button" data-chat-question="请解释当前回合的输入和预测。哪些因素可能与胜率有关，哪些结论还不能确定？">读懂当前预测 <span aria-hidden="true">↗</span></button>
+        <button type="button" data-chat-question="在当前信息范围内，应该怎样比较 XGBoost 和 LightGBM？请区分已有证据和还缺少的数据。">怎样比较两个模型 <span aria-hidden="true">↗</span></button>
+        <button type="button" data-chat-question="请根据当前回合与模型信息，列出我下一步应核对的三件事，不要自动执行或读取赛果。">下一步核对什么 <span aria-hidden="true">↗</span></button>
+      </div>
+      <div id="chat-empty" class="chat-empty"><span aria-hidden="true">↗</span><p>从一个问题开始。<small>点击上方建议只会填入问题，不会自动发送。</small></p></div>
+      <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-relevant="additions" aria-label="本页对话记录"></div>
+      <p id="chat-progress" class="chat-progress" role="status"></p><p id="chat-error" class="chat-error" role="alert"></p>
+      <form id="chat-form" class="chat-form">
+        <label for="chat-input">你的问题</label>
+        <textarea id="chat-input" rows="3" maxlength="2000" placeholder="例如：当前 CT 胜率为什么更高？哪些数据支持这个判断？" aria-describedby="chat-disclosure chat-input-help"></textarea>
+        <div class="chat-compose-footer"><span id="chat-input-help">Enter 换行 · Ctrl / ⌘ + Enter 发送 <span id="chat-counter">0 / 2000</span></span><div class="chat-actions"><button id="chat-cancel" class="text-button" type="button" hidden>停止回复</button><button id="chat-send" class="primary" type="submit" disabled>发送给 Codex</button></div></div>
+      </form>
+      <p id="chat-disclosure" class="chat-disclosure">只有点击发送，才会把问题、当前回合数据、已成功运行的预测和最近最多 6 轮对话发送至 Codex。不会发送隐藏赛果，不会自动读取仓库或修改模型。页面记录仅在内存中保留，刷新页面后不恢复；点击清空不会删除 Codex 账户上的使用记录。</p>
+    </section>
+    <footer><span>ROUNDCAST / FROZEN MODEL REPLAY</span><span>预测本机运行 · 对话按需发送至 Codex</span></footer>
+  </main>
+</body>
+</html>

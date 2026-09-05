@@ -1,0 +1,164 @@
+{
+  "status": "passed",
+  "requestBodies": [
+    {
+      "example_id": "A",
+      "stage": "pre_round",
+      "algorithm": "xgboost"
+    },
+    {
+      "example_id": "A",
+      "stage": "pre_round",
+      "algorithm": "xgboost"
+    },
+    {
+      "example_id": "A",
+      "stage": "pre_round",
+      "algorithm": "xgboost"
+    }
+  ],
+  "predictions": [
+    {
+      "task": "pre_round",
+      "snapshot_definition": "purchase end, before combat",
+      "calibration_method": "uncalibrated",
+      "validation": {
+        "status": "passed",
+        "required_base_feature_count": 27,
+        "provided_field_count": 27,
+        "derived_features": [
+          "score_diff_ct",
+          "eq_value_diff_ct",
+          "cash_diff_ct",
+          "armor_diff_ct",
+          "helmet_diff_ct",
+          "grenade_diff_ct",
+          "awp_diff_ct",
+          "rifle_diff_ct",
+          "smg_diff_ct"
+        ],
+        "model_feature_count_before_encoding": 36,
+        "map_name": "de_ancient",
+        "encoded_model_feature_count": 43
+      },
+      "prediction": {
+        "ct_win_probability": 0.6291529536247253,
+        "t_win_probability": 0.37084704637527466,
+        "predicted_side": "CT",
+        "decision_threshold": 0.5,
+        "probability_sum": 1
+      },
+      "model_id": "xgb_pre_round",
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "model_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+      "calibrator_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+      "inference_ready": true,
+      "available_examples": [
+        "A"
+      ],
+      "status": "success",
+      "example_id": "A",
+      "request_id": "3d83ce9a-6d3b-4a98-a55e-cf7b1251afab",
+      "identity": {
+        "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+        "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+        "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+      },
+      "base_ct_win_probability": 0.6291529536247253,
+      "model_version": "M8-tuned / M10-identity",
+      "feature_version": "M13:27-base+9-derived",
+      "inference_ms": 111.4196999988053,
+      "source": {
+        "snapshot": "purchase end, before combat",
+        "data_version": "esta_full/pre_round",
+        "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+        "split": "test",
+        "exact_frame_alignment": "not_provided",
+        "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+      }
+    },
+    {
+      "task": "pre_round",
+      "snapshot_definition": "purchase end, before combat",
+      "calibration_method": "uncalibrated",
+      "validation": {
+        "status": "passed",
+        "required_base_feature_count": 27,
+        "provided_field_count": 27,
+        "derived_features": [
+          "score_diff_ct",
+          "eq_value_diff_ct",
+          "cash_diff_ct",
+          "armor_diff_ct",
+          "helmet_diff_ct",
+          "grenade_diff_ct",
+          "awp_diff_ct",
+          "rifle_diff_ct",
+          "smg_diff_ct"
+        ],
+        "model_feature_count_before_encoding": 36,
+        "map_name": "de_ancient",
+        "encoded_model_feature_count": 43
+      },
+      "prediction": {
+        "ct_win_probability": 0.6291529536247253,
+        "t_win_probability": 0.37084704637527466,
+        "predicted_side": "CT",
+        "decision_threshold": 0.5,
+        "probability_sum": 1
+      },
+      "model_id": "xgb_pre_round",
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "model_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+      "calibrator_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+      "inference_ready": true,
+      "available_examples": [
+        "A"
+      ],
+      "status": "success",
+      "example_id": "A",
+      "request_id": "45abb4c8-b55e-4708-aea8-c4dae79fca7b",
+      "identity": {
+        "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+        "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+        "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+      },
+      "base_ct_win_probability": 0.6291529536247253,
+      "model_version": "M8-tuned / M10-identity",
+      "feature_version": "M13:27-base+9-derived",
+      "inference_ms": 13.91299998795148,
+      "source": {
+        "snapshot": "purchase end, before combat",
+        "data_version": "esta_full/pre_round",
+        "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+        "split": "test",
+        "exact_frame_alignment": "not_provided",
+        "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "example_id": "A",
+      "winning_side": "CT"
+    }
+  ],
+  "checks": [
+    "initial-no-prediction-or-outcome",
+    "real-click-inference",
+    "bar-and-number-same-response",
+    "explicit-outcome",
+    "1440-and-1280-no-overflow",
+    "duplicate-click-guard",
+    "repeat-run-new-request",
+    "actual-server-stop-no-stale-result",
+    "outcome-offline-error"
+  ],
+  "normalConsoleErrors": [],
+  "expectedDisconnectConsoleErrors": [
+    "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+    "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ]
+}

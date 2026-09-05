@@ -1,0 +1,314 @@
+{
+  "status": "passed",
+  "inference_executed": false,
+  "cases": [
+    {
+      "example_id": "A",
+      "identity": {
+        "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+        "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+        "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+      },
+      "common_test": true,
+      "four_split_sources": [
+        "reports/esta_full_m14/split_assignments.csv",
+        "reports/esta_full_m21/split_assignments.csv",
+        "reports/esta_full_m27/split_assignments.csv",
+        "reports/esta_full_m33/split_assignments.csv"
+      ],
+      "labels_agree": true,
+      "purchase_fields_agree": true,
+      "base_feature_counts": [
+        27,
+        31
+      ],
+      "validation": "passed"
+    },
+    {
+      "example_id": "B",
+      "identity": {
+        "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+        "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+        "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+      },
+      "common_test": true,
+      "four_split_sources": [
+        "reports/esta_full_m14/split_assignments.csv",
+        "reports/esta_full_m21/split_assignments.csv",
+        "reports/esta_full_m27/split_assignments.csv",
+        "reports/esta_full_m33/split_assignments.csv"
+      ],
+      "labels_agree": true,
+      "purchase_fields_agree": true,
+      "base_feature_counts": [
+        27,
+        31
+      ],
+      "validation": "passed"
+    },
+    {
+      "example_id": "C",
+      "identity": {
+        "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+        "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+        "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+      },
+      "common_test": true,
+      "four_split_sources": [
+        "reports/esta_full_m14/split_assignments.csv",
+        "reports/esta_full_m21/split_assignments.csv",
+        "reports/esta_full_m27/split_assignments.csv",
+        "reports/esta_full_m33/split_assignments.csv"
+      ],
+      "labels_agree": true,
+      "purchase_fields_agree": true,
+      "base_feature_counts": [
+        27,
+        31
+      ],
+      "validation": "passed"
+    }
+  ],
+  "frozen_artifacts": [
+    {
+      "path": "models/esta_full_m8_tuned/pre_round_xgb.joblib",
+      "expected_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+      "actual_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m14/m14_experiment_manifest.json",
+        "entry": [
+          "artifacts",
+          "model"
+        ]
+      }
+    },
+    {
+      "path": "models/esta_full_m10/pre_round_calibrator.joblib",
+      "expected_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+      "actual_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m14/m14_experiment_manifest.json",
+        "entry": [
+          "artifacts",
+          "calibrator"
+        ]
+      }
+    },
+    {
+      "path": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "expected_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+      "actual_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m21/m21_experiment_manifest.json",
+        "entry": [
+          "artifact_fingerprints",
+          "models/esta_full_m17/first_kill_xgboost_tuned.joblib"
+        ]
+      }
+    },
+    {
+      "path": "models/esta_full_m18/first_kill_calibrator.joblib",
+      "expected_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+      "actual_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m21/m21_experiment_manifest.json",
+        "entry": [
+          "artifact_fingerprints",
+          "models/esta_full_m18/first_kill_calibrator.joblib"
+        ]
+      }
+    },
+    {
+      "path": "models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "expected_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+      "actual_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m27/m27_experiment_manifest.json",
+        "entry": [
+          "inputs",
+          1
+        ]
+      }
+    },
+    {
+      "path": "models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+      "expected_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+      "actual_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m27/m27_experiment_manifest.json",
+        "entry": [
+          "inputs",
+          2
+        ]
+      }
+    },
+    {
+      "path": "models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "expected_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+      "actual_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m33/m33_experiment_manifest.json",
+        "entry": [
+          "inputs",
+          1
+        ]
+      }
+    },
+    {
+      "path": "models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+      "expected_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+      "actual_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m33/m33_experiment_manifest.json",
+        "entry": [
+          "inputs",
+          2
+        ]
+      }
+    },
+    {
+      "path": "data/processed/esta_full/pre_round.parquet",
+      "expected_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+      "actual_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m27/m27_experiment_manifest.json",
+        "entry": [
+          "inputs",
+          0
+        ]
+      }
+    },
+    {
+      "path": "data/processed/esta_full/first_kill.parquet",
+      "expected_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "actual_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m33/m33_experiment_manifest.json",
+        "entry": [
+          "inputs",
+          0
+        ]
+      }
+    }
+  ],
+  "supporting_files": [
+    {
+      "path": "reports/esta_full_m14/split_assignments.csv",
+      "expected_sha256": "31ea3f9cc2ceacc2dd582cd6c546a8f734aa43c8d7c2824587b98baf92aa9b0d",
+      "actual_sha256": "31ea3f9cc2ceacc2dd582cd6c546a8f734aa43c8d7c2824587b98baf92aa9b0d",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m21/m21_experiment_manifest.json",
+        "entry": [
+          "artifact_fingerprints",
+          "reports/esta_full_m14/split_assignments.csv"
+        ]
+      }
+    },
+    {
+      "path": "reports/esta_full_m21/split_assignments.csv",
+      "expected_sha256": "11298f6337ae115265d3dcff648c71944a14395455a0a562e20beb475bc20a5a",
+      "actual_sha256": "11298f6337ae115265d3dcff648c71944a14395455a0a562e20beb475bc20a5a",
+      "provenance": {
+        "kind": "initial_pin",
+        "git_commit": "eb0a0e348826398df479a7cdcc93c1cc713efba3",
+        "reason": "Tracked baseline; no historical manifest entry"
+      }
+    },
+    {
+      "path": "reports/esta_full_m27/split_assignments.csv",
+      "expected_sha256": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+      "actual_sha256": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m27/m27_experiment_manifest.json",
+        "entry": [
+          "outputs",
+          9
+        ]
+      }
+    },
+    {
+      "path": "reports/esta_full_m33/split_assignments.csv",
+      "expected_sha256": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+      "actual_sha256": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m33/m33_experiment_manifest.json",
+        "entry": [
+          "outputs",
+          11
+        ]
+      }
+    },
+    {
+      "path": "reports/esta_full_m10/calibrated_test_predictions.csv",
+      "expected_sha256": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31",
+      "actual_sha256": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31",
+      "provenance": {
+        "kind": "initial_pin",
+        "git_commit": "eb0a0e348826398df479a7cdcc93c1cc713efba3",
+        "reason": "Tracked baseline; no historical manifest entry"
+      }
+    },
+    {
+      "path": "reports/esta_full_m18/calibrated_test_predictions.csv",
+      "expected_sha256": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e",
+      "actual_sha256": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e",
+      "provenance": {
+        "kind": "initial_pin",
+        "git_commit": "eb0a0e348826398df479a7cdcc93c1cc713efba3",
+        "reason": "Tracked baseline; no historical manifest entry"
+      }
+    },
+    {
+      "path": "reports/esta_full_m27/replayed_test_predictions.csv",
+      "expected_sha256": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c",
+      "actual_sha256": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m27/m27_experiment_manifest.json",
+        "entry": [
+          "outputs",
+          6
+        ]
+      }
+    },
+    {
+      "path": "reports/esta_full_m33/replayed_test_predictions.csv",
+      "expected_sha256": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af",
+      "actual_sha256": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m33/m33_experiment_manifest.json",
+        "entry": [
+          "outputs",
+          8
+        ]
+      }
+    },
+    {
+      "path": "reports/esta_full_m32/model_contract_audit.json",
+      "expected_sha256": "d6a4776c1b904f2fc9d394a1955e3ce72f0f0dfbde7b7dedf98bb85dca7134ed",
+      "actual_sha256": "d6a4776c1b904f2fc9d394a1955e3ce72f0f0dfbde7b7dedf98bb85dca7134ed",
+      "provenance": {
+        "kind": "frozen_manifest",
+        "manifest": "reports/esta_full_m33/m33_experiment_manifest.json",
+        "entry": [
+          "inputs",
+          17
+        ]
+      }
+    }
+  ]
+}

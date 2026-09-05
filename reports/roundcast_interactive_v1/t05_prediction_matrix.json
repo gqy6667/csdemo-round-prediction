@@ -1,0 +1,1024 @@
+{
+  "status": "passed",
+  "recorded_at": "2026-09-05T09:30:33.606409+00:00",
+  "scope": "T05: 12 real HTTP predictions, no frontend selection changes",
+  "tolerance": 1e-08,
+  "max_absolute_error": 0.0,
+  "frozen_sources_unchanged": true,
+  "records": [
+    {
+      "request": {
+        "example_id": "A",
+        "stage": "pre_round",
+        "algorithm": "xgboost"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "purchase end, before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_ancient",
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.6291529536247253,
+          "t_win_probability": 0.37084704637527466,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_pre_round",
+        "stage": "pre_round",
+        "algorithm": "xgboost",
+        "model_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+        "calibrator_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "A",
+        "request_id": "6f51b8c8-5814-412b-81ca-182f743115fb",
+        "identity": {
+          "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+          "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+          "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+        },
+        "base_ct_win_probability": 0.6291529536247253,
+        "model_version": "M8-tuned / M10-identity",
+        "feature_version": "M13:27-base+9-derived",
+        "inference_ms": 100.43260001111776,
+        "source": {
+          "snapshot": "purchase end, before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.6291529536247253,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m10/calibrated_test_predictions.csv",
+        "probability_column": "probability_uncalibrated"
+      },
+      "reference_source_sha256": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31"
+    },
+    {
+      "request": {
+        "example_id": "A",
+        "stage": "pre_round",
+        "algorithm": "lightgbm"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "freeze-time end after purchases and before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_ancient",
+          "raw_model_feature_count": 36,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 115,
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.6591145000070254,
+          "t_win_probability": 0.34088549999297457,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_pre_round",
+        "stage": "pre_round",
+        "algorithm": "lightgbm",
+        "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+        "calibrator_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "A",
+        "request_id": "8a8367c5-4aac-4bab-b206-496724e1bb9e",
+        "identity": {
+          "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+          "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+          "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+        },
+        "base_ct_win_probability": 0.6591145000070254,
+        "model_version": "M23-tuned / M24-identity",
+        "feature_version": "M26:27-base+9-derived",
+        "inference_ms": 172.25190001772717,
+        "source": {
+          "snapshot": "freeze-time end after purchases and before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.6591145000070254,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m27/replayed_test_predictions.csv",
+        "probability_column": "ct_win_probability"
+      },
+      "reference_source_sha256": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c"
+    },
+    {
+      "request": {
+        "example_id": "A",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_ancient",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "AK-47",
+          "encoded_model_feature_count": 82,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 409,
+          "required_input_field_count": 31
+        },
+        "prediction": {
+          "ct_win_probability": 0.7656537294387817,
+          "t_win_probability": 0.23434627056121826,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost",
+        "model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+        "calibrator_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "A",
+        "request_id": "e132f7b7-162b-4e5a-b975-af8ea74a82a5",
+        "identity": {
+          "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+          "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+          "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+        },
+        "base_ct_win_probability": 0.7656537294387817,
+        "model_version": "M17-tuned / M18-identity",
+        "feature_version": "M20:31-base+9-derived",
+        "inference_ms": 19.658700010040775,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.7656537294387817,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m18/calibrated_test_predictions.csv",
+        "probability_column": "probability_uncalibrated"
+      },
+      "reference_source_sha256": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e"
+    },
+    {
+      "request": {
+        "example_id": "A",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "post_first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_ancient",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "AK-47",
+          "required_input_field_count": 31,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "encoded_model_feature_count": 82,
+          "deployment_tree_count": 211
+        },
+        "prediction": {
+          "ct_win_probability": 0.736277887665323,
+          "t_win_probability": 0.263722112334677,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm",
+        "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+        "calibrator_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "A",
+        "request_id": "13f8da21-d8d1-4c9d-9620-66a9dde9c935",
+        "identity": {
+          "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+          "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+          "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+        },
+        "base_ct_win_probability": 0.736277887665323,
+        "model_version": "M29-tuned / M30-identity",
+        "feature_version": "M32:31-base+9-derived",
+        "inference_ms": 12.354799982858822,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.736277887665323,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m33/replayed_test_predictions.csv",
+        "probability_column": "ct_win_probability"
+      },
+      "reference_source_sha256": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af"
+    },
+    {
+      "request": {
+        "example_id": "B",
+        "stage": "pre_round",
+        "algorithm": "xgboost"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "purchase end, before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_mirage",
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.7336581349372864,
+          "t_win_probability": 0.2663418650627136,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_pre_round",
+        "stage": "pre_round",
+        "algorithm": "xgboost",
+        "model_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+        "calibrator_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "B",
+        "request_id": "fe5a6131-a0ab-44a1-bbef-c01adc740974",
+        "identity": {
+          "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+          "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+          "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+        },
+        "base_ct_win_probability": 0.7336581349372864,
+        "model_version": "M8-tuned / M10-identity",
+        "feature_version": "M13:27-base+9-derived",
+        "inference_ms": 14.516399998683482,
+        "source": {
+          "snapshot": "purchase end, before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.7336581349372864,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m10/calibrated_test_predictions.csv",
+        "probability_column": "probability_uncalibrated"
+      },
+      "reference_source_sha256": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31"
+    },
+    {
+      "request": {
+        "example_id": "B",
+        "stage": "pre_round",
+        "algorithm": "lightgbm"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "freeze-time end after purchases and before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_mirage",
+          "raw_model_feature_count": 36,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 115,
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.7735134884219927,
+          "t_win_probability": 0.22648651157800725,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_pre_round",
+        "stage": "pre_round",
+        "algorithm": "lightgbm",
+        "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+        "calibrator_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "B",
+        "request_id": "2d3b5ce6-06ba-4693-ad5c-0d4cffb3ac51",
+        "identity": {
+          "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+          "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+          "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+        },
+        "base_ct_win_probability": 0.7735134884219927,
+        "model_version": "M23-tuned / M24-identity",
+        "feature_version": "M26:27-base+9-derived",
+        "inference_ms": 9.951400017598644,
+        "source": {
+          "snapshot": "freeze-time end after purchases and before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.7735134884219927,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m27/replayed_test_predictions.csv",
+        "probability_column": "ct_win_probability"
+      },
+      "reference_source_sha256": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c"
+    },
+    {
+      "request": {
+        "example_id": "B",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_mirage",
+          "first_kill_side": "T",
+          "first_kill_weapon": "Desert Eagle",
+          "encoded_model_feature_count": 82,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 409,
+          "required_input_field_count": 31
+        },
+        "prediction": {
+          "ct_win_probability": 0.41505882143974304,
+          "t_win_probability": 0.584941178560257,
+          "predicted_side": "T",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost",
+        "model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+        "calibrator_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "B",
+        "request_id": "1e40fe6d-ab64-44fc-9554-38b7c8fd025f",
+        "identity": {
+          "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+          "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+          "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+        },
+        "base_ct_win_probability": 0.41505882143974304,
+        "model_version": "M17-tuned / M18-identity",
+        "feature_version": "M20:31-base+9-derived",
+        "inference_ms": 18.64299998851493,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.41505882143974304,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m18/calibrated_test_predictions.csv",
+        "probability_column": "probability_uncalibrated"
+      },
+      "reference_source_sha256": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e"
+    },
+    {
+      "request": {
+        "example_id": "B",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "post_first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_mirage",
+          "first_kill_side": "T",
+          "first_kill_weapon": "Desert Eagle",
+          "required_input_field_count": 31,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "encoded_model_feature_count": 82,
+          "deployment_tree_count": 211
+        },
+        "prediction": {
+          "ct_win_probability": 0.3991340729586205,
+          "t_win_probability": 0.6008659270413794,
+          "predicted_side": "T",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm",
+        "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+        "calibrator_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "B",
+        "request_id": "f238f3c4-edb9-4c42-b25f-9096abc1bf63",
+        "identity": {
+          "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+          "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+          "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+        },
+        "base_ct_win_probability": 0.3991340729586205,
+        "model_version": "M29-tuned / M30-identity",
+        "feature_version": "M32:31-base+9-derived",
+        "inference_ms": 12.758000026224181,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.3991340729586205,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m33/replayed_test_predictions.csv",
+        "probability_column": "ct_win_probability"
+      },
+      "reference_source_sha256": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af"
+    },
+    {
+      "request": {
+        "example_id": "C",
+        "stage": "pre_round",
+        "algorithm": "xgboost"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "purchase end, before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_nuke",
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.9748938679695129,
+          "t_win_probability": 0.02510613203048706,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_pre_round",
+        "stage": "pre_round",
+        "algorithm": "xgboost",
+        "model_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+        "calibrator_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "C",
+        "request_id": "fbbb4969-1de1-46bf-a8ec-779dd733bb45",
+        "identity": {
+          "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+          "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+          "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+        },
+        "base_ct_win_probability": 0.9748938679695129,
+        "model_version": "M8-tuned / M10-identity",
+        "feature_version": "M13:27-base+9-derived",
+        "inference_ms": 15.114799985894933,
+        "source": {
+          "snapshot": "purchase end, before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.9748938679695129,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m10/calibrated_test_predictions.csv",
+        "probability_column": "probability_uncalibrated"
+      },
+      "reference_source_sha256": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31"
+    },
+    {
+      "request": {
+        "example_id": "C",
+        "stage": "pre_round",
+        "algorithm": "lightgbm"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "freeze-time end after purchases and before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_nuke",
+          "raw_model_feature_count": 36,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 115,
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.9704182077374078,
+          "t_win_probability": 0.029581792262592166,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_pre_round",
+        "stage": "pre_round",
+        "algorithm": "lightgbm",
+        "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+        "calibrator_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "C",
+        "request_id": "5c58e192-1adf-431c-b1f1-d28134430f32",
+        "identity": {
+          "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+          "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+          "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+        },
+        "base_ct_win_probability": 0.9704182077374078,
+        "model_version": "M23-tuned / M24-identity",
+        "feature_version": "M26:27-base+9-derived",
+        "inference_ms": 11.237699975026771,
+        "source": {
+          "snapshot": "freeze-time end after purchases and before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.9704182077374078,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m27/replayed_test_predictions.csv",
+        "probability_column": "ct_win_probability"
+      },
+      "reference_source_sha256": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c"
+    },
+    {
+      "request": {
+        "example_id": "C",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_nuke",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "MP9",
+          "encoded_model_feature_count": 82,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 409,
+          "required_input_field_count": 31
+        },
+        "prediction": {
+          "ct_win_probability": 0.9854957461357117,
+          "t_win_probability": 0.01450425386428833,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost",
+        "model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+        "calibrator_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "C",
+        "request_id": "4d3fc6d7-ec0d-4a34-baf3-bd7cd6458e72",
+        "identity": {
+          "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+          "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+          "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+        },
+        "base_ct_win_probability": 0.9854957461357117,
+        "model_version": "M17-tuned / M18-identity",
+        "feature_version": "M20:31-base+9-derived",
+        "inference_ms": 18.05790001526475,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.9854957461357117,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m18/calibrated_test_predictions.csv",
+        "probability_column": "probability_uncalibrated"
+      },
+      "reference_source_sha256": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e"
+    },
+    {
+      "request": {
+        "example_id": "C",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm"
+      },
+      "http_status": 200,
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "post_first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_nuke",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "MP9",
+          "required_input_field_count": 31,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "encoded_model_feature_count": 82,
+          "deployment_tree_count": 211
+        },
+        "prediction": {
+          "ct_win_probability": 0.9898388852132408,
+          "t_win_probability": 0.010161114786759184,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm",
+        "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+        "calibrator_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "C",
+        "request_id": "982392f7-23fa-4462-a479-2f6c96054f3f",
+        "identity": {
+          "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+          "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+          "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+        },
+        "base_ct_win_probability": 0.9898388852132408,
+        "model_version": "M29-tuned / M30-identity",
+        "feature_version": "M32:31-base+9-derived",
+        "inference_ms": 12.214700022013858,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference_probability": 0.9898388852132408,
+      "absolute_error": 0.0,
+      "reference_source": {
+        "path": "reports/esta_full_m33/replayed_test_predictions.csv",
+        "probability_column": "ct_win_probability"
+      },
+      "reference_source_sha256": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af"
+    }
+  ]
+}
