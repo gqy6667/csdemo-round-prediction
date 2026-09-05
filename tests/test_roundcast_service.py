@@ -127,6 +127,38 @@ class RoundcastTrustTests(unittest.TestCase):
 
 
 class RoundcastInferenceTests(unittest.TestCase):
+    def test_nested_predictor_metadata_and_boolean_probability_sum_fail_closed(self):
+        service = RoundcastService(ROOT)
+        for stage, algorithm, predictor_class, _, _ in PREDICTOR_CASES:
+            original = predictor_class.predict
+            for fault in ('snapshot', 'validation', 'probability_sum', 'contract_flag'):
+                if fault == 'contract_flag' and (stage, algorithm) == ('pre_round', 'xgboost'):
+                    continue
+                def malformed(predictor, snapshot):
+                    result = original(predictor, snapshot)
+                    if fault == 'snapshot':
+                        result['snapshot_definition'] = {'local_path': 'C:/SYNTHETIC_PRIVATE/diagnostic.txt'}
+                    elif fault == 'validation':
+                        result['validation']['local_path'] = 'C:/SYNTHETIC_PRIVATE/diagnostic.txt'
+                    elif fault == 'contract_flag':
+                        result['validation']['model_contract_verified'] = 1
+                    else:
+                        result['prediction']['probability_sum'] = True
+                    return result
+                with self.subTest(stage=stage, algorithm=algorithm, fault=fault):
+                    with patch.object(predictor_class, 'predict', autospec=True, side_effect=malformed):
+                        with self.assertRaises(RoundcastValidationError):
+                            service.predict_example('A', stage, algorithm)
+
+    def test_same_stage_reference_source_swaps_are_rejected(self):
+        for stage in ('pre_round', 'post_first_kill'):
+            registry = json.loads((ROOT / 'examples/roundcast_v1_cases.json').read_text(encoding='utf-8'))
+            sources = registry['reference_sources']
+            sources['xgb_' + stage], sources['lgbm_' + stage] = sources['lgbm_' + stage], sources['xgb_' + stage]
+            with self.subTest(stage=stage), patch('src.csdemo.roundcast_service._read_registry', return_value=registry):
+                with self.assertRaises(RoundcastValidationError):
+                    RoundcastService(ROOT)
+
     def test_real_case_a_prediction_matches_reference_without_reading_it(self):
         service = RoundcastService(ROOT)
         result = service.predict_example("A", "pre_round", "xgboost")

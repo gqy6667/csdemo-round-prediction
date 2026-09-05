@@ -2,12 +2,13 @@
 from __future__ import annotations
 
 import hashlib
+import csv
 import json
 import math
 from time import perf_counter
 from uuid import uuid4
 from copy import deepcopy
-from io import BytesIO
+from io import BytesIO, StringIO
 from pathlib import Path
 
 import pandas as pd
@@ -52,6 +53,52 @@ PREDICTOR_ROUTES = {
 KEY_FIELDS = ("series_id", "game_id", "round_id")
 SPLIT_FILES = tuple(f"reports/esta_full_m{n}/split_assignments.csv" for n in (14, 21, 27, 33))
 CATEGORY_FILE = "reports/esta_full_m32/model_contract_audit.json"
+METRIC_NAMES = ("accuracy", "auc", "log_loss", "brier_score", "ece10")
+REFERENCE_SOURCES = {
+    'xgb_pre_round': {'path': 'reports/esta_full_m10/calibrated_test_predictions.csv', 'probability_column': 'probability_uncalibrated'},
+    'lgbm_pre_round': {'path': 'reports/esta_full_m27/replayed_test_predictions.csv', 'probability_column': 'ct_win_probability'},
+    'xgb_post_first_kill': {'path': 'reports/esta_full_m18/calibrated_test_predictions.csv', 'probability_column': 'probability_uncalibrated'},
+    'lgbm_post_first_kill': {'path': 'reports/esta_full_m33/replayed_test_predictions.csv', 'probability_column': 'ct_win_probability'},
+}
+SNAPSHOT_DEFINITIONS = {
+    ('pre_round', 'xgboost'): 'purchase end, before combat',
+    ('pre_round', 'lightgbm'): 'freeze-time end after purchases and before combat',
+    ('post_first_kill', 'xgboost'): 'purchase complete, immediately after earliest valid enemy kill',
+    ('post_first_kill', 'lightgbm'): 'purchase complete, immediately after earliest valid enemy kill',
+}
+DEPLOYMENT_TREES = {('pre_round', 'lightgbm'): 115, ('post_first_kill', 'xgboost'): 409, ('post_first_kill', 'lightgbm'): 211}
+# M10 is an initial pin checked against the unmodified Git baseline. The other
+# hashes match their existing M21/M27/M33 manifests. No report enters startup readiness.
+METRIC_SOURCES = {
+    "xgb_pre_round": ("reports/esta_full_m10/m10_summary.json", "c9c696cde9a9ac523ae5dc64e74c581b353e7fac74ef3c074a05517f2847d72b", ("test_selected_metrics",), "initial_pin"),
+    "xgb_post_first_kill": ("reports/esta_full_m18/m18_summary.json", "995ea75987aa6275989c207ed118a5781f74b30b8c0bf30bfb62e766e95cf8ab", ("calibration", "selected_test_metrics"), "M21"),
+    "lgbm_pre_round": ("reports/esta_full_m27/fixed_test_metrics.csv", "13ab68023973d791c59297a1fee9751fe98e2777e2e932aef9f0788dd642064f", (), "M27"),
+    "lgbm_post_first_kill": ("reports/esta_full_m33/fixed_test_metrics.csv", "567df88ce4ce2c5e22c3a0d9ff2fd2f503cf04cae25bb65e55a5c16f3e2a80f6", (), "M33"),
+}
+
+
+def parse_formal_metrics(content: bytes, selector: tuple[str, ...]) -> dict:
+    if selector:
+        values = json.loads(content, object_pairs_hook=_unique_object)
+        for field in selector:
+            values = values[field]
+    else:
+        rows = list(csv.reader(StringIO(content.decode('utf-8-sig')), strict=True))
+        if (len(rows) != 6 or rows[0] != ['metric', 'value'] or any(len(row) != 2 for row in rows[1:])
+                or len({row[0] for row in rows[1:]}) != 5):
+            raise RoundcastValidationError("Invalid metric table")
+        values = {name: float(value) for name, value in rows[1:]}
+    if not isinstance(values, dict) or set(values) != set(METRIC_NAMES):
+        raise RoundcastValidationError("Missing or unexpected formal metrics")
+    for name, value in values.items():
+        try:
+            finite = isinstance(value, (int, float)) and math.isfinite(value)
+        except OverflowError:
+            finite = False
+        if (isinstance(value, bool) or not finite
+                or value < 0 or (name != "log_loss" and value > 1)):
+            raise RoundcastValidationError("Invalid formal metric value")
+    return {name: float(values[name]) for name in METRIC_NAMES}
 
 
 class RoundcastValidationError(ValueError):
@@ -121,8 +168,8 @@ class RoundcastService:
         required = set(DATA_FILES.values()) | {p for route in MODEL_FILES.values() for p in route[1:]}
         if registry.get("schema_version") != 1 or set(registry["frozen_artifacts"]) != required:
             raise RoundcastValidationError("Invalid frozen artifact registry")
-        if set(registry["reference_sources"]) != {route[0] for route in MODEL_FILES.values()}:
-            raise RoundcastValidationError("Missing four-model reference source mapping")
+        if registry["reference_sources"] != REFERENCE_SOURCES:
+            raise RoundcastValidationError("Invalid four-model reference source mapping")
         support = set(SPLIT_FILES) | {CATEGORY_FILE} | {
             source["path"] for source in registry["reference_sources"].values()
         }
@@ -158,6 +205,37 @@ class RoundcastService:
                 "calibrator_sha256": self._registry["files"][calibrator]["sha256"],
                 "inference_ready": True, "available_examples": ["A", "B", "C"]}
 
+    def metrics(self) -> dict:
+        """Read frozen full-test reports, independently of model execution/cases."""
+        rows = []
+        for (stage, algorithm), (model_id, _, _) in MODEL_FILES.items():
+            path, sha256, selector, provenance = METRIC_SOURCES[model_id]
+            row = {"model_id": model_id, "stage": stage, "algorithm": algorithm,
+                   "model_version": PREDICTOR_ROUTES[stage, algorithm][2],
+                   "scope": "frozen_test_set", "split": "test", "split_unit": "series_id",
+                   "calibration_method": "uncalibrated", "metrics": None, "n_test": None,
+                   "source": {"path": path, "sha256": sha256,
+                              "selector": ".".join(selector) if selector else "metric,value",
+                              "provenance": provenance}}
+            try:
+                values = parse_formal_metrics(self._check_file(path, sha256), selector)
+                count_path = self._registry["reference_sources"][model_id]["path"]
+                count_sha = self._registry["files"][count_path]["sha256"]
+                frame = pd.read_csv(BytesIO(self._check_file(count_path, count_sha)))
+                n_test = len(frame)
+                if (n_test != (4172 if stage == "pre_round" else 4170)
+                        or not set(KEY_FIELDS).issubset(frame.columns)
+                        or frame[list(KEY_FIELDS)].isna().any().any()
+                        or frame.duplicated(list(KEY_FIELDS)).any()):
+                    raise RoundcastValidationError("Invalid full-test sample count")
+                row.update(status="success", metrics=values, n_test=n_test,
+                           sample_source={"path": count_path, "sha256": count_sha})
+            except (OSError, ValueError, KeyError, TypeError, IndexError):
+                row.update(status="unavailable", message="此模型的正式指标来源不可用，请检查本地报告后重试")
+            rows.append(row)
+        available = sum(row["status"] == "success" for row in rows)
+        return {"status": "success" if available == 4 else "partial" if available else "unavailable", "models": rows}
+
     def predict_example(self, example_id: str, stage: str, algorithm: str) -> dict:
         metadata = self.model_metadata(stage, algorithm)
         snapshot = self.snapshot(example_id, stage)
@@ -177,7 +255,7 @@ class RoundcastService:
             expected_keys = {"task", "snapshot_definition", "calibration_method", "validation", "prediction"}
             if algorithm == "lightgbm":
                 expected_keys |= {"model_name", "model_sha256"}
-            if set(result) != expected_keys:
+            if set(result) != expected_keys or result['snapshot_definition'] != SNAPSHOT_DEFINITIONS[stage, algorithm]:
                 raise ValueError("Unexpected predictor fields")
             probability = result["prediction"]
             ct, t = probability["ct_win_probability"], probability["t_win_probability"]
@@ -187,14 +265,21 @@ class RoundcastService:
                     or probability["predicted_side"] != ("CT" if ct >= 0.5 else "T")
                     or result["task"] != internal_task or result["calibration_method"] != "uncalibrated"
                     or abs(base - ct) > 1e-15
-                    or probability["probability_sum"] != ct + t
+                    or type(probability["probability_sum"]) not in (int, float) or probability["probability_sum"] != ct + t
                     or result["validation"]["status"] != "passed"):
                 raise ValueError("Invalid predictor response")
             if algorithm == "lightgbm" and (result["model_name"] != "lightgbm_tuned" or result["model_sha256"] != metadata["model_sha256"]):
                 raise ValueError("Predictor model identity mismatch")
             validation = result["validation"]
-            if validation["encoded_model_feature_count"] != (43 if stage == "pre_round" else 82):
-                raise ValueError("Predictor feature count mismatch")
+            expected_validation = {**snapshot['validation'], 'encoded_model_feature_count': 43 if stage == 'pre_round' else 82}
+            if (stage, algorithm) in DEPLOYMENT_TREES:
+                expected_validation.update(raw_model_feature_count=36 if stage == 'pre_round' else 40,
+                                           model_contract_verified=True, calibrator_contract_verified=True,
+                                           deployment_tree_count=DEPLOYMENT_TREES[stage, algorithm])
+            if (stage, algorithm) == ('post_first_kill', 'lightgbm'):
+                expected_validation['required_input_field_count'] = 31
+            if validation != expected_validation or any(type(validation[k]) is not type(v) for k, v in expected_validation.items()):
+                raise ValueError('Predictor validation metadata mismatch')
             validation["required_input_field_count"] = len(snapshot["features"])
         except Exception as exc:
             raise RoundcastValidationError("Inference unavailable; no fallback prediction was used") from exc

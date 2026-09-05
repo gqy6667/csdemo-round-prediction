@@ -1,0 +1,2 @@
+# Preserve the generated delivery PDF byte-for-byte on every platform.
+reports/roundcast_interactive_v1/roundcast-v1-demo-guide.pdf binary

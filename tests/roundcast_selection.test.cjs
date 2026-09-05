@@ -1,11 +1,12 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { RoundcastController } = require('../web/roundcast/app.js');
+const metadata = require('./roundcast_prediction_fixture.cjs');
 const pairs = [['pre_round','xgboost'],['pre_round','lightgbm'],['post_first_kill','xgboost'],['post_first_kill','lightgbm']];
 const id = (stage, algorithm) => `${algorithm === 'xgboost' ? 'xgb' : 'lgbm'}_${stage}`;
 const features = {map_name:'de_ancient',round_num:4,ct_score:2,t_score:1,ct_cash:6000,t_cash:400,ct_eq_value:23900,t_eq_value:14650};
-const reply = s => ({...s,status:'success',model_id:id(s.stage,s.algorithm),request_id:'request-'+Math.random(),
-  prediction:{ct_win_probability:s.algorithm==='xgboost'?.6:.65,t_win_probability:s.algorithm==='xgboost'?.4:.35}});
+const reply = s => ({...metadata(s),...s,status:'success',model_id:id(s.stage,s.algorithm),request_id:'request-'+Math.random(),
+  prediction:{ct_win_probability:s.algorithm==='xgboost'?.6:.65,t_win_probability:s.algorithm==='xgboost'?.4:.35,decision_threshold:.5,predicted_side:'CT'}});
 function fixture(hook = async (url, body) => body ? reply(body) : null) {
   const calls = [];
   const api = async (url, body) => {
@@ -82,5 +83,27 @@ test('malformed post-first-kill display fields fail closed before publishing rea
     const {c}=fixture(async url=>url.endsWith('/post_first_kill')?{example_id:'A',stage:'post_first_kill',features:{...good,...bad}}:null);
     await c.load();await c.select({stage:'post_first_kill'});
     assert.equal(c.state.ready,false);assert.equal(c.state.status,'error');assert.equal(c.state.detail,null);
+  }
+});
+
+test('reconnect cannot use old ready catalogs when selecting a new case',async()=>{
+  const {c,calls}=fixture();await c.load();let resolveCatalog;const original=c.api;
+  c.api=async(url,body)=>url==='/api/models'?new Promise(resolve=>resolveCatalog=resolve):original(url,body);
+  const pending=c.load();const before=calls.length;
+  assert.equal(await c.select({example_id:'B'}),false);
+  await c.navigate({view:'technical'});assert.equal(c.state.view,'technical');
+  assert.equal(c.state.ready,false);assert.equal(calls.length,before);
+  resolveCatalog({models:pairs.map(([stage,algorithm])=>({stage,algorithm,model_id:id(stage,algorithm),inference_ready:false,available_examples:[]}))});
+  await pending;await c.run();assert.equal(c.state.ready,false);assert.equal(c.state.status,'error');
+  assert.equal(calls.filter(call=>call.body).length,0);assert(c.state.models.every(m=>!m.inference_ready));
+});
+
+test('view-only navigation remains available with failed or malformed catalogs',async()=>{
+  for(const catalog of [null,{models:[{stage:'pre_round',algorithm:'xgboost',model_id:'xgb_pre_round',inference_ready:true}]}]){
+    const {c}=fixture();const original=c.api;
+    c.api=async(url,body)=>{if(url==='/api/models'){if(!catalog)throw Error('catalog offline');return catalog;}return original(url,body);};
+    await c.load();assert.equal(c.state.ready,false);
+    assert.equal(await c.navigate({view:'technical'}),true);assert.equal(c.state.view,'technical');
+    assert.equal(await c.select({example_id:'B'}),false);assert.equal(c.state.ready,false);
   }
 });

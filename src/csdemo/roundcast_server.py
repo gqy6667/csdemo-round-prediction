@@ -63,6 +63,8 @@ def create_server(host: str = "127.0.0.1", port: int = 8765,
                     return self.error(404, "对话请求已过期或不存在，请重新发送")
             if self.path == "/api/models":
                 return self.reply(200, {"models": [trusted.model_metadata(*pair) for pair in MODEL_FILES]})
+            if self.path == "/api/metrics":
+                return self.reply(200, trusted.metrics())
             if self.path == "/api/examples":
                 return self.reply(200, {"examples": [{**e, "inference_ready": True,
                                                       "available_stages": ["pre_round", "post_first_kill"]}

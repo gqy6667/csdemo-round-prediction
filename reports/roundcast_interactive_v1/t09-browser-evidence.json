@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "matrix": [
+    {
+      "example_id": "A",
+      "model_id": "xgb_pre_round",
+      "ct_probability": 0.6291529536247253,
+      "reference": 0.6291529536247253,
+      "request_id": "91b20286-629f-4fbb-807c-b8c490035888",
+      "n_test": 4172
+    },
+    {
+      "example_id": "A",
+      "model_id": "lgbm_pre_round",
+      "ct_probability": 0.6591145000070254,
+      "reference": 0.6591145000070254,
+      "request_id": "79df0cd6-2073-4acf-87c0-cf7eee510a14",
+      "n_test": 4172
+    },
+    {
+      "example_id": "A",
+      "model_id": "xgb_post_first_kill",
+      "ct_probability": 0.7656537294387817,
+      "reference": 0.7656537294387817,
+      "request_id": "1cda97ea-7b0c-45da-bf8f-3e8d48179ec0",
+      "n_test": 4170
+    },
+    {
+      "example_id": "A",
+      "model_id": "lgbm_post_first_kill",
+      "ct_probability": 0.736277887665323,
+      "reference": 0.736277887665323,
+      "request_id": "d06c87cf-792a-4666-9a6d-f1d265e894b7",
+      "n_test": 4170,
+      "revealed_winner": "CT"
+    },
+    {
+      "example_id": "B",
+      "model_id": "xgb_pre_round",
+      "ct_probability": 0.7336581349372864,
+      "reference": 0.7336581349372864,
+      "request_id": "5388f532-a84a-4ddb-a6e2-edf3a639844d",
+      "n_test": 4172
+    },
+    {
+      "example_id": "B",
+      "model_id": "lgbm_pre_round",
+      "ct_probability": 0.7735134884219927,
+      "reference": 0.7735134884219927,
+      "request_id": "c08092be-daa0-4a36-a88e-fe2480981065",
+      "n_test": 4172
+    },
+    {
+      "example_id": "B",
+      "model_id": "xgb_post_first_kill",
+      "ct_probability": 0.41505882143974304,
+      "reference": 0.41505882143974304,
+      "request_id": "a56c6b91-238e-4570-bb92-9a3c991cd964",
+      "n_test": 4170
+    },
+    {
+      "example_id": "B",
+      "model_id": "lgbm_post_first_kill",
+      "ct_probability": 0.3991340729586205,
+      "reference": 0.3991340729586205,
+      "request_id": "e2b60bf0-c6d6-42c4-bcb9-68457cceda07",
+      "n_test": 4170,
+      "revealed_winner": "T"
+    },
+    {
+      "example_id": "C",
+      "model_id": "xgb_pre_round",
+      "ct_probability": 0.9748938679695129,
+      "reference": 0.9748938679695129,
+      "request_id": "6abbb7f0-bc0f-49c1-9886-a89f96282848",
+      "n_test": 4172
+    },
+    {
+      "example_id": "C",
+      "model_id": "lgbm_pre_round",
+      "ct_probability": 0.9704182077374078,
+      "reference": 0.9704182077374078,
+      "request_id": "6495c156-f34b-4b91-8f4e-aa2c885ebf62",
+      "n_test": 4172
+    },
+    {
+      "example_id": "C",
+      "model_id": "xgb_post_first_kill",
+      "ct_probability": 0.9854957461357117,
+      "reference": 0.9854957461357117,
+      "request_id": "f5ebe20d-30ba-433e-b0e3-d70a1be21c51",
+      "n_test": 4170
+    },
+    {
+      "example_id": "C",
+      "model_id": "lgbm_post_first_kill",
+      "ct_probability": 0.9898388852132408,
+      "reference": 0.9898388852132408,
+      "request_id": "3189f33f-9792-4ed9-8698-dbcd0c6110b0",
+      "n_test": 4170,
+      "revealed_winner": "T"
+    }
+  ],
+  "checks": [
+    "four-formal-metric-sources-match-by-sha256-and-all-five-values",
+    "technical-deep-link-does-not-predict-or-reveal",
+    "all-12-combinations-display-matching-metrics-and-runtime",
+    "three-views-back-forward-share-results-and-outcome",
+    "outcome-correctness-only-after-explicit-reveal",
+    "three-widths-without-page-overflow",
+    "metrics-outage-clears-stale-values-without-blocking-real-inference",
+    "prediction-failure-clears-runtime-and-correctness-not-formal-metrics",
+    "refresh-restores-selection-not-results-or-outcome",
+    "no-codex-messages",
+    "no-page-errors"
+  ],
+  "pageErrors": [],
+  "screenshots": [
+    "t09-technical-1440.png",
+    "t09-technical-1280.png",
+    "t09-technical-390.png"
+  ]
+}

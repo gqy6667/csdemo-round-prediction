@@ -1,0 +1,121 @@
+{
+  "status": "passed",
+  "matrix": [
+    {
+      "example_id": "A",
+      "model_id": "xgb_pre_round",
+      "ct_probability": 0.6291529536247253,
+      "reference": 0.6291529536247253
+    },
+    {
+      "example_id": "A",
+      "model_id": "lgbm_pre_round",
+      "ct_probability": 0.6591145000070254,
+      "reference": 0.6591145000070254
+    },
+    {
+      "example_id": "A",
+      "model_id": "xgb_post_first_kill",
+      "ct_probability": 0.7656537294387817,
+      "reference": 0.7656537294387817
+    },
+    {
+      "example_id": "A",
+      "model_id": "lgbm_post_first_kill",
+      "ct_probability": 0.736277887665323,
+      "reference": 0.736277887665323
+    },
+    {
+      "example_id": "B",
+      "model_id": "xgb_pre_round",
+      "ct_probability": 0.7336581349372864,
+      "reference": 0.7336581349372864
+    },
+    {
+      "example_id": "B",
+      "model_id": "lgbm_pre_round",
+      "ct_probability": 0.7735134884219927,
+      "reference": 0.7735134884219927
+    },
+    {
+      "example_id": "B",
+      "model_id": "xgb_post_first_kill",
+      "ct_probability": 0.41505882143974304,
+      "reference": 0.41505882143974304
+    },
+    {
+      "example_id": "B",
+      "model_id": "lgbm_post_first_kill",
+      "ct_probability": 0.3991340729586205,
+      "reference": 0.3991340729586205
+    },
+    {
+      "example_id": "C",
+      "model_id": "xgb_pre_round",
+      "ct_probability": 0.9748938679695129,
+      "reference": 0.9748938679695129
+    },
+    {
+      "example_id": "C",
+      "model_id": "lgbm_pre_round",
+      "ct_probability": 0.9704182077374078,
+      "reference": 0.9704182077374078
+    },
+    {
+      "example_id": "C",
+      "model_id": "xgb_post_first_kill",
+      "ct_probability": 0.9854957461357117,
+      "reference": 0.9854957461357117
+    },
+    {
+      "example_id": "C",
+      "model_id": "lgbm_post_first_kill",
+      "ct_probability": 0.9898388852132408,
+      "reference": 0.9898388852132408
+    }
+  ],
+  "checks": [
+    "deep-link-restores-view-and-selection-without-prediction-or-outcome",
+    "all-12-chart-points-match-frozen-reference-and-comparison-table",
+    "view-back-forward-preserves-request-id-without-api-calls",
+    "all-six-snapshots-match-exact-27-31-fields",
+    "economy-differences-and-stage-changes-match-original-values",
+    "three-widths-without-page-overflow",
+    "reveal-shared-between-views",
+    "reload-restores-selection-not-results-outcome-or-chat",
+    "partial-failure-removes-point-and-delta",
+    "single-retry-restores-point-with-one-request",
+    "view-switch-during-batch-preserves-four-runs",
+    "prediction-completion-does-not-overwrite-pending-native-navigation",
+    "invalid-hash-normalized-to-supported-selection",
+    "no-page-errors"
+  ],
+  "pageErrors": [],
+  "screenshots": [
+    "t10-analysis-analyst-1440.png",
+    "t10-analysis-analyst-1280.png",
+    "t10-analysis-analyst-390.png"
+  ],
+  "navigationRaceTrace": [
+    {
+      "phase": "before-hash",
+      "hash": "#view=analyst&case=C&stage=post_first_kill&algorithm=lightgbm",
+      "viewerVisible": false
+    },
+    {
+      "phase": "popstate",
+      "hash": "#view=viewer&case=C&stage=post_first_kill&algorithm=lightgbm",
+      "viewerVisible": true
+    },
+    {
+      "phase": "after-hash",
+      "hash": "#view=viewer&case=C&stage=post_first_kill&algorithm=lightgbm",
+      "viewerVisible": true
+    },
+    {
+      "phase": "hashchange",
+      "hash": "#view=viewer&case=C&stage=post_first_kill&algorithm=lightgbm",
+      "viewerVisible": true
+    }
+  ]
+}

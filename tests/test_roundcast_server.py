@@ -132,9 +132,46 @@ class RoundcastHTTPTests(unittest.TestCase):
     def test_no_repository_download_or_path_traversal(self):
         for path in ("/examples/roundcast_v1_cases.json", "/../examples/roundcast_v1_cases.json",
                      "/%2e%2e/examples/roundcast_v1_cases.json", "/models/", "/app.js?path=../",
-                     "/api/examples/A?stage=post_first_kill", "/api/metrics"):
+                     "/api/examples/A?stage=post_first_kill", "/api/metrics?path=../",
+                     "/api/metrics/../../examples/roundcast_v1_cases.json", "/api/unknown"):
             with self.subTest(path=path):
                 self.assertIn(self.request("GET", path)[0], (400, 404))
+
+    def test_ambiguous_headers_invalid_utf8_and_deep_json_never_run_models(self):
+        authority = f'127.0.0.1:{self.port}'
+        cases = [
+            (f'Host: {authority}\r\nHost: {authority}\r\n', b'{}', 403),
+            (f'Host: {authority}\r\nOrigin: http://{authority}\r\nOrigin: http://{authority}\r\n', b'{}', 403),
+            (f'Host: {authority}\r\nContent-Length: 2\r\n', b'{}', 400),
+            (f'Host: {authority}\r\nTransfer-Encoding: chunked\r\n', b'{}', 400),
+            (f'Host: {authority}\r\nSec-Fetch-Site: same-site\r\n', b'{}', 403),
+            (f'Host: {authority}\r\n', b'\xff', 400),
+            (f'Host: {authority}\r\n', b'[' * 1500 + b']' * 1500, 400),
+        ]
+        with patch.object(self.service, 'predict_example') as predict:
+            for headers, body, expected in cases:
+                with self.subTest(headers=headers, size=len(body)), socket.create_connection(('127.0.0.1', self.port), timeout=5) as sock:
+                    request = f'POST /api/predict HTTP/1.1\r\n{headers}Content-Type: application/json\r\nContent-Length: {len(body)}\r\n\r\n'.encode() + body
+                    sock.sendall(request)
+                    self.assertEqual(int(sock.recv(4096).split(b' ')[1]), expected)
+            with socket.create_connection(('127.0.0.1', self.port), timeout=5) as sock:
+                sock.sendall(f'POST /api/predict HTTP/1.1\r\nHost: {authority}\r\nContent-Type: application/json\r\n\r\n'.encode())
+                self.assertEqual(int(sock.recv(4096).split(b' ')[1]), 400)
+            predict.assert_not_called()
+
+    def test_nested_diagnostic_metadata_never_reaches_http(self):
+        from src.csdemo.predict_pre_round import PreRoundPredictor
+        original = PreRoundPredictor.predict
+        def malformed(predictor, snapshot):
+            result = original(predictor, snapshot)
+            result['validation']['private_path'] = 'C:/SYNTHETIC_PRIVATE/diagnostic.txt'
+            return result
+        with patch.object(PreRoundPredictor, 'predict', autospec=True, side_effect=malformed):
+            status, raw, _ = self.request('POST', '/api/predict',
+                json.dumps({'example_id': 'A', 'stage': 'pre_round', 'algorithm': 'xgboost'}), {'Content-Type': 'application/json'})
+        self.assertEqual(status, 503)
+        self.assertEqual(set(json.loads(raw)), {'status', 'message'})
+        self.assertNotIn(b'SYNTHETIC_PRIVATE', raw)
 
     def test_each_model_chain_failure_is_sanitized_and_never_falls_back(self):
         with patch.object(self.service, "predict_example", side_effect=RuntimeError("C:\\private\\auth.json traceback")):

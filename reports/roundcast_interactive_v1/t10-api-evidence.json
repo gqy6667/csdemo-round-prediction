@@ -1,0 +1,1386 @@
+{
+  "status": "passed",
+  "recorded_at": "2026-09-05T13:11:47.661491+00:00",
+  "scope": "T10 local cross-layer acceptance",
+  "api_categories": [
+    "models",
+    "examples",
+    "snapshots",
+    "predict",
+    "outcome",
+    "metrics"
+  ],
+  "records": [
+    {
+      "request": {
+        "example_id": "A",
+        "stage": "pre_round",
+        "algorithm": "xgboost"
+      },
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "purchase end, before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_ancient",
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.6291529536247253,
+          "t_win_probability": 0.37084704637527466,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_pre_round",
+        "stage": "pre_round",
+        "algorithm": "xgboost",
+        "model_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+        "calibrator_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "A",
+        "request_id": "4e1786d3-0ced-4d26-89ec-50c7a0ef8a9c",
+        "identity": {
+          "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+          "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+          "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+        },
+        "base_ct_win_probability": 0.6291529536247253,
+        "model_version": "M8-tuned / M10-identity",
+        "feature_version": "M13:27-base+9-derived",
+        "inference_ms": 104.36850000041886,
+        "source": {
+          "snapshot": "purchase end, before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.6291529536247253,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "A",
+        "stage": "pre_round",
+        "algorithm": "lightgbm"
+      },
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "freeze-time end after purchases and before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_ancient",
+          "raw_model_feature_count": 36,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 115,
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.6591145000070254,
+          "t_win_probability": 0.34088549999297457,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_pre_round",
+        "stage": "pre_round",
+        "algorithm": "lightgbm",
+        "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+        "calibrator_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "A",
+        "request_id": "76181235-f2ca-4bc9-a150-a60dc4e08a99",
+        "identity": {
+          "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+          "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+          "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+        },
+        "base_ct_win_probability": 0.6591145000070254,
+        "model_version": "M23-tuned / M24-identity",
+        "feature_version": "M26:27-base+9-derived",
+        "inference_ms": 157.60090000003402,
+        "source": {
+          "snapshot": "freeze-time end after purchases and before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.6591145000070254,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "A",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost"
+      },
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_ancient",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "AK-47",
+          "encoded_model_feature_count": 82,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 409,
+          "required_input_field_count": 31
+        },
+        "prediction": {
+          "ct_win_probability": 0.7656537294387817,
+          "t_win_probability": 0.23434627056121826,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost",
+        "model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+        "calibrator_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "A",
+        "request_id": "f5c03cfa-6c27-4510-814d-133d1c51f68e",
+        "identity": {
+          "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+          "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+          "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+        },
+        "base_ct_win_probability": 0.7656537294387817,
+        "model_version": "M17-tuned / M18-identity",
+        "feature_version": "M20:31-base+9-derived",
+        "inference_ms": 19.55210000051011,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.7656537294387817,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "A",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm"
+      },
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "post_first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_ancient",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "AK-47",
+          "required_input_field_count": 31,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "encoded_model_feature_count": 82,
+          "deployment_tree_count": 211
+        },
+        "prediction": {
+          "ct_win_probability": 0.736277887665323,
+          "t_win_probability": 0.263722112334677,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm",
+        "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+        "calibrator_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "A",
+        "request_id": "4ee23452-2e73-49e1-8141-ac4698d4adf1",
+        "identity": {
+          "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+          "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+          "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+        },
+        "base_ct_win_probability": 0.736277887665323,
+        "model_version": "M29-tuned / M30-identity",
+        "feature_version": "M32:31-base+9-derived",
+        "inference_ms": 11.53119999980845,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.736277887665323,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "B",
+        "stage": "pre_round",
+        "algorithm": "xgboost"
+      },
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "purchase end, before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_mirage",
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.7336581349372864,
+          "t_win_probability": 0.2663418650627136,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_pre_round",
+        "stage": "pre_round",
+        "algorithm": "xgboost",
+        "model_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+        "calibrator_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "B",
+        "request_id": "483da612-422e-4e67-a108-45719abbb717",
+        "identity": {
+          "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+          "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+          "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+        },
+        "base_ct_win_probability": 0.7336581349372864,
+        "model_version": "M8-tuned / M10-identity",
+        "feature_version": "M13:27-base+9-derived",
+        "inference_ms": 13.181599999370519,
+        "source": {
+          "snapshot": "purchase end, before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.7336581349372864,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "B",
+        "stage": "pre_round",
+        "algorithm": "lightgbm"
+      },
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "freeze-time end after purchases and before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_mirage",
+          "raw_model_feature_count": 36,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 115,
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.7735134884219927,
+          "t_win_probability": 0.22648651157800725,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_pre_round",
+        "stage": "pre_round",
+        "algorithm": "lightgbm",
+        "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+        "calibrator_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "B",
+        "request_id": "673a4184-3025-4bc5-bf96-5ade806914e9",
+        "identity": {
+          "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+          "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+          "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+        },
+        "base_ct_win_probability": 0.7735134884219927,
+        "model_version": "M23-tuned / M24-identity",
+        "feature_version": "M26:27-base+9-derived",
+        "inference_ms": 9.887999998682062,
+        "source": {
+          "snapshot": "freeze-time end after purchases and before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.7735134884219927,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "B",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost"
+      },
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_mirage",
+          "first_kill_side": "T",
+          "first_kill_weapon": "Desert Eagle",
+          "encoded_model_feature_count": 82,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 409,
+          "required_input_field_count": 31
+        },
+        "prediction": {
+          "ct_win_probability": 0.41505882143974304,
+          "t_win_probability": 0.584941178560257,
+          "predicted_side": "T",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost",
+        "model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+        "calibrator_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "B",
+        "request_id": "05d958fe-333f-45ee-827a-e51246544530",
+        "identity": {
+          "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+          "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+          "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+        },
+        "base_ct_win_probability": 0.41505882143974304,
+        "model_version": "M17-tuned / M18-identity",
+        "feature_version": "M20:31-base+9-derived",
+        "inference_ms": 17.704300000332296,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.41505882143974304,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "B",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm"
+      },
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "post_first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_mirage",
+          "first_kill_side": "T",
+          "first_kill_weapon": "Desert Eagle",
+          "required_input_field_count": 31,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "encoded_model_feature_count": 82,
+          "deployment_tree_count": 211
+        },
+        "prediction": {
+          "ct_win_probability": 0.3991340729586205,
+          "t_win_probability": 0.6008659270413794,
+          "predicted_side": "T",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm",
+        "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+        "calibrator_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "B",
+        "request_id": "0adcdf7b-f02d-4082-a0d3-5d35e9c439e5",
+        "identity": {
+          "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+          "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+          "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+        },
+        "base_ct_win_probability": 0.3991340729586205,
+        "model_version": "M29-tuned / M30-identity",
+        "feature_version": "M32:31-base+9-derived",
+        "inference_ms": 11.630199998762691,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.3991340729586205,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "C",
+        "stage": "pre_round",
+        "algorithm": "xgboost"
+      },
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "purchase end, before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_nuke",
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.9748938679695129,
+          "t_win_probability": 0.02510613203048706,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_pre_round",
+        "stage": "pre_round",
+        "algorithm": "xgboost",
+        "model_sha256": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+        "calibrator_sha256": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "C",
+        "request_id": "a29fe176-bca3-4ee7-86ad-9476d835eadc",
+        "identity": {
+          "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+          "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+          "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+        },
+        "base_ct_win_probability": 0.9748938679695129,
+        "model_version": "M8-tuned / M10-identity",
+        "feature_version": "M13:27-base+9-derived",
+        "inference_ms": 13.245500000266475,
+        "source": {
+          "snapshot": "purchase end, before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.9748938679695129,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "C",
+        "stage": "pre_round",
+        "algorithm": "lightgbm"
+      },
+      "response": {
+        "task": "pre_round",
+        "predictor_task": "pre_round",
+        "snapshot_definition": "freeze-time end after purchases and before combat",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_base_feature_count": 27,
+          "provided_field_count": 27,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "model_feature_count_before_encoding": 36,
+          "map_name": "de_nuke",
+          "raw_model_feature_count": 36,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 115,
+          "encoded_model_feature_count": 43,
+          "required_input_field_count": 27
+        },
+        "prediction": {
+          "ct_win_probability": 0.9704182077374078,
+          "t_win_probability": 0.029581792262592166,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_pre_round",
+        "stage": "pre_round",
+        "algorithm": "lightgbm",
+        "model_sha256": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+        "calibrator_sha256": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "C",
+        "request_id": "a74876e7-d298-4474-9ab1-f501b9248b9e",
+        "identity": {
+          "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+          "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+          "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+        },
+        "base_ct_win_probability": 0.9704182077374078,
+        "model_version": "M23-tuned / M24-identity",
+        "feature_version": "M26:27-base+9-derived",
+        "inference_ms": 9.54499999897962,
+        "source": {
+          "snapshot": "freeze-time end after purchases and before combat",
+          "data_version": "esta_full/pre_round",
+          "purchase_state": "purchase_end",
+          "data_sha256": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.9704182077374078,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "C",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost"
+      },
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_nuke",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "MP9",
+          "encoded_model_feature_count": 82,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "deployment_tree_count": 409,
+          "required_input_field_count": 31
+        },
+        "prediction": {
+          "ct_win_probability": 0.9854957461357117,
+          "t_win_probability": 0.01450425386428833,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "xgb_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost",
+        "model_sha256": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+        "calibrator_sha256": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "C",
+        "request_id": "9fb7d642-c2a4-47a8-9281-b762695d1312",
+        "identity": {
+          "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+          "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+          "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+        },
+        "base_ct_win_probability": 0.9854957461357117,
+        "model_version": "M17-tuned / M18-identity",
+        "feature_version": "M20:31-base+9-derived",
+        "inference_ms": 17.140799998742295,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.9854957461357117,
+      "absolute_error": 0.0
+    },
+    {
+      "request": {
+        "example_id": "C",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm"
+      },
+      "response": {
+        "task": "post_first_kill",
+        "predictor_task": "post_first_kill",
+        "snapshot_definition": "purchase complete, immediately after earliest valid enemy kill",
+        "calibration_method": "uncalibrated",
+        "validation": {
+          "status": "passed",
+          "required_purchase_base_feature_count": 27,
+          "required_first_kill_feature_count": 4,
+          "provided_field_count": 31,
+          "derived_features": [
+            "score_diff_ct",
+            "eq_value_diff_ct",
+            "cash_diff_ct",
+            "armor_diff_ct",
+            "helmet_diff_ct",
+            "grenade_diff_ct",
+            "awp_diff_ct",
+            "rifle_diff_ct",
+            "smg_diff_ct"
+          ],
+          "derived_feature_count": 9,
+          "raw_model_feature_count": 40,
+          "map_name": "de_nuke",
+          "first_kill_side": "CT",
+          "first_kill_weapon": "MP9",
+          "required_input_field_count": 31,
+          "model_contract_verified": true,
+          "calibrator_contract_verified": true,
+          "encoded_model_feature_count": 82,
+          "deployment_tree_count": 211
+        },
+        "prediction": {
+          "ct_win_probability": 0.9898388852132408,
+          "t_win_probability": 0.010161114786759184,
+          "predicted_side": "CT",
+          "decision_threshold": 0.5,
+          "probability_sum": 1.0
+        },
+        "model_id": "lgbm_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm",
+        "model_sha256": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+        "calibrator_sha256": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+        "inference_ready": true,
+        "available_examples": [
+          "A",
+          "B",
+          "C"
+        ],
+        "status": "success",
+        "example_id": "C",
+        "request_id": "49a35013-ebe3-4bcd-8ad5-3e138854c4fb",
+        "identity": {
+          "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+          "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+          "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+        },
+        "base_ct_win_probability": 0.9898388852132408,
+        "model_version": "M29-tuned / M30-identity",
+        "feature_version": "M32:31-base+9-derived",
+        "inference_ms": 11.124000000563683,
+        "source": {
+          "snapshot": "purchase complete, immediately after earliest valid enemy kill",
+          "data_version": "esta_full/first_kill",
+          "purchase_state": "purchase_end",
+          "data_sha256": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+          "split": "test",
+          "exact_frame_alignment": "not_provided",
+          "timing_note": "Elapsed time includes active source rechecks, loading and prediction"
+        }
+      },
+      "reference": 0.9898388852132408,
+      "absolute_error": 0.0
+    }
+  ],
+  "snapshots": [
+    {
+      "example_id": "A",
+      "stage": "pre_round",
+      "input_count": 27
+    },
+    {
+      "example_id": "A",
+      "stage": "post_first_kill",
+      "input_count": 31
+    },
+    {
+      "example_id": "B",
+      "stage": "pre_round",
+      "input_count": 27
+    },
+    {
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "input_count": 31
+    },
+    {
+      "example_id": "C",
+      "stage": "pre_round",
+      "input_count": 27
+    },
+    {
+      "example_id": "C",
+      "stage": "post_first_kill",
+      "input_count": 31
+    }
+  ],
+  "metrics": {
+    "status": "success",
+    "models": [
+      {
+        "model_id": "xgb_pre_round",
+        "stage": "pre_round",
+        "algorithm": "xgboost",
+        "model_version": "M8-tuned / M10-identity",
+        "scope": "frozen_test_set",
+        "split": "test",
+        "split_unit": "series_id",
+        "calibration_method": "uncalibrated",
+        "metrics": {
+          "accuracy": 0.6474113135186961,
+          "auc": 0.7271219343412749,
+          "log_loss": 0.5917331887919193,
+          "brier_score": 0.20529449849711118,
+          "ece10": 0.023197745861465936
+        },
+        "n_test": 4172,
+        "source": {
+          "path": "reports/esta_full_m10/m10_summary.json",
+          "sha256": "c9c696cde9a9ac523ae5dc64e74c581b353e7fac74ef3c074a05517f2847d72b",
+          "selector": "test_selected_metrics",
+          "provenance": "initial_pin"
+        },
+        "status": "success",
+        "sample_source": {
+          "path": "reports/esta_full_m10/calibrated_test_predictions.csv",
+          "sha256": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31"
+        }
+      },
+      {
+        "model_id": "lgbm_pre_round",
+        "stage": "pre_round",
+        "algorithm": "lightgbm",
+        "model_version": "M23-tuned / M24-identity",
+        "scope": "frozen_test_set",
+        "split": "test",
+        "split_unit": "series_id",
+        "calibration_method": "uncalibrated",
+        "metrics": {
+          "accuracy": 0.6507670182166826,
+          "auc": 0.7278463079406734,
+          "log_loss": 0.5914369800026945,
+          "brier_score": 0.20520059289240616,
+          "ece10": 0.018874543992825548
+        },
+        "n_test": 4172,
+        "source": {
+          "path": "reports/esta_full_m27/fixed_test_metrics.csv",
+          "sha256": "13ab68023973d791c59297a1fee9751fe98e2777e2e932aef9f0788dd642064f",
+          "selector": "metric,value",
+          "provenance": "M27"
+        },
+        "status": "success",
+        "sample_source": {
+          "path": "reports/esta_full_m27/replayed_test_predictions.csv",
+          "sha256": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c"
+        }
+      },
+      {
+        "model_id": "xgb_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "xgboost",
+        "model_version": "M17-tuned / M18-identity",
+        "scope": "frozen_test_set",
+        "split": "test",
+        "split_unit": "series_id",
+        "calibration_method": "uncalibrated",
+        "metrics": {
+          "accuracy": 0.7441247002398081,
+          "auc": 0.8098368635821109,
+          "log_loss": 0.5231460210364541,
+          "brier_score": 0.17565589988309552,
+          "ece10": 0.01544967890679123
+        },
+        "n_test": 4170,
+        "source": {
+          "path": "reports/esta_full_m18/m18_summary.json",
+          "sha256": "995ea75987aa6275989c207ed118a5781f74b30b8c0bf30bfb62e766e95cf8ab",
+          "selector": "calibration.selected_test_metrics",
+          "provenance": "M21"
+        },
+        "status": "success",
+        "sample_source": {
+          "path": "reports/esta_full_m18/calibrated_test_predictions.csv",
+          "sha256": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e"
+        }
+      },
+      {
+        "model_id": "lgbm_post_first_kill",
+        "stage": "post_first_kill",
+        "algorithm": "lightgbm",
+        "model_version": "M29-tuned / M30-identity",
+        "scope": "frozen_test_set",
+        "split": "test",
+        "split_unit": "series_id",
+        "calibration_method": "uncalibrated",
+        "metrics": {
+          "accuracy": 0.7429256594724221,
+          "auc": 0.808255446182,
+          "log_loss": 0.5240626574288818,
+          "brier_score": 0.1760026226340809,
+          "ece10": 0.014190844077173683
+        },
+        "n_test": 4170,
+        "source": {
+          "path": "reports/esta_full_m33/fixed_test_metrics.csv",
+          "sha256": "567df88ce4ce2c5e22c3a0d9ff2fd2f503cf04cae25bb65e55a5c16f3e2a80f6",
+          "selector": "metric,value",
+          "provenance": "M33"
+        },
+        "status": "success",
+        "sample_source": {
+          "path": "reports/esta_full_m33/replayed_test_predictions.csv",
+          "sha256": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af"
+        }
+      }
+    ]
+  },
+  "faults": [
+    {
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "source": "models/esta_full_m8_tuned/pre_round_xgb.joblib",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "source": "models/esta_full_m8_tuned/pre_round_xgb.joblib",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "source": "models/esta_full_m10/pre_round_calibrator.joblib",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "source": "models/esta_full_m10/pre_round_calibrator.joblib",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "source": "data/processed/esta_full/pre_round.parquet",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "source": "data/processed/esta_full/pre_round.parquet",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "source": "models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "source": "models/esta_full_m23/pre_round_lightgbm_tuned.joblib",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "source": "models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "source": "models/esta_full_m24/pre_round_lightgbm_calibrator.joblib",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "source": "data/processed/esta_full/pre_round.parquet",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "source": "data/processed/esta_full/pre_round.parquet",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "source": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "source": "models/esta_full_m17/first_kill_xgboost_tuned.joblib",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "source": "models/esta_full_m18/first_kill_calibrator.joblib",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "source": "models/esta_full_m18/first_kill_calibrator.joblib",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "source": "data/processed/esta_full/first_kill.parquet",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "source": "data/processed/esta_full/first_kill.parquet",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "source": "models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "source": "models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "source": "models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "source": "models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "source": "data/processed/esta_full/first_kill.parquet",
+      "fault": "missing",
+      "http_status": 503,
+      "model_loads": 0
+    },
+    {
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "source": "data/processed/esta_full/first_kill.parquet",
+      "fault": "tampered",
+      "http_status": 503,
+      "model_loads": 0
+    }
+  ],
+  "guards": [
+    {
+      "path": "/api/metrics?path=../",
+      "expected_status": 400
+    },
+    {
+      "path": "/models/",
+      "expected_status": 404
+    },
+    {
+      "path": "/examples/roundcast_v1_cases.json",
+      "expected_status": 404
+    },
+    {
+      "path": "/api/models",
+      "expected_status": 403
+    },
+    {
+      "path": "/api/metrics",
+      "expected_status": 403
+    }
+  ],
+  "hashes_before": {
+    "models/esta_full_m8_tuned/pre_round_xgb.joblib": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+    "models/esta_full_m10/pre_round_calibrator.joblib": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+    "models/esta_full_m17/first_kill_xgboost_tuned.joblib": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+    "models/esta_full_m18/first_kill_calibrator.joblib": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+    "models/esta_full_m23/pre_round_lightgbm_tuned.joblib": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+    "models/esta_full_m24/pre_round_lightgbm_calibrator.joblib": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+    "models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+    "data/processed/esta_full/pre_round.parquet": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "data/processed/esta_full/first_kill.parquet": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "reports/esta_full_m14/split_assignments.csv": "31ea3f9cc2ceacc2dd582cd6c546a8f734aa43c8d7c2824587b98baf92aa9b0d",
+    "reports/esta_full_m21/split_assignments.csv": "11298f6337ae115265d3dcff648c71944a14395455a0a562e20beb475bc20a5a",
+    "reports/esta_full_m27/split_assignments.csv": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+    "reports/esta_full_m33/split_assignments.csv": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+    "reports/esta_full_m10/calibrated_test_predictions.csv": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31",
+    "reports/esta_full_m18/calibrated_test_predictions.csv": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e",
+    "reports/esta_full_m27/replayed_test_predictions.csv": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c",
+    "reports/esta_full_m33/replayed_test_predictions.csv": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af",
+    "reports/esta_full_m32/model_contract_audit.json": "d6a4776c1b904f2fc9d394a1955e3ce72f0f0dfbde7b7dedf98bb85dca7134ed",
+    "reports/esta_full_m14/m14_experiment_manifest.json": "cc0c2237a4a7aed95934862a167d0c773c5ca95df5d0e255c90a3e1cbb11a1fb",
+    "reports/esta_full_m21/m21_experiment_manifest.json": "d049d64f27e2122728213214c076a7fe817c87e44209070e766df65ce11dc23a",
+    "reports/esta_full_m27/m27_experiment_manifest.json": "a6998501362552c495cc1c6fb003c2484544b963ae0a3aec878db6540176ceef",
+    "reports/esta_full_m33/m33_experiment_manifest.json": "5f958a54b7526a1b06cbe0499547e5221c787a57d342f83b6f60b15ebd2c867b",
+    "reports/esta_full_m10/m10_summary.json": "c9c696cde9a9ac523ae5dc64e74c581b353e7fac74ef3c074a05517f2847d72b",
+    "reports/esta_full_m18/m18_summary.json": "995ea75987aa6275989c207ed118a5781f74b30b8c0bf30bfb62e766e95cf8ab",
+    "reports/esta_full_m27/fixed_test_metrics.csv": "13ab68023973d791c59297a1fee9751fe98e2777e2e932aef9f0788dd642064f",
+    "reports/esta_full_m33/fixed_test_metrics.csv": "567df88ce4ce2c5e22c3a0d9ff2fd2f503cf04cae25bb65e55a5c16f3e2a80f6"
+  },
+  "hashes_after": {
+    "models/esta_full_m8_tuned/pre_round_xgb.joblib": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+    "models/esta_full_m10/pre_round_calibrator.joblib": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+    "models/esta_full_m17/first_kill_xgboost_tuned.joblib": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+    "models/esta_full_m18/first_kill_calibrator.joblib": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+    "models/esta_full_m23/pre_round_lightgbm_tuned.joblib": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+    "models/esta_full_m24/pre_round_lightgbm_calibrator.joblib": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+    "models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+    "data/processed/esta_full/pre_round.parquet": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "data/processed/esta_full/first_kill.parquet": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "reports/esta_full_m14/split_assignments.csv": "31ea3f9cc2ceacc2dd582cd6c546a8f734aa43c8d7c2824587b98baf92aa9b0d",
+    "reports/esta_full_m21/split_assignments.csv": "11298f6337ae115265d3dcff648c71944a14395455a0a562e20beb475bc20a5a",
+    "reports/esta_full_m27/split_assignments.csv": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+    "reports/esta_full_m33/split_assignments.csv": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+    "reports/esta_full_m10/calibrated_test_predictions.csv": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31",
+    "reports/esta_full_m18/calibrated_test_predictions.csv": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e",
+    "reports/esta_full_m27/replayed_test_predictions.csv": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c",
+    "reports/esta_full_m33/replayed_test_predictions.csv": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af",
+    "reports/esta_full_m32/model_contract_audit.json": "d6a4776c1b904f2fc9d394a1955e3ce72f0f0dfbde7b7dedf98bb85dca7134ed",
+    "reports/esta_full_m14/m14_experiment_manifest.json": "cc0c2237a4a7aed95934862a167d0c773c5ca95df5d0e255c90a3e1cbb11a1fb",
+    "reports/esta_full_m21/m21_experiment_manifest.json": "d049d64f27e2122728213214c076a7fe817c87e44209070e766df65ce11dc23a",
+    "reports/esta_full_m27/m27_experiment_manifest.json": "a6998501362552c495cc1c6fb003c2484544b963ae0a3aec878db6540176ceef",
+    "reports/esta_full_m33/m33_experiment_manifest.json": "5f958a54b7526a1b06cbe0499547e5221c787a57d342f83b6f60b15ebd2c867b",
+    "reports/esta_full_m10/m10_summary.json": "c9c696cde9a9ac523ae5dc64e74c581b353e7fac74ef3c074a05517f2847d72b",
+    "reports/esta_full_m18/m18_summary.json": "995ea75987aa6275989c207ed118a5781f74b30b8c0bf30bfb62e766e95cf8ab",
+    "reports/esta_full_m27/fixed_test_metrics.csv": "13ab68023973d791c59297a1fee9751fe98e2777e2e932aef9f0788dd642064f",
+    "reports/esta_full_m33/fixed_test_metrics.csv": "567df88ce4ce2c5e22c3a0d9ff2fd2f503cf04cae25bb65e55a5c16f3e2a80f6"
+  },
+  "frozen_sources_unchanged": true,
+  "max_absolute_error": 0.0
+}

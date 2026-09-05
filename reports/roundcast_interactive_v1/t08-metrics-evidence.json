@@ -1,0 +1,121 @@
+{
+  "status": "success",
+  "models": [
+    {
+      "model_id": "xgb_pre_round",
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "model_version": "M8-tuned / M10-identity",
+      "scope": "frozen_test_set",
+      "split": "test",
+      "split_unit": "series_id",
+      "calibration_method": "uncalibrated",
+      "metrics": {
+        "accuracy": 0.6474113135186961,
+        "auc": 0.7271219343412749,
+        "log_loss": 0.5917331887919193,
+        "brier_score": 0.20529449849711118,
+        "ece10": 0.023197745861465936
+      },
+      "n_test": 4172,
+      "source": {
+        "path": "reports/esta_full_m10/m10_summary.json",
+        "sha256": "c9c696cde9a9ac523ae5dc64e74c581b353e7fac74ef3c074a05517f2847d72b",
+        "selector": "test_selected_metrics",
+        "provenance": "initial_pin"
+      },
+      "status": "success",
+      "sample_source": {
+        "path": "reports/esta_full_m10/calibrated_test_predictions.csv",
+        "sha256": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31"
+      }
+    },
+    {
+      "model_id": "lgbm_pre_round",
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "model_version": "M23-tuned / M24-identity",
+      "scope": "frozen_test_set",
+      "split": "test",
+      "split_unit": "series_id",
+      "calibration_method": "uncalibrated",
+      "metrics": {
+        "accuracy": 0.6507670182166826,
+        "auc": 0.7278463079406734,
+        "log_loss": 0.5914369800026945,
+        "brier_score": 0.2052005928924061,
+        "ece10": 0.0188745439928255
+      },
+      "n_test": 4172,
+      "source": {
+        "path": "reports/esta_full_m27/fixed_test_metrics.csv",
+        "sha256": "13ab68023973d791c59297a1fee9751fe98e2777e2e932aef9f0788dd642064f",
+        "selector": "metric,value",
+        "provenance": "M27"
+      },
+      "status": "success",
+      "sample_source": {
+        "path": "reports/esta_full_m27/replayed_test_predictions.csv",
+        "sha256": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c"
+      }
+    },
+    {
+      "model_id": "xgb_post_first_kill",
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "model_version": "M17-tuned / M18-identity",
+      "scope": "frozen_test_set",
+      "split": "test",
+      "split_unit": "series_id",
+      "calibration_method": "uncalibrated",
+      "metrics": {
+        "accuracy": 0.7441247002398081,
+        "auc": 0.8098368635821109,
+        "log_loss": 0.5231460210364541,
+        "brier_score": 0.17565589988309552,
+        "ece10": 0.01544967890679123
+      },
+      "n_test": 4170,
+      "source": {
+        "path": "reports/esta_full_m18/m18_summary.json",
+        "sha256": "995ea75987aa6275989c207ed118a5781f74b30b8c0bf30bfb62e766e95cf8ab",
+        "selector": "calibration.selected_test_metrics",
+        "provenance": "M21"
+      },
+      "status": "success",
+      "sample_source": {
+        "path": "reports/esta_full_m18/calibrated_test_predictions.csv",
+        "sha256": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e"
+      }
+    },
+    {
+      "model_id": "lgbm_post_first_kill",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "model_version": "M29-tuned / M30-identity",
+      "scope": "frozen_test_set",
+      "split": "test",
+      "split_unit": "series_id",
+      "calibration_method": "uncalibrated",
+      "metrics": {
+        "accuracy": 0.7429256594724221,
+        "auc": 0.808255446182,
+        "log_loss": 0.5240626574288818,
+        "brier_score": 0.1760026226340809,
+        "ece10": 0.0141908440771736
+      },
+      "n_test": 4170,
+      "source": {
+        "path": "reports/esta_full_m33/fixed_test_metrics.csv",
+        "sha256": "567df88ce4ce2c5e22c3a0d9ff2fd2f503cf04cae25bb65e55a5c16f3e2a80f6",
+        "selector": "metric,value",
+        "provenance": "M33"
+      },
+      "status": "success",
+      "sample_source": {
+        "path": "reports/esta_full_m33/replayed_test_predictions.csv",
+        "sha256": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af"
+      }
+    }
+  ]
+}

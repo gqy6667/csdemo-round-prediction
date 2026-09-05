@@ -1,0 +1,341 @@
+{
+  "status": "passed",
+  "recorded_at": "2026-09-05T17:49:57.480Z",
+  "matrix": [
+    {
+      "example_id": "A",
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "ct_probability": 0.6291529536247253,
+      "request_id": "0550e034-6335-4f55-8f12-529b72f93420",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+        "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+        "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+      },
+      "winner": "CT",
+      "correct": true
+    },
+    {
+      "example_id": "A",
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "ct_probability": 0.6591145000070254,
+      "request_id": "df3a026c-4293-4157-af96-40b6a51c5509",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+        "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+        "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+      },
+      "winner": "CT",
+      "correct": true
+    },
+    {
+      "example_id": "A",
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "ct_probability": 0.7656537294387817,
+      "request_id": "8a190888-d4cc-4d43-8729-7ed6d17e25d8",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+        "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+        "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+      },
+      "winner": "CT",
+      "correct": true
+    },
+    {
+      "example_id": "A",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "ct_probability": 0.736277887665323,
+      "request_id": "43508fac-2f2b-41d8-aa0b-9a92455fb7b7",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "1d78bfe0-e598-4a95-b5c0-2227e976dc5d",
+        "game_id": "online:946b0351-728d-41c6-9964-9b20f21df71d",
+        "round_id": "online:946b0351-728d-41c6-9964-9b20f21df71d_4"
+      },
+      "winner": "CT",
+      "correct": true
+    },
+    {
+      "example_id": "B",
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "ct_probability": 0.7336581349372864,
+      "request_id": "ca005814-54c6-419d-8e11-b38835a23108",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+        "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+        "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+      },
+      "winner": "T",
+      "correct": false
+    },
+    {
+      "example_id": "B",
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "ct_probability": 0.7735134884219927,
+      "request_id": "1267ab28-dc90-4d55-a061-9699bd8fa3c4",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+        "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+        "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+      },
+      "winner": "T",
+      "correct": false
+    },
+    {
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "ct_probability": 0.41505882143974304,
+      "request_id": "8b10bd04-49ab-47cb-924d-e41cdbe63e6e",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+        "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+        "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+      },
+      "winner": "T",
+      "correct": true
+    },
+    {
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "ct_probability": 0.3991340729586205,
+      "request_id": "77220dd5-ae8d-4589-bca3-962f461da45d",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "bdada140-b48c-4be0-93c3-ce2cd7973eed",
+        "game_id": "online:e941205c-0716-43ea-9836-3ad863fc2193",
+        "round_id": "online:e941205c-0716-43ea-9836-3ad863fc2193_11"
+      },
+      "winner": "T",
+      "correct": true
+    },
+    {
+      "example_id": "C",
+      "stage": "pre_round",
+      "algorithm": "xgboost",
+      "ct_probability": 0.9748938679695129,
+      "request_id": "9f6816a4-3545-4a6f-91ae-6d405d8719b5",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+        "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+        "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+      },
+      "winner": "T",
+      "correct": false
+    },
+    {
+      "example_id": "C",
+      "stage": "pre_round",
+      "algorithm": "lightgbm",
+      "ct_probability": 0.9704182077374078,
+      "request_id": "2079d40f-5ca0-41d9-b062-c79a533d82c3",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+        "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+        "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+      },
+      "winner": "T",
+      "correct": false
+    },
+    {
+      "example_id": "C",
+      "stage": "post_first_kill",
+      "algorithm": "xgboost",
+      "ct_probability": 0.9854957461357117,
+      "request_id": "f7ab3b78-f84c-45b0-b72b-178a6cb56bb5",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+        "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+        "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+      },
+      "winner": "T",
+      "correct": false
+    },
+    {
+      "example_id": "C",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "ct_probability": 0.9898388852132408,
+      "request_id": "59eed8f3-106b-42d2-af70-673e9107ffdd",
+      "absolute_error": 0,
+      "identity": {
+        "series_id": "90da2c53-5a02-4f16-8abe-f2235da5ffbd",
+        "game_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5",
+        "round_id": "online:478d378e-e7c1-4d64-a3f3-679ee18f27b5_17"
+      },
+      "winner": "T",
+      "correct": false
+    }
+  ],
+  "screenshots": [
+    {
+      "view": "viewer",
+      "width": 1440,
+      "full": "t11-viewer-1440.png",
+      "focus": "t11-viewer-1440-focus.png",
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "outcome_revealed": false,
+      "request_id": "77220dd5-ae8d-4589-bca3-962f461da45d"
+    },
+    {
+      "view": "viewer",
+      "width": 1280,
+      "full": "t11-viewer-1280.png",
+      "focus": "t11-viewer-1280-focus.png",
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "outcome_revealed": false,
+      "request_id": "77220dd5-ae8d-4589-bca3-962f461da45d"
+    },
+    {
+      "view": "analyst",
+      "width": 1440,
+      "full": "t11-analyst-1440.png",
+      "focus": "t11-analyst-1440-focus.png",
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "outcome_revealed": false,
+      "request_id": "77220dd5-ae8d-4589-bca3-962f461da45d"
+    },
+    {
+      "view": "analyst",
+      "width": 1280,
+      "full": "t11-analyst-1280.png",
+      "focus": "t11-analyst-1280-focus.png",
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "outcome_revealed": false,
+      "request_id": "77220dd5-ae8d-4589-bca3-962f461da45d"
+    },
+    {
+      "view": "technical",
+      "width": 1440,
+      "full": "t11-technical-1440.png",
+      "focus": "t11-technical-1440-focus.png",
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "outcome_revealed": false,
+      "request_id": "77220dd5-ae8d-4589-bca3-962f461da45d"
+    },
+    {
+      "view": "technical",
+      "width": 1280,
+      "full": "t11-technical-1280.png",
+      "focus": "t11-technical-1280-focus.png",
+      "example_id": "B",
+      "stage": "post_first_kill",
+      "algorithm": "lightgbm",
+      "outcome_revealed": false,
+      "request_id": "77220dd5-ae8d-4589-bca3-962f461da45d"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "source_hashes_before": {
+    "models/esta_full_m8_tuned/pre_round_xgb.joblib": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+    "models/esta_full_m10/pre_round_calibrator.joblib": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+    "models/esta_full_m17/first_kill_xgboost_tuned.joblib": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+    "models/esta_full_m18/first_kill_calibrator.joblib": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+    "models/esta_full_m23/pre_round_lightgbm_tuned.joblib": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+    "models/esta_full_m24/pre_round_lightgbm_calibrator.joblib": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+    "models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+    "data/processed/esta_full/pre_round.parquet": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "data/processed/esta_full/first_kill.parquet": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "reports/esta_full_m14/split_assignments.csv": "31ea3f9cc2ceacc2dd582cd6c546a8f734aa43c8d7c2824587b98baf92aa9b0d",
+    "reports/esta_full_m21/split_assignments.csv": "11298f6337ae115265d3dcff648c71944a14395455a0a562e20beb475bc20a5a",
+    "reports/esta_full_m27/split_assignments.csv": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+    "reports/esta_full_m33/split_assignments.csv": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+    "reports/esta_full_m10/calibrated_test_predictions.csv": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31",
+    "reports/esta_full_m18/calibrated_test_predictions.csv": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e",
+    "reports/esta_full_m27/replayed_test_predictions.csv": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c",
+    "reports/esta_full_m33/replayed_test_predictions.csv": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af",
+    "reports/esta_full_m32/model_contract_audit.json": "d6a4776c1b904f2fc9d394a1955e3ce72f0f0dfbde7b7dedf98bb85dca7134ed",
+    "reports/esta_full_m14/m14_experiment_manifest.json": "cc0c2237a4a7aed95934862a167d0c773c5ca95df5d0e255c90a3e1cbb11a1fb",
+    "reports/esta_full_m21/m21_experiment_manifest.json": "d049d64f27e2122728213214c076a7fe817c87e44209070e766df65ce11dc23a",
+    "reports/esta_full_m27/m27_experiment_manifest.json": "a6998501362552c495cc1c6fb003c2484544b963ae0a3aec878db6540176ceef",
+    "reports/esta_full_m33/m33_experiment_manifest.json": "5f958a54b7526a1b06cbe0499547e5221c787a57d342f83b6f60b15ebd2c867b",
+    "reports/esta_full_m10/m10_summary.json": "c9c696cde9a9ac523ae5dc64e74c581b353e7fac74ef3c074a05517f2847d72b",
+    "reports/esta_full_m18/m18_summary.json": "995ea75987aa6275989c207ed118a5781f74b30b8c0bf30bfb62e766e95cf8ab",
+    "reports/esta_full_m27/fixed_test_metrics.csv": "13ab68023973d791c59297a1fee9751fe98e2777e2e932aef9f0788dd642064f",
+    "reports/esta_full_m33/fixed_test_metrics.csv": "567df88ce4ce2c5e22c3a0d9ff2fd2f503cf04cae25bb65e55a5c16f3e2a80f6"
+  },
+  "code_hashes_before": {
+    "web/roundcast/index.html": "78d79b60d8acb0fda75f27a959da68539171442e10bd64f1ab8e21501a5ed975",
+    "web/roundcast/app.js": "513c2e79f38d7e0a6bc2af3cc23f39ec207c95d04146ba4c25f98cdc64c938b4",
+    "web/roundcast/styles.css": "024b3363e3ab0a5d866b11c9d5bb407ed6c0fd59d02c700024b38bcd28788f7b",
+    "web/roundcast/chat.js": "2d70cac57258bec686290627fdc152a20b413a3c47c76b7e4f85e64b2d8c38e5",
+    "src/csdemo/roundcast_service.py": "d386ff811c5a202e52d04d450e6b76bb5d63f486317892e4f48355ab94d6a1e7",
+    "src/csdemo/roundcast_server.py": "382bd33b0ce649ed40fe99959bb1ba1c8cd181fa24ffda3e255aa15926eb597e"
+  },
+  "restart_request_id": "f7e0b1a2-687a-4d04-bc9e-58873dc4a994",
+  "source_hashes_after": {
+    "models/esta_full_m8_tuned/pre_round_xgb.joblib": "bf958cd64fd5a398894c286f2db77db4bed7c762054cc04bae9477b82f8d003d",
+    "models/esta_full_m10/pre_round_calibrator.joblib": "8f888d90303d464b12874df968c5daad81c438c349eb5e6df9c2997be63f2507",
+    "models/esta_full_m17/first_kill_xgboost_tuned.joblib": "ecfaaf93031e78207f81ab5ad9674020657018c0601953238ee6b68e367e8279",
+    "models/esta_full_m18/first_kill_calibrator.joblib": "661db6964786dde1276dbeb6c0cf3f175858ad0bf02ecb109bb2f72c45074157",
+    "models/esta_full_m23/pre_round_lightgbm_tuned.joblib": "3a95983ed73cd99ae0178a16009036d48510e1ad091d33994cf296dfc69244fd",
+    "models/esta_full_m24/pre_round_lightgbm_calibrator.joblib": "84e6b533e50bb9e169bb34cbbf748d6566482de716510e9f8dd733ec08147ff1",
+    "models/esta_full_m29/post_first_kill_lightgbm_tuned.joblib": "35ce17435a3716efcfdd49dd5ca13ff441e75c65512322627249e8920546a5b5",
+    "models/esta_full_m30/post_first_kill_lightgbm_calibrator.joblib": "c5453403a25dfb03bbda131028fda7bdfde934840093de3e527ad2988c8043e5",
+    "data/processed/esta_full/pre_round.parquet": "85f8154ce27a5b5d88da6b0abba29057ad9989e0ceed46c7543b089da36d5d72",
+    "data/processed/esta_full/first_kill.parquet": "06f7f5887388c433870d36a39ca1cd9337236254a08e55751250c87e9e8b7492",
+    "reports/esta_full_m14/split_assignments.csv": "31ea3f9cc2ceacc2dd582cd6c546a8f734aa43c8d7c2824587b98baf92aa9b0d",
+    "reports/esta_full_m21/split_assignments.csv": "11298f6337ae115265d3dcff648c71944a14395455a0a562e20beb475bc20a5a",
+    "reports/esta_full_m27/split_assignments.csv": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+    "reports/esta_full_m33/split_assignments.csv": "b226372e508b645b2bc6f4a8d8958f16aa2772769d8084b9734b1d1d45e657c5",
+    "reports/esta_full_m10/calibrated_test_predictions.csv": "490d0c2f3c878a4175f75ccf5159efe6214c7408e54420a715eab10681254c31",
+    "reports/esta_full_m18/calibrated_test_predictions.csv": "83a1932a30d845c331c81b1238383504fe627064301c6dd12b02eeee2906713e",
+    "reports/esta_full_m27/replayed_test_predictions.csv": "74f03dc3e06ed1be8a16ea1f71574b4ee509b1f13f2c15a517d5183485542a6c",
+    "reports/esta_full_m33/replayed_test_predictions.csv": "730c0d2054b7417cfeba220577cd250aeaa9f3315b69a0665eb10d0ca4b432af",
+    "reports/esta_full_m32/model_contract_audit.json": "d6a4776c1b904f2fc9d394a1955e3ce72f0f0dfbde7b7dedf98bb85dca7134ed",
+    "reports/esta_full_m14/m14_experiment_manifest.json": "cc0c2237a4a7aed95934862a167d0c773c5ca95df5d0e255c90a3e1cbb11a1fb",
+    "reports/esta_full_m21/m21_experiment_manifest.json": "d049d64f27e2122728213214c076a7fe817c87e44209070e766df65ce11dc23a",
+    "reports/esta_full_m27/m27_experiment_manifest.json": "a6998501362552c495cc1c6fb003c2484544b963ae0a3aec878db6540176ceef",
+    "reports/esta_full_m33/m33_experiment_manifest.json": "5f958a54b7526a1b06cbe0499547e5221c787a57d342f83b6f60b15ebd2c867b",
+    "reports/esta_full_m10/m10_summary.json": "c9c696cde9a9ac523ae5dc64e74c581b353e7fac74ef3c074a05517f2847d72b",
+    "reports/esta_full_m18/m18_summary.json": "995ea75987aa6275989c207ed118a5781f74b30b8c0bf30bfb62e766e95cf8ab",
+    "reports/esta_full_m27/fixed_test_metrics.csv": "13ab68023973d791c59297a1fee9751fe98e2777e2e932aef9f0788dd642064f",
+    "reports/esta_full_m33/fixed_test_metrics.csv": "567df88ce4ce2c5e22c3a0d9ff2fd2f503cf04cae25bb65e55a5c16f3e2a80f6"
+  },
+  "code_hashes_after": {
+    "web/roundcast/index.html": "78d79b60d8acb0fda75f27a959da68539171442e10bd64f1ab8e21501a5ed975",
+    "web/roundcast/app.js": "513c2e79f38d7e0a6bc2af3cc23f39ec207c95d04146ba4c25f98cdc64c938b4",
+    "web/roundcast/styles.css": "024b3363e3ab0a5d866b11c9d5bb407ed6c0fd59d02c700024b38bcd28788f7b",
+    "web/roundcast/chat.js": "2d70cac57258bec686290627fdc152a20b413a3c47c76b7e4f85e64b2d8c38e5",
+    "src/csdemo/roundcast_service.py": "d386ff811c5a202e52d04d450e6b76bb5d63f486317892e4f48355ab94d6a1e7",
+    "src/csdemo/roundcast_server.py": "382bd33b0ce649ed40fe99959bb1ba1c8cd181fa24ffda3e255aa15926eb597e"
+  },
+  "checks": [
+    "fresh-start-and-empty-default",
+    "three-cases-twelve-real-predictions",
+    "three-views-share-request-and-hidden-outcome",
+    "six-desktop-layouts",
+    "explicit-reveal-matches-all-views",
+    "same-port-restart-and-fresh-inference",
+    "no-codex-message",
+    "source-and-application-hashes-unchanged"
+  ]
+}

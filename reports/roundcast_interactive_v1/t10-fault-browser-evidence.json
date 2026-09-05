@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "checks": [
+    "incomplete-success-never-renders-success-probability-or-runtime",
+    "reconnect-invalidates-old-catalog-and-blocks-case-change-until-ready",
+    "independent-technical-metrics-remain-navigable-when-catalog-fails",
+    "duplicate-clicks-and-case-switch-do-not-publish-or-continue-old-batch",
+    "late-outcome-from-old-case-does-not-reveal-current-case",
+    "actual-process-stop-clears-current-prediction-outcome-and-metrics",
+    "same-port-restart-restores-real-inference-with-new-request"
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    {
+      "phase": "catalog-failure",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "phase": "actual-service-stopped",
+      "message": "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "phase": "actual-service-stopped",
+      "message": "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "phase": "actual-service-stopped",
+      "message": "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    }
+  ],
+  "requestFailures": [
+    {
+      "phase": "actual-service-stopped",
+      "path": "/api/predict",
+      "error": "net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "phase": "actual-service-stopped",
+      "path": "/api/examples/C/outcome",
+      "error": "net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "phase": "actual-service-stopped",
+      "path": "/api/metrics",
+      "error": "net::ERR_CONNECTION_REFUSED"
+    }
+  ],
+  "outageScreenshot": "t10-actual-service-stopped.png"
+}

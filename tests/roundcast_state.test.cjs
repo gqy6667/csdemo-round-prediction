@@ -1,8 +1,9 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { RoundcastController, registerRoundcastTool } = require('../web/roundcast/app.js');
+const metadata = require('./roundcast_prediction_fixture.cjs');
 const selection = { example_id: 'A', stage: 'pre_round', algorithm: 'xgboost' };
-const response = () => ({ ...selection, status: 'success', model_id: 'xgb_pre_round', request_id: 'test-only',
+const response = () => ({ ...metadata(selection), ...selection, status: 'success', model_id: 'xgb_pre_round', request_id: 'test-only',
   prediction: { ct_win_probability: 0.6, t_win_probability: 0.4, decision_threshold: 0.5, predicted_side: 'CT' } });
 function fixture(predict = async () => response()) {
   const calls = [];
@@ -59,4 +60,14 @@ test('optional page tool shares the run action and rejects extra input', async (
   const result = await tool.execute({});
   assert.equal(result.request_id, c.state.result.request_id);
   assert.equal(c.state.status, 'success'); cleanup(); assert(signal.aborted);
+});
+
+test('incomplete or contradictory successful response is rejected before rendering metadata',async()=>{
+  for(const change of [{inference_ms:undefined},{inference_ms:'12'},{validation:null},{model_sha256:null},
+    {model_version:''},{request_id:{}},{calibration_method:'unknown'},
+    {validation:{status:'passed',required_input_field_count:31,encoded_model_feature_count:82}},
+    {prediction:{ct_win_probability:.6,t_win_probability:.4,decision_threshold:.5,predicted_side:'T'}}]){
+    const {controller:c}=fixture(async()=>({...response(),...change}));await c.load();await c.run();
+    assert.equal(c.state.status,'error');assert.equal(c.state.result,null);
+  }
 });
