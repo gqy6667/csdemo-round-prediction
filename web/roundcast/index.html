@@ -10,29 +10,30 @@
 <body>
   <header class="topbar"><a class="brand" href="/">ROUNDCAST<span class="brand-mark">/</span></a><span class="environment">LOCAL DEMO <span class="dot"></span> 历史回合演示 · 非实时比赛</span></header>
   <main>
-    <nav class="views" aria-label="受众视图"><span aria-current="page">比赛观众</span><span class="unavailable">比赛分析 <small>后续开放</small></span><span class="unavailable">技术分析 <small>后续开放</small></span><span class="version">P1 · 单案例预览</span></nav>
-    <section class="intro"><div><p class="eyebrow">ROUND OBSERVER</p><h1>读懂一个回合。</h1><p class="muted">从购买结束时的状态，运行模型估计 CT / T 获胜概率。</p></div><div class="map-label"><span id="map-name">—</span><small id="round-num">正在读取回合</small></div></section>
+    <nav class="views" aria-label="受众视图"><span aria-current="page">比赛观众</span><span class="unavailable">比赛分析 <small>后续开放</small></span><span class="unavailable">技术分析 <small>后续开放</small></span><span class="version">P2 · 三案例 / 四模型</span></nav>
+    <section class="intro"><div><p class="eyebrow">ROUND OBSERVER</p><h1>读懂一个回合。</h1><p class="muted">选择真实历史回合，比较购买结束与首杀后的模型估计。</p></div><div class="map-label"><span id="map-name">—</span><small id="round-num">正在读取回合</small></div></section>
     <section class="controls" aria-label="预测选择">
-      <label>历史案例<select id="case-select"><option value="A">案例 A · Ancient R4</option><option disabled>案例 B · 后续开放</option><option disabled>案例 C · 后续开放</option></select></label>
-      <label>预测时点<select id="stage-select"><option value="pre_round">购买结束</option><option disabled>首杀后 · 后续开放</option></select></label>
-      <label>算法<select id="algorithm-select"><option value="xgboost">XGBoost</option><option disabled>LightGBM · 后续开放</option></select></label>
-      <button id="run" class="primary" disabled>运行模型 <span aria-hidden="true">↗</span></button><button id="reload" class="text-button">重新连接</button>
+      <label>历史案例<select id="case-select"><option value="A">案例 A · Ancient R4</option><option value="B">案例 B · Mirage R11</option><option value="C">案例 C · Nuke R17</option></select></label>
+      <label>预测时点<select id="stage-select"><option value="pre_round">购买结束</option><option value="post_first_kill">首杀后</option></select></label>
+      <label>算法<select id="algorithm-select"><option value="xgboost">XGBoost</option><option value="lightgbm">LightGBM</option></select></label>
+      <button id="run" class="primary" disabled>运行当前组合 <span aria-hidden="true">↗</span></button><button id="run-all" class="secondary compare-button" disabled>运行全部对比</button><button id="reload" class="text-button">重新连接</button>
     </section>
     <div class="layout">
       <div class="main-column">
         <section class="panel probability-panel" aria-labelledby="probability-title">
-          <div class="panel-heading"><h2 id="probability-title">回合胜率</h2><span id="status" class="status" role="status" aria-live="polite">正在连接</span></div>
+          <div class="panel-heading"><h2 id="probability-title">回合胜率</h2><span id="status" class="status" role="status" aria-live="polite">正在连接</span></div><p id="current-combination" class="current-combination">正在读取当前组合</p>
           <div class="score-context"><span>购买结束前比分 <strong id="score">—</strong></span><span>CT / T 为阵营，非固定战队</span></div>
           <div class="probability-values"><div><span class="side ct">CT</span><strong id="ct-probability">—</strong><small>反恐精英</small></div><span class="versus">VS</span><div class="right"><span class="side t">T</span><strong id="t-probability">—</strong><small>恐怖分子</small></div></div>
           <div id="probability-bar" class="probability-bar empty" role="img" aria-label="尚未运行模型"><div id="ct-fill"></div><div id="t-fill"></div></div>
           <p id="prediction-note" class="prediction-note" aria-live="polite">点击运行，使用已保存的真实模型进行本次预测。</p>
           <div class="mini-meta"><span>阈值 <b id="threshold">—</b></span><span>校准 <b id="calibration">—</b></span><span>本次处理 <b id="elapsed">—</b></span></div>
         </section>
+        <section id="first-kill-panel" class="panel" hidden><div class="panel-heading"><h2>首杀后 · 已知事件</h2><span class="muted">截至当前时点</span></div><dl class="event-facts"><div><dt>首杀阵营</dt><dd id="first-kill-side">—</dd></div><div><dt>回合开始后</dt><dd id="first-kill-time">—</dd></div><div><dt>武器</dt><dd id="first-kill-weapon">—</dd></div><div><dt>是否爆头</dt><dd id="first-kill-headshot">—</dd></div></dl><p class="footnote">只显示输入中已有的首杀事实；不据此虚构玩家身份、剩余人数或后续事件。</p></section>
         <section class="panel" aria-labelledby="economy-title"><div class="panel-heading"><h2 id="economy-title">购买结束 · 经济快照</h2><span class="legend"><i class="ct-swatch"></i> CT <i class="t-swatch"></i> T</span></div>
           <div id="economy-chart" class="economy-chart"><p class="muted">正在读取真实装备与现金</p></div>
           <p class="footnote">装备价值与剩余现金分别比较，不是队伍总资产或经济投入的因果效果。</p>
         </section>
-        <section class="panel timeline-panel"><div class="panel-heading"><h2>回合时间轴</h2><span class="muted">离散时点 · 不做逐秒插值</span></div><div class="timeline"><div class="timeline-node active"><i></i><strong>购买结束</strong><small>当前已接通</small></div><div class="timeline-track"></div><div class="timeline-node"><i></i><strong>首杀后</strong><small>后续开放</small></div></div><p class="footnote">当前仅展示购买结束信息；数据未提供精确帧对齐，不表示已与比赛视频同步。</p></section>
+        <section class="panel timeline-panel"><div class="panel-heading"><h2>回合时间轴</h2><span class="muted">离散时点 · 不做逐秒插值</span></div><div class="timeline"><button type="button" id="timeline-pre" data-stage="pre_round" class="timeline-node active"><i></i><strong>购买结束</strong><small>27 项输入</small></button><div class="timeline-track"></div><button type="button" id="timeline-post" data-stage="post_first_kill" class="timeline-node"><i></i><strong>首杀后</strong><small>31 项输入</small></button></div><p class="footnote">点击节点切换输入时点，不自动运行模型。首杀后使用购买结束快照加首杀事实；不表示已与视频帧同步。</p></section>
       </div>
       <aside>
         <section class="panel outcome-panel"><p class="eyebrow">AFTER THE ROUND</p><h2>实际赛果</h2><p id="outcome" aria-live="polite">暂不揭示。先观察输入，再比较预测与实际结果。</p><button id="reveal" class="secondary" disabled>查看实际结果</button><small>这是已结束的历史回合。赛果不作为模型输入。</small></section>
@@ -40,6 +41,10 @@
         <section class="data-note"><strong>数据边界</strong><p>玩家、位置、烟雾与炸弹事件尚未接入，本页不显示模拟数据。</p><p>此案例用于演示，不代表总体准确率或算法排名。</p></section>
       </aside>
     </div>
+    <section class="panel comparison-panel" aria-labelledby="comparison-title"><div class="panel-heading"><div><p class="eyebrow">SAME ROUND · FOUR RUNS</p><h2 id="comparison-title">当前回合 · 四项对比</h2></div><span id="comparison-status" class="status" role="status">尚未运行</span></div><p class="muted comparison-description">每一项独立调用真实模型。切换案例会清空此表；单个回合不代表整体准确率或算法排名。</p>
+      <div class="comparison-scroll"><table class="comparison-table"><thead><tr><th scope="col">预测时点</th><th scope="col">算法</th><th scope="col">CT 胜率</th><th scope="col">T 胜率</th><th scope="col">状态</th><th scope="col">操作</th></tr></thead><tbody id="comparison-body"></tbody></table></div>
+      <div class="comparison-differences"><p>购买结束 · 模型差 <strong id="pre-difference">—</strong></p><p>首杀后 · 模型差 <strong id="post-difference">—</strong></p></div><p class="footnote">模型差 = LightGBM − XGBoost 的 CT 概率差，单位为百分点；仅在同一时点两项均成功后显示，不是性能优势或因果效果。</p>
+    </section>
     <section class="panel chat-panel" aria-labelledby="chat-title">
       <div class="panel-heading"><div><p class="eyebrow">ASK ABOUT THIS ROUND</p><h2 id="chat-title">和 Codex 聊聊这个回合</h2></div><button id="chat-clear" class="text-button" type="button" disabled>清空对话</button></div>
       <p class="chat-description">解释胜率、比较指标、梳理下一步。这里是独立的 ROUNDCAST 对话，不与 Codex 桌面任务自动同步。</p>
@@ -58,7 +63,7 @@
         <textarea id="chat-input" rows="3" maxlength="2000" placeholder="例如：当前 CT 胜率为什么更高？哪些数据支持这个判断？" aria-describedby="chat-disclosure chat-input-help"></textarea>
         <div class="chat-compose-footer"><span id="chat-input-help">Enter 换行 · Ctrl / ⌘ + Enter 发送 <span id="chat-counter">0 / 2000</span></span><div class="chat-actions"><button id="chat-cancel" class="text-button" type="button" hidden>停止回复</button><button id="chat-send" class="primary" type="submit" disabled>发送给 Codex</button></div></div>
       </form>
-      <p id="chat-disclosure" class="chat-disclosure">只有点击发送，才会把问题、当前回合数据、已成功运行的预测和最近最多 6 轮对话发送至 Codex。不会发送隐藏赛果，不会自动读取仓库或修改模型。页面记录仅在内存中保留，刷新页面后不恢复；点击清空不会删除 Codex 账户上的使用记录。</p>
+      <p id="chat-disclosure" class="chat-disclosure">只有点击发送，才会把问题、当前回合数据、当前选中组合的成功预测和最近最多 6 轮对话发送至 Codex；不会自动附上其他对比项，不会发送隐藏赛果。切换案例或时点后不再携带原范围的追问历史，但保留可见记录。不会自动读取仓库或修改模型。页面记录仅在内存中保留，刷新后不恢复；清空不等于删除账户上的使用记录。</p>
     </section>
     <footer><span>ROUNDCAST / FROZEN MODEL REPLAY</span><span>预测本机运行 · 对话按需发送至 Codex</span></footer>
   </main>

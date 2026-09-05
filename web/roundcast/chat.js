@@ -34,7 +34,13 @@ class RoundcastChatController {
       context: getChatContext(null), messages: [], error: '' };
   }
   notify() { this.render(this.state); }
-  setModelState(state) { this.state.context = getChatContext(state); this.notify(); }
+  setModelState(state) {
+    const context = getChatContext(state), previous = this.state.context;
+    if (context.example_id !== previous.example_id || context.stage !== previous.stage) {
+      this.history = []; this.historyUpdatedAt = 0;
+    }
+    this.state.context = context; this.notify();
+  }
   async checkStatus() {
     const generation = ++this.statusGeneration;
     this.state.checking = true; this.notify();
@@ -104,8 +110,10 @@ class RoundcastChatController {
     if (reply) {
       this.state.messages.push({ role: 'assistant', text: reply, contextLabel: active.context.label });
       const contextNote = `[上下文：${active.context.label}]\n`;
-      this.history = boundedHistory([...this.history, { role: 'user', text: contextNote + active.message }, { role: 'assistant', text: reply }]);
-      this.historyUpdatedAt = Date.now();
+      if (active.context.example_id === this.state.context.example_id && active.context.stage === this.state.context.stage) {
+        this.history = boundedHistory([...this.history, { role: 'user', text: contextNote + active.message }, { role: 'assistant', text: reply }]);
+        this.historyUpdatedAt = Date.now();
+      }
     }
     this.active = null; this.state.phase = 'idle'; this.state.error = error; this.notify();
   }

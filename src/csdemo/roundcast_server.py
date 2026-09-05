@@ -68,6 +68,9 @@ def create_server(host: str = "127.0.0.1", port: int = 8765,
                                                       "available_stages": ["pre_round", "post_first_kill"]}
                                                      for e in trusted.examples()]})
             for e in ("A", "B", "C"):
+                for stage in ("pre_round", "post_first_kill"):
+                    if self.path == f"/api/examples/{e}/snapshots/{stage}":
+                        return self.reply(200, trusted.snapshot(e, stage))
                 if self.path == f"/api/examples/{e}":
                     return self.reply(200, trusted.snapshot(e, "pre_round"))
                 if self.path == f"/api/examples/{e}/outcome":

@@ -56,6 +56,23 @@ class RoundcastHTTPTests(unittest.TestCase):
         self.assertTrue(all(e["inference_ready"] for e in examples))
         self.assertTrue(all(e["available_stages"] == ["pre_round", "post_first_kill"] for e in examples))
 
+    def test_six_explicit_snapshots_are_stage_bound_and_spoiler_free(self):
+        with patch.object(self.service, 'outcome', side_effect=AssertionError('No spoilers')):
+            for example in ('A', 'B', 'C'):
+                for stage, count in (('pre_round', 27), ('post_first_kill', 31)):
+                    status, raw, _ = self.request('GET', f'/api/examples/{example}/snapshots/{stage}')
+                    self.assertEqual(status, 200)
+                    snapshot = json.loads(raw)
+                    self.assertEqual(snapshot, self.service.snapshot(example, stage))
+                    self.assertEqual(len(snapshot['features']), count)
+                    self.assertNotIn(b'winning_side', raw)
+                    self.assertNotIn(b'reference_probabilities', raw)
+                    if stage == 'pre_round':
+                        self.assertNotIn(b'first_kill', raw)
+        for path in ('/api/examples/D/snapshots/pre_round', '/api/examples/A/snapshots/first_kill',
+                     '/api/examples/A/snapshots/unknown'):
+            self.assertEqual(self.request('GET', path)[0], 404)
+
     def test_all_twelve_http_predictions_match_trusted_references(self):
         reference = self.service._registry["reference_probabilities"]
         observed_request_ids = set()

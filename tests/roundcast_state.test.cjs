@@ -11,7 +11,8 @@ function fixture(predict = async () => response()) {
     if (url === '/api/models') return { models: [{ ...selection, model_id: 'xgb_pre_round', inference_ready: true, available_examples: ['A'] }] };
     if (url === '/api/examples') return { examples: [{ example_id: 'A', inference_ready: true }] };
     if (url.endsWith('/outcome')) return { example_id: 'A', winning_side: 'CT' };
-    if (url === '/api/examples/A') return { example_id: 'A', stage: 'pre_round', features: { map_name: 'de_ancient', round_num: 4 } };
+    if (url === '/api/examples/A') return { example_id: 'A', stage: 'pre_round', features: { map_name: 'de_ancient', round_num: 4,
+      ct_score:2,t_score:1,ct_cash:6000,t_cash:400,ct_eq_value:23900,t_eq_value:14650 } };
     return predict();
   };
   return { controller: new RoundcastController(api), calls };

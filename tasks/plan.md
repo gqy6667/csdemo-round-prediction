@@ -1,6 +1,6 @@
 # ROUNDCAST 本地交互演示 v1 — 实施计划
 
-日期：2026-09-05。状态：规格及实施顺序已获用户批准，首轮规划文档已同步至 GitHub（eb0a0e3）。[T01–T05](todo.md) 已完成，包含 P0/P1 和 P2 的后端 12 项推理；下一项 T06 尚未执行。本轮实现仅本地保存，未提交或推送。
+日期：2026-09-05。状态：规格及实施顺序已获用户批准，首轮规划文档已同步至 GitHub（eb0a0e3），T01–T05 与 Codex 对话已同步为 edfc541。[T01–T06](todo.md) 已完成，P2 的三例切换、四项对比及真实浏览器 12 项推理均通过；下一项为 T07。
 
 规格：[roundcast_interactive_v1_spec.md](../docs/roundcast_interactive_v1_spec.md)。
 案例预检：[roundcast_v1_case_readiness.md](../docs/roundcast_v1_case_readiness.md)。
@@ -8,7 +8,7 @@
 附加请求（2026-09-05）：模型下方的 Codex 对话区已实现并完成真实连接验收。
 独立规格：[roundcast_codex_chat_spec.md](../docs/roundcast_codex_chat_spec.md)。
 实施按“固定消息/权限边界 → 后端可信上下文及临时对话 → 前端对话区 → 自动测试及真实网页验收”完成。
-此附加项不替代 T06 的组合选择，也不提前完成两个分析视图。
+此附加项与现已完成的 T06 组合选择独立，不提前完成两个分析视图。
 
 ## 这次实现什么
 
@@ -27,7 +27,7 @@
 | P4 交付验收 | 故障、安全、全套回归、浏览器操作与三页截图；整理启动说明及三例演示步骤 | 本地可复现的 v1 演示包 | 所有规格完成条件通过；冻结模型/数据不变；失败不伪造概率 |
 
 P0/P1 的 T01–T04 已验收：十工件哈希、三例准备、A 的真实单链推理、本地 HTTP 和观众页均通过。详见 [验收记录](../reports/roundcast_interactive_v1/t02_t04_verification.md)。
-T05 后端 12 项已全部通过正式参考核对，误差为 0；T06 页面选择与四项对比尚待实施。详见 [T05 验收](../reports/roundcast_interactive_v1/t05_verification.md)。
+T05 后端 12 项与参考误差为 0；T06 页面选择和四项对比已通过真实浏览器验收。详见 [T06 验收](../reports/roundcast_interactive_v1/t06_verification.md)。
 P1 只展示已接通的组合，未完成选项不可伪装为可用。P2 才开放完整选择矩阵。
 
 ## 组件与依赖

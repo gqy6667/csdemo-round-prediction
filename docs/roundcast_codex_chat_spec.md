@@ -51,7 +51,12 @@ Messages/results remain in memory only (bounded cache, expire after 30 minutes).
 - A send attaches the current context; a failed/new prediction does not reuse an older result.
 - Chat failure/cancellation must not break model predictions. Show send/disclosure/wait/error/clear
   states and keep an answer's original context label even if a later model run differs.
-- The existing model remains T05 backend / T04 UI; this feature does not silently complete T06.
+- The chat was initially accepted against T05 backend / T04 UI; that acceptance did not itself complete T06.
+- T06 now supports all case/stage/algorithm selections. Each send attaches only the selected
+  successful prediction, not all four comparison rows. Changing case or stage clears follow-up
+  history; visible older answers retain their original labels. A late answer from another
+  case/stage is not appended to the current follow-up history. Algorithm-only changes keep
+  history within the same case/stage to allow comparisons.
 
 ## Sources
 Official non-interactive execution and authentication behavior:

@@ -9,6 +9,19 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class RoundcastBrowserContractTests(unittest.TestCase):
+    def test_selection_controls_and_four_result_comparison_exist(self):
+        html = (ROOT / 'web/roundcast/index.html').read_text(encoding='utf-8')
+        for item in ('id="run-all"', 'id="comparison-body"', 'id="first-kill-panel"',
+                     'value="B"', 'value="C"', 'value="lightgbm"', 'value="post_first_kill"'):
+            self.assertIn(item, html)
+
+    def test_selection_state_contract(self):
+        bundled = Path.home() / '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe'
+        node = os.environ.get('ROUNDCAST_NODE') or shutil.which('node') or str(bundled)
+        result = subprocess.run([node, '--test', str(ROOT / 'tests/roundcast_selection.test.cjs')],
+                                cwd=ROOT, capture_output=True, text=True, encoding='utf-8', timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_static_entry_is_local_and_spoiler_free(self):
         html = (ROOT / "web/roundcast/index.html").read_text(encoding="utf-8")
         script = (ROOT / "web/roundcast/app.js").read_text(encoding="utf-8")

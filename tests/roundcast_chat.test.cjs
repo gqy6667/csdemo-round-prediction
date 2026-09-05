@@ -139,3 +139,15 @@ test('reply limit matches the backend: 16000 characters accepted, 16001 rejected
     if (c.active) await c.cancel();
   }
 });
+test('case or stage changes do not carry old history or a late old-scope reply into new questions', async () => {
+  let finish; const {c,calls}=fixture(()=>new Promise(resolve=>finish=resolve));
+  await c.checkStatus();const pending=c.send('首杀前的问题');await Promise.resolve();
+  const changed=model();changed.selection.stage='post_first_kill';c.setModelState(changed);
+  finish({job_id:job,status:'success',reply:'旧范围回复'});await pending;
+  assert.equal(c.history.length,0);assert.match(c.state.messages[1].contextLabel,/购买结束/);
+  c.api=async(url,body)=>{calls.push({url,body});return url==='/api/chat'?{job_id:job,status:'running'}:{job_id:job,status:'success',reply:'新回复'};};
+  await c.send('首杀后的问题');assert.equal(calls.filter(v=>v.url==='/api/chat').at(-1).body.history.length,0);
+  const sameScope={...changed,selection:{...changed.selection,algorithm:'lightgbm'}};c.setModelState(sameScope);
+  assert.equal(c.history.length,2);
+  c.setModelState({...sameScope,selection:{...sameScope.selection,example_id:'B'}});assert.equal(c.history.length,0);
+});
